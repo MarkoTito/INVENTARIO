@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\BienController;
 use Illuminate\Support\Facades\Route;
 /*
     aca tenderemos las rutas que nos dirijiran atraves del
@@ -11,9 +14,19 @@ Route::get('/',function(){
 
 //ruta de ingreso
 
-Route::get('/create',function(){
-    return view('admin.ingresar');
-})->name('ad_ingresar');//su nombre es admin.home
+//ruta para areas
+Route::resource('area', AreaController::class);
+
+//ruta para los bienes
+Route::resource('bien',BienController::class);
+
+
+
+
+
+
+//-------
+
 
 //ruta de busqueda
 
