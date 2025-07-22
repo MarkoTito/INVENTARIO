@@ -34,7 +34,28 @@ class BienController extends Controller
      */
     public function store(Request $request)
     {
+        //validacion
+        $request->validate([
+            'area_id' => 'required',
+            'tipo_id' => 'required',
+            'codigo_patrimonial' => 'required|min:12|max:12',
+            'descripcion' => 'required',
+            //laravel crea una variable una variable errors, q se pondra en su php
+        ]);
+
         //este metodo es post es el que rellena el formulario x debajo
+        $bien = new Bien();
+        //esto se podria evitar con carga masivoa . pero se vera despues
+        $bien->area_id=$request->area;
+        $bien->tipo_id=$request->tipo;
+        $bien->descripcion=$request->descripcion;
+        $bien->codigo_patrimonial=$request->descripcion;
+        $bien->estado=1;
+
+        $bien->save();
+        
+       return redirect('/');
+
     }
 
     /**
