@@ -36,9 +36,9 @@ class BienController extends Controller
     {
         //validacion
         $request->validate([
-            'area_id' => 'required',
-            'tipo_id' => 'required',
-            'codigo_patrimonial' => 'required|min:12|max:12',
+            'tipo' => 'required',
+            'area' => 'required',
+            'codigo_patrimonial' => 'required|min:12|max:12|unique:biens',
             'descripcion' => 'required',
             //laravel crea una variable una variable errors, q se pondra en su php
         ]);
@@ -49,7 +49,7 @@ class BienController extends Controller
         $bien->area_id=$request->area;
         $bien->tipo_id=$request->tipo;
         $bien->descripcion=$request->descripcion;
-        $bien->codigo_patrimonial=$request->descripcion;
+        $bien->codigo_patrimonial=$request->codigo;
         $bien->estado=1;
 
         $bien->save();
