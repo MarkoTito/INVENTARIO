@@ -9,5 +9,15 @@ class Bien extends Model
 {
     //
     use HasFactory;
+
+    protected $fillable=[
+        'area_id',
+        'tipo_id',
+        'descripcion',
+        'codigo_patrimonial',
+        'estado'
+    ];
+
+
     protected $table = 'Biens';
 }

@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Bien;
 use App\Models\Category;
 use App\Models\Tipo;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
 class BienController extends Controller
@@ -40,20 +41,25 @@ class BienController extends Controller
             'area' => 'required',
             'codigo_patrimonial' => 'required|min:12|max:12|unique:biens',
             'descripcion' => 'required',
-            //laravel crea una variable una variable errors, q se pondra en su php
+            //laravel crea una variable una variable errors, q se pondra en su php (1 forma)
         ]);
-
+        
+        //NUEVA FORMA (CARGA  MASIVA)
+        Bien::create($request->all());
+        
+        
+        
+        /*ANTIGUA FORMA
         //este metodo es post es el que rellena el formulario x debajo
         $bien = new Bien();
         //esto se podria evitar con carga masivoa . pero se vera despues
         $bien->area_id=$request->area;
         $bien->tipo_id=$request->tipo;
         $bien->descripcion=$request->descripcion;
-        $bien->codigo_patrimonial=$request->codigo;
+        $bien->codigo_patrimonial=$request->codigo_patrimonial;
         $bien->estado=1;
-
         $bien->save();
-        
+        */
        return redirect('/');
 
     }
