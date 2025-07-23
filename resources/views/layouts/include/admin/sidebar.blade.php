@@ -16,16 +16,25 @@
       <ul class="space-y-2 font-medium">
          <li>
             {{-- para ingresar producto --}}
-
-            <a href="{{route('adminbien.create')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               {{-- el comando dentro del span lo pone en el centro de las dimenciones
-                  que le dimos osea entre 6 y 6
-               --}}
-               <span class="w-6 h-6 inline-flex justify-center items-center">
+            {{-- Sub titulo q divide el fisico con el digital - uppercase es mayuscula--}}
+            <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                  <span class="w-6 h-6 inline-flex justify-center items-center">
                      <i class="fa-solid fa-arrow-right"></i>
-               </span>
-               <span class="ms-3">Registrar</span>
-            </a>
+                  </span>
+                  <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Registrar</span>
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                  </svg>
+            </button>
+            <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                  <li>
+                     <a href="{{route('adminbien.create')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Bien Fisico</a>
+                  </li>
+                  <li>
+                     <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Bien Digital</a>
+                  </li>
+                 
+            </ul>
          </li>
          <li>
             {{-- para buscar producto --}}
