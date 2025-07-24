@@ -35,21 +35,17 @@ class BienController extends Controller
      */
     public function store(Request $request)
     {
-        // //validacion
-        // $request->validate([
-        //     'FK_B_Fisico_TipoId' => 'required',
-        //     'FK_B_Fisico_Area' => 'required',
-        //     'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:b_fisicos',
-        //     'T_B_Descripcion' => 'required',
-        //     'T_Estado'=> 'required'
-        //     //laravel crea una variable una variable errors, q se pondra en su php (1 forma)
-        // ]);
-        
-        // //NUEVA FORMA (CARGA  MASIVA)
-        // //Bien::create($request->all());
-        
-        
-        
+        // // //validacion
+        $request->validate([
+                'FK_B_Fisico_TipoId' => 'required',
+                'FK_B_Fisico_Area' => 'required',
+                'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:b_fisicos',
+                'T_B_Descripcion' => 'required',
+                'T_Estado'=> 'required',
+                
+           //laravel crea una variable una variable errors, q se pondra en su php (1 forma)
+        ]);
+        /*
         //ANTIGUA FORMA
         //este metodo es post es el que rellena el formulario x debajo
         $bien = new Bien();
@@ -62,10 +58,12 @@ class BienController extends Controller
         $bien->N_Estado=1;
         $bien->D_Adquisicion=null;
         $bien->save();
+        */
         
+        //NUEVA FORMA (CARGA  MASIVA)
+        Bien::create($request->all());
         //return 'se registro correctamente';
-       return redirect('/');
-
+        return redirect('/');
     }
 
     /**

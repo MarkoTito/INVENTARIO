@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('UK_Codigo_Pratimonial')->unique()->nullable();
             $table->date('D_Adquisicion')->nullable();
             $table->text('T_Estado');
-             $table->double('N_Estado');
+            $table->double('N_Estado')->nullable();
             $table->timestamps();
 
         });
