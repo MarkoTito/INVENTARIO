@@ -9,15 +9,17 @@ class Bien extends Model
 {
     //
     use HasFactory;
-
+    /*
     protected $fillable=[
-        'area_id',
-        'tipo_id',
-        'descripcion',
-        'codigo_patrimonial',
-        'estado'
+        'FK_B_Fisico_TipoId',
+        'FK_B_Fisico_Area',
+        'T_B_Descripcion',
+        'UK_Codigo_Pratimonial',
+        'D_Adquisicion',
+        'T_Estado'
     ];
+    */
 
 
-    protected $table = 'Biens';
+    protected $table = 'b_fisicos';
 }

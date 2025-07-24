@@ -35,31 +35,35 @@ class BienController extends Controller
      */
     public function store(Request $request)
     {
-        //validacion
-        $request->validate([
-            'tipo' => 'required',
-            'area' => 'required',
-            'codigo_patrimonial' => 'required|min:12|max:12|unique:biens',
-            'descripcion' => 'required',
-            //laravel crea una variable una variable errors, q se pondra en su php (1 forma)
-        ]);
+        // //validacion
+        // $request->validate([
+        //     'FK_B_Fisico_TipoId' => 'required',
+        //     'FK_B_Fisico_Area' => 'required',
+        //     'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:b_fisicos',
+        //     'T_B_Descripcion' => 'required',
+        //     'T_Estado'=> 'required'
+        //     //laravel crea una variable una variable errors, q se pondra en su php (1 forma)
+        // ]);
         
-        //NUEVA FORMA (CARGA  MASIVA)
-        Bien::create($request->all());
+        // //NUEVA FORMA (CARGA  MASIVA)
+        // //Bien::create($request->all());
         
         
         
-        /*ANTIGUA FORMA
+        //ANTIGUA FORMA
         //este metodo es post es el que rellena el formulario x debajo
         $bien = new Bien();
         //esto se podria evitar con carga masivoa . pero se vera despues
-        $bien->area_id=$request->area;
-        $bien->tipo_id=$request->tipo;
-        $bien->descripcion=$request->descripcion;
-        $bien->codigo_patrimonial=$request->codigo_patrimonial;
-        $bien->estado=1;
+        $bien->FK_B_Fisico_Area=$request->FK_B_Fisico_Area;
+        $bien->FK_B_Fisico_TipoId=$request->FK_B_Fisico_TipoId;
+        $bien->T_B_Descripcion=$request->T_B_Descripcion;
+        $bien->UK_Codigo_Pratimonial=$request->UK_Codigo_Pratimonial;
+        $bien->T_Estado=$request->T_Estado;
+        $bien->N_Estado=1;
+        $bien->D_Adquisicion=null;
         $bien->save();
-        */
+        
+        //return 'se registro correctamente';
        return redirect('/');
 
     }
