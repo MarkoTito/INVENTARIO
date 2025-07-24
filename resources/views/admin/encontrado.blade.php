@@ -16,17 +16,17 @@ title="Buscar"
 
     <form method="POST" action="/admin/buscar/todo" >
         @csrf
-        <div>
-            {{-- tipo de bien --}}
-            <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Bien</label>
-                  <select name="FK_B_Fisico_TipoId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                @foreach ($tipos as $tipo)
-                  <option value="{{{$tipo->PK_Tipo}}}">{{{$tipo->T_Descriocion}}}</option>
-              @endforeach
-          </select>
-        </div>        
-        <div class="grid gap-6 mb-4 md:grid-cols-2 mt-4 ">
+        <div class="grid gap-6 mb-4 md:grid-cols-2">
 
+            <div>
+                {{-- tipo de bien --}}
+                <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Bien</label>
+                      <select name="FK_B_Fisico_TipoId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @foreach ($tipos as $tipo)
+                      <option value="{{{$tipo->PK_Tipo}}}">{{{$tipo->T_Descriocion}}}</option>
+                  @endforeach
+              </select>
+            </div>
             <div>
                 {{-- area --}}
                     <div>
@@ -39,15 +39,19 @@ title="Buscar"
                     </div>
                     
             </div>
-            {{-- <div>
+
+        </div>        
+        {{-- <div class="grid gap-6 mb-4 md:grid-cols-2 mt-4 ">
+
+            <div>
                codigo patrimonial 
                <label for="codigo_patrimonial" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo Patrimonial</label>
                <input name="UK_Codigo_Pratimonial" type="text" id="codigo_patrimonial" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el codigo unitario de 12 digitos" required value="{{old('UK_Codigo_Pratimonial')}}"/>
                @error('UK_Codigo_Pratimonial')
                        <p class="text-red-600">*{{$message}}</p>
                @enderror
-            </div> --}}
-        </div>    
+            </div>
+        </div>     --}}
 
         <div class="flex justify-center mt-4">
             <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">
@@ -79,26 +83,34 @@ title="Buscar"
                 </tr>
             </thead>
             <tbody>
-                @foreach ($bienes as $bien)
+                @if ($bienes->isEmpty())
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                            {{$bien->tipo->T_Descriocion}}
+                            No Exite Bien con esa relacion
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                            {{$bien->UK_Codigo_Pratimonial}}
-                        </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                            {{$bien->T_Estado}}
-                        </th>
-                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                            {{$bien->area->UK_Nombre_Area}}
-                        </th>
-                        <td class="px-6 py-4">
-                            <a href="show" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
                     </tr>
-                    
-                @endforeach
+                @else
+                    @foreach ($bienes as $bien)
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+    
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$bien->tipo->T_Descriocion}}
+                            </th>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$bien->UK_Codigo_Pratimonial}}
+                            </th>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$bien->T_Estado}}
+                            </th>
+                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$bien->area->UK_Nombre_Area}}
+                            </th>
+                            <td class="px-6 py-4">
+                                <a href="show" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>

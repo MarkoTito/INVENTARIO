@@ -15,6 +15,8 @@ Route::get('/',function(){
 
 //ruta para los bienes
 Route::resource('bien',BienController::class);
+//mostrar la busqueda mas exacta
+Route::post('/buscar/todo',[BienController::class,'index2']);
 
 
 

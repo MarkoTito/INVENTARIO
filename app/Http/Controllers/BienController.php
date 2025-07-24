@@ -25,9 +25,28 @@ class BienController extends Controller
         */
         //forma q muestra todo con los metodos creado, mas facil q hacer un where dentro de otro... :)
         $bienes = Bien::with('area','tipo')->get();
+
+        //mandar info
+        $areas=Area::all();
+        $tipos = Tipo::all();
         
         //return $bienes;
-        return view('admin.buscar',compact('bienes'));
+        return view('admin.buscar',compact('bienes','areas','tipos'));
+    }
+
+    public function index2(?Request $request){
+        
+        //mandar info
+        $areas=Area::all();
+        $tipos = Tipo::all();
+
+        $bienes = Bien::with('area','tipo')
+                ->where('FK_B_Fisico_Area',$request->FK_B_Fisico_Area)
+                ->where('FK_B_Fisico_TipoId',$request->FK_B_Fisico_TipoId)
+                ->get();
+        
+        // $bienes;
+        return view('admin.encontrado',compact('bienes','areas','tipos'));
     }
 
     /**
