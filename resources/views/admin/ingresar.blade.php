@@ -20,7 +20,7 @@ title="Registrar"
         <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Bien</label>
         <select name="tipo" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             @foreach ($tipos as $tipo)
-                    <option value="{{{$tipo->id}}}">{{{$tipo->descripcion}}}</option>
+                    <option value="{{{$tipo->PK_Tipo}}}">{{{$tipo->T_Descriocion}}}</option>
             @endforeach
         </select>
         <br>
@@ -31,7 +31,7 @@ title="Registrar"
                     <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un area</label>
                     <select name="area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @foreach ($areas as $area)
-                            <option value="{{$area->id}}">{{$area->nombre}}</option>
+                            <option value="{{$area->PK_Area}}">{{$area->UK_Nombre_Area}}</option>
                         @endforeach
                     </select>
             </div>

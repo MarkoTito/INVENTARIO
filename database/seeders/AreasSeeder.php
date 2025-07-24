@@ -14,235 +14,236 @@ class AreasSeeder extends Seeder
      */
     public function run(): void
     {
+        
         $areas=[
             [
-                'nombre' => 'Consejo Municipal',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Consejo Municipal',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Alcaldía',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Alcaldía',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Control Institucional',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Control Institucional',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Procuradora Pública Municipal',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Procuradora Pública Municipal',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Integridad Institucional',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Integridad Institucional',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia Municipal',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia Municipal',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Secretaria General',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Secretaria General',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Trámite Documentario, Registro Civil y Archivo',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Trámite Documentario, Registro Civil y Archivo',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina General de Recursos Humanos',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina General de Recursos Humanos',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina General de Administración y Finanzas',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina General de Administración y Finanzas',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina General de Comunicaciones',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina General de Comunicaciones',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina General de Asesoría Jurídica',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina General de Asesoría Jurídica',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina General de Planeamiento y Presupuesto',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina General de Planeamiento y Presupuesto',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Abastecimiento y Patrimonio',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Abastecimiento y Patrimonio',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Contabilidad',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Contabilidad',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Tesorería',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Tesorería',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Servicios Generales y Maestranza',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Servicios Generales y Maestranza',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Presupuesto',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Presupuesto',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Oficina de Desarrollo de Tecnologías de la Información y Estadística',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Oficina de Desarrollo de Tecnologías de la Información y Estadística',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Inversiones Públicas',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Inversiones Públicas',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Administración Tributaria',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Administración Tributaria',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Desarrollo Urbano',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Desarrollo Urbano',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Desarrollo Económico y Promoción Empresarial',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Desarrollo Económico y Promoción Empresarial',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Fiscalización y Transporte',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Fiscalización y Transporte',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Gestión Ambiental',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Gestión Ambiental',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Seguridad Ciudadana',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Seguridad Ciudadana',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Salud y Desarrollo Humano',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Salud y Desarrollo Humano',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Deportes, Educación y Cultura',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Deportes, Educación y Cultura',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Gerencia de Participación Vecinal',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Gerencia de Participación Vecinal',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Obras Públicas Estudios y Proyectos',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Obras Públicas Estudios y Proyectos',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia Administración Tributaria y Orientación al Contribuyente',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia Administración Tributaria y Orientación al Contribuyente',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Recaudación Tributaria y Control de la Deuda',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Recaudación Tributaria y Control de la Deuda',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Fiscalización Tributaria',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Fiscalización Tributaria',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Obras Privadas y Planeamiento Urbano',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Obras Privadas y Planeamiento Urbano',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Catastro y Habilitaciones Urbanas',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Catastro y Habilitaciones Urbanas',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Licencias y Autorizaciones Comerciales',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Licencias y Autorizaciones Comerciales',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Gestión de Riesgo de Desastres',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Gestión de Riesgo de Desastres',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Control y Operaciones',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Control y Operaciones',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Seguridad Vial, Transporte y  Tránsito',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Seguridad Vial, Transporte y  Tránsito',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Limpieza Publica',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Limpieza Publica',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Parques y Jardines',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Parques y Jardines',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Serenazgo',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Serenazgo',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Servicios Sociales',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Servicios Sociales',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Recursos Alimentarios',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Recursos Alimentarios',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Sanidad y Zoonosis',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Sanidad y Zoonosis',
+                'N_estado' => 1
 
             ],
             [
-                'nombre' => 'Subgerencia de Juventud, Educación y Cultura',
-                'estado' => 1
+                'UK_Nombre_Area' => 'Subgerencia de Juventud, Educación y Cultura',
+                'N_estado' => 1
 
             ],
 

@@ -15,28 +15,28 @@ class Tiposeeder extends Seeder
     {
         $Tipos= [
             [
-                'descripcion' => 'Licencia',
-                'estado'=> 1
+                'T_Descriocion' => 'Licencia',
+                'N_estado'=> 1
             ],
             [
-                'descripcion' => 'Monitor',
-                'estado'=> 1
+                'T_Descriocion' => 'Monitor',
+                'N_estado'=> 1
             ],
             [
-                'descripcion' => 'CPU',
-                'estado'=> 1
+                'T_Descriocion' => 'CPU',
+                'N_estado'=> 1
             ],
             [
-                'descripcion' => 'Mouse',
-                'estado'=> 1
+                'T_Descriocion' => 'Mouse',
+                'N_estado'=> 1
             ],
             [
-                'descripcion' => 'Proyector',
-                'estado'=> 1
+                'T_Descriocion' => 'Proyector',
+                'N_estado'=> 1
             ],
             [
-                'descripcion' => 'Impresora',
-                'estado'=> 1
+                'T_Descriocion' => 'Impresora',
+                'N_estado'=> 1
             ],
         ];
 

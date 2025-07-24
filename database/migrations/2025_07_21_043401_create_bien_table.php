@@ -11,17 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('biens', function (Blueprint $table) {
-            $table->id();
+        Schema::create('B_fisicos', function (Blueprint $table) {
+            $table->id('PK_B_Fisico');
             //foreignId:->hace referencia al id y su tabla (tabla_suId) recuerda q la tabla tiene q ser con s
-            $table->foreignId('area_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreignId('area_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('FK_B_Fisico_Area');
+            $table->foreign('FK_B_Fisico_Area')
+                    ->references('PK_Area')
+                    ->on('areas')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
 
+            
+            $table->unsignedBigInteger('FK_B_Fisico_TipoId');
+            $table->foreign('FK_B_Fisico_TipoId')
+                    ->references('PK_Tipo')
+                    ->on('tipos')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
 
-            $table->foreignId('tipo_id')->constrained()->onDelete('cascade');
-            $table->text('descripcion');
-            $table->string('codigo_patrimonial')->unique()->nullable();
-            $table->double('estado');
+            $table->text('T_B_Descripcion');
+            $table->string('UK_Codigo_Pratimonial')->unique()->nullable();
+            $table->date('D_Adquisicion')->nullable();
+            $table->double('T_Estado');
             $table->timestamps();
+
         });
     }
 
