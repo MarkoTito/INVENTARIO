@@ -9,7 +9,7 @@ class Bien extends Model
 {
     //
     
-    
+    protected $table = 'b_fisicos';
     protected $fillable=[
         'FK_B_Fisico_TipoId',
         'FK_B_Fisico_Area',
@@ -20,7 +20,18 @@ class Bien extends Model
         'T_Estado'
     ];
     
+     public function area()
+    {
+        return $this->belongsTo(Area::class,'PK_B_Fisico','PK_Area');
+    }
+    public function tipo()
+    {
+        return $this->belongsTo(Tipo::class,'PK_B_Fisico','PK_Tipo');
+    }
 
 
-    protected $table = 'b_fisicos';
+    
+
+
+    
 }

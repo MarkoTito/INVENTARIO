@@ -16,7 +16,15 @@ class BienController extends Controller
      */
     public function index()
     {
-        $bienes = Bien::all();
+        /*
+        Forma de uno x uno
+        $areas= Bien::where('PK_B_Fisico',1)
+                ->with('area')
+                ->with('tipo')
+                ->first();
+        */
+        //forma q muestra todo con los metodos creado, mas facil q hacer un where dentro de otro... :)
+        $bienes = Bien::with('area','tipo')->get();
         
         //return $bienes;
         return view('admin.buscar',compact('bienes'));
