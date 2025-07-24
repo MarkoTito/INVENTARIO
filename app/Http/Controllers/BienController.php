@@ -16,7 +16,10 @@ class BienController extends Controller
      */
     public function index()
     {
-        //
+        $bienes = Bien::all();
+        
+        //return $bienes;
+        return view('admin.buscar',compact('bienes'));
     }
 
     /**
@@ -72,6 +75,7 @@ class BienController extends Controller
     public function show(Bien $bien)
     {
         //
+        
     }
 
     /**

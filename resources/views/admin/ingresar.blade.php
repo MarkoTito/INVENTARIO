@@ -40,7 +40,6 @@ title="Registrar"
                 <label for="codigo_patrimonial" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo Patrimonial</label>
                 <input name="UK_Codigo_Pratimonial" type="text" id="codigo_patrimonial" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el codigo unitario de 12 digitos" required value="{{old('UK_Codigo_Pratimonial')}}"/>
                 @error('UK_Codigo_Pratimonial')
-                        
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>

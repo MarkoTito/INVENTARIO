@@ -12,27 +12,14 @@ Route::get('/',function(){
     return view('admin.menu');
 });//->name('admin.menu');//su nombre es admin.home
 
-//ruta de ingreso
-
-//ruta para areas
-Route::resource('area', AreaController::class);
 
 //ruta para los bienes
 Route::resource('bien',BienController::class);
 
 
 
-
-
-
-//-------
-
-
-//ruta de busqueda
-
-Route::get('/index',function(){
-    return view('admin.buscar');
-})->name('ad_ingresar');//su nombre es admin.home
+//ruta para areas (ni lo uso XD)
+Route::resource('area', AreaController::class);
 
 //ruta de Reparacion
 
