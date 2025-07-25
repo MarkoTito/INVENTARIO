@@ -9,11 +9,15 @@ title="Reprar"
         'name'=>'Menu',
         'href' => '/',
     ],
+     [
+        'name'=>'Buscar',
+        'href' => '/',
+    ],
     [
-        'name'=> 'Reprar',
+        'name'=> 'Detalle',
     ]
     ]">
-    Reparar
+    
 
     
 

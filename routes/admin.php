@@ -17,6 +17,8 @@ Route::get('/',function(){
 Route::resource('bien',BienController::class);
 //mostrar la busqueda mas exacta
 Route::post('/buscar/todo',[BienController::class,'index2']);
+//mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
+Route::get('/buscar/{id}',[BienController::class,'show1']);
 
 
 

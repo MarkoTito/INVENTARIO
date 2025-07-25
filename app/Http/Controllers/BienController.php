@@ -99,10 +99,16 @@ class BienController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Bien $bien)
+    public function show1($bien)
     {
-        //
-        
+        //para mostra solo un bien , con todo su detalle
+        $bien=Bien::where('PK_B_Fisico', $bien)
+                ->with('area')
+                ->with('tipo')
+                ->get();
+
+       
+        return view('admin.detalle',compact('bien'));
     }
 
     /**
@@ -111,6 +117,7 @@ class BienController extends Controller
     public function edit(Bien $bien)
     {
         //
+        return 'hola desde el edit';
     }
 
     /**
@@ -127,5 +134,6 @@ class BienController extends Controller
     public function destroy(Bien $bien)
     {
         //
+        return 'hola desde el elimar';
     }
 }
