@@ -76,7 +76,7 @@ title="Buscar"
                         Estado
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Area
+                        Área
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Accion

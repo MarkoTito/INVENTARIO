@@ -105,9 +105,9 @@ class BienController extends Controller
         $bien=Bien::where('PK_B_Fisico', $bien)
                 ->with('area')
                 ->with('tipo')
-                ->get();
+                ->first();
 
-       
+        //return $bien;
         return view('admin.detalle',compact('bien'));
     }
 

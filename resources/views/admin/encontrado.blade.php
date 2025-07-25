@@ -75,7 +75,7 @@ title="Buscar"
                         Estado
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Area
+                        Área
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Accion
@@ -106,7 +106,7 @@ title="Buscar"
                                 {{$bien->area->UK_Nombre_Area}}
                             </th>
                             <td class="px-6 py-4">
-                                <a href="show" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <a href="/admin/buscar/{{$bien->PK_B_Fisico}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalle</a>                            
                             </td>
                         </tr>
                     @endforeach
