@@ -20,6 +20,16 @@ class DatabaseSeeder extends Seeder
             'email' => 'markojosheptitopena@gmail.com',
             'password' => bcrypt('12345678'),
         ]);
+
+        User::factory()->create([
+                'name' => 'jeremy vega',
+                'email' => 'jeremyvega@gmail.com',
+                'password' => bcrypt('87654321'),
+           
+        ]);
+
+
+
         // metodo para correr las areas seeder
 
         $this->call([
