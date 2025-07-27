@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Bien;
 use App\Models\Category;
+use App\Models\Comentario;
 use App\Models\Tipo;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class BienController extends Controller
     public function store(Request $request)
     {
         // // //validacion
-        $request->validate([
+        $data=$request->validate([
                 'FK_B_Fisico_TipoId' => 'required',
                 'FK_B_Fisico_Area' => 'required',
                 'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:b_fisicos',
@@ -91,24 +92,40 @@ class BienController extends Controller
         */
         
         //NUEVA FORMA (CARGA  MASIVA)
-        Bien::create($request->all());
+        $bien=Bien::create($data);
+
+        //varaible de seccion
+        session()->flash('swal',[
+            'icon'=> 'success',
+            'title'=> '!Bien hecho',
+            'text'=>'El bien fue registrado correctamente'
+        ]);
+
         //return 'se registro correctamente';
-        return redirect('/');
+        return redirect()->route('admin',$bien);
+
+        //return redirect('/');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show1($bien)
+    public function show1($id)
     {
         //para mostra solo un bien , con todo su detalle
-        $bien=Bien::where('PK_B_Fisico', $bien)
+        $bien=Bien::where('PK_B_Fisico', $id)
                 ->with('area')
                 ->with('tipo')
                 ->first();
 
-        //return $bien;
-        return view('admin.detalle',compact('bien'));
+        //para mostrar los comentarios del bien
+
+        $comentarios=Comentario::where('FK_Comentario_FisicoId',$id)
+                 ->get();
+        
+        //return $comentarios;
+
+        return view('admin.detalle',compact('bien','comentarios'));
     }
 
     /**

@@ -22,6 +22,10 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- sweetalert2 --}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         {{-- aca esta el font awsone de imagenes para la barra --}}
         <script src="https://kit.fontawesome.com/0dc89a789d.js" crossorigin="anonymous"></script>
         <!-- Styles -->
@@ -54,5 +58,15 @@
 
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+
+        @if (session('swal'))
+            <script>
+                Swal.fire(@json(session('swal')));
+
+            </script>
+            
+        @endif
+
     </body>
 </html>

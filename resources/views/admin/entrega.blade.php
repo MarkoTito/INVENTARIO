@@ -19,7 +19,7 @@ title="Entregar"
     <p>hola {{ Auth::user()->name }}</p>
 
 
-
+    
 
     
 

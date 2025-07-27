@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\BienController;
+use App\Http\Controllers\ComentarioController;
 use Illuminate\Support\Facades\Route;
 /*
     aca tenderemos las rutas que nos dirijiran atraves del
@@ -20,16 +21,18 @@ Route::post('/buscar/todo',[BienController::class,'index2']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/{id}',[BienController::class,'show1']);
 
+//ruta de los comentarios (reparacion)
+Route::resource('comentario',ComentarioController::class);
+
+
+
+
+
 
 
 //ruta para areas (ni lo uso XD)
 Route::resource('area', AreaController::class);
 
-//ruta de Reparacion
-
-Route::get('/buscar/reparar',function(){
-    return view('admin.reparar');
-})->name('ad_ingresar');//su nombre es admin.home
 
 //ruta de Entrega
 

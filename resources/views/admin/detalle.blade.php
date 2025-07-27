@@ -25,13 +25,13 @@ title="Reprar"
             
                 @endif
                 @if ($bien->FK_B_Fisico_TipoId ==5)
-                    <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="350px" width="350px" alt="imagen de impresora">
+                    <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="250px" width="350px" alt="imagen de impresora">
                 @endif
                 @if ($bien->FK_B_Fisico_TipoId ==4)
                     <img src=" https://static.vecteezy.com/system/resources/previews/011/065/272/non_2x/wireless-computer-mouse-clipart-gray-computer-mouse-watercolor-style-illustration-isolated-on-white-background-simple-wireless-mouse-cartoon-hand-drawn-office-supplies-drawing-back-view-vector.jpg" height="350px" width="350px" alt="imagen de impresora">
                 @endif
                 @if ($bien->FK_B_Fisico_TipoId ==3)
-                    <img src=" https://cdn-icons-png.flaticon.com/512/5921/5921714.png" height="350px" width="350px" alt="imagen de impresora">
+                    <img src=" https://cdn-icons-png.flaticon.com/512/5921/5921714.png" height="250px" width="250px" alt="imagen de impresora">
                 @endif
                 @if ($bien->FK_B_Fisico_TipoId ==2)
                     <img src="https://img.freepik.com/vector-premium/monitor-computadora-estilo-dibujos-animados-aislado-sobre-fondo-blanco-ilustracion-stock-simbolo-computadora_258706-337.jpg" height="350px" width="350px" alt="imagen de impresora">
@@ -41,16 +41,18 @@ title="Reprar"
                 @endif    
             </div>
             <div>
-                <div class="mt-4">
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Área</label>
-                    <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->area->UK_Nombre_Area}}" required />
+                <div class="">
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Área</label>
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->area->UK_Nombre_Area}}" disabled>
+
+                
                 </div>
-                <br>    
+                    
                 <div>
                     <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>
-                    <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Codigo_Pratimonial}}" required />
+                    
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Codigo_Pratimonial}}" disabled>
                 </div>
-                <br>
              
 
                 <div class="grid gap-6 mb-4 md:grid-cols-2" >
@@ -71,7 +73,7 @@ title="Reprar"
                                 <!-- Modal header -->
                                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                        Bajar Bien
+                                        
                                     </h3>
                                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -120,19 +122,31 @@ title="Reprar"
                 </tr>
             </thead>
             <tbody>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        ga
-                    </th>
-                        
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        ga
-                    </th>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        ga
-                    </td>
-                 </tr>
-                    
+                @if ($comentarios->isEmpty())
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            No hay comentarios
+                        </th>
+                    </tr>
+                
+                @else
+                    @foreach ($comentarios as $coment)
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$coment->T_User_Name}}
+                            </th>
+                                
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$coment->T_Descripcion_Comentario}}
+                            </th>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$coment->created_at}}
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
+                  
                 
             </tbody>
         </table>
