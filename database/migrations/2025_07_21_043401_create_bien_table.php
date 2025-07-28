@@ -33,8 +33,10 @@ return new class extends Migration
             $table->text('T_B_Descripcion');
             $table->string('UK_Codigo_Pratimonial')->unique()->nullable();
             $table->date('D_Adquisicion')->nullable();
+            $table->text('T_Estado_Fisico');
             $table->text('T_Estado');
-            $table->double('N_Estado')->nullable();
+            $table->date('D_Baja')->nullable();
+            $table->text('T_Motivo_Baja')->nullable();
             $table->timestamps();
 
         });

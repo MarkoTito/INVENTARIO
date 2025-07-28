@@ -22,22 +22,13 @@ title="Reprar"
             <div>
                 {{-- codigo patrimonial --}}
                 <label for="FK_Comentario_FisicoId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo Patrimonial</label>
-                <input name="FK_Comentario_FisicoId" type="text" id="FK_Comentario_FisicoId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el codigo unitario de 12 digitos" required value="{{old('UK_Codigo_Pratimonial')}}"/>
+                <input name="FK_Comentario_FisicoId" type="text" id="FK_Comentario_FisicoId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el codigo unitario de 12 digitos" required value="{{old('FK_Comentario_FisicoId')}}"/>
                 @error('FK_Comentario_FisicoId')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>
 
-            {{-- <div>
-                    area
-                    <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Área de Destino</label>
-                    <select name="FK_B_Fisico_Area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        @foreach ($areas as $area)
-                            <option value="{{$area->PK_Area}}">{{$area->UK_Nombre_Area}}</option>
-                        @endforeach
-                    </select>
-            </div> --}}
-            
+          
             <div>
                 {{-- Estado del bien --}}
                 <h3 class=" font-semibold text-gray-900 dark:text-black">Estado del bien</h3>

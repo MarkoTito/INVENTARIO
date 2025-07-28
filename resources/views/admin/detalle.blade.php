@@ -18,11 +18,11 @@ title="Reprar"
     ]
     ]">
 
-    <div class="grid gap-6 mb-4 md:grid-cols-2">
+    <div class="grid gap-6  md:grid-cols-2">
             <div>
                 @if ($bien->FK_B_Fisico_TipoId ==6)
                     <img class="rounded-full w-96 h-96" width="300px" src="https://static.vecteezy.com/system/resources/previews/012/618/939/original/printer-cartoon-illustration-vector.jpg" alt="image description">
-            
+                    
                 @endif
                 @if ($bien->FK_B_Fisico_TipoId ==5)
                     <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="250px" width="350px" alt="imagen de impresora">
@@ -39,7 +39,11 @@ title="Reprar"
                 @if ($bien->FK_B_Fisico_TipoId ==1)
                     <img src="" height="350px" width="350px" alt="imagen de impresora">
                 @endif    
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado Original: {{$bien->T_Estado_Fisico}}</label>    
+                    
+                
             </div>
+            
             <div>
                 <div class="grid gap-6 md:grid-cols-2">
 
@@ -50,7 +54,9 @@ title="Reprar"
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
                         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Codigo_Pratimonial}}" disabled>
+                    
                     </div>
+                    
                 </div>
                     
                 <div>
@@ -77,7 +83,7 @@ title="Reprar"
                                 <!-- Modal header -->
                                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                        
+                                        Dar de Baja al Bien
                                     </h3>
                                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -87,11 +93,15 @@ title="Reprar"
                                     </button>
                                 </div>
                                 <!-- Modal body y formulario -->
-                                <form action="">
+                                <form action="/admin/Bajar/{{$bien->PK_B_Fisico}}">
                                     @csrf
                                     <div class="p-4 md:p-5 space-y-4">
-                                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motivo:</label>
-                                        <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la baja"></textarea>
+                                        <label for="T_Motivo_Baja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motivo:</label>
+                                        <textarea  name="T_Motivo_Baja" id="T_Motivo_Baja" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la baja">{{old('T_Motivo_Baja')}}</textarea>
+                                        @error('T_Motivo_Baja')
+                                                <p class="text-red-600">*{{$message}}</p>
+                                        @enderror
+                                    
                                     </div>
                                     <!-- Modal footer -->
                                     <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -110,7 +120,7 @@ title="Reprar"
     
 
     <div class="relative overflow-x-auto">
-        <h3>Comentarios</h3>
+        <h3>Historial</h3>
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -119,6 +129,9 @@ title="Reprar"
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Comentario
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Estado
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Fecha
@@ -143,6 +156,9 @@ title="Reprar"
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                                 {{$coment->T_Descripcion_Comentario}}
                             </th>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$coment->T_Estado}}
+                            </td>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                                 {{$coment->created_at}}
                             </td>

@@ -20,6 +20,8 @@ Route::resource('bien',BienController::class);
 Route::post('/buscar/todo',[BienController::class,'index2']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/{id}',[BienController::class,'show1']);
+//Bajar un bien (cree una ruta pero se ve mal esteticamente)
+Route::get('/Bajar/{id}',[BienController::class,'baja']);
 
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);

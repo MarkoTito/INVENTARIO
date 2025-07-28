@@ -47,6 +47,8 @@ class ComentarioController extends Controller
         //BUSQUEDA DEL USUARIO
         $usuario=Auth::user()->name;
         //BUSQUEDA DEL BIEN
+        $codigo= Bien::where('UK_Codigo_Pratimonial',$request->FK_Comentario_FisicoId)
+                            ->first();
         $bien= Bien::where('UK_Codigo_Pratimonial',$request->FK_Comentario_FisicoId)
                             ->get();
 
@@ -63,7 +65,7 @@ class ComentarioController extends Controller
             //ANTIGUA FORMA
             $coment = new Comentario();
             //esto se podria evitar con carga masivoa . pero se vera despues
-            $coment->FK_Comentario_FisicoId=$bien->PK_B_Fisico;
+            $coment->FK_Comentario_FisicoId=$codigo->PK_B_Fisico;
             $coment->T_Descripcion_Comentario=$request->T_Descripcion_Comentario;
             $coment->T_Estado=$request->T_Estado;
             $coment->T_User_Name=$usuario;

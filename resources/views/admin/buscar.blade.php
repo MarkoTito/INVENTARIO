@@ -93,7 +93,7 @@ title="Buscar"
                             {{$bien->UK_Codigo_Pratimonial}}
                         </th>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                            {{$bien->T_Estado}}
+                            {{$bien->T_Estado_Fisico}}
                         </th>
                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                             {{$bien->area->UK_Nombre_Area}}
