@@ -48,25 +48,39 @@ class ComentarioController extends Controller
         $usuario=Auth::user()->name;
         //BUSQUEDA DEL BIEN
         $bien= Bien::where('UK_Codigo_Pratimonial',$request->FK_Comentario_FisicoId)
-                            ->first();
+                            ->get();
 
-        //ANTIGUA FORMA
-        $coment = new Comentario();
-        //esto se podria evitar con carga masivoa . pero se vera despues
-        $coment->FK_Comentario_FisicoId=$bien->PK_B_Fisico;
-        $coment->T_Descripcion_Comentario=$request->T_Descripcion_Comentario;
-        $coment->T_Estado=$request->T_Estado;
-        $coment->T_User_Name=$usuario;
-        $coment->save();
+        if ($bien->isEmpty()) {
+             //varaible de seccion
+            session()->flash('swal',[
+                'icon'=> 'error',
+                'title'=> '!Upss',
+                'text'=>   'El Bien no existe'
+            ]);
+            return redirect()->route('adminbien.index');
+        } else {
+        
+            //ANTIGUA FORMA
+            $coment = new Comentario();
+            //esto se podria evitar con carga masivoa . pero se vera despues
+            $coment->FK_Comentario_FisicoId=$bien->PK_B_Fisico;
+            $coment->T_Descripcion_Comentario=$request->T_Descripcion_Comentario;
+            $coment->T_Estado=$request->T_Estado;
+            $coment->T_User_Name=$usuario;
+            $coment->save();
+    
+            //varaible de seccion
+            session()->flash('swal',[
+                'icon'=> 'success',
+                'title'=> '!Bien hecho',
+                'text'=>   'El comentario fue registrado con exito'
+            ]);
+            //return 'se registro correctamente';
+            return redirect()->route('adminbien.index');
+            
+        }
+        
 
-        //varaible de seccion
-        session()->flash('swal',[
-            'icon'=> 'success',
-            'title'=> '!Bien hecho',
-            'text'=>   'El comentario fue registrado con exito'
-        ]);
-        //return 'se registro correctamente';
-        return redirect('/');
     }
 
     /**
