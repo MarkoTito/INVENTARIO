@@ -93,7 +93,8 @@ title="Reprar"
                                     </button>
                                 </div>
                                 <!-- Modal body y formulario -->
-                                <form action="/admin/Bajar/{{$bien->PK_B_Fisico}}">
+                                <form action="/admin/Bajar/{{$bien->PK_B_Fisico}}"
+                                        class="delete-form">
                                     @csrf
                                     <div class="p-4 md:p-5 space-y-4">
                                         <label for="T_Motivo_Baja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motivo:</label>
@@ -109,6 +110,11 @@ title="Reprar"
                                         <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancelar</button>
                                     </div>
                                 </form>
+
+                            
+
+
+
                             </div>
                         </div>
                     </div>
@@ -172,7 +178,35 @@ title="Reprar"
         </table>
     </div>
 
-        
+    @push('js')
+        <script>
+        //que seleciona todos esos formularios que tengan ese nombre de delete-form 
+            forms = document.querySelectorAll('.delete-form')
+            //que recorra todos los formularios
+            forms.forEach(form => {
+                //que se ponga al escucha de ese formulario con el evento submit
+                form.addEventListener('submit',function(e){ //e es el evento en si
+                    //previne el evento 
+                    e.preventDefault('');
+                        Swal.fire({
+                            title: "Estas Bajar este Bien?",
+                            text: "No podras revertir esto!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Si, Bajar bien",
+                            cancelButtonText: "No cancelar"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });    
+                });
+            });
+        </script>
+                                    
+    @endpush      
 
 
 

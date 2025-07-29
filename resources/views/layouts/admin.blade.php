@@ -30,6 +30,7 @@
         <script src="https://kit.fontawesome.com/0dc89a789d.js" crossorigin="anonymous"></script>
         <!-- Styles -->
         @livewireStyles
+        @stack('css')
         
     </head>
     <body class="font-sans antialiased bg-gray-50">
@@ -67,6 +68,9 @@
             </script>
             
         @endif
+        
+        {{-- se le dara un contenido --}}
+        @stack('js')
 
     </body>
 </html>

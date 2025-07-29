@@ -152,27 +152,32 @@ class BienController extends Controller
     public function baja (Request $request,$bien)
     {
         
-        $request->validate([
-            'T_Motivo_Baja' => 'required|max:125',
-        ]);
+        if (!$request->T_Motivo_Baja || strlen($request->T_Motivo_Baja) > 125) {
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => '!Upss',
+                'text' => 'No introdujo un motivo o es muy largo'
+            ]);
+        return redirect()->route('adminbien.index');
+}
         
         
         $fecha=Carbon::now();
         ////Bajar bien
-        $n_bien=Bien::where('PK_B_Fisico',$bien)->update(
+        Bien::where('PK_B_Fisico',$bien)->update(
             [
                 'D_Baja'=>$fecha,
                 'T_Motivo_Baja'=> $request->T_Motivo_Baja,
                 'T_Estado' => "Baja"                
             ]
         );
-        
-
+       
         session()->flash('swal',[
             'icon'=> 'success',
             'title'=> '!Bien hecho',
             'text'=>   'El bien fue dado de baja correctamente'
         ]);
+
 
        return redirect()->route('adminbien.index');
     }
