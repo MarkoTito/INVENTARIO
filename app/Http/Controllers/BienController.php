@@ -27,7 +27,7 @@ class BienController extends Controller
         */
         //forma q muestra todo con los metodos creado, mas facil q hacer un where dentro de otro... :)
         $bienes = Bien::with('area','tipo')
-                ->where('T_Estado','Activo')    
+                //->where('T_Estado','Activo')    
                 ->get();
 
         //mandar info
@@ -43,15 +43,30 @@ class BienController extends Controller
         //mandar info
         $areas=Area::all();
         $tipos = Tipo::all();
+        $bien=$request->FK_B_Fisico_Area;
 
-        $bienes = Bien::with('area','tipo')
-                ->where('T_Estado','Activo')
-                ->where('FK_B_Fisico_Area',$request->FK_B_Fisico_Area)
-                ->where('FK_B_Fisico_TipoId',$request->FK_B_Fisico_TipoId)
-                ->get();
-        
-        // $bienes;
-        return view('admin.encontrado',compact('bienes','areas','tipos'));
+        if ($request->estado == "1") {
+            $bienes = Bien::with('area','tipo')
+                    ->where('T_Estado','Activo')
+                    ->where('FK_B_Fisico_Area',$request->FK_B_Fisico_Area)
+                    ->where('FK_B_Fisico_TipoId',$request->FK_B_Fisico_TipoId)
+                    ->get();
+            
+            return view('admin.encontrado',compact('bienes','areas','tipos'));
+        } 
+        if ($request->estado == "0") {
+            
+            $bienes = Bien::with('area','tipo')
+                    ->where('FK_B_Fisico_Area',$request->FK_B_Fisico_Area)
+                    ->where('FK_B_Fisico_TipoId',$request->FK_B_Fisico_TipoId)
+                    ->where('T_Estado','Baja')
+                    ->get();
+                //vereficar el t fisico mal escrito en el controller
+            
+            
+            return view('admin.encontrado',compact('bienes','areas','tipos'));
+        }
+
     }
 
     /**

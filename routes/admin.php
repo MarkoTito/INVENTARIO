@@ -25,6 +25,8 @@ Route::get('/Bajar/{id}',[BienController::class,'baja']);
 
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);
+
+
 //mostrar los bienes con baja
 Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);
 //mostrar la busqueda mas exacta
