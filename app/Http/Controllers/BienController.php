@@ -87,19 +87,15 @@ class BienController extends Controller
      */
     public function store(Request $request)
     {
-        // // //validacion
+        //validacion
         $request->validate([
                 'FK_B_Fisico_TipoId' => 'required',
                 'FK_B_Fisico_Area' => 'required',
                 'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:b_fisicos',
                 'T_B_Descripcion' => 'required',
                 'T_Estado_Fisico'=> 'required',
-                
-           //laravel crea una variable una variable errors, q se pondra en su php (1 forma)
+                'D_Adquisicion'=> 'required'
         ]);
-        
-        //ANTIGUA FORMA
-        //este metodo es post es el que rellena el formulario x debajo
         $bien = new Bien();
         //esto se podria evitar con carga masivoa . pero se vera despues
         $bien->FK_B_Fisico_Area=$request->FK_B_Fisico_Area;
@@ -109,13 +105,8 @@ class BienController extends Controller
         $bien->UK_Codigo_Pratimonial=$request->UK_Codigo_Pratimonial;
         $bien->T_Estado_Fisico=$request->T_Estado_Fisico;
         $bien->T_Estado="Activo";
+        $bien->D_Adquisicion=$request->D_Adquisicion;
         $bien->save();
-        
-        
-        //NUEVA FORMA (CARGA  MASIVA)
-        //$bien=Bien::create($data);
-
-        //varaible de seccion
         session()->flash('swal',[
             'icon'=> 'success',
             'title'=> '!Bien hecho',
@@ -124,7 +115,6 @@ class BienController extends Controller
 
         //return 'se registro correctamente';
         return redirect()->route('adminbien.index');
-
 
     }
 

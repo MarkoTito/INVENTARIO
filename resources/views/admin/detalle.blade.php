@@ -195,7 +195,7 @@ title="Reprar"
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
-                            title: "Estas Bajar este Bien?",
+                            title: "Bajar este Bien?",
                             text: "No podras revertir esto!",
                             icon: "warning",
                             showCancelButton: true,

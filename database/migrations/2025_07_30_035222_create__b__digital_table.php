@@ -37,10 +37,10 @@ return new class extends Migration
 
             $table->text('T_Nombre_Digital');
             $table->text('T_Host');
-            $table->date('D_F_Inicio')->nullable();
+            $table->date('D_F_Inicio');
             $table->text('T_Determinacion');
             $table->date('D_F_Vencimiento')->nullable();
-            $table->text('T_Sustento');
+            //$table->text('T_Sustento')->nullable();
             $table->text('T_Estado_Digital');
             $table->timestamps();
 

@@ -23,7 +23,7 @@ class SistemasSeeder extends Seeder
                 'T_Estado_Sis'=> "Activo"
             ],
             [
-                'T_Descripcion_Sis' => 'Micrasoft ',
+                'T_Descripcion_Sis' => 'Microsoft',
                 'T_Estado_Sis'=> "Activo"
             ],
             [

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Digital;
+use App\Models\file;
 use App\Models\Sistema;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DigitalController extends Controller
 {
@@ -34,7 +37,64 @@ class DigitalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bDigital = new Digital();
+        $bDigital->FK_B_Digital_AreaId=$request->FK_B_Digital_AreaId;
+        $bDigital->FK_B_Fisico_TipoId=1;
+        $bDigital->FK_B_Digital_SistemaId=$request->FK_B_Digital_SistemaId;
+        $bDigital->T_Nombre_Digital=$request->T_Nombre_Digital;
+        $bDigital->T_Host=$request->T_Host;
+        $bDigital->D_F_Inicio=$request->D_F_Inicio;
+        $bDigital->T_Determinacion	=$request->T_Determinacion;
+        $bDigital->D_F_Vencimiento=$request->fecha_vencimiento;
+        $bDigital->T_Estado_Digital="Activo";
+        $bDigital->save();
+        
+        session()->flash('swal',[
+                'icon'=> 'success',
+                'title'=> '!Bien hecho',
+                'text'=>'El bien fue registrado correctamente'
+            ]);
+        return redirect()->route('adminbien.index');
+
+
+
+
+
+        
+        // $max_sixe = (int)ini_get('upload_max_filesize')*1024;
+        // $files = $request->file('T_Sustento');
+        // $usuario= Auth::user()->name;
+
+        // if ($request->hasFile('T_Sustento')) {
+        //     foreach ($files as $archivo) {
+        //             if (Storage::putFileAs('/public/'.$usuario. '/',$archivo, 
+        //                                 $archivo->getClientOriginalName())) {
+        //                 file::create([
+        //                     'T_Descripcion_Sis' => $archivo->getClientOriginalName()
+        //                 ]);
+                        
+        //             }       
+        //     }
+        //     session()->flash('swal',[
+        //         'icon'=> 'success',
+        //         'title'=> '!Bien hecho',
+        //         'text'=>'El bien fue registrado correctamente'
+        //     ]);
+
+        //     //return 'se registro correctamente';
+        //     return redirect()->route('adminbien.index');
+        // } else {
+        //     session()->flash('swal', [
+        //         'icon' => 'error',
+        //         'title' => '!Upss',
+        //         'text' => 'No introdujo algun campo'
+        //     ]);
+        //     //return 'se registro correctamente';
+        //     return redirect()->route('adminbien.index');
+        // }
+
+
+        
     }
 
     /**
