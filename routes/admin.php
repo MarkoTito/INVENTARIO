@@ -3,6 +3,7 @@
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\BienController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\DigitalController;
 use Illuminate\Support\Facades\Route;
 /*
     aca tenderemos las rutas que nos dirijiran atraves del
@@ -14,8 +15,12 @@ Route::get('/',function(){
 });//->name('admin.menu');//su nombre es admin.home
 
 
-//ruta para los bienes
+//ruta para los bienes FISICOS
 Route::resource('bien',BienController::class);
+
+//ruta para los bines digitos
+Route::resource('digital',DigitalController::class);
+
 //mostrar la busqueda mas exacta
 Route::post('/buscar/todo',[BienController::class,'index2']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
@@ -27,17 +32,17 @@ Route::get('/Bajar/{id}',[BienController::class,'baja']);
 Route::resource('comentario',ComentarioController::class);
 
 
+
+
+
+
+
 //mostrar los bienes con baja
 Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);
 //mostrar la busqueda mas exacta
 Route::post('/buscar/baja/store',[BienController::class,'index_baja']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/baja/{id}',[BienController::class,'baja_show']);
-
-
-
-
-
 
 //ruta para areas (ni lo uso XD)
 Route::resource('area', AreaController::class);

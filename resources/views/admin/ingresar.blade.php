@@ -10,7 +10,7 @@ title="Registrar"
         'href' => '/',
     ],
     [
-        'name'=> 'Registrar',
+        'name'=> 'Registrar Hardware',
     ]
     ]">
 

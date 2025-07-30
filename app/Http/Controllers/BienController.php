@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Bien;
 use App\Models\Category;
 use App\Models\Comentario;
+use App\Models\Sistema;
 use App\Models\Tipo;
 use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
@@ -74,11 +75,12 @@ class BienController extends Controller
      */
     public function create()
     {
-        //muestra el formulario
+        //muestra el formulario de hardware
         $areas=Area::all();
         $tipos = Tipo::all();
         return view('admin.ingresar', compact('areas','tipos') );
     }
+   
 
     /**
      * Store a newly created resource in storage.
