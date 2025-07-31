@@ -23,7 +23,7 @@ title="Registrar"
             <div>
                 {{-- Nombre de la licencia --}}
                 <label for="T_Nombre_Digital" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nombre de la Licencia:</label>
-                <input name="T_Nombre_Digital" type="text" id="T_Nombre_Digital" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el nombre especifico de la licencia" required value="{{old('')}}"/>
+                <input name="T_Nombre_Digital" type="text" id="T_Nombre_Digital" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el nombre especifico de la licencia" required value="{{old('T_Nombre_Digital')}}"/>
                 @error('T_Nombre_Digital')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -43,7 +43,7 @@ title="Registrar"
             <div>
                 {{-- Nombre del host --}}
                 <label for="T_Host" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Host:</label>
-                <input name="T_Host" type="text" id="T_Host" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el Host" required value="{{old('')}}"/>
+                <input name="T_Host" type="text" id="T_Host" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el Host" required value="{{old('T_Host')}}"/>
                 @error('T_Host')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -68,26 +68,29 @@ title="Registrar"
                     <input checked id="default-radio-2" type="radio" value="Determinado" name="T_Determinacion" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Determinado</label>
                 </div>
+                @error('T_Determinacion')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
                 
             </div>
             <div>
                 {{-- Fecha de inicio --}}
                 <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Inicio:</label>
                 <input type="date" name="D_F_Inicio">
-                {{-- @error('')
+                @error('D_F_Inicio')
                         <p class="text-red-600">*{{$message}}</p>
-                @enderror --}}
+                @enderror
             </div>
             
-            {{-- <div>   
-                original  sustento 
+            <div>   
+                {{-- original  sustento  --}}
                 
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" for="multiple_files">Subir Sustento</label>
-                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="T_Sustento[]"  id="multiple_files" type="file" multiple> 
+                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="T_Nombre_File[]"  id="multiple_files" type="file" multiple> 
 
 
 
-            </div> --}}
+            </div>
 
 
 
@@ -95,10 +98,10 @@ title="Registrar"
             <div>
                 {{-- Fecha de vencimiento  --}}
                 <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Vencimiento:</label>
-                <input type="date" name="fecha_vencimiento">
-                {{-- @error('')
+                <input type="date" name="D_F_Vencimiento">
+                @error('D_F_Vencimiento')
                         <p class="text-red-600">*{{$message}}</p>
-                @enderror --}}
+                @enderror
             </div>
 
             

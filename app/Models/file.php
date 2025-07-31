@@ -10,6 +10,7 @@ class file extends Model
     protected $table = 'file';
 
     protected $fillable=[
-        'T_Descripcion_Sis'
+        'FK_B_Digital_File',
+        'T_Nombre_File'
     ];
 }
