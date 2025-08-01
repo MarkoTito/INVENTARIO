@@ -32,7 +32,8 @@ Route::get('/Bajar/{id}',[BienController::class,'baja']);
 Route::resource('comentario',ComentarioController::class);
 
 
-
+//mostrar el historial
+Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
 
 
 

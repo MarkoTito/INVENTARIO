@@ -139,6 +139,22 @@ class BienController extends Controller
         return view('admin.detalle',compact('bien','comentarios'));
     }
 
+    public function historial($id)
+    {   
+        $bien=Bien::where('PK_B_Fisico', $id)
+                ->with('area')
+                ->with('tipo')
+                ->first();
+        
+        $comentarios=Comentario::where('FK_Comentario_FisicoId',$id)
+                 ->get();
+        
+        //return $comentarios;
+
+        return view('admin.historial',compact('comentarios','bien'));
+        
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -166,7 +182,7 @@ class BienController extends Controller
                 'text' => 'No introdujo un motivo o es muy largo'
             ]);
         return redirect()->route('adminbien.index');
-}
+    }
         
         
         $fecha=Carbon::now();
