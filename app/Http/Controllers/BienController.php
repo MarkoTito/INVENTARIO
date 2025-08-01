@@ -232,24 +232,6 @@ class BienController extends Controller
         // $bienes;
         return view('admin/Buscar/encontrado_Baja',compact('bienes','areas','tipos'));
     }
-    public function baja_show($id)
-    {
-        //para mostra solo un bien , con todo su detalle
-        $bien=Bien::where('PK_B_Fisico', $id)
-                ->with('area')
-                ->with('tipo')
-                ->first();
-
-        //para mostrar los comentarios del bien
-
-        $comentarios=Comentario::where('FK_Comentario_FisicoId',$id)
-                 ->get();
-        
-        //return $comentarios;
-
-        return view('admin/Buscar/detalle_Baja',compact('bien','comentarios'));
-    }
-
 
 
 

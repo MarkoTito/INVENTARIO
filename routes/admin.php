@@ -20,6 +20,9 @@ Route::resource('bien',BienController::class);
 
 //ruta para los bines digitos
 Route::resource('digital',DigitalController::class);
+//mostrar el detalle de un digital (cree una ruta pero se ve mal esteticamente)
+Route::get('/buscar/digital/{id}',[DigitalController::class,'show2']);
+
 
 //mostrar la busqueda mas exacta
 Route::post('/buscar/todo',[BienController::class,'index2']);
@@ -28,17 +31,18 @@ Route::get('/buscar/{id}',[BienController::class,'show1']);
 //Bajar un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/Bajar/{id}',[BienController::class,'baja']);
 
+//mostrar el historial
+Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
+
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);
 
 
-//mostrar el historial
-Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
 
 
 
 
-//mostrar los bienes con baja
+//mostrar los bienes 
 Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);
 //mostrar la busqueda mas exacta
 Route::post('/buscar/baja/store',[BienController::class,'index_baja']);

@@ -17,7 +17,12 @@ class DigitalController extends Controller
      */
     public function index()
     {
-        //
+        //mostramos en la tabla
+
+
+        $sistemas= Sistema::all();
+        $digitales= Digital::all();
+        return view('admin/Buscar/buscar_Digital',compact('digitales','sistemas'));
     }
 
     /**
@@ -154,7 +159,18 @@ class DigitalController extends Controller
     public function show(Digital $digital)
     {
         //
+        
     }
+    public function show2($id)
+    {
+        //detalle del bien digital
+        $digital=Digital::where('PK_B_Digital', $id)
+                ->first();
+
+        return view('admin/Buscar/detalle_Digital',compact('digital'));
+        
+    }
+    
 
     /**
      * Show the form for editing the specified resource.
