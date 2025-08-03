@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Comentario;
 use App\Models\Sistema;
 use App\Models\Tipo;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -231,6 +232,25 @@ class BienController extends Controller
         
         // $bienes;
         return view('admin/Buscar/encontrado_Baja',compact('bienes','areas','tipos'));
+    }
+
+    public function pdf($id){
+        $historial = Comentario::where('FK_Comentario_FisicoId',$id)->get();
+
+        $bien = Bien::where('PK_B_Fisico', $id)
+                ->with('area')
+                ->with('tipo')
+                ->firstOrFail();
+        
+        $pdf =Pdf::loadView('admin.PDF.pdf',[
+            'bien' =>$bien,
+            'comentarios' => $historial,
+        ]);
+        
+
+        return $pdf->download("compra_{$bien->PK_B_Fisico}.pdf");
+        
+       // return $bien;
     }
 
 

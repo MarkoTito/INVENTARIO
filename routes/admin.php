@@ -33,6 +33,8 @@ Route::get('/Bajar/{id}',[BienController::class,'baja']);
 
 //mostrar el historial
 Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
+//generar el PDF
+Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
 
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);
