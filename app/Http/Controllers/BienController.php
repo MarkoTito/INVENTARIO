@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Comentario;
 use App\Models\Sistema;
 use App\Models\Tipo;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
@@ -185,13 +187,14 @@ class BienController extends Controller
         return redirect()->route('adminbien.index');
     }
         
-        
+        $usuario=Auth::user()->name;
         $fecha=Carbon::now();
         ////Bajar bien
         Bien::where('PK_B_Fisico',$bien)->update(
             [
                 'D_Baja'=>$fecha,
                 'T_Motivo_Baja'=> $request->T_Motivo_Baja,
+                'B_User_Name_Baja'=>$usuario,
                 'T_Estado' => "Baja"                
             ]
         );
@@ -236,6 +239,9 @@ class BienController extends Controller
 
     public function pdf($id){
         $historial = Comentario::where('FK_Comentario_FisicoId',$id)->get();
+        $jefa = User::where('tipo_User', 'Jefe')
+            ->orderBy('id', 'desc')
+            ->first();
 
         $bien = Bien::where('PK_B_Fisico', $id)
                 ->with('area')
@@ -245,8 +251,9 @@ class BienController extends Controller
         $pdf =Pdf::loadView('admin.PDF.pdf',[
             'bien' =>$bien,
             'comentarios' => $historial,
+            'jefa'=> $jefa,
         ]);
-        
+        $pdf->setPaper('A5', 'portrait');
 
         return $pdf->download("compra_{$bien->PK_B_Fisico}.pdf");
         

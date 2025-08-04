@@ -4,6 +4,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\BienController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DigitalController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 /*
     aca tenderemos las rutas que nos dirijiran atraves del

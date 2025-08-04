@@ -36,6 +36,7 @@ return new class extends Migration
             $table->text('T_Estado_Fisico');
             $table->text('T_Estado');
             $table->date('D_Baja')->nullable();
+            $table->text('B_User_Name_Baja')->nullable();
             $table->text('T_Motivo_Baja')->nullable();
             $table->timestamps();
 

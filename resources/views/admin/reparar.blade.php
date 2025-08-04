@@ -13,7 +13,7 @@ title="Reprar"
         'name'=> 'Reprar',
     ]
     ]">
-      <form method="POST" action="{{route('admincomentario.store')}}">
+      <form method="POST" action="{{route('admincomentario.store')}}" class="submit-form" >
         @csrf
     
 
@@ -76,7 +76,13 @@ title="Reprar"
 
 
         <br>
-        {{-- modal --}}
+
+        <div class="flex justify-center mt-4" >
+            <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Subir</button>
+
+        </div>
+
+         {{-- modal 
         <div class="flex justify-center mb-4">
             <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="button">
             Registrar
@@ -104,7 +110,7 @@ title="Reprar"
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
 
@@ -114,7 +120,35 @@ title="Reprar"
     </form>    
     
 
-    
+    @push('js')
+        <script>
+        //que seleciona todos esos formularios que tengan ese nombre de delete-form 
+            forms = document.querySelectorAll('.submit-form')
+            //que recorra todos los formularios
+            forms.forEach(form => {
+                //que se ponga al escucha de ese formulario con el evento submit
+                form.addEventListener('submit',function(e){ //e es el evento en si
+                    //previne el evento 
+                    e.preventDefault('');
+                        Swal.fire({
+                            title: "Estas seguro de subir este comentario?",
+                            text: "No podras revertir esto!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Si, Subir comentario",
+                            cancelButtonText: "No cancelar"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });    
+                });
+            });
+        </script>
+                                    
+    @endpush
 
 
 
