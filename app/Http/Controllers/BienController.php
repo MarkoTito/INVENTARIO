@@ -14,6 +14,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BienController extends Controller
 {
@@ -260,9 +261,6 @@ class BienController extends Controller
        // return $bien;
     }
 
-
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -270,4 +268,28 @@ class BienController extends Controller
     {
         //Bajar bien
     }
+
+    public function dropzone(Request $request){
+        // Valida que haya un archivo
+        if (!$request->hasFile('file')) {
+            return response()->json(['error' => 'No se recibió ningún archivo'], 400);
+        }
+
+        // Guarda el archivo
+        $path = Storage::put('/images', $request->file('file'));
+
+        // Devuelve respuesta correcta
+        return response()->json([
+            'success' => true,
+            'path' => $path,
+            'message' => 'Archivo subido correctamente'
+        ]);
+    }
+    
+    /*
+    return response()->json([
+            
+        'path'=>$path,
+    ]);
+    */
 }

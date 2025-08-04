@@ -36,6 +36,8 @@ Route::get('/Bajar/{id}',[BienController::class,'baja']);
 Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
 //generar el PDF
 Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
+//para las imagenes:
+Route::post('bien/dropzone',[BienController::class,'dropzone'])->name('bien.dropzone');
 
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);

@@ -14,6 +14,7 @@ title="Registrar"
     ]
     ]">
 
+    
     <form method="POST" action="{{route('adminbien.store')}}" class="submit-form">
         @csrf
         {{-- tipo de bien --}}
@@ -105,6 +106,9 @@ title="Registrar"
         </div>
     </form>    
     
+   
+
+
 
     @push('js')
         <script>
