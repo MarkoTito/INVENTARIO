@@ -44,6 +44,7 @@ title="Entregar"
                         title: '¡Bien hecho!',
                         text: response.message
                     });
+                    
                 },
 
                 error: function(file, response) {
@@ -69,6 +70,7 @@ title="Entregar"
                         title: '¡Ups!',
                         text: message
                     });
+                    
                 }
             };
         </script>                                

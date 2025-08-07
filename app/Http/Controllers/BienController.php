@@ -118,7 +118,7 @@ class BienController extends Controller
             'text'=>'Acontinuacion Ingresa una imagen del bien'
         ]);
        
-        return view('admin/entrega');
+        return view('admin/Load_Imagen');
 
         //return redirect()->route('/admin/entregar/{{$ultimo->PK_B_Fisico}}');
 
@@ -293,12 +293,9 @@ class BienController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Imagen subida correctamente'
+            'message' => 'Imagen subida correctamente, Puede salir de la Pestaña'
         ]);
+        // return redirect()->route('adminbien.index');
         
-        
-
     }
-    
-    
 }
