@@ -37,12 +37,7 @@ title="Entregar"
     @push('js')
         <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
         <script>
-            Dropzone.options.miDropzone = {
-                dictDefaultMessage: "Arrastre una imagen del Bien",
-                acceptedFiles: "image/*",
-                maxFilesize: 2,
-                maxFiles: 1,
-
+            Dropzone.options.myDropzone = {
                 success: function(file, response) {
                     Swal.fire({
                         icon: 'success',
