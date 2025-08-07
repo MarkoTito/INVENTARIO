@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('Ima_path')->unique();
             $table->integer('Ima_size')->default(0);
             $table->double('FK_B_Fisico_Ima');
+            $table->double('Tipo_Bien_Ima');
             $table->timestamps();
         });
     }

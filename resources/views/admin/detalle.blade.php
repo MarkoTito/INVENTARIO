@@ -20,25 +20,34 @@ title="Reprar"
 
     <div class="grid gap-6  md:grid-cols-2">
             <div>
-                @if ($bien->FK_B_Fisico_TipoId ==6)
-                    <img class="rounded-full w-96 h-96" width="300px" src="https://static.vecteezy.com/system/resources/previews/012/618/939/original/printer-cartoon-illustration-vector.jpg" alt="image description">
+                @if (!$imagen)
+                    @if ($bien->FK_B_Fisico_TipoId ==6)
+                        <img class="rounded-full w-96 h-96" width="300px" src="https://static.vecteezy.com/system/resources/previews/012/618/939/original/printer-cartoon-illustration-vector.jpg" alt="image description">
+                        
+                    @endif
+                    @if ($bien->FK_B_Fisico_TipoId ==5)
+                        <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="250px" width="350px" alt="imagen de impresora">
+                    @endif
+                    @if ($bien->FK_B_Fisico_TipoId ==4)
+                        <img src=" https://static.vecteezy.com/system/resources/previews/011/065/272/non_2x/wireless-computer-mouse-clipart-gray-computer-mouse-watercolor-style-illustration-isolated-on-white-background-simple-wireless-mouse-cartoon-hand-drawn-office-supplies-drawing-back-view-vector.jpg" height="350px" width="350px" alt="imagen de impresora">
+                    @endif
+                    @if ($bien->FK_B_Fisico_TipoId ==3)
+                        <img src=" https://cdn-icons-png.flaticon.com/512/5921/5921714.png" height="200px" width="200px" alt="imagen de impresora">
+                    @endif
+                    @if ($bien->FK_B_Fisico_TipoId ==2)
+                        <img src="https://img.freepik.com/vector-premium/monitor-computadora-estilo-dibujos-animados-aislado-sobre-fondo-blanco-ilustracion-stock-simbolo-computadora_258706-337.jpg" height="200px" width="250px" alt="imagen de impresora">
+                    @endif
+                    @if ($bien->FK_B_Fisico_TipoId ==1)
+                        <img src="" height="350px" width="350px" alt="imagen de impresora">
+                    @endif  
+                    
+                @else
+                    
+                    <img src="{{ Storage::url($imagen->Ima_path) }}" height="50px" width="140px" alt="imagen del bien">
                     
                 @endif
-                @if ($bien->FK_B_Fisico_TipoId ==5)
-                    <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="250px" width="350px" alt="imagen de impresora">
-                @endif
-                @if ($bien->FK_B_Fisico_TipoId ==4)
-                    <img src=" https://static.vecteezy.com/system/resources/previews/011/065/272/non_2x/wireless-computer-mouse-clipart-gray-computer-mouse-watercolor-style-illustration-isolated-on-white-background-simple-wireless-mouse-cartoon-hand-drawn-office-supplies-drawing-back-view-vector.jpg" height="350px" width="350px" alt="imagen de impresora">
-                @endif
-                @if ($bien->FK_B_Fisico_TipoId ==3)
-                    <img src=" https://cdn-icons-png.flaticon.com/512/5921/5921714.png" height="50px" width="50px" alt="imagen de impresora">
-                @endif
-                @if ($bien->FK_B_Fisico_TipoId ==2)
-                    <img src="https://img.freepik.com/vector-premium/monitor-computadora-estilo-dibujos-animados-aislado-sobre-fondo-blanco-ilustracion-stock-simbolo-computadora_258706-337.jpg" height="200px" width="250px" alt="imagen de impresora">
-                @endif
-                @if ($bien->FK_B_Fisico_TipoId ==1)
-                    <img src="" height="350px" width="350px" alt="imagen de impresora">
-                @endif    
+
+
                     
                 
             </div>

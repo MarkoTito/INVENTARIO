@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Bien;
 use App\Models\Category;
 use App\Models\Comentario;
+use App\Models\Image;
 use App\Models\Sistema;
 use App\Models\Tipo;
 use App\Models\User;
@@ -113,12 +114,13 @@ class BienController extends Controller
         $bien->save();
         session()->flash('swal',[
             'icon'=> 'success',
-            'title'=> '!Bien hecho',
-            'text'=>'El bien fue registrado correctamente'
+            'title'=> '!El bien fue registrado correctamente¡',
+            'text'=>'Acontinuacion Ingresa una imagen del bien'
         ]);
+       
+        return view('admin/entrega');
 
-        //return 'se registro correctamente';
-        return redirect()->route('adminbien.index');
+        //return redirect()->route('/admin/entregar/{{$ultimo->PK_B_Fisico}}');
 
     }
 
@@ -138,9 +140,10 @@ class BienController extends Controller
         $comentarios=Comentario::where('FK_Comentario_FisicoId',$id)
                  ->get();
         
-        //return $comentarios;
-
-        return view('admin.detalle',compact('bien','comentarios'));
+        //para mostrar las imagnes;
+        $imagen = Image::where('FK_B_Fisico_Ima',$id)->first();
+        //return $imagen->Ima_path;
+        return view('admin.detalle',compact('bien','comentarios','imagen'));
     }
 
     public function historial($id)
@@ -268,28 +271,34 @@ class BienController extends Controller
     {
         //Bajar bien
     }
+    public function imagen($id){
+        // se va a el formulario para ponerle su imagen
+        return view('admin/entrega',compact('id'));
+        
+    }
 
     public function dropzone(Request $request){
-        // Valida que haya un archivo
+        $ultimo = Bien::orderBy('PK_B_Fisico', 'desc')->first();
+
         if (!$request->hasFile('file')) {
             return response()->json(['error' => 'No se recibió ningún archivo'], 400);
         }
 
-        // Guarda el archivo
-        $path = Storage::put('/images', $request->file('file'));
+        $image = new Image();
+        $image->Ima_path = $request->file('file')->store('imagenes', 'public');
+        $image->Ima_size = $request->file('file')->getSize();
+        $image->FK_B_Fisico_Ima = $ultimo->PK_B_Fisico;
+        $image->Tipo_Bien_Ima = $ultimo->FK_B_Fisico_TipoId;
+        $image->save();
 
-        // Devuelve respuesta correcta
         return response()->json([
             'success' => true,
-            'path' => $path,
-            'message' => 'Archivo subido correctamente'
+            'message' => 'Imagen subida correctamente'
         ]);
+        
+        
+
     }
     
-    /*
-    return response()->json([
-            
-        'path'=>$path,
-    ]);
-    */
+    
 }

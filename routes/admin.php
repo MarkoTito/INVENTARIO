@@ -37,6 +37,14 @@ Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
 //generar el PDF
 Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
 //para las imagenes:
+
+//ruta de Entrega
+/*
+Route::get('/entregar/{id}',[BienController::class,'imagen']);
+// Route::get('/entregar',function(){
+// })->name('ad_ingresar');//su nombre es admin.home
+
+*/
 Route::post('bien/dropzone',[BienController::class,'dropzone'])->name('bien.dropzone');
 
 //ruta de los comentarios (reparacion)
@@ -57,9 +65,3 @@ Route::get('/buscar/baja/{id}',[BienController::class,'baja_show']);
 //ruta para areas (ni lo uso XD)
 Route::resource('area', AreaController::class);
 
-
-//ruta de Entrega
-
-Route::get('/entregar',function(){
-    return view('admin.entrega');
-})->name('ad_ingresar');//su nombre es admin.home

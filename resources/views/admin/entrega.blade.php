@@ -10,14 +10,16 @@ title="Entregar"
         'href' => '/',
     ],
     [
-        'name'=> 'Entregar',
+        'name'=> 'Ingresar Imagen',
     ]
     ]">
-   <H2>Entregar bien</H2>
+   <H2>Ingresar Imagen del bien</H2>
 
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     @endpush
+
+   
 
     {{-- imagen --}}
     <div class="mb-4" >
@@ -26,12 +28,29 @@ title="Entregar"
         @csrf
         
     </div>
+    <div>
+        <h2>
+            *Este campo No es Obligatorio
+        </h2>
+    </div>
 
     @push('js')
         <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
         <script>
             Dropzone.options.miDropzone = {
-                // tu configuración...
+                dictDefaultMessage: "Arrastre una imagen del Bien",
+                acceptedFiles: "image/*",
+                maxFilesize: 2,
+                maxFiles: 1,
+
+                success: function(file, response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Bien hecho!',
+                        text: response.message
+                    });
+                },
+
                 error: function(file, response) {
                     let message = response;
 
@@ -39,16 +58,22 @@ title="Entregar"
                     if (typeof response === "object" && response.error) {
                         message = response.error;
                     } else if (typeof response === "object") {
-                        // Laravel a veces envía response con errores de validación
                         message = response.message || "Error desconocido";
                     }
 
-                    // Mostrar el mensaje en el diseño de Dropzone
+                    // Mostrar en Dropzone visualmente
                     file.previewElement.classList.add("dz-error");
                     const _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
                     for (let i = 0, len = _ref.length; i < len; i++) {
                         _ref[i].textContent = message;
                     }
+
+                    // También mostrar con SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Ups!',
+                        text: message
+                    });
                 }
             };
         </script>                                
