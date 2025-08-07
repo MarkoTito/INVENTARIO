@@ -32,19 +32,15 @@ Route::get('/buscar/{id}',[BienController::class,'show1']);
 //Bajar un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/Bajar/{id}',[BienController::class,'baja']);
 
+//Bajar editar un bien:
+Route::get('/Editar/Hardware/{id}',[BienController::class,'H_editar']);
+
 //mostrar el historial
 Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
 //generar el PDF
 Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
 //para las imagenes:
 
-//ruta de Entrega
-/*
-Route::get('/entregar/{id}',[BienController::class,'imagen']);
-// Route::get('/entregar',function(){
-// })->name('ad_ingresar');//su nombre es admin.home
-
-*/
 Route::post('bien/dropzone',[BienController::class,'dropzone'])->name('bien.dropzone');
 
 //ruta de los comentarios (reparacion)

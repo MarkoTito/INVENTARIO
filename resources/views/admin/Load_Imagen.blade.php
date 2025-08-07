@@ -72,6 +72,12 @@ title="Entregar"
                     });
                     
                 }
+                //limitaciones
+                dictDefaultMessage: "Arraste una imagen al recuadro para subirlo",
+                acceptedFiles : "image/*",
+
+
+
             };
         </script>                                
     @endpush

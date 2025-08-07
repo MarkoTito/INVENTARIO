@@ -101,9 +101,13 @@ title="Reprar"
                                 class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
                             </button>
         
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                                class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button">   Editar {{$bien->tipo->T_Descriocion}}
-                            </button>
+                           <a href="/admin/Editar/Hardware/{{$bien->PK_B_Fisico}}">
+                                <button
+                                    class="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-10 py-4 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800"
+                                    type="button">
+                                    Editar 
+                                </button>
+                            </a>
 
                             <a href="/admin/buscar/historial/{{$bien->PK_B_Fisico}}">
                                 <button

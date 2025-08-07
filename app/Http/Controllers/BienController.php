@@ -114,8 +114,8 @@ class BienController extends Controller
         $bien->save();
         session()->flash('swal',[
             'icon'=> 'success',
-            'title'=> '!El bien fue registrado correctamente¡',
-            'text'=>'Acontinuacion Ingresa una imagen del bien'
+            'title'=> '!PASO 1 COMPLEATADO¡',
+            'text'=>'El Bien fue registrado con Exito'
         ]);
        
         return view('admin/Load_Imagen');
@@ -169,6 +169,21 @@ class BienController extends Controller
     {
         //
         return 'hola desde el edit';
+    }
+    public function H_editar($id)
+    {
+        //formulario para editar un hardware
+        $bien=Bien::where('PK_B_Fisico', $id)
+                ->with('area')
+                ->with('tipo')
+                ->first();
+        //para mostrar las imagnes;
+        $imagen = Image::where('FK_B_Fisico_Ima',$id)->first();
+        $areas=Area::all();
+        $tipos = Tipo::all();
+
+        return view('admin/editar_hardware',compact('bien','imagen','areas','tipos'));
+        
     }
 
     /**
@@ -295,7 +310,7 @@ class BienController extends Controller
             'success' => true,
             'message' => 'Imagen subida correctamente, Puede salir de la Pestaña'
         ]);
-        // return redirect()->route('adminbien.index');
+        return redirect()->route('adminbien.index');
         
     }
 }

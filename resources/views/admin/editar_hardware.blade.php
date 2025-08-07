@@ -1,0 +1,127 @@
+{{-- PASA la informacion a un componente (con el nombre breadcrumbds)
+    : significa codigo php
+    sin : significa texto plano
+--}}
+<x-admin-layout 
+title="Entregar"
+:breadcrumbs="[
+    [
+        'name'=>'Menu',
+        'href' => '/',
+    ],
+    [
+        'name'=> 'Editar Harware',
+    ]
+    ]">
+    <form action="">
+
+        <div class="grid gap-6  md:grid-cols-2">
+                 <div>
+                     @if (!$imagen)
+                         @if ($bien->FK_B_Fisico_TipoId ==6)
+                             <img class="rounded-full w-96 h-96" width="300px" src="https://static.vecteezy.com/system/resources/previews/012/618/939/original/printer-cartoon-illustration-vector.jpg" alt="image description">
+                             
+                         @endif
+                         @if ($bien->FK_B_Fisico_TipoId ==5)
+                             <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="250px" width="350px" alt="imagen de impresora">
+                         @endif
+                         @if ($bien->FK_B_Fisico_TipoId ==4)
+                             <img src=" https://static.vecteezy.com/system/resources/previews/011/065/272/non_2x/wireless-computer-mouse-clipart-gray-computer-mouse-watercolor-style-illustration-isolated-on-white-background-simple-wireless-mouse-cartoon-hand-drawn-office-supplies-drawing-back-view-vector.jpg" height="350px" width="350px" alt="imagen de impresora">
+                         @endif
+                         @if ($bien->FK_B_Fisico_TipoId ==3)
+                             <img src=" https://cdn-icons-png.flaticon.com/512/5921/5921714.png" height="200px" width="200px" alt="imagen de impresora">
+                         @endif
+                         @if ($bien->FK_B_Fisico_TipoId ==2)
+                             <img src="https://img.freepik.com/vector-premium/monitor-computadora-estilo-dibujos-animados-aislado-sobre-fondo-blanco-ilustracion-stock-simbolo-computadora_258706-337.jpg" height="200px" width="250px" alt="imagen de impresora">
+                         @endif
+                         @if ($bien->FK_B_Fisico_TipoId ==1)
+                             <img src="" height="350px" width="350px" alt="imagen de impresora">
+                         @endif  
+                         
+                     @else
+                         
+                         <img src="{{ Storage::url($imagen->Ima_path) }}" height="50px" width="140px" alt="imagen del bien">
+                         
+                     @endif
+                 </div>
+                 <div>
+                     <div class="grid gap-6 md:grid-cols-2">
+                         <div>
+                             {{-- AREA --}} 
+                            <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
+                            <select name="FK_B_Fisico_Area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @foreach ($areas as $area)
+                                    <option value="{{$area->PK_Area}}" {{$bien->FK_B_Fisico_Area==$area->PK_Area ? 'selected' : ''}} >{{$area->UK_Nombre_Area}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+     
+                         <div>
+                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
+                             <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Codigo_Pratimonial}}" >          
+                        </div>
+             
+                         <div>
+                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
+                             <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->D_Adquisicion}}" >
+                         </div>
+                         <div>
+                            {{-- estado --}}
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado:</label>   
+                            <select name="FK_B_Fisico_Area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="Bien" {{$bien->T_Estado_Fisico== 'Bien' ? 'selected' : ''}} >Bien</option>
+                                <option value="Regular" {{$bien->T_Estado_Fisico== 'Regular' ? 'selected' : ''}} >Regular</option>
+                                <option value="Mal" {{$bien->T_Estado_Fisico== 'Mal' ? 'selected' : ''}} >Mal</option>
+                            </select>   
+                         </div>
+                     </div>
+                 </div>
+         </div>
+        
+         <div class="mb-4">
+             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
+             <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$bien->T_B_Descripcion}}</textarea>
+         </div> 
+         <br> 
+        <button
+            style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+            type="button">
+            Editar
+        </button>
+
+    </form>
+
+
+    @push('js')
+        <script>
+        //que seleciona todos esos formularios que tengan ese nombre de delete-form 
+            forms = document.querySelectorAll('.delete-form')
+            //que recorra todos los formularios
+            forms.forEach(form => {
+                //que se ponga al escucha de ese formulario con el evento submit
+                form.addEventListener('submit',function(e){ //e es el evento en si
+                    //previne el evento 
+                    e.preventDefault('');
+                        Swal.fire({
+                            title: "Bajar este Bien?",
+                            text: "No podras revertir esto!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Si, Bajar bien",
+                            cancelButtonText: "No cancelar"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });    
+                });
+            });
+        </script>
+                                    
+    @endpush      
+
+    
+    
+</x-admin-layout>
