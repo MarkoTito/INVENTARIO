@@ -10,6 +10,8 @@ class Bien extends Model
     //
     
     protected $table = 'b_fisicos';
+    //siempre es bueno poner cual es nombre de pk
+    protected $primaryKey = 'PK_B_Fisico'; 
     protected $fillable=[
         'FK_B_Fisico_Area',
         'FK_B_Fisico_TipoId',

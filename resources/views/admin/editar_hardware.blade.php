@@ -13,7 +13,9 @@ title="Entregar"
         'name'=> 'Editar Harware',
     ]
     ]">
-    <form action="">
+    <form action="{{route('adminbien.update',$bien->PK_B_Fisico)}}" method="POST">
+        @csrf
+        @method('PUT');
 
         <div class="grid gap-6  md:grid-cols-2">
                  <div>
@@ -57,18 +59,18 @@ title="Entregar"
                         </div>
      
                          <div>
-                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
-                             <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Codigo_Pratimonial}}" >          
+                             <label for="UK_Codigo_Pratimonial" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
+                             <input type="text" name="UK_Codigo_Pratimonial" id="UK_Codigo_Pratimonial" aria-label="UK_Codigo_Pratimonial" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Codigo_Pratimonial}}" >          
                         </div>
              
                          <div>
-                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
-                             <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->D_Adquisicion}}" >
+                             <label for="D_Adquisicion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
+                             <input type="text" name="D_Adquisicion" id="D_Adquisicion" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->D_Adquisicion}}" >
                          </div>
                          <div>
                             {{-- estado --}}
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado:</label>   
-                            <select name="FK_B_Fisico_Area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select name="T_Estado_Fisico" id="T_Estado_Fisico" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="Bien" {{$bien->T_Estado_Fisico== 'Bien' ? 'selected' : ''}} >Bien</option>
                                 <option value="Regular" {{$bien->T_Estado_Fisico== 'Regular' ? 'selected' : ''}} >Regular</option>
                                 <option value="Mal" {{$bien->T_Estado_Fisico== 'Mal' ? 'selected' : ''}} >Mal</option>
@@ -80,12 +82,12 @@ title="Entregar"
         
          <div class="mb-4">
              <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
-             <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$bien->T_B_Descripcion}}</textarea>
+             <textarea id="message" name="T_B_Descripcion" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$bien->T_B_Descripcion}}</textarea>
          </div> 
          <br> 
         <button
             style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-            type="button">
+            type="submit">
             Editar
         </button>
 

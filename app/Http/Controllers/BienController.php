@@ -191,7 +191,21 @@ class BienController extends Controller
      */
     public function update(Request $request, Bien $bien)
     {
-        //
+        //$New_Bien= Bien::find($bien);
+        $bien->FK_B_Fisico_Area = $request->FK_B_Fisico_Area;
+        $bien->UK_Codigo_Pratimonial = $request->UK_Codigo_Pratimonial;
+        $bien->D_Adquisicion = $request->D_Adquisicion;
+        $bien->T_Estado_Fisico= $request->T_Estado_Fisico;
+        $bien->T_B_Descripcion= $request->T_B_Descripcion;
+        $bien->save();
+        session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Bien hecho¡',
+                    'text'=>'El bien fue Actualizado correctamente'
+                ]);
+    
+        //return 'se registro correctamente';
+        return redirect()->route('adminbien.index');
     }
 
     public function baja (Request $request,$bien)

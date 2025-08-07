@@ -103,17 +103,17 @@ title="Reprar"
         
                            <a href="/admin/Editar/Hardware/{{$bien->PK_B_Fisico}}">
                                 <button
-                                    class="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-10 py-4 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800"
+                                    style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                     type="button">
-                                    Editar 
+                                    Editar
                                 </button>
                             </a>
 
                             <a href="/admin/buscar/historial/{{$bien->PK_B_Fisico}}">
                                 <button
-                                    class="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-10 py-4 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800"
+                                    style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                     type="button">
-                                    Ver Historial
+                                    Historial
                                 </button>
                             </a>
         
