@@ -34,7 +34,7 @@ class BienController extends Controller
         //forma q muestra todo con los metodos creado, mas facil q hacer un where dentro de otro... :)
         $bienes = Bien::with('area','tipo')
                 //->where('T_Estado','Activo')    
-                ->get();
+                ->paginate(5);
 
         //mandar info
         $areas=Area::all();
