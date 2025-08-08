@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('archivos', function (Blueprint $table) {
             $table->id('PK_Archivos');
             $table->string('Arch_path')->unique();
+            $table->string('T_Arch_Nombre');
             $table->integer('Arch_path_size')->default(0);
             $table->double('FK_B_Digital_Arch');
             $table->timestamps();

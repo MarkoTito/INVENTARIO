@@ -246,6 +246,11 @@ class AreasSeeder extends Seeder
                 'N_estado' => 1
 
             ],
+            [
+                'UK_Nombre_Area' => 'Area no Asignada',
+                'N_estado' => 1
+
+            ],
 
 
 

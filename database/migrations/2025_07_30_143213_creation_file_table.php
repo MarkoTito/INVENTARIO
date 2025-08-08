@@ -14,14 +14,7 @@ return new class extends Migration
         //
         Schema::create('file', function (Blueprint $table) {
             $table->id('PK_file');
-            /*
-            $table->unsignedBigInteger('FK_B_Digital_File');
-            $table->foreign('FK_B_Digital_File')
-                    ->references('PK_B_Digital')
-                    ->on('b_digital')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            */
+            
             $table->double('FK_B_Digital_File');
 
             $table->string('T_Nombre_File');

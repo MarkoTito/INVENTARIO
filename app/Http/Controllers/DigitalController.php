@@ -168,11 +168,12 @@ class DigitalController extends Controller
         if (!$request->hasFile('file')) {
             return response()->json(['error' => 'No se recibió ningún archivo'], 400);
         }
-
+        
         $image = new Archivos();
-        $image->Arch_path = $request->file('file')->store('imagenes', 'public');
+        $image->Arch_path = $request->file('file')->store('archivos', 'public');
         $image->Arch_path_size = $request->file('file')->getSize();
         $image->FK_B_Digital_Arch = $ultimo->PK_B_Digital;
+        $image->T_Arch_Nombre=$request->file('file')->getClientOriginalName();
         $image->save();
 
         return response()->json([
@@ -197,8 +198,9 @@ class DigitalController extends Controller
         //detalle del bien digital
         $digital=Digital::where('PK_B_Digital', $id)
                 ->first();
+        $archivos=Archivos::where('PK_Archivos',$id)->get();
 
-        return view('admin/Buscar/detalle_Digital',compact('digital'));
+        return view('admin/Buscar/detalle_Digital',compact('digital','archivos'));
         
     }
     
