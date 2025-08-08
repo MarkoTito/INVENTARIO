@@ -38,44 +38,40 @@ title="Entregar"
         <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
         <script>
             Dropzone.options.myDropzone = {
-                success: function(file, response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Bien hecho!',
-                        text: response.message
-                    });
-                    
-                },
+                    maxFiles: 1,
+                    acceptedFiles: 'image/*',
+                    dictDefaultMessage: "Arrastra una imagen al recuadro para subirla",
+                    maxFilesize :2,
 
-                error: function(file, response) {
-                    let message = response;
+                    success: function(file, response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Bien hecho!',
+                            text: response.message
+                        });
+                    },
 
-                    // Si es un objeto (como un JSON), extrae el mensaje
-                    if (typeof response === "object" && response.error) {
-                        message = response.error;
-                    } else if (typeof response === "object") {
-                        message = response.message || "Error desconocido";
+                    error: function(file, response) {
+                        let message = response;
+
+                        if (typeof response === "object" && response.error) {
+                            message = response.error;
+                        } else if (typeof response === "object") {
+                            message = response.message || "Error desconocido";
+                        }
+
+                        file.previewElement.classList.add("dz-error");
+                        const _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
+                        for (let i = 0, len = _ref.length; i < len; i++) {
+                            _ref[i].textContent = message;
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Ups!',
+                            text: message
+                        });
                     }
-
-                    // Mostrar en Dropzone visualmente
-                    file.previewElement.classList.add("dz-error");
-                    const _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
-                    for (let i = 0, len = _ref.length; i < len; i++) {
-                        _ref[i].textContent = message;
-                    }
-
-                    // También mostrar con SweetAlert
-                    Swal.fire({
-                        icon: 'error',
-                        title: '¡Ups!',
-                        text: message
-                    });
-                    
-                }
-                //limitaciones
-                dictDefaultMessage: "Arraste una imagen al recuadro para subirlo",
-                acceptedFiles : "image/*",
-
 
 
             };

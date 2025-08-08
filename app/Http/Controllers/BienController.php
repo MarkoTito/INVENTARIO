@@ -114,8 +114,9 @@ class BienController extends Controller
         $bien->save();
         session()->flash('swal',[
             'icon'=> 'success',
-            'title'=> '!PASO 1 COMPLEATADO¡',
-            'text'=>'El Bien fue registrado con Exito'
+            'title'=> '!El Bien fue registrado con Exito¡',
+            'text'=>'PASO 1 COMPLEATADO'
+            
         ]);
        
         return view('admin/Load_Imagen');
@@ -157,6 +158,7 @@ class BienController extends Controller
                  ->get();
         
         //return $comentarios;
+        
 
         return view('admin.historial',compact('comentarios','bien'));
         
@@ -322,7 +324,8 @@ class BienController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Imagen subida correctamente, Puede salir de la Pestaña'
+            'message' => 'IMAGEN SUBIDA CORRECTAMENTE',
+            'text'=> 'Paso 2 Compleatodo'
         ]);
         return redirect()->route('adminbien.index');
         
