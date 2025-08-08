@@ -40,9 +40,9 @@ Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
 //generar el PDF
 Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
 //para las imagenes:
-
 Route::post('bien/dropzone',[BienController::class,'dropzone'])->name('bien.dropzone');
-
+//para los archivos
+Route::post('digital/dropzone',[DigitalController::class,'dropzone'])->name('digital.dropzone');
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);
 

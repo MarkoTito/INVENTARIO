@@ -10,10 +10,10 @@ title="Entregar"
         'href' => '/',
     ],
     [
-        'name'=> 'Ingresar Imagen',
+        'name'=> 'Ingresar Archivos',
     ]
     ]">
-   <H2>Ingresar Imagen del bien</H2>
+   <H2>Ingresar Archivo de la Licencia</H2>
 
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
@@ -24,12 +24,12 @@ title="Entregar"
     {{-- imagen --}}
     <div class="mb-4" >
        
-        <form action="{{ route('adminbien.dropzone')}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admindigital.dropzone')}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
         @csrf
         
     </div>
     <div>
-        <h2 class="text-red-700" >
+        <h2 class="text-red-700">
             *Este campo No es Obligatorio
         </h2>
     </div>
@@ -38,11 +38,9 @@ title="Entregar"
         <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
         <script>
             Dropzone.options.myDropzone = {
-                    maxFiles: 1,
-                    acceptedFiles: 'image/*',
-                    dictDefaultMessage: "Arrastra una imagen al recuadro para subirla",
-                    maxFilesize :2,
-
+                    maxFiles: 3,
+                    acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx,.txt',
+                    dictDefaultMessage: "Arrastra los archivos al recuadro para subirla",
                     success: function(file, response) {
                         Swal.fire({
                             icon: 'success',

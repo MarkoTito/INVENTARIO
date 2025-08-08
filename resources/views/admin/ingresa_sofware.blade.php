@@ -80,32 +80,25 @@ title="Registrar"
                 @error('D_F_Inicio')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
-            </div>
-            
-            <div>   
-                {{-- original  sustento  --}}
+            </div>  
+            {{-- <div>   
+                original  sustento 
                 
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" for="multiple_files">Subir Sustento</label>
                 <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="T_Nombre_File[]"  id="multiple_files" type="file" multiple> 
-
-
-
-            </div>
-
-
-
-
-            <div>
-                {{-- Fecha de vencimiento  --}}
-                <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Vencimiento:</label>
-                <input type="date" name="D_F_Vencimiento">
-                @error('D_F_Vencimiento')
-                        <p class="text-red-600">*{{$message}}</p>
-                @enderror
-            </div>
-
-            
+            </div> --}}    
         </div>
+        
+        <div class="flex justify-center">
+            {{-- Fecha de vencimiento  --}}
+            <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Vencimiento:</label>
+            <input type="date" name="D_F_Vencimiento">
+            @error('D_F_Vencimiento')
+                    <p class="text-red-600">*{{$message}}</p>
+            @enderror
+        </div>
+
+
         <br>
 
                 

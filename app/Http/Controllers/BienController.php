@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class BienController extends Controller
 {
@@ -99,7 +100,7 @@ class BienController extends Controller
                 'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:b_fisicos',
                 'T_B_Descripcion' => 'required',
                 'T_Estado_Fisico'=> 'required',
-                'D_Adquisicion'=> 'required'
+                'D_Adquisicion'=> ['required' , 'date', 'before_or_equal:today']
         ]);
         $bien = new Bien();
         //esto se podria evitar con carga masivoa . pero se vera despues
