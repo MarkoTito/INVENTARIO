@@ -24,7 +24,7 @@
 </head>
 <body>
  
-    <div class="title">Retiro de Bien Patrimonial</div>
+    <div class="title">Acta de Baja de Bien</div>
  
     <div>
         {{-- descripcion --}}
@@ -32,7 +32,7 @@
         <strong>Area:</strong> {{ $bien->area->UK_Nombre_Area ?? '—' }}<br>
         <strong>Fecha de Adquisicion:</strong> {{ \Carbon\Carbon::parse($bien->D_Adquisicion)->format('d/m/Y') }}<br>
         <strong>Codigo Patrimonial:</strong> {{$bien->UK_Codigo_Pratimonial ?? '—' }}<br>
-        <strong>Tecnico Responsable:</strong> {{$bien->B_User_Name_Baja ?? '—' }}<br>
+       
     </div>
 
     <div class="section">
@@ -82,22 +82,18 @@
     </div>
     <br>
     <br>
-    <div>
-        <h3>
-            __________________
-        </h3>
-        <h3>
-            {{$jefa->name}}
-        </h3>
-        
-        {{-- <h5>
-            Jefe de la Oficina de Desarrollo de Tecnologias de la Informacion Y Estadistica
-        </h5> --}}
-    </div>
-    <br>
-    <div>
+    
+    
+    <h2 style="display:inline-block; margin:0 100px 0 0;">______________</h2>
+    <h2 style="display:inline-block; margin:0;">__________________</h2>
+    <h3 style="display:inline-block; margin:0 165px 0 25;"> {{ $bien->B_User_Name_Baja }}</h3>
+    <h3 style="display:inline-block; margin:0;">V.B Jefe de la ODTIE</h3>
+    
+    <p style="display:inline-block; margin:0;">*Tecnico Responsable*</p>
 
-    </div>
+    
+    
+
 
 </body>
 

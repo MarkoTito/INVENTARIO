@@ -106,23 +106,39 @@ title="Reprar"
                 </tr>
             </thead>
             <tbody>
-                @foreach ($archivos as $archivo)
+                @if ($archivos->isEmpty())
                     <tr>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                            {{$archivo->T_Arch_Nombre}}
-                        </th>
+                            No hay Documentos
+                        </th>   
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                            {{$archivo->created_at}}
-                        </th>
-                        <th class="px-6 py-4">
-
-                            <a href="{{asset('storage/'.$archivo->Arch_path)}} "target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                            Ver
-                            </a>
-                        
-                        </th>
+                           -
+                        </th>  
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            -
+                        </th>           
                     </tr>
-                @endforeach
+                @else
+                    @foreach ($archivos as $archivo)
+                        <tr>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$archivo->T_Arch_Nombre}}
+                            </th>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                {{$archivo->created_at}}
+                            </th>
+                            <th class="px-6 py-4">
+
+                                <a href="{{asset('storage/'.$archivo->Arch_path)}} "target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                Ver
+                                </a>
+                            
+                            </th>
+                        </tr>
+                    @endforeach
+                    
+                @endif
+                
                 
             </tbody>
         </table>
