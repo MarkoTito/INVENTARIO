@@ -61,12 +61,12 @@ title="Registrar"
             <div>
                 {{-- determincacion --}}
                 <div class="flex items-center mb-4">
-                    <input id="default-radio-1" type="radio" value="Indeterminado" name="T_Determinacion" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Indeterminado</label>
+                    <input id="default-radio-1" type="radio" value="Determinado" name="T_Determinacion" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Determinado</label> 
                 </div>
                 <div class="flex items-center">
-                    <input checked id="default-radio-2" type="radio" value="Determinado" name="T_Determinacion" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Determinado</label>
+                    <input id="default-radio-2" type="radio" value="Indeterminado" name="T_Determinacion" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Indeterminado</label>
                 </div>
                 @error('T_Determinacion')
                         <p class="text-red-600">*{{$message}}</p>
@@ -81,35 +81,43 @@ title="Registrar"
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>  
-            {{-- <div>   
-                original  sustento 
-                
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" for="multiple_files">Subir Sustento</label>
-                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="T_Nombre_File[]"  id="multiple_files" type="file" multiple> 
-            </div> --}}    
         </div>
         
-        <div class="flex justify-center">
+        <br>
+        
+        
+        
+        <div class="flex justify-center" id="miInput" style="display: none;">
             {{-- Fecha de vencimiento  --}}
             <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Vencimiento:</label>
-            <input type="date" name="D_F_Vencimiento">
+            <input type="date" id="wasa" name="D_F_Vencimiento">
             @error('D_F_Vencimiento')
-                    <p class="text-red-600">*{{$message}}</p>
+            <p class="text-red-600">*{{$message}}</p>
             @enderror
         </div>
-
-
-        <br>
-
-                
+        
         <div class="flex justify-center mt-4" >
             <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Subir</button>
+        </div>  
 
-        </div>    
     </form>    
     
 
     @push('js')
+        <script>
+        let input = document.getElementById('miInput');
+
+        document.querySelectorAll('input[name="T_Determinacion"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                let input = document.getElementById('miInput');
+                if (this.value === 'Determinado') {
+                    input.style.display = 'block'; // mostrar
+                } else {
+                    input.style.display = 'none';  // ocultar
+                }
+            });
+        });
+        </script>
         <script>
         //que seleciona todos esos formularios que tengan ese nombre de delete-form 
             forms = document.querySelectorAll('.submit-form')
