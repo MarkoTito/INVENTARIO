@@ -90,8 +90,8 @@ class DigitalController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'ARCHIVO(S) SUBIDA CORRECTAMENTE',
-            'text'=> 'Paso 2 Compleatodo'
+            'message' => 'Se subio correctamente el archivo',
+            
         ]);
         return redirect()->route('adminbien.index');
         

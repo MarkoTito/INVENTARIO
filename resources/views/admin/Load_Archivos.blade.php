@@ -26,6 +26,7 @@ title="Entregar"
        
         <form action="{{ route('admindigital.dropzone')}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
         @csrf
+        </form>
         
     </div>
     <div>
@@ -44,8 +45,18 @@ title="Entregar"
                     success: function(file, response) {
                         Swal.fire({
                             icon: 'success',
-                            title: '¡Bien hecho!',
+                            title: '¡PASO 2 COMPLETADO!',
                             text: response.message
+                        });
+                        
+                    },
+
+                    init: function() {
+                        this.on("success", function(file, response) {
+                            // Espera un poquito para mostrar el mensaje y luego redirige
+                            setTimeout(function() {
+                                window.location.href = "{{ route('adminbien.index') }}";
+                            }, 1500);
                         });
                     },
 

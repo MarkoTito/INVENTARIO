@@ -325,10 +325,10 @@ class BienController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'IMAGEN SUBIDA CORRECTAMENTE',
-            'text'=> 'Paso 2 Compleatodo'
+            'message' => 'La imagen se subio correctamente',
+            
         ]);
-        return redirect()->route('adminbien.index');
+        // return redirect()->route('adminbien.index');
         
     }
 }
