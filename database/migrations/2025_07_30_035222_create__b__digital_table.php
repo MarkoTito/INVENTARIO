@@ -21,12 +21,11 @@ return new class extends Migration
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('FK_B_Fisico_TipoId');
+            $table->unsignedBigInteger('FK_B_Fisico_TipoId')->default(1);;
             $table->foreign('FK_B_Fisico_TipoId')
                     ->references('PK_Tipo')
                     ->on('tipos')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+                    ->onDelete('cascade');
 
             $table->unsignedBigInteger('FK_B_Digital_SistemaId');
             $table->foreign('FK_B_Digital_SistemaId')
@@ -40,8 +39,7 @@ return new class extends Migration
             $table->date('D_F_Inicio');
             $table->text('T_Determinacion');
             $table->date('D_F_Vencimiento')->nullable();
-            //$table->text('T_Sustento')->nullable();
-            $table->text('T_Estado_Digital');
+            $table->text('T_Estado_Digital')->default('Activo');
             $table->timestamps();
 
         });

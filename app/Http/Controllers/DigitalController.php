@@ -44,34 +44,33 @@ class DigitalController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate(
+                [
                 'FK_B_Digital_AreaId' => 'required',
                 'FK_B_Digital_SistemaId' => 'required',
                 'T_Nombre_Digital' => 'required',
                 'T_Host' => 'required',
-                'D_F_Inicio'=> ['required' , 'date', 'before_or_equal:today',]
-                
-        ]);
+                'D_F_Inicio'=> 'required',
+                ],
+                [],
+                [
+                    'FK_B_Digital_AreaId'=>'Area',
+                    'FK_B_Digital_SistemaId'=> 'Sistema',
+                    'T_Nombre_Digital'=>'Nombre del sistema',
+                    'T_Host' => 'Host',
+                    'D_F_Inicio'=> 'Fecha de Incio'
+                ]
+        );
 
-        //subir a la bd de digital
-        $bDigital = new Digital();
-        $bDigital->FK_B_Digital_AreaId=$request->FK_B_Digital_AreaId;
-        $bDigital->FK_B_Fisico_TipoId=1;
-        $bDigital->FK_B_Digital_SistemaId=$request->FK_B_Digital_SistemaId;
-        $bDigital->T_Nombre_Digital=$request->T_Nombre_Digital;
-        $bDigital->T_Host=$request->T_Host;
-        $bDigital->D_F_Inicio=$request->D_F_Inicio;
-        $bDigital->T_Determinacion	=$request->T_Determinacion;
-        $bDigital->D_F_Vencimiento=$request->D_F_Vencimiento;
-        $bDigital->T_Estado_Digital="Activo";
-        $bDigital->save();
+        Digital::create($request->all());
+
+
         session()->flash('swal',[
                 'icon'=> 'success',
                 'title'=> '!Bien hecho',
                 'text'=>'El bien fue registrado correctamente'
         ]);
-        return view('admin/Load_Archivos');
-         
+        return view('admin/Load_Archivos'); 
         
     }
     public function dropzone(Request $request){

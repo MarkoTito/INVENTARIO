@@ -38,12 +38,19 @@ class ComentarioController extends Controller
     public function store(Request $request)
     {
         //creacion del comentario
-        $data=$request->validate([
-                
+        $data=$request->validate(
+            [
                 'T_Descripcion_Comentario' => 'required',
                 'FK_Comentario_FisicoId' => 'required|min:12|max:12',
                 'T_Estado' => 'required',
-        ]);
+            ],
+            [],
+            [
+                'T_Descripcion_Comentario'=> 'Comentario',
+                'FK_Comentario_FisicoId' => 'Codigo Patrimonial',
+                'T_Estado' => 'Estado del Bien'
+            ]
+        );
         //BUSQUEDA DEL USUARIO
         $usuario=Auth::user()->name;
         //BUSQUEDA DEL BIEN

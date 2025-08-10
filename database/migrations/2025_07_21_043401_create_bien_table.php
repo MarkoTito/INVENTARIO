@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('UK_Codigo_Pratimonial')->unique()->nullable();
             $table->date('D_Adquisicion');
             $table->text('T_Estado_Fisico');
-            $table->text('T_Estado');
+            $table->string('T_Estado')->default('Activo'); //se puede mejorar con una tabla (esto es para ver si esta activo o de baja)
             $table->date('D_Baja')->nullable();
             $table->text('B_User_Name_Baja')->nullable();
             $table->text('T_Motivo_Baja')->nullable();

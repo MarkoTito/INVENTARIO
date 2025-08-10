@@ -93,26 +93,28 @@ class BienController extends Controller
      */
     public function store(Request $request)
     {
-        //validacion
-        $request->validate([
-                'FK_B_Fisico_TipoId' => 'required',
+        //Inserccion de datos
+        $request->validate(
+                [
                 'FK_B_Fisico_Area' => 'required',
+                'FK_B_Fisico_TipoId' => 'required',
                 'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:b_fisicos',
                 'T_B_Descripcion' => 'required',
                 'T_Estado_Fisico'=> 'required',
                 'D_Adquisicion'=> ['required' , 'date', 'before_or_equal:today']
-        ]);
-        $bien = new Bien();
-        //esto se podria evitar con carga masivoa . pero se vera despues
-        $bien->FK_B_Fisico_Area=$request->FK_B_Fisico_Area;
-        $bien->FK_B_Fisico_TipoId=$request->FK_B_Fisico_TipoId;
+                ],
+                [],
+                [
+                    'FK_B_Fisico_Area' => 'Area',
+                    'FK_B_Fisico_TipoId'=> 'Tipo',
+                    'UK_Codigo_Pratimonial' => 'Codigo patrimonial',
+                    'T_B_Descripcion'=> 'Descripcion',
+                    'T_Estado_Fisico'=> 'Estado',
+                    'D_Adquisicion'=>'Fecha de Adiquiscion'
 
-        $bien->T_B_Descripcion=$request->T_B_Descripcion;
-        $bien->UK_Codigo_Pratimonial=$request->UK_Codigo_Pratimonial;
-        $bien->T_Estado_Fisico=$request->T_Estado_Fisico;
-        $bien->T_Estado="Activo";
-        $bien->D_Adquisicion=$request->D_Adquisicion;
-        $bien->save();
+                ]
+        );
+        Bien::create($request->all());
         session()->flash('swal',[
             'icon'=> 'success',
             'title'=> '!El Bien fue registrado con Exito¡',
@@ -121,9 +123,6 @@ class BienController extends Controller
         ]);
        
         return view('admin/Load_Imagen');
-
-        //return redirect()->route('/admin/entregar/{{$ultimo->PK_B_Fisico}}');
-
     }
 
     /**
