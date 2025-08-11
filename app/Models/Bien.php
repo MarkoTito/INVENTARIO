@@ -9,7 +9,7 @@ class Bien extends Model
 {
     //
     
-    protected $table = 'b_fisicos';
+    protected $table = 'Hardware';
     //siempre es bueno poner cual es nombre de pk
     protected $primaryKey = 'PK_B_Fisico'; 
 

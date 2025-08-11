@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('B_fisicos', function (Blueprint $table) {
+        Schema::create('Hardware', function (Blueprint $table) {
             $table->id('PK_B_Fisico');
             //foreignId:->hace referencia al id y su tabla (tabla_suId) recuerda q la tabla tiene q ser con s
             //$table->foreignId('area_id')->constrained()->onDelete('cascade')->onUpdate('cascade');

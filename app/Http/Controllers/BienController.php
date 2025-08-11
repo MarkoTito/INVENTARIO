@@ -98,7 +98,7 @@ class BienController extends Controller
                 [
                 'FK_B_Fisico_Area' => 'required',
                 'FK_B_Fisico_TipoId' => 'required',
-                'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:b_fisicos',
+                'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:hardware',
                 'T_B_Descripcion' => 'required',
                 'T_Estado_Fisico'=> 'required',
                 'D_Adquisicion'=> ['required' , 'date', 'before_or_equal:today']
