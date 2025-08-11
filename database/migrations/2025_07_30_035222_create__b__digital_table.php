@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('FK_B_Fisico_TipoId')->default(1);;
             $table->foreign('FK_B_Fisico_TipoId')
-                    ->references('PK_Tipo')
+                    ->references('PK_tipo')
                     ->on('tipos')
                     ->onDelete('cascade');
 

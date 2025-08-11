@@ -25,7 +25,7 @@ return new class extends Migration
             
             $table->unsignedBigInteger('FK_B_Fisico_TipoId');
             $table->foreign('FK_B_Fisico_TipoId')
-                    ->references('PK_Tipo')
+                    ->references('PK_tipo')
                     ->on('tipos')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');

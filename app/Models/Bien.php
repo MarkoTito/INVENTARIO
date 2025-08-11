@@ -28,7 +28,7 @@ class Bien extends Model
     }
     public function tipo()
     {
-        return $this->belongsTo(Tipo::class,'FK_B_Fisico_TipoId','PK_Tipo');
+        return $this->belongsTo(Tipo::class,'FK_B_Fisico_TipoId','PK_tipo');
     }
     //aca falta agregar mas coneccionde de la BD
 
