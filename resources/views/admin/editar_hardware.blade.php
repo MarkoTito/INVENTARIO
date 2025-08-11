@@ -13,30 +13,30 @@ title="Entregar"
         'name'=> 'Editar Harware',
     ]
     ]">
-    <form action="{{route('adminbien.update',$bien->PK_B_Fisico)}}" method="POST">
+    <form action="{{route('adminbien.update',$bien->PK_Hardware)}}" method="POST">
         @csrf
-        @method('PUT');
+        @method('PUT')
 
         <div class="grid gap-6  md:grid-cols-2">
                  <div>
                      @if (!$imagen)
-                         @if ($bien->FK_B_Fisico_TipoId ==6)
+                         @if ($bien->FK_Hardware_TipoId ==6)
                              <img class="rounded-full w-96 h-96" width="300px" src="https://static.vecteezy.com/system/resources/previews/012/618/939/original/printer-cartoon-illustration-vector.jpg" alt="image description">
                              
                          @endif
-                         @if ($bien->FK_B_Fisico_TipoId ==5)
+                         @if ($bien->FK_Hardware_TipoId ==5)
                              <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="250px" width="350px" alt="imagen de impresora">
                          @endif
-                         @if ($bien->FK_B_Fisico_TipoId ==4)
+                         @if ($bien->FK_Hardware_TipoId ==4)
                              <img src=" https://static.vecteezy.com/system/resources/previews/011/065/272/non_2x/wireless-computer-mouse-clipart-gray-computer-mouse-watercolor-style-illustration-isolated-on-white-background-simple-wireless-mouse-cartoon-hand-drawn-office-supplies-drawing-back-view-vector.jpg" height="350px" width="350px" alt="imagen de impresora">
                          @endif
-                         @if ($bien->FK_B_Fisico_TipoId ==3)
+                         @if ($bien->FK_Hardware_TipoId ==3)
                              <img src=" https://cdn-icons-png.flaticon.com/512/5921/5921714.png" height="200px" width="200px" alt="imagen de impresora">
                          @endif
-                         @if ($bien->FK_B_Fisico_TipoId ==2)
+                         @if ($bien->FK_Hardware_TipoId ==2)
                              <img src="https://img.freepik.com/vector-premium/monitor-computadora-estilo-dibujos-animados-aislado-sobre-fondo-blanco-ilustracion-stock-simbolo-computadora_258706-337.jpg" height="200px" width="250px" alt="imagen de impresora">
                          @endif
-                         @if ($bien->FK_B_Fisico_TipoId ==1)
+                         @if ($bien->FK_Hardware_TipoId ==1)
                              <img src="" height="350px" width="350px" alt="imagen de impresora">
                          @endif  
                          
@@ -51,29 +51,29 @@ title="Entregar"
                          <div>
                              {{-- AREA --}} 
                             <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
-                            <select name="FK_B_Fisico_Area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select name="FK_Hardware_AreaId" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach ($areas as $area)
-                                    <option value="{{$area->PK_area}}" {{$bien->FK_B_Fisico_Area==$area->PK_Area ? 'selected' : ''}} >{{$area->UK_Nombre_area}}</option>
+                                    <option value="{{$area->PK_area}}" {{$bien->FK_Hardware_AreaId==$area->PK_area ? 'selected' : ''}} >{{$area->UK_Nombre_area}}</option>
                                 @endforeach
                             </select>
                         </div>
      
                          <div>
-                             <label for="UK_Codigo_Pratimonial" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
-                             <input type="text" name="UK_Codigo_Pratimonial" id="UK_Codigo_Pratimonial" aria-label="UK_Codigo_Pratimonial" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Codigo_Pratimonial}}" >          
+                             <label for="UK_Hardware_Codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
+                             <input type="text" name="UK_Hardware_Codigo" id="UK_Hardware_Codigo" aria-label="UK_Hardware_Codigo" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Hardware_Codigo}}" >          
                         </div>
              
                          <div>
-                             <label for="D_Adquisicion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
-                             <input type="text" name="D_Adquisicion" id="D_Adquisicion" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->D_Adquisicion}}" >
+                             <label for="Dadquisicion_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
+                             <input type="text" name="Dadquisicion_hardware" id="Dadquisicion_hardware" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" >
                          </div>
                          <div>
                             {{-- estado --}}
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado:</label>   
-                            <select name="T_Estado_Fisico" id="T_Estado_Fisico" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="Bien" {{$bien->T_Estado_Fisico== 'Bien' ? 'selected' : ''}} >Bien</option>
-                                <option value="Regular" {{$bien->T_Estado_Fisico== 'Regular' ? 'selected' : ''}} >Regular</option>
-                                <option value="Mal" {{$bien->T_Estado_Fisico== 'Mal' ? 'selected' : ''}} >Mal</option>
+                            <select name="Testado_fisico_hardware" id="Testado_fisico_hardware" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="Bien" {{$bien->Testado_fisico_hardware== 'Bien' ? 'selected' : ''}} >Bien</option>
+                                <option value="Regular" {{$bien->Testado_fisico_hardware== 'Regular' ? 'selected' : ''}} >Regular</option>
+                                <option value="Mal" {{$bien->Testado_fisico_hardware== 'Mal' ? 'selected' : ''}} >Mal</option>
                             </select>   
                          </div>
                      </div>
@@ -82,7 +82,7 @@ title="Entregar"
         
          <div class="mb-4">
              <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
-             <textarea id="message" name="T_B_Descripcion" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$bien->T_B_Descripcion}}</textarea>
+             <textarea id="message" name="Tdescripcion_hardware" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$bien->Tdescripcion_hardware}}</textarea>
          </div> 
          <br> 
         <button

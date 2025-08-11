@@ -17,6 +17,7 @@ use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use PhpParser\Node\Stmt\Return_;
 
 class BienController extends Controller
 {
@@ -27,16 +28,14 @@ class BienController extends Controller
     {
         /*
         Forma de uno x uno
-        $areas= Bien::where('PK_B_Fisico',1)
+        $areas= Bien::where('PK_Hardware',1)
                 ->with('area')
                 ->with('tipo')
                 ->first();
         */
         //forma q muestra todo con los metodos creado, mas facil q hacer un where dentro de otro... :)
-        $bienes = Bien::with('area','tipo')
-                //->where('T_Estado','Activo')    
-                ->paginate(5);
-
+        $bienes = Bien::with('area','tipo','estado')->paginate(5);
+                //->where('FK_Hardware_EstadoId',1)    
         //mandar info
         $areas=Area::all();
         $tipos = Tipo::all();
@@ -50,23 +49,23 @@ class BienController extends Controller
         //mandar info
         $areas=Area::all();
         $tipos = Tipo::all();
-        $bien=$request->FK_B_Fisico_Area;
+        //$bien=$request->FK_Hardware_AreaId;
 
         if ($request->estado == "1") {
-            $bienes = Bien::with('area','tipo')
-                    ->where('T_Estado','Activo')
-                    ->where('FK_B_Fisico_Area',$request->FK_B_Fisico_Area)
-                    ->where('FK_B_Fisico_TipoId',$request->FK_B_Fisico_TipoId)
+            $bienes = Bien::with('area','tipo','estado')
+                    ->where('FK_Hardware_EstadoId',1)
+                    ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                    ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                     ->get();
             
             return view('admin.encontrado',compact('bienes','areas','tipos'));
         } 
         if ($request->estado == "0") {
             
-            $bienes = Bien::with('area','tipo')
-                    ->where('FK_B_Fisico_Area',$request->FK_B_Fisico_Area)
-                    ->where('FK_B_Fisico_TipoId',$request->FK_B_Fisico_TipoId)
-                    ->where('T_Estado','Baja')
+            $bienes = Bien::with('area','tipo','estado')
+                    ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                    ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                    ->where('FK_Hardware_EstadoId','Baja')
                     ->get();
                 //vereficar el t fisico mal escrito en el controller
             
@@ -96,21 +95,21 @@ class BienController extends Controller
         //Inserccion de datos
         $request->validate(
                 [
-                'FK_B_Fisico_Area' => 'required',
-                'FK_B_Fisico_TipoId' => 'required',
-                'UK_Codigo_Pratimonial' => 'required|min:12|max:12|unique:hardware',
-                'T_B_Descripcion' => 'required',
-                'T_Estado_Fisico'=> 'required',
-                'D_Adquisicion'=> ['required' , 'date', 'before_or_equal:today']
+                'FK_Hardware_AreaId' => 'required',
+                'FK_Hardware_TipoId' => 'required',
+                'UK_Hardware_Codigo' => 'required|min:12|max:12|unique:hardware',
+                'Dadquisicion_hardware' => 'required',
+                'Testado_fisico_hardware'=> 'required',
+                'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
                 ],
                 [],
                 [
-                    'FK_B_Fisico_Area' => 'Area',
-                    'FK_B_Fisico_TipoId'=> 'Tipo',
-                    'UK_Codigo_Pratimonial' => 'Codigo patrimonial',
-                    'T_B_Descripcion'=> 'Descripcion',
-                    'T_Estado_Fisico'=> 'Estado',
-                    'D_Adquisicion'=>'Fecha de Adiquiscion'
+                    'FK_Hardware_AreaId' => 'Area',
+                    'FK_Hardware_TipoId'=> 'Tipo',
+                    'UK_Hardware_Codigo' => 'Codigo patrimonial',
+                    'Dadquisicion_hardware'=> 'Descripcion',
+                    'Testado_fisico_hardware'=> 'Estado',
+                    'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
 
                 ]
         );
@@ -131,7 +130,7 @@ class BienController extends Controller
     public function show1($id)
     {
         //para mostra solo un bien , con todo su detalle
-        $bien=Bien::where('PK_B_Fisico', $id)
+        $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
                 ->first();
@@ -149,7 +148,7 @@ class BienController extends Controller
 
     public function historial($id)
     {   
-        $bien=Bien::where('PK_B_Fisico', $id)
+        $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
                 ->first();
@@ -175,7 +174,7 @@ class BienController extends Controller
     public function H_editar($id)
     {
         //formulario para editar un hardware
-        $bien=Bien::where('PK_B_Fisico', $id)
+        $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
                 ->first();
@@ -183,7 +182,7 @@ class BienController extends Controller
         $imagen = Image::where('FK_B_Fisico_Ima',$id)->first();
         $areas=Area::all();
         $tipos = Tipo::all();
-
+        //return $bien;
         return view('admin/editar_hardware',compact('bien','imagen','areas','tipos'));
         
     }
@@ -192,14 +191,14 @@ class BienController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Bien $bien)
-    {
-        //$New_Bien= Bien::find($bien);
-        $bien->FK_B_Fisico_Area = $request->FK_B_Fisico_Area;
-        $bien->UK_Codigo_Pratimonial = $request->UK_Codigo_Pratimonial;
-        $bien->D_Adquisicion = $request->D_Adquisicion;
-        $bien->T_Estado_Fisico= $request->T_Estado_Fisico;
-        $bien->T_B_Descripcion= $request->T_B_Descripcion;
-        $bien->save();
+    {        
+        $New_Bien= Bien::find($bien->PK_Hardware);
+        $New_Bien->FK_Hardware_AreaId = $request->FK_Hardware_AreaId;
+        $New_Bien->UK_Hardware_Codigo = $request->UK_Hardware_Codigo;
+        $New_Bien->Tdescripcion_hardware = $request->Tdescripcion_hardware;
+        $New_Bien->Testado_fisico_hardware= $request->Testado_fisico_hardware;
+        $New_Bien->Dadquisicion_hardware= $request->Dadquisicion_hardware;
+        $New_Bien->save();
         session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Bien hecho¡',
@@ -208,6 +207,8 @@ class BienController extends Controller
     
         //return 'se registro correctamente';
         return redirect()->route('adminbien.index');
+        
+        
     }
 
     public function baja (Request $request,$bien)
@@ -222,15 +223,16 @@ class BienController extends Controller
         return redirect()->route('adminbien.index');
     }
         
-        $usuario=Auth::user()->name;
+        $usuario=Auth::user()->id;
+        
         $fecha=Carbon::now();
         ////Bajar bien
-        Bien::where('PK_B_Fisico',$bien)->update(
+        Bien::where('PK_Hardware',$bien)->update(
             [
-                'D_Baja'=>$fecha,
-                'T_Motivo_Baja'=> $request->T_Motivo_Baja,
-                'B_User_Name_Baja'=>$usuario,
-                'T_Estado' => "Baja"                
+                'Dbaja_hardware'=>$fecha,
+                'Tmotivo_baja_hardware'=> $request->T_Motivo_Baja,
+                'FK_Hardware_UserId'=>$usuario,
+                'FK_Hardware_EstadoId' => 2                
             ]
         );
        
@@ -240,7 +242,6 @@ class BienController extends Controller
             'text'=>   'El bien fue dado de baja correctamente'
         ]);
 
-
        return redirect()->route('adminbien.index');
     }
 
@@ -248,7 +249,7 @@ class BienController extends Controller
     {
         //buscar todos los bienes de baja
         $bienes = Bien::with('area','tipo')
-                ->where('T_Estado','Baja')    
+                ->where('FK_Hardware_EstadoId','Baja')    
                 ->get();
 
         //mandar info
@@ -260,25 +261,19 @@ class BienController extends Controller
 
     public function pdf($id){
         $historial = Comentario::where('FK_Comentario_FisicoId',$id)->get();
-        $jefa = User::where('tipo_User', 'Jefe')
-            ->orderBy('id', 'desc')
-            ->first();
-
-        $bien = Bien::where('PK_B_Fisico', $id)
+        $bien = Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
-                ->firstOrFail();
-        
+                ->with('usuario')
+                ->firstOrFail();    
         $pdf =Pdf::loadView('admin.PDF.pdf',[
             'bien' =>$bien,
-            'comentarios' => $historial,
-            'jefa'=> $jefa,
+            'comentarios' => $historial
         ]);
         $pdf->setPaper('A5', 'portrait');
 
-        return $pdf->download("compra_{$bien->PK_B_Fisico}.pdf");
-        
-       // return $bien;
+        return $pdf->download("compra_{$bien->PK_Hardware}.pdf");
+       
     }
 
     /**
@@ -295,7 +290,7 @@ class BienController extends Controller
     }
 
     public function dropzone(Request $request){
-        $ultimo = Bien::orderBy('PK_B_Fisico', 'desc')->first();
+        $ultimo = Bien::orderBy('PK_Hardware', 'desc')->first();
 
         if (!$request->hasFile('file')) {
             return response()->json(['error' => 'No se recibió ningún archivo'], 400);
@@ -304,8 +299,8 @@ class BienController extends Controller
         $image = new Image();
         $image->Ima_path = $request->file('file')->store('imagenes', 'public');
         $image->Ima_size = $request->file('file')->getSize();
-        $image->FK_B_Fisico_Ima = $ultimo->PK_B_Fisico;
-        $image->Tipo_Bien_Ima = $ultimo->FK_B_Fisico_TipoId;
+        $image->FK_B_Fisico_Ima = $ultimo->PK_Hardware;
+        $image->Tipo_Bien_Ima = $ultimo->FK_Hardware_TipoId;
         $image->save();
 
         return response()->json([

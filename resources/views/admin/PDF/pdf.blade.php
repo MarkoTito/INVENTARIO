@@ -28,10 +28,10 @@
  
     <div>
         {{-- descripcion --}}
-        <strong>Tipo:</strong> {{ $bien->tipo->T_Descriocion ?? '—' }}<br>
-        <strong>Area:</strong> {{ $bien->area->UK_Nombre_Area ?? '—' }}<br>
-        <strong>Fecha de Adquisicion:</strong> {{ \Carbon\Carbon::parse($bien->D_Adquisicion)->format('d/m/Y') }}<br>
-        <strong>Codigo Patrimonial:</strong> {{$bien->UK_Codigo_Pratimonial ?? '—' }}<br>
+        <strong>Tipo:</strong> {{ $bien->tipo->Tdescriocion_tipo ?? '—' }}<br>
+        <strong>Area:</strong> {{ $bien->area->UK_Nombre_area ?? '—' }}<br>
+        <strong>Fecha de Adquisicion:</strong> {{ \Carbon\Carbon::parse($bien->Dadquisicion_hardware)->format('d/m/Y') }}<br>
+        <strong>Codigo Patrimonial:</strong> {{$bien->UK_Hardware_Codigo ?? '—' }}<br>
        
     </div>
 
@@ -44,7 +44,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $bien->T_Motivo_Baja}}</td>
+                    <td>{{ $bien->Tmotivo_baja_hardware}}</td>
                     
                 </tr>                
             </tbody>
@@ -86,7 +86,7 @@
     
     <h2 style="display:inline-block; margin:0 100px 0 0;">______________</h2>
     <h2 style="display:inline-block; margin:0;">__________________</h2>
-    <h3 style="display:inline-block; margin:0 165px 0 25;"> {{ $bien->B_User_Name_Baja }}</h3>
+    <h3 style="display:inline-block; margin:0 165px 0 25;"> {{ $bien->usuario->name}}</h3>
     <h3 style="display:inline-block; margin:0;">V.B Jefe de la ODTIE</h3>
     
     <p style="display:inline-block; margin:0;">*Tecnico Responsable*</p>

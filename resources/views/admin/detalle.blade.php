@@ -21,23 +21,23 @@ title="Reprar"
     <div class="grid gap-6  md:grid-cols-2">
             <div>
                 @if (!$imagen)
-                    @if ($bien->FK_B_Fisico_TipoId ==6)
+                    @if ($bien->FK_Hardware_TipoId ==6)
                         <img class="rounded-full w-96 h-96" width="300px" src="https://static.vecteezy.com/system/resources/previews/012/618/939/original/printer-cartoon-illustration-vector.jpg" alt="image description">
                         
                     @endif
-                    @if ($bien->FK_B_Fisico_TipoId ==5)
+                    @if ($bien->FK_Hardware_TipoId ==5)
                         <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="250px" width="350px" alt="imagen de impresora">
                     @endif
-                    @if ($bien->FK_B_Fisico_TipoId ==4)
+                    @if ($bien->FK_Hardware_TipoId ==4)
                         <img src=" https://static.vecteezy.com/system/resources/previews/011/065/272/non_2x/wireless-computer-mouse-clipart-gray-computer-mouse-watercolor-style-illustration-isolated-on-white-background-simple-wireless-mouse-cartoon-hand-drawn-office-supplies-drawing-back-view-vector.jpg" height="350px" width="350px" alt="imagen de impresora">
                     @endif
-                    @if ($bien->FK_B_Fisico_TipoId ==3)
+                    @if ($bien->FK_Hardware_TipoId ==3)
                         <img src=" https://cdn-icons-png.flaticon.com/512/5921/5921714.png" height="200px" width="200px" alt="imagen de impresora">
                     @endif
-                    @if ($bien->FK_B_Fisico_TipoId ==2)
+                    @if ($bien->FK_Hardware_TipoId ==2)
                         <img src="https://img.freepik.com/vector-premium/monitor-computadora-estilo-dibujos-animados-aislado-sobre-fondo-blanco-ilustracion-stock-simbolo-computadora_258706-337.jpg" height="200px" width="250px" alt="imagen de impresora">
                     @endif
-                    @if ($bien->FK_B_Fisico_TipoId ==1)
+                    @if ($bien->FK_Hardware_TipoId ==1)
                         <img src="" height="350px" width="350px" alt="imagen de impresora">
                     @endif  
                     
@@ -61,17 +61,17 @@ title="Reprar"
                     </div>
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Codigo_Pratimonial}}" disabled>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Hardware_Codigo}}" disabled>
                     
                     </div>
 
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->D_Adquisicion}}" disabled>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" disabled>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado Original:</label>    
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->T_Estado_Fisico}}" disabled>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->estado->UK_Descripcion_estado}}" disabled>
                     
                     </div>
                     
@@ -81,11 +81,11 @@ title="Reprar"
         </div>    
         <div>  
             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
-            <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>{{$bien->T_B_Descripcion}}</textarea>
+            <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>{{$bien->Tdescripcion_hardware}}</textarea>
         </div>
         <br>
         <br>
-        @if ($bien->T_Estado == 'Activo')
+        @if ($bien->estado->PK_estado == 1)
             @if ($comentarios->isEmpty())
                 <div class="grid gap-6 mb-4 md:grid-cols-2" >
                     
@@ -93,7 +93,7 @@ title="Reprar"
                         class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
                     </button>
 
-                    <a href="/admin/Editar/Hardware/{{$bien->PK_B_Fisico}}">
+                    <a href="/admin/Editar/Hardware/{{$bien->PK_Hardware}}">
                             <button
                                 style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                 type="button">
@@ -108,7 +108,7 @@ title="Reprar"
                         class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
                     </button>
 
-                    <a href="/admin/Editar/Hardware/{{$bien->PK_B_Fisico}}">
+                    <a href="/admin/Editar/Hardware/{{$bien->PK_Hardware}}">
                             <button
                                 style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                 type="button">
@@ -116,7 +116,7 @@ title="Reprar"
                             </button>
                     </a>
 
-                    <a href="/admin/buscar/historial/{{$bien->PK_B_Fisico}}">
+                    <a href="/admin/buscar/historial/{{$bien->PK_Hardware}}">
                         <button
                             style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                             type="button">
@@ -131,12 +131,12 @@ title="Reprar"
 
             
         @endif
-        @if ($bien->T_Estado == 'Baja')
+        @if ($bien->estado->PK_estado == 2)
                 
                 @if ($comentarios->isEmpty())
                     {{-- <div class="grid gap-6 mb-4 md:grid-cols-1" >
                     </div> --}}
-                    <a href="/admin/baja/{{$bien->PK_B_Fisico}}/pdf">
+                    <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
                         <button
                             style="background-color: #e21111; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                             type="button">
@@ -146,7 +146,7 @@ title="Reprar"
                     
                 @else
                     <div class="grid gap-6 mb-4 md:grid-cols-2" >
-                        <a href="/admin/baja/{{$bien->PK_B_Fisico}}/pdf">
+                        <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
                             <button
                                 style="background-color: #e21111; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                 type="button">
@@ -154,7 +154,7 @@ title="Reprar"
                             </button>
                         </a>
 
-                        <a href="/admin/buscar/historial/{{$bien->PK_B_Fisico}}">
+                        <a href="/admin/buscar/historial/{{$bien->PK_Hardware}}">
                             <button
                                 style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                 type="button">
@@ -188,7 +188,7 @@ title="Reprar"
                                         </button>
                                     </div>
                                     <!-- Modal body y formulario -->
-                                    <form action="/admin/Bajar/{{$bien->PK_B_Fisico}}"
+                                    <form action="/admin/Bajar/{{$bien->PK_Hardware}}"
                                             class="delete-form">
                                         @csrf
                                         <div class="p-4 md:p-5 space-y-4">

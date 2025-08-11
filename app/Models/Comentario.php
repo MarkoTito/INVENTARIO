@@ -17,7 +17,7 @@ class Comentario extends Model
     
     public function bien()
     {
-        return $this->belongsTo(Bien::class,'FK_Comentario_FisicoId','PK_B_Fisico');
+        return $this->belongsTo(Bien::class,'FK_Comentario_FisicoId','PK_Hardware');
     }
 
 }

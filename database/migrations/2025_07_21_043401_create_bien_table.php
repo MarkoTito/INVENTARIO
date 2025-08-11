@@ -12,32 +12,44 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Hardware', function (Blueprint $table) {
-            $table->id('PK_B_Fisico');
+            $table->id('PK_Hardware');
             //foreignId:->hace referencia al id y su tabla (tabla_suId) recuerda q la tabla tiene q ser con s
             //$table->foreignId('area_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('FK_B_Fisico_Area');
-            $table->foreign('FK_B_Fisico_Area')
+            $table->unsignedBigInteger('FK_Hardware_AreaId');
+            $table->foreign('FK_Hardware_AreaId')
                     ->references('PK_area')
                     ->on('areas')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
             
-            $table->unsignedBigInteger('FK_B_Fisico_TipoId');
-            $table->foreign('FK_B_Fisico_TipoId')
+            $table->unsignedBigInteger('FK_Hardware_TipoId');
+            $table->foreign('FK_Hardware_TipoId')
                     ->references('PK_tipo')
                     ->on('tipos')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
-            $table->text('T_B_Descripcion');
-            $table->string('UK_Codigo_Pratimonial')->unique()->nullable();
-            $table->date('D_Adquisicion');
-            $table->text('T_Estado_Fisico');
-            $table->string('T_Estado')->default('Activo'); //se puede mejorar con una tabla (esto es para ver si esta activo o de baja)
-            $table->date('D_Baja')->nullable();
-            $table->text('B_User_Name_Baja')->nullable();
-            $table->text('T_Motivo_Baja')->nullable();
+            $table->unsignedBigInteger('FK_Hardware_UserId')->nullable();
+            $table->foreign('FK_Hardware_UserId')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            
+            $table->unsignedBigInteger('FK_Hardware_EstadoId')->default(1);
+            $table->foreign('FK_Hardware_EstadoId')
+                    ->references('PK_estado')
+                    ->on('estados')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->text('Testado_fisico_hardware'); //este se hara sin tabla 
+            $table->text('Tdescripcion_hardware');
+            $table->string('UK_Hardware_Codigo')->unique()->nullable();
+            $table->date('Dadquisicion_hardware');
+            $table->date('Dbaja_hardware')->nullable();
+            $table->text('Tmotivo_baja_hardware')->nullable();
             $table->timestamps();
 
         });

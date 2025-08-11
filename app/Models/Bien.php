@@ -11,24 +11,32 @@ class Bien extends Model
     
     protected $table = 'Hardware';
     //siempre es bueno poner cual es nombre de pk
-    protected $primaryKey = 'PK_B_Fisico'; 
+    protected $primaryKey = 'PK_Hardware'; 
 
     protected $fillable=[
-        'FK_B_Fisico_Area',
-        'FK_B_Fisico_TipoId',
-        'T_B_Descripcion',
-        'UK_Codigo_Pratimonial',
-        'D_Adquisicion',
-        'T_Estado_Fisico',
+        'FK_Hardware_AreaId',
+        'FK_Hardware_TipoId',
+        'Tdescripcion_hardware',
+        'UK_Hardware_Codigo',
+        'Dadquisicion_hardware',
+        'Testado_fisico_hardware',
     ];
     
-     public function area()
+    public function area()
     {
-        return $this->belongsTo(Area::class,'FK_B_Fisico_Area','PK_area');
+        return $this->belongsTo(Area::class,'FK_Hardware_AreaId','PK_area');
+    }
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class,'FK_Hardware_EstadoId','PK_estado');
+    }
+    public function usuario()
+    {
+        return $this->belongsTo(User::class,'FK_Hardware_UserId','id');
     }
     public function tipo()
     {
-        return $this->belongsTo(Tipo::class,'FK_B_Fisico_TipoId','PK_tipo');
+        return $this->belongsTo(Tipo::class,'FK_Hardware_TipoId','PK_tipo');
     }
     //aca falta agregar mas coneccionde de la BD
 
