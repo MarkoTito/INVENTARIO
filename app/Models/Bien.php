@@ -24,7 +24,7 @@ class Bien extends Model
     
      public function area()
     {
-        return $this->belongsTo(Area::class,'FK_B_Fisico_Area','PK_Area');
+        return $this->belongsTo(Area::class,'FK_B_Fisico_Area','PK_area');
     }
     public function tipo()
     {

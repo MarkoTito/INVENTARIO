@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('areas', function (Blueprint $table) {
-           $table->id('PK_Area');
-            $table->text('UK_Nombre_Area')->uniqid();
-            $table->double('N_estado');
+            $table->id('PK_area');
+            $table->text('UK_Nombre_area')->uniqid();
+            $table->integer('Nestado_area')->default(1);
             $table->timestamps();
         });
     }

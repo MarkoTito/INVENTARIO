@@ -17,7 +17,7 @@ return new class extends Migration
             //$table->foreignId('area_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('FK_B_Fisico_Area');
             $table->foreign('FK_B_Fisico_Area')
-                    ->references('PK_Area')
+                    ->references('PK_area')
                     ->on('areas')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');

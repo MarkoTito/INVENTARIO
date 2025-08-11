@@ -14,14 +14,14 @@ title="Buscar"
     ]
     ]"> 
 
-    <form method="POST" action="/admin/buscar/baja/store" >
+    <form method="POST" action="/admin/buscar/digital/store" >
         @csrf
          <div class="grid gap-6 mb-4 md:grid-cols-2">
 
             <div>
                 {{-- tipo de sistema  --}}
                 <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Bien</label>
-                      <select name="FK_B_Fisico_TipoId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <select name="sistemas" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     @foreach ($sistemas as $sistema)
                       <option value="{{{$sistema->PK_Sistema}}}">{{{$sistema->T_Descripcion_Sis}}}</option>
                   @endforeach
@@ -31,7 +31,7 @@ title="Buscar"
                 {{-- Determinacion --}}
                     <div>
                         <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un area</label>
-                        <select name="FK_B_Fisico_Area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select name="determinacion" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="Indeterminado">Indeterminado</option>
                             <option value="Determinado">Determinado</option>
                         </select>
@@ -51,7 +51,7 @@ title="Buscar"
     </form>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-        <h3>Bienes</h3>
+        <h3>Licencias</h3>
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>

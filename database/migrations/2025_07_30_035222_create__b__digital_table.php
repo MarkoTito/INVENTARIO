@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('FK_B_Digital_AreaId');
             $table->foreign('FK_B_Digital_AreaId')
-                    ->references('PK_Area')
+                    ->references('PK_area')
                     ->on('areas')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');

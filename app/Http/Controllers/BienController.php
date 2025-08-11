@@ -256,21 +256,7 @@ class BienController extends Controller
         $tipos = Tipo::all();
         return view('admin/Buscar/buscar_Baja',compact('bienes','areas','tipos'));
     }
-    public function index_baja(Request $request){
-        
-        //mandar info
-        $areas=Area::all();
-        $tipos = Tipo::all();
-
-        $bienes = Bien::with('area','tipo')
-                ->where('T_Estado','Baja')
-                ->where('FK_B_Fisico_Area',$request->FK_B_Fisico_Area)
-                ->where('FK_B_Fisico_TipoId',$request->FK_B_Fisico_TipoId)
-                ->get();
-        
-        // $bienes;
-        return view('admin/Buscar/encontrado_Baja',compact('bienes','areas','tipos'));
-    }
+    
 
     public function pdf($id){
         $historial = Comentario::where('FK_Comentario_FisicoId',$id)->get();

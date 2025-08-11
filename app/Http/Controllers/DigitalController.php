@@ -114,6 +114,19 @@ class DigitalController extends Controller
         return view('admin/Buscar/detalle_Digital',compact('digital','archivos'));
         
     }
+    public function index_baja(Request $request){
+        
+        //mandar info
+        $sistemas=Sistema::all();
+        //aca faltaria el with
+        $licencias = Digital::where('T_Determinacion',$request->determinacion)
+                        ->where('FK_B_Digital_SistemaId', $request->sistemas)
+                ->get();
+        
+        //return $request;
+        //return $licencias;
+        return view('admin/Buscar/encontrado_Baja',compact('licencias','sistemas'));
+    }
     
 
     /**
