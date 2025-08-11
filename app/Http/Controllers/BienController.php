@@ -65,7 +65,7 @@ class BienController extends Controller
             $bienes = Bien::with('area','tipo','estado')
                     ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                     ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                    ->where('FK_Hardware_EstadoId','Baja')
+                    ->where('FK_Hardware_EstadoId',2)
                     ->get();
                 //vereficar el t fisico mal escrito en el controller
             
@@ -137,7 +137,7 @@ class BienController extends Controller
 
         //para mostrar los comentarios del bien
 
-        $comentarios=Comentario::where('FK_Comentario_FisicoId',$id)
+        $comentarios=Comentario::where('FK_Comentario_HardwareId',$id)
                  ->get();
         
         //para mostrar las imagnes;
@@ -153,12 +153,11 @@ class BienController extends Controller
                 ->with('tipo')
                 ->first();
         
-        $comentarios=Comentario::where('FK_Comentario_FisicoId',$id)
+        $comentarios=Comentario::with('bien','usuario')
+                ->where('FK_Comentario_HardwareId',$id)
                  ->get();
         
         //return $comentarios;
-        
-
         return view('admin.historial',compact('comentarios','bien'));
         
     }
@@ -260,7 +259,9 @@ class BienController extends Controller
     
 
     public function pdf($id){
-        $historial = Comentario::where('FK_Comentario_FisicoId',$id)->get();
+        $historial = Comentario::with('usuario')
+                    ->where('FK_Comentario_HardwareId',$id)->get();
+
         $bien = Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')

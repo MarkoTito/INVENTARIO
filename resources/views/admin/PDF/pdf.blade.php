@@ -71,8 +71,8 @@
                 @else
                     @foreach ($comentarios as $comentario)
                         <tr>
-                            <td>{{ $comentario->T_User_Name }}</td>
-                            <td>{{ $comentario->T_Descripcion_Comentario }}</td>
+                            <td>{{ $comentario->usuario->name }}</td>
+                            <td>{{ $comentario->Tdescripcion_comentario }}</td>
                             <td>{{ \Carbon\Carbon::parse($comentario->created_at)->format('d/m/Y') }}</td>
                         </tr>
                     @endforeach

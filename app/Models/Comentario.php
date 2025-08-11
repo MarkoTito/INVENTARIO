@@ -7,17 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Comentario extends Model
 {
     //
-    protected $table = 'comentario';
+    protected $table = 'comentarios';
     protected $fillable=[
-        'FK_Comentario_FisicoId',
-        'FK_Comentario_UsuarioId',
-        'T_Descripcion_Comentario',
-        'T_Estado',
+        'FK_Comentario_HardwareId',
+        'FK_Comentario_UserId',
+        'Tdescripcion_comentario',
+        'Testado_fisico_comentario'
     ];
     
     public function bien()
     {
         return $this->belongsTo(Bien::class,'FK_Comentario_FisicoId','PK_Hardware');
+    }
+    public function usuario()
+    {
+        return $this->belongsTo(User::class,'FK_Comentario_UserId','id');
     }
 
 }

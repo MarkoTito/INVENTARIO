@@ -40,23 +40,23 @@ class ComentarioController extends Controller
         //creacion del comentario
         $data=$request->validate(
             [
-                'T_Descripcion_Comentario' => 'required',
-                'FK_Comentario_FisicoId' => 'required|min:12|max:12',
-                'T_Estado' => 'required',
+                'Tdescripcion_comentario' => 'required',
+                'FK_Comentario_HardwareId' => 'required|min:12|max:12',
+                'Testado_fisico_comentario' => 'required',
             ],
             [],
             [
-                'T_Descripcion_Comentario'=> 'Comentario',
-                'FK_Comentario_FisicoId' => 'Codigo Patrimonial',
-                'T_Estado' => 'Estado del Bien'
+                'Tdescripcion_comentario'=> 'Comentario',
+                'FK_Comentario_HardwareId' => 'Codigo Patrimonial',
+                'Testado_fisico_comentario' => 'Estado del Bien'
             ]
         );
         //BUSQUEDA DEL USUARIO
-        $usuario=Auth::user()->name;
+        $usuario=Auth::user()->id;
         //BUSQUEDA DEL BIEN
-        $codigo= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_FisicoId)
+        $codigo= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)
                             ->first();
-        $bien= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_FisicoId)
+        $bien= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)
                             ->get();
 
         if ($bien->isEmpty()) {
@@ -72,10 +72,10 @@ class ComentarioController extends Controller
             //ANTIGUA FORMA
             $coment = new Comentario();
             //esto se podria evitar con carga masivoa . pero se vera despues
-            $coment->FK_Comentario_FisicoId=$codigo->PK_Hardware;
-            $coment->T_Descripcion_Comentario=$request->T_Descripcion_Comentario;
-            $coment->T_Estado=$request->T_Estado;
-            $coment->T_User_Name=$usuario;
+            $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
+            $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
+            $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
+            $coment->FK_Comentario_UserId=$usuario;
             $coment->save();
     
             //varaible de seccion
