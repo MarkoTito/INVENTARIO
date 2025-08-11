@@ -73,6 +73,9 @@ class DigitalController extends Controller
         return view('admin/Load_Archivos'); 
         
     }
+
+
+
     public function dropzone(Request $request){
         $ultimo = Digital::orderBy('PK_B_Digital', 'desc')->first();
 

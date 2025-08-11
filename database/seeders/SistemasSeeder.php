@@ -15,20 +15,16 @@ class SistemasSeeder extends Seeder
     {
         $Sistemas= [
             [
-                'T_Descripcion_Sis' => 'Zoon',
-                'T_Estado_Sis'=> "Activo"
+                'Tdescripcion_sistema' => 'Zoon',
             ],
             [
-                'T_Descripcion_Sis' => 'Ezet',
-                'T_Estado_Sis'=> "Activo"
+                'Tdescripcion_sistema' => 'Ezet',
             ],
             [
-                'T_Descripcion_Sis' => 'Microsoft',
-                'T_Estado_Sis'=> "Activo"
+                'Tdescripcion_sistema' => 'Microsoft',
             ],
             [
-                'T_Descripcion_Sis' => 'autocad',
-                'T_Estado_Sis'=> "Activo"
+                'Tdescripcion_sistema' => 'autocad',
             ]
         ];
 
