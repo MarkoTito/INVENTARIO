@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
            $table->id('PK_Area');
-            $table->text('UK_Nombre_Area')
-            ->uniqid();
+            $table->text('UK_Nombre_Area')->uniqid();
             $table->double('N_estado');
             $table->timestamps();
         });
