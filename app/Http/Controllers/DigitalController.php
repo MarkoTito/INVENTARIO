@@ -45,36 +45,83 @@ class DigitalController extends Controller
      */
     public function store(Request $request)
     {
-       
         $request->validate(
                 [
-                'FK_Software_AreaId' => 'required',
-                'FK_Software_SistemaId' => 'required',
-                'Tnombre_software' => 'required',
-                'Thost_software' => 'required',
-                'Dfe_Inicio_software'=> 'required',
                 'FK_Software_DeterminacionId' => 'required'
                 ],
                 [],
                 [
-                    'FK_Software_AreaId'=>'Area',
-                    'FK_Software_SistemaId'=> 'Sistema',
-                    'Tnombre_software'=>'Nombre del sistema',
                     'FK_Software_DeterminacionId' => "Determinacion",
-                    'Thost_software' => 'Host',
-                    'Dfe_Inicio_software'=> 'Fecha de Incio'
                 ]
         );
+
+        if ($request->FK_Software_DeterminacionId == 2) {
+            
+            $request->validate(
+                    [
+                    'FK_Software_AreaId' => 'required',
+                    'FK_Software_SistemaId' => 'required',
+                    'Tnombre_software' => 'required',
+                    'Thost_software' => 'required',
+                    'Dfe_Inicio_software'=> 'required',
+                    ],
+                    [],
+                    [
+                        'FK_Software_AreaId'=>'Area',
+                        'FK_Software_SistemaId'=> 'Sistema',
+                        'Tnombre_software'=>'Nombre del sistema',
+                        'Thost_software' => 'Host',
+                        'Dfe_Inicio_software'=> 'Fecha de Incio'
+                    ]
+            );
+            
+            Digital::create($request->all());
+    
+    
+            session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Bien hecho',
+                    'text'=>'El bien fue registrado correctamente'
+            ]);
+            return view('admin/Load_Archivos'); 
+
+
+        } else {
+            $request->validate(
+                    [
+                    'FK_Software_AreaId' => 'required',
+                    'FK_Software_SistemaId' => 'required',
+                    'Tnombre_software' => 'required',
+                    'Thost_software' => 'required',
+                    'Dfe_vencimiento_software'=> 'required',
+                    'Dfe_Inicio_software'=> 'required',
+                    ],
+                    [],
+                    [
+                        'FK_Software_AreaId'=>'Area',
+                        'FK_Software_SistemaId'=> 'Sistema',
+                        'Tnombre_software'=>'Nombre del sistema',
+                        'Dfe_vencimiento_software' => 'Fecha de vencimiento',
+                        'Thost_software' => 'Host',
+                        'Dfe_Inicio_software'=> 'Fecha de Incio'
+                    ]
+            );
+            
+            Digital::create($request->all());
+    
+    
+            session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Bien hecho',
+                    'text'=>'El bien fue registrado correctamente'
+            ]);
+            return view('admin/Load_Archivos'); 
+            
+
+
+        }
         
-        Digital::create($request->all());
-
-
-        session()->flash('swal',[
-                'icon'=> 'success',
-                'title'=> '!Bien hecho',
-                'text'=>'El bien fue registrado correctamente'
-        ]);
-        return view('admin/Load_Archivos'); 
+       
     
     }
 

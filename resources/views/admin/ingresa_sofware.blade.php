@@ -63,7 +63,7 @@ title="Registrar"
             <div>
                 {{-- Fecha de inicio --}}
                 <label for="Dfe_Inicio_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Inicio:</label>
-                <input type="date" name="Dfe_Inicio_software">
+                <input type="date" name="Dfe_Inicio_software" value="{{old('Dfe_Inicio_software')}}" >
                 @error('Dfe_Inicio_software')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -72,14 +72,17 @@ title="Registrar"
             <div>
                 {{-- determincacion --}}
                 <div class="flex items-center mb-4">
-                    <input id="default-radio-1" type="radio" value="1" name="FK_Software_DeterminacionId" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="default-radio-1" type="radio" value="1" name="FK_Software_DeterminacionId" {{ old('FK_Software_DeterminacionId') == 1 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Determinado</label> 
                 </div>
                 <div class="flex items-center">
-                    <input id="default-radio-2" type="radio" value="2" name="FK_Software_DeterminacionId" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Indeterminado</label>
+                    <input  id="default-radio-2" type="radio" value="2" name="FK_Software_DeterminacionId" {{ old('FK_Software_DeterminacionId') == 2 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label  for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Indeterminado</label>
                 </div>
                 @error('FK_Software_DeterminacionId')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+                @error('Dfe_vencimiento_software')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
                 
