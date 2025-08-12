@@ -23,7 +23,8 @@ class DigitalController extends Controller
 
 
         $sistemas= Sistema::all();
-        $digitales= Digital::paginate(6);
+        $digitales= Digital::with('determinacion')
+                ->paginate(6);
         return view('admin/Buscar/buscar_Digital',compact('digitales','sistemas'));
     }
 
@@ -44,24 +45,27 @@ class DigitalController extends Controller
      */
     public function store(Request $request)
     {
+       
         $request->validate(
                 [
-                'FK_B_Digital_AreaId' => 'required',
-                'FK_B_Digital_SistemaId' => 'required',
-                'T_Nombre_Digital' => 'required',
-                'T_Host' => 'required',
-                'D_F_Inicio'=> 'required',
+                'FK_Software_AreaId' => 'required',
+                'FK_Software_SistemaId' => 'required',
+                'Tnombre_software' => 'required',
+                'Thost_software' => 'required',
+                'Dfe_Inicio_software'=> 'required',
+                'FK_Software_DeterminacionId' => 'required'
                 ],
                 [],
                 [
-                    'FK_B_Digital_AreaId'=>'Area',
-                    'FK_B_Digital_SistemaId'=> 'Sistema',
-                    'T_Nombre_Digital'=>'Nombre del sistema',
-                    'T_Host' => 'Host',
-                    'D_F_Inicio'=> 'Fecha de Incio'
+                    'FK_Software_AreaId'=>'Area',
+                    'FK_Software_SistemaId'=> 'Sistema',
+                    'Tnombre_software'=>'Nombre del sistema',
+                    'FK_Software_DeterminacionId' => "Determinacion",
+                    'Thost_software' => 'Host',
+                    'Dfe_Inicio_software'=> 'Fecha de Incio'
                 ]
         );
-
+        
         Digital::create($request->all());
 
 
@@ -71,7 +75,7 @@ class DigitalController extends Controller
                 'text'=>'El bien fue registrado correctamente'
         ]);
         return view('admin/Load_Archivos'); 
-        
+    
     }
 
 
@@ -110,7 +114,8 @@ class DigitalController extends Controller
     public function show2($id)
     {
         //detalle del bien digital
-        $digital=Digital::where('PK_B_Digital', $id)
+        $digital=Digital::with('determinacion','area','sistema')
+                    ->where('PK_Software', $id)
                 ->first();
         $archivos=Archivos::where('PK_Archivos',$id)->get();
 
@@ -122,8 +127,9 @@ class DigitalController extends Controller
         //mandar info
         $sistemas=Sistema::all();
         //aca faltaria el with
-        $licencias = Digital::where('T_Determinacion',$request->determinacion)
-                        ->where('FK_B_Digital_SistemaId', $request->sistemas)
+        $licencias = Digital::with('determinacion','area','sistema')
+                        ->where('FK_Software_DeterminacionId',$request->determinacion)
+                        ->where('FK_Software_SistemaId', $request->FK_Software_SistemaId)
                 ->get();
         
         //return $request;

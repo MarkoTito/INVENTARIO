@@ -11,35 +11,48 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('b_digital', function (Blueprint $table) {
-            $table->id('PK_B_Digital');
+        Schema::create('software', function (Blueprint $table) {
+            $table->id('PK_Software');
 
-            $table->unsignedBigInteger('FK_B_Digital_AreaId');
-            $table->foreign('FK_B_Digital_AreaId')
+            $table->unsignedBigInteger('FK_Software_AreaId');
+            $table->foreign('FK_Software_AreaId')
                     ->references('PK_area')
                     ->on('areas')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('FK_B_Fisico_TipoId')->default(1);;
-            $table->foreign('FK_B_Fisico_TipoId')
+            $table->unsignedBigInteger('FK_Software_TipoId')->default(1);;
+            $table->foreign('FK_Software_TipoId')
                     ->references('PK_tipo')
                     ->on('tipos')
                     ->onDelete('cascade');
 
-            $table->unsignedBigInteger('FK_B_Digital_SistemaId');
-            $table->foreign('FK_B_Digital_SistemaId')
+            $table->unsignedBigInteger('FK_Software_SistemaId');
+            $table->foreign('FK_Software_SistemaId')
                     ->references('PK_sistema')
                     ->on('sistemas')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
+            
+            $table->unsignedBigInteger('FK_Software_EstadoId')->default(1);
+            $table->foreign('FK_Software_EstadoId')
+                    ->references('PK_estado')
+                    ->on('estados')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            
+            $table->unsignedBigInteger('FK_Software_DeterminacionId');
+            $table->foreign('FK_Software_DeterminacionId')
+                    ->references('PK_determinacion')
+                    ->on('determinaciones')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
 
-            $table->text('T_Nombre_Digital');
-            $table->text('T_Host');
-            $table->date('D_F_Inicio');
-            $table->text('T_Determinacion');
-            $table->date('D_F_Vencimiento')->nullable();
-            $table->text('T_Estado_Digital')->default('Activo');
+            $table->text('Tnombre_software');
+            $table->text('Thost_software');
+            $table->date('Dfe_Inicio_software');
+            //$table->text('Tdeterminacion_software');
+            $table->date('Dfe_vencimiento_software')->nullable();
             $table->timestamps();
 
         });

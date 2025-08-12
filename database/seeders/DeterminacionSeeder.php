@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Estado;
+use App\Models\Determinacion;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class EstadoSeeder extends Seeder
+class DeterminacionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,15 +15,15 @@ class EstadoSeeder extends Seeder
     {
         $estados= [
             [
-                'UK_Descripcion_estado' => 'Activo',
+                'Tdescripcion_determinacion' => 'Determinado',
             ],
             [
-                'UK_Descripcion_estado' => 'Baja',
+                'Tdescripcion_determinacion' => 'Indeterminado',
             ]
         ];
 
         foreach ($estados as $esta) {
-            Estado::create($esta);
+            Determinacion::create($esta);
         }
     }
 }

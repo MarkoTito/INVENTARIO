@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
 
         // metodo para correr las areas seeder
 
+        $this->call(DeterminacionSeeder::class);
+
         $this->call([
             AreasSeeder::class
         ]);

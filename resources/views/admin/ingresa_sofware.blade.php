@@ -22,17 +22,17 @@ title="Registrar"
             
             <div>
                 {{-- Nombre de la licencia --}}
-                <label for="T_Nombre_Digital" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nombre de la Licencia:</label>
-                <input name="T_Nombre_Digital" type="text" id="T_Nombre_Digital" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el nombre especifico de la licencia" required value="{{old('T_Nombre_Digital')}}"/>
-                @error('T_Nombre_Digital')
+                <label for="Tnombre_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nombre de la Licencia:</label>
+                <input name="Tnombre_software" type="text" id="Tnombre_software" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el nombre especifico de la licencia" required value="{{old('Tnombre_software')}}"/>
+                @error('Tnombre_software')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>
 
             <div>
                     {{-- Sistem --}}
-                    <label for="FK_B_Digital_SistemaId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Sistema</label>
-                    <select name="FK_B_Digital_SistemaId" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="FK_Software_SistemaId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Sistema</label>
+                    <select name="FK_Software_SistemaId" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @foreach ($sistemas as $sis)
                             <option value="{{$sis->PK_sistema}}">{{$sis->Tdescripcion_sistema}}</option>
                         @endforeach
@@ -42,45 +42,51 @@ title="Registrar"
             
             <div>
                 {{-- Nombre del host --}}
-                <label for="T_Host" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Host:</label>
-                <input name="T_Host" type="text" id="T_Host" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el Host" required value="{{old('T_Host')}}"/>
-                @error('T_Host')
+                <label for="Thost_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Host:</label>
+                <input name="Thost_software" type="text" id="Thost_software" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el Host" required value="{{old('Thost_software')}}"/>
+                @error('Thost_software')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>
 
             <div>
                     {{-- area --}}
-                    <label for="FK_B_Digital_AreaId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Área</label>
-                    <select name="FK_B_Digital_AreaId" id="FK_B_Digital_AreaId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="FK_Software_AreaId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Área</label>
+                    <select name="FK_Software_AreaId" id="FK_Software_AreaId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @foreach ($areas as $area)
                             <option value="{{$area->PK_area}}">{{$area->UK_Nombre_area}}</option>
                         @endforeach
                     </select>
             </div>
+            
+
+            <div>
+                {{-- Fecha de inicio --}}
+                <label for="Dfe_Inicio_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Inicio:</label>
+                <input type="date" name="Dfe_Inicio_software">
+                @error('Dfe_Inicio_software')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+            </div>  
+
             <div>
                 {{-- determincacion --}}
                 <div class="flex items-center mb-4">
-                    <input id="default-radio-1" type="radio" value="Determinado" name="T_Determinacion" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="default-radio-1" type="radio" value="1" name="FK_Software_DeterminacionId" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Determinado</label> 
                 </div>
                 <div class="flex items-center">
-                    <input id="default-radio-2" type="radio" value="Indeterminado" name="T_Determinacion" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="default-radio-2" type="radio" value="2" name="FK_Software_DeterminacionId" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Indeterminado</label>
                 </div>
-                @error('T_Determinacion')
+                @error('FK_Software_DeterminacionId')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
                 
             </div>
-            <div>
-                {{-- Fecha de inicio --}}
-                <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Inicio:</label>
-                <input type="date" name="D_F_Inicio">
-                @error('D_F_Inicio')
-                        <p class="text-red-600">*{{$message}}</p>
-                @enderror
-            </div>  
+
+
+
         </div>
         
         <br>
@@ -89,10 +95,10 @@ title="Registrar"
         
         <div class="flex justify-center" id="miInput" style="display: none;">
             {{-- Fecha de vencimiento  --}}
-            <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Vencimiento:</label>
-            <input type="date" id="wasa" name="D_F_Vencimiento">
-            @error('D_F_Vencimiento')
-            <p class="text-red-600">*{{$message}}</p>
+            <label for="Dfe_vencimiento_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Vencimiento:</label>
+            <input type="date" id="wasa" name="Dfe_vencimiento_software">
+            @error('Dfe_vencimiento_software')
+                <p class="text-red-600">*{{$message}}</p>
             @enderror
         </div>
         
@@ -107,10 +113,10 @@ title="Registrar"
         <script>
         let input = document.getElementById('miInput');
 
-        document.querySelectorAll('input[name="T_Determinacion"]').forEach(function(radio) {
+        document.querySelectorAll('input[name="FK_Software_DeterminacionId"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
                 let input = document.getElementById('miInput');
-                if (this.value === 'Determinado') {
+                if (this.value === '1') {
                     input.style.display = 'block'; // mostrar
                 } else {
                     input.style.display = 'none';  // ocultar

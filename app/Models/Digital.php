@@ -7,19 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 class Digital extends Model
 {
     //
-    protected $table = 'b_digital';
+    protected $table = 'software';
 
     protected $fillable=[
+        'FK_Software_DeterminacionId',
+        'FK_Software_AreaId',
+        'FK_Software_SistemaId',
 
-        'FK_B_Digital_AreaId',
-        'FK_B_Digital_SistemaId',
-        'T_Nombre_Digital',
-        'T_Host',
-        'D_F_Inicio',
-        'T_Determinacion',
-        'D_F_Vencimiento', //ojito aca
+        'Tnombre_software',
+        'Thost_software',
+        'Dfe_Inicio_software',
+        'Dfe_vencimiento_software', //ojito aca
     ];
 
+   
+    public function determinacion()
+    {
+        return $this->belongsTo(determinacion::class,'FK_Software_DeterminacionId','PK_determinacion');
+    }
+    public function area()
+    {
+        return $this->belongsTo(Area::class,'FK_Software_AreaId','PK_area');
+    }
+    public function sistema()
+    {
+        return $this->belongsTo(sistema::class,'FK_Software_SistemaId','PK_sistema');
+    }
 
 
 }
