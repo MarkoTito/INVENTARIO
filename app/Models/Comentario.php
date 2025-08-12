@@ -12,7 +12,9 @@ class Comentario extends Model
         'FK_Comentario_HardwareId',
         'FK_Comentario_UserId',
         'Tdescripcion_comentario',
-        'Testado_fisico_comentario'
+        'Testado_fisico_comentario',
+        'Tobservacion_comentario',
+        'Trecomendacion_comentario'
     ];
     
     public function bien()

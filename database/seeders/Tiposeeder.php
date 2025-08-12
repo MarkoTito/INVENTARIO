@@ -18,6 +18,9 @@ class Tiposeeder extends Seeder
                 'Tdescriocion_tipo' => 'Licencia',
             ],
             [
+                'Tdescriocion_tipo' => 'Laptop',
+            ],
+            [
                 'Tdescriocion_tipo' => 'Monitor',
             ],
             [

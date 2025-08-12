@@ -57,21 +57,67 @@ title="Reprar"
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>
-
-
-            
-        </div>
-
         
             <div>
                 {{-- descipcion --}}
                 <label  for="message" class="block mb-1 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
-                <textarea name="Tdescripcion_comentario" id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripcion del bien">{{old('Tdescripcion_comentario')}}</textarea>
+                <textarea name="Tdescripcion_comentario" id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripcion de la reparacion">{{old('Tdescripcion_comentario')}}</textarea>
                  @error('Tdescripcion_comentario')
                         
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>
+            <div>
+                {{-- Observaciones --}}
+                <label  for="message" class="block mb-1 text-sm font-medium text-gray-900 dark:text-black">Observacion:</label>
+                <textarea name="Tobservacion_comentario" id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una observacion del Bien - Campo opcional">{{old('Tobservacion_comentario')}}</textarea>
+                 @error('Tobservacion_comentario')
+                        
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+            </div>
+            <div>
+                {{-- afuera/adentro --}}
+                <div class="flex items-center mb-4">
+                    <input id="default-radio-1" type="radio" value="0" name="situacion" {{ old('situacion') == 1 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Dentro de Palacio</label> 
+                </div>
+                <div class="flex items-center">
+                    <input  id="default-radio-2" type="radio" value="1" name="situacion" {{ old('situacion') == 2 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label  for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Afuera de Palacio</label>
+                </div>
+                @error('situacion')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+                @error('Dfe_vencimiento_software')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+                
+            </div>
+            <div>
+                {{-- recomendacion --}}
+                <label  for="message" class="block mb-1 text-sm font-medium text-gray-900 dark:text-black">Recomendacion:</label>
+                <textarea name="Trecomendacion_comentario" id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una Recomendacion del Bien - Campo opcional">{{old('Trecomendacion_comentario')}}</textarea>
+                 @error('Trecomendacion_comentario')
+                        
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+            </div>
+            
+            {{-- <div class="flex justify-center" id="miInput" style="display: none;">
+                 area
+                <label for="FK_Software_AreaId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Área de Destino:</label>
+                <select name="area_destino" id="FK_Software_AreaId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @foreach ($areas as $area)
+                        <option value="{{$area->PK_area}}">{{$area->UK_Nombre_area}}</option>
+                    @endforeach
+                </select>
+            </div> --}}
+            
+        </div>
+
+
+        
 
 
 
@@ -82,36 +128,6 @@ title="Reprar"
 
         </div>
 
-         {{-- modal 
-        <div class="flex justify-center mb-4">
-            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="button">
-            Registrar
-            </button>            
-        </div>     
-        <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative p-4 w-full max-w-md max-h-full">
-                <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-                    <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="p-4 md:p-5 text-center">
-                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                        </svg>
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Estas seguro de subir este bien?</h3>
-                        
-                        <button data-modal-hide="popup-modal" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                            Si
-                        </button>
-                        <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No</button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
 
 
 
@@ -121,6 +137,20 @@ title="Reprar"
     
 
     @push('js')
+        <script>
+        let input = document.getElementById('miInput');
+
+        document.querySelectorAll('input[name="situacion"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                let input = document.getElementById('miInput');
+                if (this.value === '1') {
+                    input.style.display = 'block'; // mostrar
+                } else {
+                    input.style.display = 'none';  // ocultar
+                }
+            });
+        });
+        </script>
         <script>
         //que seleciona todos esos formularios que tengan ese nombre de delete-form 
             forms = document.querySelectorAll('.submit-form')
