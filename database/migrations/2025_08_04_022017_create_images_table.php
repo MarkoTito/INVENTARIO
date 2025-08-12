@@ -11,12 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id('PK_Images');
-            $table->string('Ima_path')->unique();
-            $table->integer('Ima_size')->default(0);
-            $table->double('FK_B_Fisico_Ima');
-            $table->double('Tipo_Bien_Ima');
+        Schema::create('imagenes', function (Blueprint $table) {
+            $table->id('PK_imagenes');
+
+            $table->unsignedBigInteger('FK_Imagenes_HardwareId'); //FK_B_Fisico_Ima
+            $table->foreign('FK_Imagenes_HardwareId')
+                    ->references('PK_Hardware')
+                    ->on('Hardware')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->string('Tpath_imagenes')->unique();
+            $table->integer('Nsize_imagenes')->default(0);
+            //$table->double('Tipo_Bien_Ima');  Tipo_Bien_Ima
             $table->timestamps();
         });
     }

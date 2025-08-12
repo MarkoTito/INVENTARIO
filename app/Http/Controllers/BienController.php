@@ -98,7 +98,7 @@ class BienController extends Controller
                 'FK_Hardware_AreaId' => 'required',
                 'FK_Hardware_TipoId' => 'required',
                 'UK_Hardware_Codigo' => 'required|min:12|max:12|unique:hardware',
-                'Dadquisicion_hardware' => 'required',
+                'Tdescripcion_hardware' => 'required',
                 'Testado_fisico_hardware'=> 'required',
                 'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
                 ],
@@ -107,7 +107,7 @@ class BienController extends Controller
                     'FK_Hardware_AreaId' => 'Area',
                     'FK_Hardware_TipoId'=> 'Tipo',
                     'UK_Hardware_Codigo' => 'Codigo patrimonial',
-                    'Dadquisicion_hardware'=> 'Descripcion',
+                    'Tdescripcion_hardware'=> 'Descripcion',
                     'Testado_fisico_hardware'=> 'Estado',
                     'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
 
@@ -141,8 +141,8 @@ class BienController extends Controller
                  ->get();
         
         //para mostrar las imagnes;
-        $imagen = Image::where('FK_B_Fisico_Ima',$id)->first();
-        //return $imagen->Ima_path;
+        $imagen = Image::where('FK_Imagenes_HardwareId',$id)->first();
+        //return $imagen->Tpath_imagenes;
         return view('admin.detalle',compact('bien','comentarios','imagen'));
     }
 
@@ -178,7 +178,7 @@ class BienController extends Controller
                 ->with('tipo')
                 ->first();
         //para mostrar las imagnes;
-        $imagen = Image::where('FK_B_Fisico_Ima',$id)->first();
+        $imagen = Image::where('FK_Imagenes_HardwareId',$id)->first();
         $areas=Area::all();
         $tipos = Tipo::all();
         //return $bien;
@@ -298,10 +298,9 @@ class BienController extends Controller
         }
 
         $image = new Image();
-        $image->Ima_path = $request->file('file')->store('imagenes', 'public');
-        $image->Ima_size = $request->file('file')->getSize();
-        $image->FK_B_Fisico_Ima = $ultimo->PK_Hardware;
-        $image->Tipo_Bien_Ima = $ultimo->FK_Hardware_TipoId;
+        $image->Tpath_imagenes = $request->file('file')->store('imagenes', 'public');
+        $image->Nsize_imagenes = $request->file('file')->getSize();
+        $image->FK_Imagenes_HardwareId = $ultimo->PK_Hardware;
         $image->save();
 
         return response()->json([

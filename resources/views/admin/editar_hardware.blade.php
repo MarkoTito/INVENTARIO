@@ -42,7 +42,7 @@ title="Entregar"
                          
                      @else
                          
-                         <img src="{{ Storage::url($imagen->Ima_path) }}" height="50px" width="140px" alt="imagen del bien">
+                         <img src="{{ Storage::url($imagen->Tpath_imagenes) }}" height="50px" width="140px" alt="imagen del bien">
                          
                      @endif
                  </div>
