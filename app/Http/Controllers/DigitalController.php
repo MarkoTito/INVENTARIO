@@ -81,17 +81,17 @@ class DigitalController extends Controller
 
 
     public function dropzone(Request $request){
-        $ultimo = Digital::orderBy('PK_B_Digital', 'desc')->first();
+        $ultimo = Digital::orderBy('PK_Software', 'desc')->first();
 
         if (!$request->hasFile('file')) {
             return response()->json(['error' => 'No se recibió ningún archivo'], 400);
         }
-        
+         
         $image = new Archivos();
-        $image->Arch_path = $request->file('file')->store('archivos', 'public');
-        $image->Arch_path_size = $request->file('file')->getSize();
-        $image->FK_B_Digital_Arch = $ultimo->PK_B_Digital;
-        $image->T_Arch_Nombre=$request->file('file')->getClientOriginalName();
+        $image->Tpath_archivos = $request->file('file')->store('archivos', 'public');
+        $image->Nsize_archivo = $request->file('file')->getSize();
+        $image->FK_Archivos_SoftwareId = $ultimo->PK_Software;
+        $image->Tnombre_archivo=$request->file('file')->getClientOriginalName();
         $image->save();
 
         return response()->json([
@@ -117,8 +117,9 @@ class DigitalController extends Controller
         $digital=Digital::with('determinacion','area','sistema')
                     ->where('PK_Software', $id)
                 ->first();
-        $archivos=Archivos::where('PK_Archivos',$id)->get();
+        $archivos=Archivos::where('FK_Archivos_SoftwareId',$id)->get();
 
+        //return $id;
         return view('admin/Buscar/detalle_Digital',compact('digital','archivos'));
         
     }

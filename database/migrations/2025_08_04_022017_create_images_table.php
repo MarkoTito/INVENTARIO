@@ -23,7 +23,6 @@ return new class extends Migration
 
             $table->string('Tpath_imagenes')->unique();
             $table->integer('Nsize_imagenes')->default(0);
-            //$table->double('Tipo_Bien_Ima');  Tipo_Bien_Ima
             $table->timestamps();
         });
     }
