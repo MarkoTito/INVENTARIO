@@ -204,6 +204,7 @@ class BienController extends Controller
         $New_Bien->UK_Hardware_Codigo = $request->UK_Hardware_Codigo;
         $New_Bien->Tdescripcion_hardware = $request->Tdescripcion_hardware;
         $New_Bien->Testado_fisico_hardware= $request->Testado_fisico_hardware;
+        $New_Bien->FK_Hardware_TipoId = $request->FK_Hardware_TipoId;
         $New_Bien->Dadquisicion_hardware= $request->Dadquisicion_hardware;
         $New_Bien->save();
         session()->flash('swal',[

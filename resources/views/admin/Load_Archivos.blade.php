@@ -29,12 +29,7 @@ title="Entregar"
         </form>
         
     </div>
-    <div>
-        <h2 class="text-red-700">
-            *Este campo No es Obligatorio
-        </h2>
-    </div>
-
+    
     @push('js')
         <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
         <script>

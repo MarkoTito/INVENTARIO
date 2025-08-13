@@ -13,7 +13,7 @@ title="Entregar"
         'name'=> 'Editar Harware',
     ]
     ]">
-    <form action="{{route('adminbien.update',$bien->PK_Hardware)}}" method="POST">
+    <form action="{{route('adminbien.update',$bien->PK_Hardware)}}" class="edit-form" method="POST">
         @csrf
         @method('PUT')
 
@@ -42,13 +42,13 @@ title="Entregar"
                          
                      @else
                          
-                         <img src="{{ Storage::url($imagen->Tpath_imagenes) }}" height="50px" width="140px" alt="imagen del bien">
+                        <img src="{{ Storage::url($imagen->Tpath_imagenes) }}" height="450px" width="550px" alt="imagen del bien">
                          
                      @endif
-                 </div>
-                 <div>
-                     <div class="grid gap-6 md:grid-cols-2">
-                         <div>
+                </div>
+                <div>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div>
                              {{-- AREA --}} 
                             <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
                             <select name="FK_Hardware_AreaId" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -62,12 +62,13 @@ title="Entregar"
                              <label for="UK_Hardware_Codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
                              <input type="text" name="UK_Hardware_Codigo" id="UK_Hardware_Codigo" aria-label="UK_Hardware_Codigo" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Hardware_Codigo}}" >          
                         </div>
-             
-                         <div>
+                    </div>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div>
                              <label for="Dadquisicion_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
                              <input type="text" name="Dadquisicion_hardware" id="Dadquisicion_hardware" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" >
-                         </div>
-                         <div>
+                        </div>
+                        <div>
                             {{-- estado --}}
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado:</label>   
                             <select name="Testado_fisico_hardware" id="Testado_fisico_hardware" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -75,11 +76,34 @@ title="Entregar"
                                 <option value="Regular" {{$bien->Testado_fisico_hardware== 'Regular' ? 'selected' : ''}} >Regular</option>
                                 <option value="Mal" {{$bien->Testado_fisico_hardware== 'Mal' ? 'selected' : ''}} >Mal</option>
                             </select>   
-                         </div>
-                     </div>
-                 </div>
+                        </div>
+                    </div>
+                    <div class="grid gap-6 md:grid-cols-2">
+
+                        <div>
+                            {{-- tipo --}}
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware:</label>    
+                            <select name="FK_Hardware_TipoId" id="FK_Hardware_TipoId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @foreach ($tipos as $tipo)
+                                    <option value="{{$tipo->PK_tipo}}" {{$bien->FK_Hardware_TipoId == $tipo->PK_tipo ? 'selected' : ''}} >{{$tipo->Tdescriocion_tipo}}</option>
+                                @endforeach
+                            </select> 
+                        </div>   
+                        <div>
+                            {{-- marca --}}
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Marca:</label>    
+                            <select name="n" id="n" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @foreach ($tipos as $tipo)
+                                    <option value="{{$tipo->PK_tipo}}" {{$bien->FK_Hardware_TipoId == $tipo->PK_tipo ? 'selected' : ''}} >{{$tipo->Tdescriocion_tipo}}</option>
+                                @endforeach
+                            </select> 
+                        </div>   
+
+                    </div>
+
+                </div>
          </div>
-        
+        <br>
          <div class="mb-4">
              <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
              <textarea id="message" name="Tdescripcion_hardware" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$bien->Tdescripcion_hardware}}</textarea>
@@ -97,7 +121,7 @@ title="Entregar"
     @push('js')
         <script>
         //que seleciona todos esos formularios que tengan ese nombre de delete-form 
-            forms = document.querySelectorAll('.delete-form')
+            forms = document.querySelectorAll('.edit-form')
             //que recorra todos los formularios
             forms.forEach(form => {
                 //que se ponga al escucha de ese formulario con el evento submit
@@ -105,13 +129,13 @@ title="Entregar"
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
-                            title: "Bajar este Bien?",
+                            title: "Editar este Bien?",
                             text: "No podras revertir esto!",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, Bajar bien",
+                            confirmButtonText: "Si, Editar bien",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {

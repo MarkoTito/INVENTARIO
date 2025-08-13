@@ -77,7 +77,7 @@ title="Registrar"
             </div>
             <div>
                 {{-- AÑO DE ADQUISICION --}}
-                <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Inicio:</label>
+                <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Adquisicion:</label>
                 <input type="date" name="Dadquisicion_hardware" value="{{old('Dadquisicion_hardware')}}" >
                 @error('Dadquisicion_hardware')
                         <p class="text-red-600">*{{$message}}</p>

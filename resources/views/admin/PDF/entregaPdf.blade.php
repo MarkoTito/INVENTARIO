@@ -74,7 +74,7 @@
         <!-- Fecha -->
         <div class="flex" style="justify-content: flex-end;">
             <label><strong>Fecha:</strong></label> 
-            <input type="text" value="poner"  class="small-input">
+            <input type="text" value="{{$fecha}}"  class="small-input">
         </div>
 
         <!-- Equipo -->

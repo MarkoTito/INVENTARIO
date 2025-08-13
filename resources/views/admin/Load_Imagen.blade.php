@@ -28,11 +28,6 @@ title="Entregar"
             @csrf
         </form>
     </div>
-    <div>
-        <h2 class="text-red-700" >
-            *Este campo No es Obligatorio
-        </h2>
-    </div>
 
     @push('js')
         <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
@@ -40,7 +35,7 @@ title="Entregar"
             Dropzone.options.myDropzone = {
                     maxFiles: 1,
                     acceptedFiles: 'image/*',
-                    dictDefaultMessage: "Arrastra una imagen al recuadro para subirla",
+                    dictDefaultMessage: "Arrastra una imagen al recuadro para subirla ",
                     maxFilesize :2,
 
                     success: function(file, response) {

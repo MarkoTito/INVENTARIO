@@ -8,6 +8,7 @@ use App\Models\Comentario;
 use App\Models\Tipo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -62,6 +63,7 @@ class ComentarioController extends Controller
         //BUSQUEDA DEL USUARIO_id
         $usuario_id=Auth::user()->id;
         $usuario=Auth::user();
+        $fecha = Carbon::now();
                 
         //BUSQUEDA DEL BIEN
         $codigo= Bien::with('area','tipo')
@@ -95,7 +97,8 @@ class ComentarioController extends Controller
                 $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
                     'comentario' =>$request,
                     'bien' => $codigo,
-                    'nombre'=> $usuario
+                    'nombre'=> $usuario,
+                    'fecha' => $fecha,
                     
                 ]);
         
