@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\Gate; //acesos
 
 class BienController extends Controller
 {
@@ -26,6 +27,7 @@ class BienController extends Controller
      */
     public function index()
     {
+        Gate::authorize('read-hardware');
         /*
         Forma de uno x uno
         $areas= Bien::where('PK_Hardware',1)
@@ -45,7 +47,7 @@ class BienController extends Controller
     }
 
     public function index2(?Request $request){
-        
+        Gate::authorize('read-hardware');
         //mandar info
         $areas=Area::all();
         $tipos = Tipo::all();
@@ -80,6 +82,7 @@ class BienController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create-hardware');
         //muestra el formulario de hardware
         $areas=Area::all();
         $tipos = Tipo::all();
@@ -92,6 +95,7 @@ class BienController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create-hardware');
         //Inserccion de datos
         $request->validate(
                 [
@@ -129,6 +133,7 @@ class BienController extends Controller
      */
     public function show1($id)
     {
+        Gate::authorize('read-hardware');
         //para mostra solo un bien , con todo su detalle
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
@@ -148,6 +153,7 @@ class BienController extends Controller
 
     public function historial($id)
     {   
+        Gate::authorize('read-hardware');
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
@@ -172,6 +178,7 @@ class BienController extends Controller
     }
     public function H_editar($id)
     {
+        Gate::authorize('update-hardware');
         //formulario para editar un hardware
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
@@ -190,7 +197,8 @@ class BienController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Bien $bien)
-    {        
+    {    
+        Gate::authorize('update-hardware');    
         $New_Bien= Bien::find($bien->PK_Hardware);
         $New_Bien->FK_Hardware_AreaId = $request->FK_Hardware_AreaId;
         $New_Bien->UK_Hardware_Codigo = $request->UK_Hardware_Codigo;
@@ -212,7 +220,7 @@ class BienController extends Controller
 
     public function baja (Request $request,$bien)
     {
-        
+        Gate::authorize('bajar-hardware'); 
         if (!$request->T_Motivo_Baja || strlen($request->T_Motivo_Baja) > 125) {
             session()->flash('swal', [
                 'icon' => 'error',
@@ -246,6 +254,7 @@ class BienController extends Controller
 
      public function Bajas()
     {
+        Gate::authorize('read-hardware'); 
         //buscar todos los bienes de baja
         $bienes = Bien::with('area','tipo')
                 ->where('FK_Hardware_EstadoId','Baja')    
@@ -258,7 +267,9 @@ class BienController extends Controller
     }
     
 
-    public function pdf($id){
+    public function pdf($id)
+    {
+        Gate::authorize('read-hardware'); 
         $historial = Comentario::with('usuario')
                     ->where('FK_Comentario_HardwareId',$id)->get();
 
@@ -285,12 +296,14 @@ class BienController extends Controller
         //Bajar bien
     }
     public function imagen($id){
+        Gate::authorize('create-hardware'); 
         // se va a el formulario para ponerle su imagen
         return view('admin/entrega',compact('id'));
         
     }
 
     public function dropzone(Request $request){
+        Gate::authorize('create-hardware'); 
         $ultimo = Bien::orderBy('PK_Hardware', 'desc')->first();
 
         if (!$request->hasFile('file')) {

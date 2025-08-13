@@ -10,6 +10,7 @@ use App\Models\Sistema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class DigitalController extends Controller
@@ -19,6 +20,7 @@ class DigitalController extends Controller
      */
     public function index()
     {
+        Gate::authorize('read-software'); 
         //mostramos en la tabla
 
 
@@ -33,6 +35,7 @@ class DigitalController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create-software'); 
         //muestra el formulario
         $areas=Area::all();
         $sistemas = Sistema::all();
@@ -45,6 +48,7 @@ class DigitalController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create-software'); 
         $request->validate(
                 [
                 'FK_Software_DeterminacionId' => 'required'
@@ -128,6 +132,7 @@ class DigitalController extends Controller
 
 
     public function dropzone(Request $request){
+        Gate::authorize('create-software'); 
         $ultimo = Digital::orderBy('PK_Software', 'desc')->first();
 
         if (!$request->hasFile('file')) {
@@ -160,6 +165,7 @@ class DigitalController extends Controller
     }
     public function show2($id)
     {
+        Gate::authorize('read-software'); 
         //detalle del bien digital
         $digital=Digital::with('determinacion','area','sistema')
                     ->where('PK_Software', $id)
@@ -171,17 +177,15 @@ class DigitalController extends Controller
         
     }
     public function index_baja(Request $request){
-        
+        Gate::authorize('read-software'); 
+        //buscar software
         //mandar info
         $sistemas=Sistema::all();
-        //aca faltaria el with
         $licencias = Digital::with('determinacion','area','sistema')
                         ->where('FK_Software_DeterminacionId',$request->determinacion)
                         ->where('FK_Software_SistemaId', $request->FK_Software_SistemaId)
                 ->get();
-        
-        //return $request;
-        //return $licencias;
+
         return view('admin/Buscar/encontrado_Baja',compact('licencias','sistemas'));
     }
     

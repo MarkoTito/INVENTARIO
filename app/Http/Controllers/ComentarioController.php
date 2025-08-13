@@ -9,6 +9,7 @@ use App\Models\Tipo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ComentarioController extends Controller
 {
@@ -17,8 +18,10 @@ class ComentarioController extends Controller
      */
     public function index()
     {
+        Gate::authorize('create-comentario'); 
         // dejar comentario de repacion
         //muestra el formulario
+        //Gate::authorize();
         $areas=Area::all();
         $tipos = Tipo::all();
         return view('admin.reparar', compact('areas','tipos') );
@@ -38,6 +41,7 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create-comentario'); 
         //creacion del comentario
         $data=$request->validate(
             [

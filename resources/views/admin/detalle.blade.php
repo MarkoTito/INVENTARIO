@@ -86,40 +86,50 @@ title="Reprar"
             @if ($comentarios->isEmpty())
                 <div class="grid gap-6 mb-4 md:grid-cols-2" >
                     
-                    <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                        class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
-                    </button>
+                    @can('bajar-hardware')
+                        <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                            class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
+                        </button>
+                    @endcan
 
-                    <a href="/admin/Editar/Hardware/{{$bien->PK_Hardware}}">
-                            <button
-                                style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                type="button">
-                                Editar
-                            </button>
-                    </a>
+                    @can('update-hardware')
+                        <a href="/admin/Editar/Hardware/{{$bien->PK_Hardware}}">
+                                <button
+                                    style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+                                    type="button">
+                                    Editar
+                                </button>
+                        </a>
+                    @endcan
+
                 </div>        
             @else
                 <div class="grid gap-6 mb-4 md:grid-cols-3" >
-                    
-                    <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                        class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
-                    </button>
-
-                    <a href="/admin/Editar/Hardware/{{$bien->PK_Hardware}}">
-                            <button
-                                style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                type="button">
-                                Editar
-                            </button>
-                    </a>
-
-                    <a href="/admin/buscar/historial/{{$bien->PK_Hardware}}">
-                        <button
-                            style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                            type="button">
-                            Historial
+                    @can('bajar-hardware')
+                        <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                            class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
                         </button>
-                    </a>
+                    @endcan
+
+                    @can('update-hardware')
+                        <a href="/admin/Editar/Hardware/{{$bien->PK_Hardware}}">
+                                <button
+                                    style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+                                    type="button">
+                                    Editar
+                                </button>
+                        </a>
+                    @endcan
+
+                    @can('read-comentario')
+                        <a href="/admin/buscar/historial/{{$bien->PK_Hardware}}">
+                            <button
+                                style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+                                type="button">
+                                Historial
+                            </button>
+                        </a>
+                    @endcan
 
                 </div>   
                 
@@ -133,16 +143,7 @@ title="Reprar"
                 @if ($comentarios->isEmpty())
                     {{-- <div class="grid gap-6 mb-4 md:grid-cols-1" >
                     </div> --}}
-                    <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
-                        <button
-                            style="background-color: #e21111; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                            type="button">
-                            Ver Baja
-                        </button>
-                    </a>
-                    
-                @else
-                    <div class="grid gap-6 mb-4 md:grid-cols-2" >
+                    @can('read-hardware')
                         <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
                             <button
                                 style="background-color: #e21111; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
@@ -150,14 +151,29 @@ title="Reprar"
                                 Ver Baja
                             </button>
                         </a>
-
-                        <a href="/admin/buscar/historial/{{$bien->PK_Hardware}}">
-                            <button
-                                style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                type="button">
-                                    Historial
-                            </button>
-                        </a>
+                    @endcan
+                    
+                @else
+                    <div class="grid gap-6 mb-4 md:grid-cols-2" >
+                        @can('read-hardware')
+                            <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
+                                <button
+                                    style="background-color: #e21111; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+                                    type="button">
+                                    Ver Baja
+                                </button>
+                            </a>
+                        @endcan
+                        @can('read-comentario')
+                            <a href="/admin/buscar/historial/{{$bien->PK_Hardware}}">
+                                <button
+                                    style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+                                    type="button">
+                                        Historial
+                                </button>
+                            </a>
+                            
+                        @endcan
                         
                     </div>
 
