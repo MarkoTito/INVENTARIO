@@ -108,23 +108,23 @@ title="Reprar"
             <tbody>
                 @if ($archivos->isEmpty())
                     <tr>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                             No hay Documentos
                         </th>   
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                            -
                         </th>  
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                             -
                         </th>           
                     </tr>
                 @else
                     @foreach ($archivos as $archivo)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$archivo->Tnombre_archivo}}
                             </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$archivo->created_at}}
                             </th>
                             <th class="px-6 py-4">

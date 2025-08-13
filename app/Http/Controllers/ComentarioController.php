@@ -74,7 +74,7 @@ class ComentarioController extends Controller
                             ->get();
         */
         if (!$codigo) {
-             //varaible de seccion
+            //varaible de seccion
             session()->flash('swal',[
                 'icon'=> 'error',
                 'title'=> '!Upss',
@@ -82,56 +82,69 @@ class ComentarioController extends Controller
             ]);
             return redirect()->route('adminbien.index');
         } else {
-            if ($request->situacion == 1) {
-                $coment = new Comentario();
-                //esto se podria evitar con carga masivoa . pero se vera despues
-                $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
-                $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
-                $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
-                $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
-                $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
-                $coment->FK_Comentario_UserId=$usuario_id;
-                $coment->save();
-
-                
-                $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
-                    'comentario' =>$request,
-                    'bien' => $codigo,
-                    'nombre'=> $usuario,
-                    'fecha' => $fecha,
+            if ($codigo->FK_Hardware_EstadoId == 1) {
+                if ($request->situacion == 1) {
+                    $coment = new Comentario();
+                    //esto se podria evitar con carga masivoa . pero se vera despues
+                    $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
+                    $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
+                    $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
+                    $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
+                    $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
+                    $coment->FK_Comentario_UserId=$usuario_id;
+                    $coment->save();
+    
                     
-                ]);
-        
-                //varaible de seccion
-                session()->flash('swal',[
-                    'icon'=> 'success',
-                    'title'=> '!Bien hecho',
-                    'text'=>   'El comentario fue registrado con exito'
-                ]);
-                return $pdf->download("compra_{$codigo->PK_Hardware}.pdf");
-                
+                    $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
+                        'comentario' =>$request,
+                        'bien' => $codigo,
+                        'nombre'=> $usuario,
+                        'fecha' => $fecha,
+                        
+                    ]);
             
-                return redirect()->route('adminbien.index');
+                    //varaible de seccion
+                    session()->flash('swal',[
+                        'icon'=> 'success',
+                        'title'=> '!Bien hecho',
+                        'text'=>   'El comentario fue registrado con exito'
+                    ]);
+                    return $pdf->download("compra_{$codigo->PK_Hardware}.pdf");
+                    
                 
-            } else {
-                 $coment = new Comentario();
-                //esto se podria evitar con carga masivoa . pero se vera despues
-                $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
-                $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
-                $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
-                $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
-                $coment->FK_Comentario_UserId=$usuario_id;
-                $coment->save();
+                    return redirect()->route('adminbien.index');
+                    
+                } else {
+                     $coment = new Comentario();
+                    //esto se podria evitar con carga masivoa . pero se vera despues
+                    $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
+                    $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
+                    $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
+                    $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
+                    $coment->FK_Comentario_UserId=$usuario_id;
+                    $coment->save();
+    
+                    //varaible de seccion
+                    session()->flash('swal',[
+                        'icon'=> 'success',
+                        'title'=> '!Bien hecho',
+                        'text'=>   'El comentario fue registrado con exito'
+                    ]);
+                
+                    return redirect()->route('adminbien.index');
+                }
+               
 
-                //varaible de seccion
+
+            } else {
                 session()->flash('swal',[
-                    'icon'=> 'success',
-                    'title'=> '!Bien hecho',
-                    'text'=>   'El comentario fue registrado con exito'
-                ]);
-            
-                return redirect()->route('adminbien.index');
+                'icon'=> 'error',
+                'title'=> '!Upss',
+                'text'=>   'El Bien fue dado de baja'
+             ]);
+             return redirect()->route('adminbien.index');
             }
+            
         }
         
 

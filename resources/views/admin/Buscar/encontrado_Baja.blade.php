@@ -74,19 +74,19 @@ title="Buscar"
             <tbody>
                 @if ($licencias->isEmpty())
                     <tr>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 No hay concidencias
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 -
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 -
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 -
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 -
                         </th>
                     </tr>
@@ -94,16 +94,16 @@ title="Buscar"
                 @else
                     @foreach ($licencias as $digital)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$digital->Tnombre_software}}
                             </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$digital->Thost_software}}
                             </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$digital->determinacion->Tdescripcion_determinacion}}
                             </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$digital->Dfe_Inicio_software}}
                             </th>
                             <td class="px-6 py-4">

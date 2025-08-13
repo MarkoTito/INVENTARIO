@@ -90,7 +90,7 @@ title="Buscar"
             <tbody>
                 @if ($bienes->isEmpty())
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                              No Exite Bien con esa relacion
                         </th>
                     </tr>
@@ -98,16 +98,16 @@ title="Buscar"
                     @foreach ($bienes as $bien)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
     
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$bien->tipo->Tdescriocion_tipo}}
                             </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$bien->UK_Hardware_Codigo}}
                             </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$bien->estado->UK_Descripcion_estado}}
                             </th>
-                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                                 {{$bien->area->UK_Nombre_area}}
                             </th>
                             <td class="px-6 py-4">
