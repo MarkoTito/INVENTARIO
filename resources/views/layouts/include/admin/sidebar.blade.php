@@ -14,17 +14,24 @@
                   </svg>
             </button>
             <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                  <li>
-                     <a href="{{route('adminbien.create')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Hardware</a>
-                  </li>
-                  <li>
-                     <a href="{{route('admindigital.create')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Licencia</a>
-                  </li>
+                  @can('create-hardware')
+                     <li>
+                        <a href="{{route('adminbien.create')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Hardware</a>
+                     </li>    
+                  @endcan
+
+                  @can('create-software',)
+                     <li>
+                        <a href="{{route('admindigital.create')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Licencia</a>
+                     </li>
+                  @endcan
                  
             </ul>
          </li>
          <li>
             {{-- para buscar producto --}}
+            
+
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-buscar" data-collapse-toggle="dropdown-buscar">
                   <span class="w-6 h-6 inline-flex justify-center items-center">
                      <i class="fa-solid fa-magnifying-glass"></i>
@@ -34,30 +41,38 @@
                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                   </svg>
             </button>
+
             <ul id="dropdown-buscar" class="hidden py-2 space-y-2">
-                  <li>
-                     <a href="{{route('adminbien.index')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Hardware</a>
-                  </li>
-                  <li>
-                     <a href="{{route('admindigital.index')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Licencia</a>
-                  </li>
+                  @can('read-hardware')
+                     <li>
+                        <a href="{{route('adminbien.index')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Hardware</a>
+                     </li>
+                  @endcan
+
+                  @can('read-software')
+                     <li>
+                        <a href="{{route('admindigital.index')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Licencia</a>
+                     </li>
+                  @endcan
                  
             </ul>
          </li>
          
-         <li>
-            {{-- para  reparar --}}
+         @can('create-comentario')
+            <li>
+               {{-- para  reparar --}}
 
-            <a href="{{route('admincomentario.index')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               {{-- el comando dentro del span lo pone en el centro de las dimenciones
-                  que le dimos osea entre 6 y 6
-               --}}
-               <span class="w-6 h-6 inline-flex justify-center items-center">
-                     <i class="fa-solid fa-wrench"></i>
-               </span>
-               <span class="ms-3">Reparar</span>
-            </a>
-         </li>
+               <a href="{{route('admincomentario.index')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  {{-- el comando dentro del span lo pone en el centro de las dimenciones
+                     que le dimos osea entre 6 y 6
+                  --}}
+                  <span class="w-6 h-6 inline-flex justify-center items-center">
+                        <i class="fa-solid fa-wrench"></i>
+                  </span>
+                  <span class="ms-3">Reparar</span>
+               </a>
+            </li>
+         @endcan
          
          {{-- <li>
             entrega

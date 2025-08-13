@@ -125,7 +125,7 @@ title="Reprar"
                                 {{$archivo->Tnombre_archivo}}
                             </th>
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
-                                {{$archivo->created_at}}
+                                {{ \Carbon\Carbon::parse($archivo->created_at)->format('d/m/Y') }}<br>
                             </th>
                             <th class="px-6 py-4">
 

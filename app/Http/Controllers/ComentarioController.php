@@ -63,7 +63,7 @@ class ComentarioController extends Controller
         //BUSQUEDA DEL USUARIO_id
         $usuario_id=Auth::user()->id;
         $usuario=Auth::user();
-        $fecha = Carbon::now();
+        $fecha = Carbon::now()->format('d-m-Y');
                 
         //BUSQUEDA DEL BIEN
         $codigo= Bien::with('area','tipo')

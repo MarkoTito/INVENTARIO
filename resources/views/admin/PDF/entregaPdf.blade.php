@@ -86,6 +86,9 @@
             <div class="flex">
                 <label><strong>Codigo:</strong></label> {{$bien->UK_Hardware_Codigo}}
             </div>
+            <div class="flex">
+                <label><strong>Codigo:</strong></label> {{$comentario->Testado_fisico_comentario}}
+            </div>
             <div class="flex-space" style="margin-top: 5px;">
                 <div class="flex" style="flex: 1;">
                     <label><strong>Marca:</strong></label>
@@ -114,12 +117,26 @@
                 <input type="text">
             </div>
         </div>
+        <!-- Acciones realizadas -->
+        <div class="section">
+            <div class="section-title">Acciones realizadas</div>
+            <textarea rows="3">{{$comentario->Tdescripcion_comentario}}</textarea>
+        </div>
 
         <!-- Observaciones -->
-        <div class="section">
-            <div class="section-title">Observaciones</div>
-            <textarea rows="2">{{$comentario->Tobservacion_comentario}}</textarea>
-        </div>
+        @if (!$comentario->Tobservacion_comentario)
+            <div class="section">
+                <div class="section-title">Observaciones</div>
+                <textarea rows="2">No se agregaron Observaciones</textarea>
+            </div>
+            
+        @else
+            <div class="section">
+                <div class="section-title">Observaciones</div>
+                <textarea rows="2">{{$comentario->Tobservacion_comentario}}</textarea>
+            </div>
+            
+        @endif
 
         <!-- Componente que presenta falla -->
         {{-- <div class="section">
@@ -141,18 +158,25 @@
             </div>
         </div> --}}
 
-        <!-- Acciones realizadas -->
-        <div class="section">
-            <div class="section-title">Acciones realizadas</div>
-            <textarea rows="3">{{$comentario->Tdescripcion_comentario}}</textarea>
-        </div>
-
-        <!-- Recomendaciones -->
-        <div class="section">
-            <div class="section-title">Recomendaciones</div>
-            <textarea rows="2">{{$comentario->Trecomendacion_comentario}}</textarea>
-        </div>
+        
+        @if (!$comentario->Trecomendacion_comentario)
+            <!-- Recomendaciones -->
+            <div class="section">
+                <div class="section-title">Recomendaciones</div>
+                <textarea rows="2">No se agregaro Observaciones</textarea>
+            </div>
+            
+        @else
+            <!-- Recomendaciones -->
+            <div class="section">
+                <div class="section-title">Recomendaciones</div>
+                <textarea rows="2">{{$comentario->Trecomendacion_comentario}}</textarea>
+            </div>
+            
+        @endif
     </div>
+    <br>
+    <br>
     <br>
     <br>
     <h2 style="display:inline-block; margin:0 280px 0 40;">______________</h2>

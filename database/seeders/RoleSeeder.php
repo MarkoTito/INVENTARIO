@@ -54,6 +54,8 @@ class RoleSeeder extends Seeder
             'delete-hardware',
             'bajar-hardware',
 
+            'read-software',
+
             'create-comentario',
             'read-comentario',
             'update-comentario',
@@ -99,7 +101,7 @@ class RoleSeeder extends Seeder
                 'email' => 'jeremyvega@gmail.com',
                 'password' => bcrypt('87654321'),
            
-        ])->assignRole('soporte2');
+        ])->assignRole('soporte1');
         
 
     }
