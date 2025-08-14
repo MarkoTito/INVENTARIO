@@ -276,8 +276,10 @@ class BienController extends Controller
     {
         Gate::authorize('read-hardware'); 
         $historial = Comentario::with('usuario')
-                    ->where('FK_Comentario_HardwareId',$id)->get();
-
+            ->where('FK_Comentario_HardwareId', $id)
+            ->orderBy('created_at', 'desc') 
+            ->take(4) 
+            ->get();
         $bien = Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')

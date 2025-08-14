@@ -87,7 +87,7 @@
                 <label><strong>Codigo:</strong></label> {{$bien->UK_Hardware_Codigo}}
             </div>
             <div class="flex">
-                <label><strong>Codigo:</strong></label> {{$comentario->Testado_fisico_comentario}}
+                <label><strong>Estado Actual del Bien:</strong></label> {{$comentario->Testado_fisico_comentario}}
             </div>
             <div class="flex-space" style="margin-top: 5px;">
                 <div class="flex" style="flex: 1;">
