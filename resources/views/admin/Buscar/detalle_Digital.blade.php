@@ -10,14 +10,14 @@ title="Reprar"
         'href' => '/',
     ],
      [
-        'name'=>'Buscar Licencia',
-        'href' => '/',
+        'name'=> 'Buscar Licencia',
+        'href' => route('admindigital.index')
     ],
     [
         'name'=> 'Detalle Licencia',
     ]
     ]">
-
+    
     <div class="grid gap-6  md:grid-cols-2">
             <div>
                 
@@ -107,7 +107,7 @@ title="Reprar"
             </thead>
             <tbody>
                 @if ($archivos->isEmpty())
-                    <tr>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
                         <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                             No hay Documentos
                         </th>   

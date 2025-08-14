@@ -50,7 +50,7 @@ title="Entregar"
                         this.on("success", function(file, response) {
                             // Espera un poquito para mostrar el mensaje y luego redirige
                             setTimeout(function() {
-                                window.location.href = "{{ route('adminbien.index') }}";
+                                window.location.href = "{{ route('admindigital.index') }}";
                             }, 1500);
                         });
                     },

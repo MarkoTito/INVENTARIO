@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\Gate; //acesos
+use Illuminate\Support\Facades\Crypt; //seguridad osea cifrado
 
 class BienController extends Controller
 {
@@ -131,10 +132,11 @@ class BienController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show1($id)
+    public function show1($idCifrado)
     {
         Gate::authorize('read-hardware');
         //para mostra solo un bien , con todo su detalle
+        $id = Crypt::decryptString($idCifrado);
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
@@ -151,9 +153,10 @@ class BienController extends Controller
         return view('admin.detalle',compact('bien','comentarios','imagen'));
     }
 
-    public function historial($id)
+    public function historial($idCifrado)
     {   
         Gate::authorize('read-hardware');
+        $id = Crypt::decryptString($idCifrado);
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
@@ -176,10 +179,11 @@ class BienController extends Controller
         //
         return 'hola desde el edit';
     }
-    public function H_editar($id)
+    public function H_editar($idCifrado)
     {
         Gate::authorize('update-hardware');
         //formulario para editar un hardware
+        $id = Crypt::decryptString($idCifrado);
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')

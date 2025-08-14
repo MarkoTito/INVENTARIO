@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Crypt; //seguridad osea cifrado
+
 
 class DigitalController extends Controller
 {
@@ -66,8 +68,8 @@ class DigitalController extends Controller
                     'FK_Software_AreaId' => 'required',
                     'FK_Software_SistemaId' => 'required',
                     'Tnombre_software' => 'required',
-                    'Thost_software' => 'required',
-                    'Dfe_Inicio_software'=> 'required',
+                    'Thost_software' => 'required|unique:software',
+                    'Dfe_Inicio_software'=> ['required' , 'date', 'before_or_equal:today'],
                     ],
                     [],
                     [
@@ -95,10 +97,11 @@ class DigitalController extends Controller
                     [
                     'FK_Software_AreaId' => 'required',
                     'FK_Software_SistemaId' => 'required',
-                    'Tnombre_software' => 'required',
-                    'Thost_software' => 'required',
-                    'Dfe_vencimiento_software'=> 'required',
-                    'Dfe_Inicio_software'=> 'required',
+                    'Tnombre_software' => 'required|unique:software',
+                    'Thost_software' => 'required|unique:software',
+                    'Dfe_vencimiento_software'=> ['required' , 'date', 'after_or_equal:today'],
+                    'Dfe_Inicio_software'=> ['required' , 'date', 'before_or_equal:today'],
+                    
                     ],
                     [],
                     [
@@ -151,7 +154,7 @@ class DigitalController extends Controller
             'message' => 'Se subio correctamente el archivo',
             
         ]);
-        return redirect()->route('adminbien.index');
+        return redirect()->route('admindigital.index');
         
     }
 
@@ -163,10 +166,11 @@ class DigitalController extends Controller
         //
         
     }
-    public function show2($id)
+    public function show2($idCifrado)
     {
         Gate::authorize('read-software'); 
         //detalle del bien digital
+        $id = Crypt::decryptString($idCifrado);
         $digital=Digital::with('determinacion','area','sistema')
                     ->where('PK_Software', $id)
                 ->first();

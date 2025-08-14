@@ -10,14 +10,16 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
         'href' => '/',
     ],
      [
-        'name'=>'Buscar',
-        'href' => '/',
+        'name'=> 'Buscar',
+        'href' => route('adminbien.index')
     ],
     [
         'name'=> 'Hardware',
     ]
     ]">
-
+    @php
+        $idCifrado = Crypt::encryptString($bien->PK_Hardware);
+    @endphp
     <div class="grid gap-6  md:grid-cols-2 mb-4">
         <div>
                 @if (!$imagen)
@@ -90,7 +92,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                     @endcan
 
                     @can('update-hardware')
-                        <a href="/admin/Editar/Hardware/{{$bien->PK_Hardware}}">
+                        <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
                                 <button
                                     style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                     type="button">
@@ -109,7 +111,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                     @endcan
 
                     @can('update-hardware')
-                        <a href="/admin/Editar/Hardware/{{$bien->PK_Hardware}}">
+                        <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
                                 <button
                                     style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                     type="button">
@@ -119,7 +121,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                     @endcan
 
                     @can('read-comentario')
-                        <a href="/admin/buscar/historial/{{$bien->PK_Hardware}}">
+                        <a href="{{url('/admin/buscar/historial/'.$idCifrado)}}">
                             <button
                                 style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
                                 type="button">

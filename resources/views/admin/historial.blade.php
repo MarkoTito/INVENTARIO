@@ -10,11 +10,11 @@ title="Reprar"
         'href' => '/',
     ],
      [
-        'name'=>'Buscar',
-        'href' => '/',
+        'name'=> 'Buscar',
+        'href' => route('adminbien.index')
     ],
     [
-        'name'=> 'ver esto',
+        'name'=> 'Hitorial',
     ]
     ]">
         <div class="relative overflow-x-auto">
