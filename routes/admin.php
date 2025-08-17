@@ -27,6 +27,9 @@ Route::get('/buscar/digital/{id}',[DigitalController::class,'show2']);
 
 //mostrar la busqueda mas exacta
 Route::post('/buscar/todo',[BienController::class,'index2']);
+//mostrar la busqueda mas exacta PERO CON CODIGO
+Route::post('/buscar/todo/code',[BienController::class,'index3']);
+
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/{id}',[BienController::class,'show1']);
 //Bajar un bien (cree una ruta pero se ve mal esteticamente)

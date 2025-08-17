@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archivos;
 use App\Models\Area;
 use App\Models\Bien;
 use App\Models\Category;
 use App\Models\Comentario;
+use App\Models\Digital;
 use App\Models\Image;
 use App\Models\Sistema;
 use App\Models\Tipo;
@@ -74,6 +76,45 @@ class BienController extends Controller
             
             
             return view('admin.encontrado',compact('bienes','areas','tipos'));
+        }
+
+    }
+    public function index3(Request $request){
+        //metodo de busqueda con CODIGO
+        Gate::authorize('read-hardware');
+        $code=$request->UK_Hardware_Codigo;
+        if (strlen($code) >12 || strlen($code) <12) {
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => '!Upss',
+                'text' => 'No Ingreso correctamente el codigo'
+            ]);
+            return redirect()->route('adminbien.index');
+        }else{
+            //$id = Crypt::decryptString($request->UK_Hardware_Codigo);
+            $bien=Bien::where('UK_Hardware_Codigo', $code)
+                    ->with('area')
+                    ->with('tipo')
+                    ->first();
+    
+    
+            if (!$bien) {
+                session()->flash('swal', [
+                    'icon' => 'error',
+                    'title' => '!Upss',
+                    'text' => 'El Codigo no exite'
+                ]);
+                return redirect()->route('adminbien.index');
+            }else{
+                //para mostrar los comentarios del bien
+                $comentarios=Comentario::where('FK_Comentario_HardwareId',$code)
+                         ->get();
+                //para mostrar las imagnes;
+                $imagen = Image::where('FK_Imagenes_HardwareId',$code)->first();
+                //return $bien;
+                return view('admin.detalle',compact('bien','comentarios','imagen'));
+            }
+            
         }
 
     }
