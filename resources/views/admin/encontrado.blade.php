@@ -93,6 +93,18 @@ title="Buscar"
                         <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
                              No Exite Bien con esa relacion
                         </th>
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                             -
+                        </th>
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                             -
+                        </th>
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                             -
+                        </th>
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                             -
+                        </th>
                     </tr>
                 @else
                     @foreach ($bienes as $bien)
@@ -111,7 +123,13 @@ title="Buscar"
                                 {{$bien->area->UK_Nombre_area}}
                             </th>
                             <td class="px-6 py-4">
-                                <a href="/admin/buscar/{{$bien->PK_Hardware}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalle</a>                            
+                                {{-- cifrado --}}
+                                @php
+                                    $idCifrado = Crypt::encryptString($bien->PK_Hardware);
+                                @endphp
+                                <a href="{{url('/admin/buscar/'.$idCifrado)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalle</a>
+                                
+                            
                             </td>
                         </tr>
                     @endforeach

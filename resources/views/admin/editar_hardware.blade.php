@@ -66,7 +66,7 @@ title="Entregar"
                     <div class="grid gap-6 md:grid-cols-2">
                         <div>
                              <label for="Dadquisicion_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
-                             <input type="text" name="Dadquisicion_hardware" id="Dadquisicion_hardware" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" >
+                             <input type="date" name="Dadquisicion_hardware" id="Dadquisicion_hardware"  class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" >
                         </div>
                         <div>
                             {{-- estado --}}
@@ -89,15 +89,15 @@ title="Entregar"
                                 @endforeach
                             </select> 
                         </div>   
-                        <div>
-                            {{-- marca --}}
+                        {{-- <div>
+                            marca
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Marca:</label>    
                             <select name="n" id="n" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach ($tipos as $tipo)
                                     <option value="{{$tipo->PK_tipo}}" {{$bien->FK_Hardware_TipoId == $tipo->PK_tipo ? 'selected' : ''}} >{{$tipo->Tdescriocion_tipo}}</option>
                                 @endforeach
                             </select> 
-                        </div>   
+                        </div>    --}}
 
                     </div>
 
