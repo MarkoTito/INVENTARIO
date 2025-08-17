@@ -377,4 +377,72 @@ class BienController extends Controller
         Gate::authorize('read-hardware'); 
         return view('admin/agregar');
     }
+
+
+    public function export()
+    {
+        $areas=Area::all();
+        $tipos = Tipo::all();
+        
+        //return $bienes;
+        
+        return view('admin/Exportacion/exportacion',compact('areas','tipos'));
+    }
+    public function exportDatps(Request $request)
+    {        
+        //ENCONTRADO DE EXPORTACION DE DATOS
+        $areas=Area::all();
+        $tipos = Tipo::all();
+        //$bien=$request->FK_Hardware_AreaId;
+
+        if ($request->form == 1) { //aca compara si es con fecha
+            if ($request->estado == "1") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->whereYear('Dadquisicion_hardware',$request->adquisicion)
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->get();
+                //return $bienes;
+                return view('admin.Exportacion.exportacionEncontrada',compact('bienes','areas','tipos','request'));
+            } 
+            if ($request->estado == "0") {
+                
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->whereYear('Dadquisicion_hardware',$request->adquisicion)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    //vereficar el t fisico mal escrito en el controller
+                
+                
+                return view('admin.Exportacion.exportacionEncontrada',compact('bienes','areas','tipos','request'));
+            }
+        } else { //aca sin fecha
+            if ($request->estado == "1") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->get();
+                //return $bienes;
+                return view('admin.Exportacion.exportacionEncontrada',compact('bienes','areas','tipos','request'));
+            } 
+            if ($request->estado == "0") {
+                
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    //vereficar el t fisico mal escrito en el controller
+                
+                
+                return view('admin.Exportacion.exportacionEncontrada',compact('bienes','areas','tipos','request'));
+            }
+        }
+        
+
+    }
 }
