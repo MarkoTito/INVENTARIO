@@ -298,7 +298,7 @@ class BienController extends Controller
        return redirect()->route('adminbien.index');
     }
 
-     public function Bajas()
+    public function Bajas()
     {
         Gate::authorize('read-hardware'); 
         //buscar todos los bienes de baja
@@ -371,5 +371,10 @@ class BienController extends Controller
         ]);
         // return redirect()->route('adminbien.index');
         
+    }
+    public function agregar()
+    {
+        Gate::authorize('read-hardware'); 
+        return view('admin/agregar');
     }
 }

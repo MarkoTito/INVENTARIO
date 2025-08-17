@@ -49,17 +49,17 @@ Route::post('digital/dropzone',[DigitalController::class,'dropzone'])->name('dig
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);
 
-
-
-
-
-
 //mostrar los bienes 
 Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);
 //mostrar la busqueda mas exacta
 Route::post('/buscar/digital/store',[DigitalController::class,'index_baja']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/baja/{id}',[BienController::class,'baja_show']);
+
+
+//menu para agegar mas cosas
+Route::get('/Agregar',[BienController::class,'agregar']);
+
 
 //ruta para areas (ni lo uso XD)
 Route::resource('area', AreaController::class);
