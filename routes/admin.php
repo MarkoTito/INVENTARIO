@@ -4,6 +4,8 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\BienController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DigitalController;
+use App\Http\Controllers\SistemasController;
+use App\Http\Controllers\TiposController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 /*
@@ -70,7 +72,10 @@ Route::get('/exportacion/encontrado/excel',[BienController::class,'dowloadExport
 //ruta para descar bienes en excell
 Route::get('/exportacion/encontrado/pdf',[BienController::class,'dowloadExportPdf'])->name('export.pdf');
 
-
-//ruta para areas (ni lo uso XD)
+//ruta para areas ()
 Route::resource('area', AreaController::class);
+//ruta para tipos ()
+Route::resource('tipos', TiposController::class);
+//ruta para sistemas
+Route::resource('sistemas', SistemasController::class);
 

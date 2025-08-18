@@ -8,4 +8,7 @@ class Sistema extends Model
 {
     //
     protected $table = 'sistemas';
+    protected $fillable=[
+        'Tdescripcion_sistema'
+    ];
 }

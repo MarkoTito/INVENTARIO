@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
+use App\Models\Sistema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
-class AreaController extends Controller
+class SistemasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return 'hola este es el index';
+        //
     }
 
     /**
@@ -32,38 +31,38 @@ class AreaController extends Controller
     {
         $validator = Validator::make($request->all(), 
             [
-                'UK_Nombre_area' => 'required|unique:areas',
+                'Tdescripcion_sistema' => 'required|unique:sistemas',
             ], 
             [], 
             [
-                'UK_Nombre_area' => 'Area', 
+                'Tdescripcion_sistema' => 'Sistema', 
             ]);
 
         
-        if (strlen($request->UK_Nombre_area) >90) {
+        if (strlen($request->Tdescripcion_sistema) >40) {
             session()->flash('swal',[
                 'icon' => 'error',
                 'title' => '!Upss No Ingreso correctamente!',
-                'text' => 'El area no puede ser mayor a 90 carecteres'
+                'text' => 'El Sistema no puede ser mayor a 40 carecteres'
             ]);
             return view('admin/agregar');
         } else {
             if ($validator->fails()) {
-                if ($validator->errors()->has('UK_Nombre_area')) {
-                    $error = $validator->errors()->first('UK_Nombre_area');
+                if ($validator->errors()->has('Tdescripcion_sistema')) {
+                    $error = $validator->errors()->first('Tdescripcion_sistema');
                     session()->flash('swal',[
                         'icon' => 'error',
                         'title' => '!Upss No Ingreso correctamente!',
-                        'text' => 'El area ya existe'
+                        'text' => 'El Sistema ya existe'
                     ]);
                     return view('admin/agregar');
                 }
             }else{
-                Area::create($request->all());
+                Sistema::create($request->all());
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Exito¡',
-                    'text'=>'El area fue registrado con Exito'
+                    'text'=>'El Sistema fue registrado con Exito'
                     
                 ]);
                
@@ -75,7 +74,7 @@ class AreaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Area $area)
+    public function show(Sistema $sistema)
     {
         //
     }
@@ -83,7 +82,7 @@ class AreaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Area $area)
+    public function edit(Sistema $sistema)
     {
         //
     }
@@ -91,7 +90,7 @@ class AreaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Area $area)
+    public function update(Request $request, Sistema $sistema)
     {
         //
     }
@@ -99,7 +98,7 @@ class AreaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Area $area)
+    public function destroy(Sistema $sistema)
     {
         //
     }

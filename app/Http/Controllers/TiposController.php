@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
+use App\Models\Tipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class AreaController extends Controller
+class TiposController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return 'hola este es el index';
+        //
     }
 
     /**
@@ -32,38 +32,38 @@ class AreaController extends Controller
     {
         $validator = Validator::make($request->all(), 
             [
-                'UK_Nombre_area' => 'required|unique:areas',
+                'Tdescriocion_tipo' => 'required|unique:tipos',
             ], 
             [], 
             [
-                'UK_Nombre_area' => 'Area', 
+                'Tdescriocion_tipo' => 'Tipo', 
             ]);
 
         
-        if (strlen($request->UK_Nombre_area) >90) {
+        if (strlen($request->Tdescriocion_tipo) >40) {
             session()->flash('swal',[
                 'icon' => 'error',
                 'title' => '!Upss No Ingreso correctamente!',
-                'text' => 'El area no puede ser mayor a 90 carecteres'
+                'text' => 'El Tipo de bien no puede ser mayor a 40 carecteres'
             ]);
             return view('admin/agregar');
         } else {
             if ($validator->fails()) {
-                if ($validator->errors()->has('UK_Nombre_area')) {
-                    $error = $validator->errors()->first('UK_Nombre_area');
+                if ($validator->errors()->has('Tdescriocion_tipo')) {
+                    $error = $validator->errors()->first('Tdescriocion_tipo');
                     session()->flash('swal',[
                         'icon' => 'error',
                         'title' => '!Upss No Ingreso correctamente!',
-                        'text' => 'El area ya existe'
+                        'text' => 'El Tipo de bien ya existe'
                     ]);
                     return view('admin/agregar');
                 }
             }else{
-                Area::create($request->all());
+                Tipo::create($request->all());
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Exito¡',
-                    'text'=>'El area fue registrado con Exito'
+                    'text'=>'El Tipo de bien fue registrado con Exito'
                     
                 ]);
                
@@ -75,7 +75,7 @@ class AreaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Area $area)
+    public function show(Tipo $tipo)
     {
         //
     }
@@ -83,7 +83,7 @@ class AreaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Area $area)
+    public function edit(Tipo $tipo)
     {
         //
     }
@@ -91,7 +91,7 @@ class AreaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Area $area)
+    public function update(Request $request, Tipo $tipo)
     {
         //
     }
@@ -99,7 +99,7 @@ class AreaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Area $area)
+    public function destroy(Tipo $tipo)
     {
         //
     }

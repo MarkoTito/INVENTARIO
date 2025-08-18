@@ -55,7 +55,7 @@ title="Buscar"
         
         <div class="flex justify-center" id="agrBien" style="display: none;">
             {{-- formulario para agregar tipo --}}
-            <form class="max-w-sm mx-auto" action="" method="POST" >
+            <form class="max-w-sm mx-auto" action="{{route('admintipos.store')}}" method="POST" >
                 <br>
                 <br>    
                 @csrf
@@ -64,7 +64,7 @@ title="Buscar"
                 <div class="mb-4">
                     <div class="mb-5">
                         <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar Nombre:</label>
-                        <input name="" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el nombre del bien" required />
+                        <input name="Tdescriocion_tipo" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el nombre del bien" required />
                     </div>
                 </div>
                 <br>
@@ -76,7 +76,7 @@ title="Buscar"
         </div>
         <div class="flex justify-center" id="agrSistem" style="display: none;">
             {{-- formulario para agregar sistema --}}
-            <form class="max-w-sm mx-auto" action="" method="POST" >
+            <form class="max-w-sm mx-auto" action="{{route('adminsistemas.store')}}" method="POST" >
                 <br>
                 <br> 
                 @csrf
@@ -85,7 +85,7 @@ title="Buscar"
                 <div class="mb-4">
                     <div class="mb-5">
                         <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar Nombre:</label>
-                        <input name="" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el nombre del Sistema" required />
+                        <input name="Tdescripcion_sistema" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el nombre del Sistema" required />
                     </div>
                 </div>
                 <br>
@@ -96,17 +96,20 @@ title="Buscar"
             </form>
         </div>
         <div class="flex justify-center" id="agrArea" style="display: none;">
-            {{-- formulario para agregar sistema --}}
-            <form class="max-w-sm mx-auto" action="" method="POST" >
+            {{-- formulario para agregar areas --}}
+            <form class="max-w-sm mx-auto" action="{{route('adminarea.store')}}" method="POST" >
                 <br>
                 <br> 
                 @csrf
-                <H2>Formulario Para Agregar Areas</H2>
+                <H2>Formulario Para Agregar Area</H2>
                 <br>
                 <div class="mb-4">
                     <div class="mb-5">
                         <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar Area:</label>
-                        <input name="" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el nombre del Area" required />
+                        <input name="UK_Nombre_area" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el nombre del Area" required />
+                        @error('UK_Nombre_area')
+                            <p class="text-red-600">*{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <br>
