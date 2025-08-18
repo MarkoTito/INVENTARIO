@@ -22,6 +22,7 @@ use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\Gate; //acesos
 use Illuminate\Support\Facades\Crypt; //seguridad osea cifrado
+use Maatwebsite\Excel\Facades\Excel;
 
 class BienController extends Controller
 {
@@ -445,4 +446,56 @@ class BienController extends Controller
         
 
     }
+    public function dowloadExport(Request $request)
+    {
+        if ($request->form == 1) { //aca compara si es con fecha
+            if ($request->estado == "1") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->whereYear('Dadquisicion_hardware',$request->adquisicion)
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->get();
+                //return $bienes;
+                return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+            } 
+            if ($request->estado == "0") {
+                
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->whereYear('Dadquisicion_hardware',$request->adquisicion)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    //vereficar el t fisico mal escrito en el controller
+                return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+            }
+        } else { //aca sin fecha
+            if ($request->estado == "1") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->get();
+                //return $bienes;
+                return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+            } 
+            if ($request->estado == "0") {
+                
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    //vereficar el t fisico mal escrito en el controller
+                
+                
+                return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+            }
+        }
+        
+        
+    }
+
+
 }

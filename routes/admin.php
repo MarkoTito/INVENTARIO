@@ -65,6 +65,9 @@ Route::get('/exportar',[BienController::class,'export']);
 //ruta exportar bienes en pdf y excell (encontrado)
 Route::post('/exportacion/encontrado',[BienController::class,'exportDatps']);
 
+//ruta para descar bienes en excell
+Route::get('/exportacion/encontrado/excel',[BienController::class,'dowloadExport'])->name('export.excell');
+
 
 //ruta para areas (ni lo uso XD)
 Route::resource('area', AreaController::class);
