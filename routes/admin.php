@@ -67,6 +67,8 @@ Route::post('/exportacion/encontrado',[BienController::class,'exportDatps']);
 
 //ruta para descar bienes en excell
 Route::get('/exportacion/encontrado/excel',[BienController::class,'dowloadExport'])->name('export.excell');
+//ruta para descar bienes en excell
+Route::get('/exportacion/encontrado/pdf',[BienController::class,'dowloadExportPdf'])->name('export.pdf');
 
 
 //ruta para areas (ni lo uso XD)
