@@ -551,6 +551,7 @@ class BienController extends Controller
                     //vereficar el t fisico mal escrito en el controller
                 $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
                     'bienes' =>$bienes
+                    
                 ]);
                 return $pdf->download("exportacion.pdf");
                 
