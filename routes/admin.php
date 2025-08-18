@@ -6,6 +6,7 @@ use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DigitalController;
 use App\Http\Controllers\SistemasController;
 use App\Http\Controllers\TiposController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 /*
@@ -78,4 +79,6 @@ Route::resource('area', AreaController::class);
 Route::resource('tipos', TiposController::class);
 //ruta para sistemas
 Route::resource('sistemas', SistemasController::class);
+//ruta para usuario
+Route::resource('usuario', UserController::class); //ojo aca
 

@@ -33,7 +33,10 @@ class RoleSeeder extends Seeder
             'read-comentario',
             'update-comentario',
             'delete-comentario',
-            'bajar-comentario'
+            'bajar-comentario',
+            //agrregar
+            'create-agregar',
+            
             
         ];
         foreach ($permissions as $permiso) {

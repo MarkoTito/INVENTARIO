@@ -121,7 +121,7 @@ title="Buscar"
         </div>
         <div class="flex justify-center" id="agrUsuario" style="display: none;">
             {{-- formulario para agregar sistema --}}
-            <form class="max-w-sm mx-auto" action="" method="POST" >
+            <form class="max-w-sm mx-auto" action="{{route('adminusuario.store')}}" method="POST" > 
                 <br>
                 <br> 
                 @csrf
@@ -130,17 +130,47 @@ title="Buscar"
                 <div class="mb-4">
                     <div class="mb-5">
                         <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar Nombre:</label>
-                        <input name="" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el nombre del Usuario" required />
+                        <input name="name" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el nombre del Usuario" required />
+                        @error('name')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="mb-6">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar Email:</label>
-                    <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa Correo del Usuario" required />
+                    <input  name="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa Correo del Usuario" required />
+                    @error('email')
+                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                    @enderror
                 </div> 
-                 <div class="mb-5">
+                 <div class="mb-4">
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-bl  ">Ingresar Contraseña</label>
-                    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                    <input  name="password" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                    @error('password')
+                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
+                <div class="grid gap-6 mb-4 md:grid-cols-3" id="radios">
+                    {{-- Permisos --}}
+                    <div class="flex items-center">
+                        <input id="default-radio-1" type="radio" value="admin" name="permiso" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Admin</label> 
+                    </div>
+                    <div class="flex items-center">
+                        <input  id="default-radio-2" type="radio" value="soporte1" name="permiso" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label  for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Soporte</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input  id="default-radio-2" type="radio" value="desarrollo" name="permiso" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label  for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Desarrollo</label>
+                    </div>
+                    @error('permiso')
+                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                    @enderror
+                    
+                </div>
+
+
                 <br>
                 <br>
                 <div>

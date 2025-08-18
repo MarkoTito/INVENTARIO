@@ -111,7 +111,7 @@ class BienController extends Controller
                 $comentarios=Comentario::where('FK_Comentario_HardwareId',$code)
                          ->get();
                 //para mostrar las imagnes;
-                $imagen = Image::where('FK_Imagenes_HardwareId',$code)->first();
+                $imagen = Image::where('FK_Imagenes_HardwareId',$bien->PK_Hardware)->first(); //aca esta el error
                 //return $bien;
                 return view('admin.detalle',compact('bien','comentarios','imagen'));
             }
@@ -391,61 +391,38 @@ class BienController extends Controller
     }
     public function exportDatps(Request $request)
     {        
-        //ENCONTRADO DE EXPORTACION DE DATOS
-        $areas=Area::all();
+        $areas = Area::all();
         $tipos = Tipo::all();
-        //$bien=$request->FK_Hardware_AreaId;
+        /*
+        $query = Bien::with('area','tipo','estado')
+            ->where('FK_Hardware_AreaId', $request->area)
+            ->where('FK_Hardware_TipoId', $request->tipo);
 
-        if ($request->form == 1) { //aca compara si es con fecha
-            if ($request->estado == "1") {
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('FK_Hardware_AreaId',$request->area)
-                        ->where('FK_Hardware_TipoId',$request->tipo)
-                        ->whereYear('Dadquisicion_hardware',$request->adquisicion)
-                        ->where('FK_Hardware_EstadoId',1)
-                        ->get();
-                //return $bienes;
-                return view('admin.Exportacion.exportacionEncontrada',compact('bienes','areas','tipos','request'));
-            } 
-            if ($request->estado == "0") {
-                
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('FK_Hardware_AreaId',$request->area)
-                        ->where('FK_Hardware_TipoId',$request->tipo)
-                        ->whereYear('Dadquisicion_hardware',$request->adquisicion)
-                        ->where('FK_Hardware_EstadoId',2)
-                        ->get();
-                    //vereficar el t fisico mal escrito en el controller
-                
-                
-                return view('admin.Exportacion.exportacionEncontrada',compact('bienes','areas','tipos','request'));
-            }
-        } else { //aca sin fecha
-            if ($request->estado == "1") {
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('FK_Hardware_AreaId',$request->area)
-                        ->where('FK_Hardware_TipoId',$request->tipo)
-                        ->where('FK_Hardware_EstadoId',1)
-                        ->get();
-                //return $bienes;
-                return view('admin.Exportacion.exportacionEncontrada',compact('bienes','areas','tipos','request'));
-            } 
-            if ($request->estado == "0") {
-                
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('FK_Hardware_AreaId',$request->area)
-                        ->where('FK_Hardware_TipoId',$request->tipo)
-                        ->where('FK_Hardware_EstadoId',2)
-                        ->get();
-                    //vereficar el t fisico mal escrito en el controller
-                
-                
-                return view('admin.Exportacion.exportacionEncontrada',compact('bienes','areas','tipos','request'));
-            }
+        Si se busca por fecha
+        if ($request->form == 1 && $request->filled('adquisicion')) {
+            $query->whereYear('Dadquisicion_hardware', $request->adquisicion);
         }
-        
 
+         por estado (1 = encontrado, 0 = no encontrado)
+        if ($request->estado == "1") {
+            $query->where('FK_Hardware_EstadoId', 1);
+        } elseif ($request->estado == "0") {
+            $query->where('FK_Hardware_EstadoId', 2);
+        }
+
+        // Paginación + mantener filtros en links
+        $bienes = $query->paginate(3);
+        $bienes->appends($request->all());
+        */
+        $bienes=Bien::paginate(8);
+
+        $bienes->appends(['FK_Hardware_AreaId'=>5]);
+
+        //return $bienes;
+
+        return view('admin.Exportacion.exportacionEncontrada', compact('bienes','areas','tipos','request'));
     }
+
     public function dowloadExport(Request $request)
     {
         if ($request->form == 1) { //aca compara si es con fecha

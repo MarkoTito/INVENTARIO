@@ -85,7 +85,10 @@ title="Entregar"
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware:</label>    
                             <select name="FK_Hardware_TipoId" id="FK_Hardware_TipoId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach ($tipos as $tipo)
-                                    <option value="{{$tipo->PK_tipo}}" {{$bien->FK_Hardware_TipoId == $tipo->PK_tipo ? 'selected' : ''}} >{{$tipo->Tdescriocion_tipo}}</option>
+                                    @if ($tipo->PK_tipo != 1)
+                                        <option value="{{{$tipo->PK_tipo}}}">{{{$tipo->Tdescriocion_tipo}}}</option>
+                                    @endif
+                                
                                 @endforeach
                             </select> 
                         </div>   

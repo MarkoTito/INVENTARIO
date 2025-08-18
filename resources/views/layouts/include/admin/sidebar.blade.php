@@ -86,18 +86,20 @@
                <span class="ms-3">Exportar</span>
             </a>
          </li>
-         <li>
-            {{-- ingresar mas --}}
-            <a href="/admin/Agregar" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               {{-- el comando dentro del span lo pone en el centro de las dimenciones
-                  que le dimos osea entre 6 y 6 --}}
-              
-               <span class="w-6 h-6 inline-flex justify-center items-center">
-                  <i class="fa-solid fa-plus"></i>
-               </span>
-               <span class="ms-3">Agregar</span>
-            </a>
-         </li>
+         @can('create-agregar')
+            <li>
+               {{-- ingresar mas --}}
+               <a href="/admin/Agregar" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  {{-- el comando dentro del span lo pone en el centro de las dimenciones
+                     que le dimos osea entre 6 y 6 --}}
+               
+                  <span class="w-6 h-6 inline-flex justify-center items-center">
+                     <i class="fa-solid fa-plus"></i>
+                  </span>
+                  <span class="ms-3">Agregar</span>
+               </a>
+            </li>
+         @endcan
          
          
       </ul>
