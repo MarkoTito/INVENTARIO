@@ -27,6 +27,7 @@ title="Buscar"
             <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Adquisicion</label>
         </div>
     </div>
+    
 
     <div id="conFecha" >
         <form method="POST" action="/admin/exportacion/encontrado" >
