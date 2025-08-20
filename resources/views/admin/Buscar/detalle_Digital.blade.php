@@ -42,11 +42,11 @@ title="Reprar"
                     
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Nombre:</label>
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Tnombre_software}}" disabled>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Tnombre_software}}" disabled>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Sistema:</label>    
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->sistema->Tdescripcion_sistema}}" disabled>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->sistema->Tdescripcion_sistema}}" disabled>
                         
                     </div>
                     
@@ -56,11 +56,11 @@ title="Reprar"
 
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Host:</label>
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Thost_software}}" disabled>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Thost_software}}" disabled>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Inicio:</label>    
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Dfe_Inicio_software}}" disabled>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Dfe_Inicio_software}}" disabled>
                     
                     </div>
                     
@@ -69,19 +69,19 @@ title="Reprar"
                     
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Determinacion:</label>
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->determinacion->Tdescripcion_determinacion}}" disabled>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->determinacion->Tdescripcion_determinacion}}" disabled>
                     </div>
                     @if ($digital->FK_Software_DeterminacionId == 2)
                         <div>
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Fin:</label>    
-                            <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="- " disabled>
+                            <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="- " disabled>
                             
                         </div>
                         
                     @else
                         <div>
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Fin:</label>    
-                            <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Dfe_vencimiento_software}}" disabled>
+                            <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Dfe_vencimiento_software}}" disabled>
                             
                         </div>
                     @endif
@@ -108,23 +108,23 @@ title="Reprar"
             <tbody>
                 @if ($archivos->isEmpty())
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             No hay Documentos
                         </th>   
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                            -
                         </th>  
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             -
                         </th>           
                     </tr>
                 @else
                     @foreach ($archivos as $archivo)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$archivo->Tnombre_archivo}}
                             </th>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{ \Carbon\Carbon::parse($archivo->created_at)->format('d/m/Y') }}<br>
                             </th>
                             <th class="px-6 py-4">

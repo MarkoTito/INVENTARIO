@@ -21,7 +21,7 @@ title="Buscar"
             <div>
                 {{-- tipo de sistema  --}}
                 <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Bien</label>
-                      <select name="FK_Software_SistemaId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <select name="FK_Software_SistemaId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     @foreach ($sistemas as $sistema)
                       <option value="{{{$sistema->PK_sistema}}}">{{{$sistema->Tdescripcion_sistema}}}</option>
                   @endforeach
@@ -31,7 +31,7 @@ title="Buscar"
                 {{-- Determinacion --}}
                     <div>
                         <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un area</label>
-                        <select name="determinacion" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select name="determinacion" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="2">Indeterminado</option>
                             <option value="1">Determinado</option>
                         </select>
@@ -44,7 +44,7 @@ title="Buscar"
         
 
         <div class="flex justify-center mt-4">
-            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">
+            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-black bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">
             Buscar
             </button>            
         </div>    
@@ -75,16 +75,16 @@ title="Buscar"
             <tbody>
                 @foreach ($digitales as $digital)
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$digital->Tnombre_software}}
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$digital->Thost_software}}
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$digital->determinacion->Tdescripcion_determinacion}} 
                         </th>
-                         <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                         <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$digital->Dfe_Inicio_software}}
                         </th>
                         <td class="px-6 py-4">

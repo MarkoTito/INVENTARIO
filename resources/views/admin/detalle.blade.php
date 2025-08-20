@@ -56,20 +56,20 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
 
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Área</label>
-                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->area->UK_Nombre_area}}" disabled>
+                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->area->UK_Nombre_area}}" disabled>
             </div>
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
-                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Hardware_Codigo}}" disabled>
+                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Hardware_Codigo}}" disabled>
                     
             </div>
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
-                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" disabled>
+                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" disabled>
             </div>
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware:</label>    
-                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->tipo->Tdescriocion_tipo}}" disabled>        
+                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->tipo->Tdescriocion_tipo}}" disabled>        
             </div>        
 
         </div>
@@ -77,7 +77,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
 
     <div class="">  
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
-        <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>{{$bien->Tdescripcion_hardware}}</textarea>
+        <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>{{$bien->Tdescripcion_hardware}}</textarea>
     </div>
     <br>
     <br>
@@ -87,7 +87,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                     
                     @can('bajar-hardware')
                         <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                            class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
+                            class="block text-black bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
                         </button>
                     @endcan
 
@@ -106,7 +106,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                 <div class="grid gap-6 mb-4 md:grid-cols-3" >
                     @can('bajar-hardware')
                         <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                            class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
+                            class="block text-black bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
                         </button>
                     @endcan
 
@@ -189,10 +189,10 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                 <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
                                     <!-- Modal header -->
                                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
                                             Dar de Baja al Bien
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-black" data-modal-hide="default-modal">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -204,8 +204,8 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                             class="delete-form">
                                         @csrf
                                         <div class="p-4 md:p-5 space-y-4">
-                                            <label for="T_Motivo_Baja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motivo:</label>
-                                            <textarea  name="T_Motivo_Baja" id="T_Motivo_Baja" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la baja">{{old('T_Motivo_Baja')}}</textarea>
+                                            <label for="T_Motivo_Baja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo:</label>
+                                            <textarea  name="T_Motivo_Baja" id="T_Motivo_Baja" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la baja">{{old('T_Motivo_Baja')}}</textarea>
                                             @error('T_Motivo_Baja')
                                                     <p class="text-red-600">*{{$message}}</p>
                                             @enderror
@@ -213,8 +213,8 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                         </div>
                                         <!-- Modal footer -->
                                         <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                            <button data-modal-hide="default-modal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Dar de baja</button>
-                                            <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancelar</button>
+                                            <button data-modal-hide="default-modal" type="submit" class="text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Dar de baja</button>
+                                            <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700">Cancelar</button>
                                         </div>
                                     </form>
                                 </div>

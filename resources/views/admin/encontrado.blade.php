@@ -27,7 +27,7 @@ title="Buscar"
             <div>
                 {{-- tipo de bien --}}
                 <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Bien</label>
-                      <select name="FK_Hardware_TipoId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <select name="FK_Hardware_TipoId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     @foreach ($tipos as $tipo)
                         @if ($tipo->PK_tipo != 1)
                             <option value="{{{$tipo->PK_tipo}}}">{{{$tipo->Tdescriocion_tipo}}}</option>
@@ -39,7 +39,7 @@ title="Buscar"
                 {{-- area --}}
                     <div>
                         <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un area</label>
-                        <select name="FK_Hardware_AreaId" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select name="FK_Hardware_AreaId" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @foreach ($areas as $area)
                                 <option value="{{$area->PK_area}}">{{$area->UK_Nombre_area}}</option>
                             @endforeach
@@ -52,14 +52,14 @@ title="Buscar"
         <div class=" flex justify-center mt-4">
             <input id="default-radio-1" type="radio" value="1" name="estado" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Activo</label>
-            <span class="text-white" >---</span>
+            <span class="text-black" >---</span>
             <input checked id="default-radio-2" type="radio" value="0" name="estado" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Inactivo</label>
         </div>  
         
 
         <div class="flex justify-center mt-4">
-            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">
+            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-black bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">
             Buscar
             </button>            
         </div>    
@@ -90,19 +90,19 @@ title="Buscar"
             <tbody>
                 @if ($bienes->isEmpty())
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              No Exite Bien con esa relacion
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
                     </tr>
@@ -110,16 +110,16 @@ title="Buscar"
                     @foreach ($bienes as $bien)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
     
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->tipo->Tdescriocion_tipo}}
                             </th>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->UK_Hardware_Codigo}}
                             </th>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->estado->UK_Descripcion_estado}}
                             </th>
-                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->area->UK_Nombre_area}}
                             </th>
                             <td class="px-6 py-4">
