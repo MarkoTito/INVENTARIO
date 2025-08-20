@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Comentario;
 use App\Models\Digital;
 use App\Models\Image;
+use App\Models\Modificaciones;
 use App\Models\Sistema;
 use App\Models\Tipo;
 use App\Models\User;
@@ -246,6 +247,20 @@ class BienController extends Controller
     {    
         Gate::authorize('update-hardware');    
         $New_Bien= Bien::find($bien->PK_Hardware);
+
+         //guardar en el registro
+        $FK_Modificaciones_UserId=Auth::user()->id;
+        $FK_Modificaciones_HardwareId= $New_Bien->PK_Hardware;
+
+        Modificaciones::create([
+            'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
+            'FK_Modificaciones_HardwareId' => $FK_Modificaciones_HardwareId
+        ]);
+
+
+
+
+
         $New_Bien->FK_Hardware_AreaId = $request->FK_Hardware_AreaId;
         $New_Bien->UK_Hardware_Codigo = $request->UK_Hardware_Codigo;
         $New_Bien->Tdescripcion_hardware = $request->Tdescripcion_hardware;
@@ -260,6 +275,10 @@ class BienController extends Controller
                 ]);
     
         //return 'se registro correctamente';
+
+       
+
+
         return redirect()->route('adminbien.index');
         
         
