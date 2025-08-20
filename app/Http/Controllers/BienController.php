@@ -146,7 +146,7 @@ class BienController extends Controller
                 'FK_Hardware_AreaId' => 'required',
                 'FK_Hardware_TipoId' => 'required',
                 'UK_Hardware_Codigo' => 'required|min:12|max:12|unique:hardware',
-                'Tdescripcion_hardware' => 'required',
+                'Tdescripcion_hardware' => 'required|max:180',
                 'Testado_fisico_hardware'=> 'required',
                 'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
                 ],
@@ -245,7 +245,28 @@ class BienController extends Controller
      */
     public function update(Request $request, Bien $bien)
     {    
-        Gate::authorize('update-hardware');    
+        Gate::authorize('update-hardware');
+        $request->validate(
+                [
+                'FK_Hardware_AreaId' => 'required',
+                'FK_Hardware_TipoId' => 'required',
+                'UK_Hardware_Codigo' => "required|min:12|max:12|unique:hardware,UK_Hardware_Codigo,{$$bien->PK_Hardware}",
+                'Tdescripcion_hardware' => 'required',
+                'Testado_fisico_hardware'=> 'required',
+                'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
+                ],
+                [],
+                [
+                    'FK_Hardware_AreaId' => 'Area',
+                    'FK_Hardware_TipoId'=> 'Tipo',
+                    'UK_Hardware_Codigo' => 'Codigo patrimonial',
+                    'Tdescripcion_hardware'=> 'Descripcion',
+                    'Testado_fisico_hardware'=> 'Estado',
+                    'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
+
+                ]
+        );
+
         $New_Bien= Bien::find($bien->PK_Hardware);
 
          //guardar en el registro
@@ -256,10 +277,6 @@ class BienController extends Controller
             'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
             'FK_Modificaciones_HardwareId' => $FK_Modificaciones_HardwareId
         ]);
-
-
-
-
 
         $New_Bien->FK_Hardware_AreaId = $request->FK_Hardware_AreaId;
         $New_Bien->UK_Hardware_Codigo = $request->UK_Hardware_Codigo;
