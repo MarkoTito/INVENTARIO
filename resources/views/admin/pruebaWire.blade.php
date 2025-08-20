@@ -3,7 +3,7 @@
     sin : significa texto plano
 --}}
 <x-admin-layout 
-title="Exportacion"
+title="Exportar"
 :breadcrumbs="[
     [
         'name'=>'Menu',
@@ -11,9 +11,9 @@ title="Exportacion"
     ],
     [
         'name'=> 'Exportar',
+        
     ]
     ]"> 
-
     <div class="grid gap-6 mb-4 md:grid-cols-3">
         <div>
         </div>
@@ -158,6 +158,7 @@ title="Exportacion"
         </script>
         
     @endpush
+
     
 
     

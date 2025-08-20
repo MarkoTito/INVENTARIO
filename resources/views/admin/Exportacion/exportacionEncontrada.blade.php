@@ -119,7 +119,7 @@ title="Buscar"
 
         </div>
         <div>
-            {{ $bienes->links('pagination::tailwind') }}
+            Total: {{$cantidad}}
         </div>
 
     </div>

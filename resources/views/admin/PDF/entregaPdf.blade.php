@@ -74,7 +74,7 @@
         <!-- Fecha -->
         <div class="flex" style="justify-content: flex-end;">
             <label><strong>Fecha:</strong></label> 
-            <input type="text" value="{{$fecha}}"  class="small-input">
+            <input type="text" value="{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}"  class="small-input">
         </div>
 
         <!-- Equipo -->
@@ -138,25 +138,6 @@
             
         @endif
 
-        <!-- Componente que presenta falla -->
-        {{-- <div class="section">
-            <div class="section-title">Componente que presenta falla</div>
-            <div class="checkbox-group">
-                <label><input type="checkbox"> Disco duro</label>
-                <label><input type="checkbox"> Placa</label>
-                <label><input type="checkbox"> Imagen</label>
-                <label><input type="checkbox"> Red</label>
-                <label><input type="checkbox"> Disco duro SSD</label>
-                <label><input type="checkbox"> Memoria</label>
-                <label><input type="checkbox"> Fuente</label>
-                <label><input type="checkbox"> Otros</label>
-                <label><input type="checkbox"> Problemas de reinicios</label>
-            </div>
-            <div class="flex" style="margin-top: 5px;">
-                <label><strong>Detalle otros:</strong></label>
-                <input type="text">
-            </div>
-        </div> --}}
 
         
         @if (!$comentario->Trecomendacion_comentario)
@@ -185,7 +166,7 @@
     <h3 style="display:inline-block; margin:0 330px 0 70;">{{$nombre->name}}</h3>
     <h3 style="display:inline-block; margin:0;">V.B Jefe de la ODTIE</h3>
     
-    {{-- <p style="display:inline-block; margin:0;">*Tecnico Responsable*</p> --}}
+    <p style="display:inline-block; margin:0 280px 0 45;">*Tecnico Responsable*</p>
 
 
 </body>

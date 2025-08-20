@@ -393,34 +393,116 @@ class BienController extends Controller
     {        
         $areas = Area::all();
         $tipos = Tipo::all();
-        /*
-        $query = Bien::with('area','tipo','estado')
-            ->where('FK_Hardware_AreaId', $request->area)
-            ->where('FK_Hardware_TipoId', $request->tipo);
-
-        Si se busca por fecha
-        if ($request->form == 1 && $request->filled('adquisicion')) {
-            $query->whereYear('Dadquisicion_hardware', $request->adquisicion);
+        
+        if ($request->form == 1) { //aca compara si es con fecha
+            if ($request->estado == "1") {
+                $hardware = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->whereYear('Dadquisicion_hardware',$request->adquisicion)
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->get();
+                //return $bienes;
+                $cantidad = $hardware->count();
+                if ($cantidad==0) {
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => 'No existe relacion',
+                        'text' => 'Intente Nuevamente'
+                    ]);
+                    return view('admin/Exportacion/exportacion',compact('areas','tipos'));
+                }
+                session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Se encontro Relacion¡',
+                    'text'=>'Se encontraron: '.$cantidad .' Datos'
+                    
+                ]);
+                $bienes = $hardware->take(25);
+                return view('admin.Exportacion.exportacionEncontrada', compact('bienes','areas','tipos','request','cantidad'));
+            } 
+            if ($request->estado == "0") {
+                
+                $hardware = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->whereYear('Dadquisicion_hardware',$request->adquisicion)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    //vereficar el t fisico mal escrito en el controller
+                $cantidad = $hardware->count();
+                if ($cantidad==0) {
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => 'No existe relacion',
+                        'text' => 'Intente Nuevamente'
+                    ]);
+                    return view('admin/Exportacion/exportacion',compact('areas','tipos'));
+                }
+                session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Se encontro Relacion¡',
+                    'text'=>'Se encontraron: '.$cantidad .' Datos'
+                    
+                ]);
+                $bienes = $hardware->take(25);
+                return view('admin.Exportacion.exportacionEncontrada', compact('bienes','areas','tipos','request','cantidad'));
+            }
+        } else { //aca sin fecha
+            if ($request->estado == "1") {
+                $hardware = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->get();
+                //return $bienes;
+                $cantidad = $hardware->count();
+                if ($cantidad==0) {
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => 'No existe relacion',
+                        'text' => 'Intente Nuevamente'
+                    ]);
+                    return view('admin/Exportacion/exportacion',compact('areas','tipos'));
+                }
+                session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Se encontro Relacion¡',
+                    'text'=>'Se encontraron: '.$cantidad .' Datos'
+                    
+                ]);
+                $bienes = $hardware->take(25);
+                return view('admin.Exportacion.exportacionEncontrada', compact('bienes','areas','tipos','request','cantidad'));
+                
+                
+            } 
+            if ($request->estado == "0") {
+                
+                $hardware = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->area)
+                        ->where('FK_Hardware_TipoId',$request->tipo)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    //vereficar el t fisico mal escrito en el controller
+                $cantidad = $hardware->count();
+                if ($cantidad==0) {
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => 'No existe relacion',
+                        'text' => 'Intente Nuevamente'
+                    ]);
+                    return view('admin/Exportacion/exportacion',compact('areas','tipos'));
+                }
+                session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Se encontro Relacion¡',
+                    'text'=>'Se encontraron: '.$cantidad .' Datos'
+                    
+                ]);
+                $bienes = $hardware->take(25);
+                return view('admin.Exportacion.exportacionEncontrada', compact('bienes','areas','tipos','request','cantidad'));
+            }
         }
-
-         por estado (1 = encontrado, 0 = no encontrado)
-        if ($request->estado == "1") {
-            $query->where('FK_Hardware_EstadoId', 1);
-        } elseif ($request->estado == "0") {
-            $query->where('FK_Hardware_EstadoId', 2);
-        }
-
-        // Paginación + mantener filtros en links
-        $bienes = $query->paginate(3);
-        $bienes->appends($request->all());
-        */
-        $bienes=Bien::paginate(8);
-
-        $bienes->appends(['FK_Hardware_AreaId'=>5]);
-
-        //return $bienes;
-
-        return view('admin.Exportacion.exportacionEncontrada', compact('bienes','areas','tipos','request'));
     }
 
     public function dowloadExport(Request $request)
