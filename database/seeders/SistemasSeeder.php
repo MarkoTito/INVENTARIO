@@ -15,10 +15,10 @@ class SistemasSeeder extends Seeder
     {
         $Sistemas= [
             [
-                'Tdescripcion_sistema' => 'Zoon',
+                'Tdescripcion_sistema' => 'Zoom',
             ],
             [
-                'Tdescripcion_sistema' => 'Ezet',
+                'Tdescripcion_sistema' => 'Eset',
             ],
             [
                 'Tdescripcion_sistema' => 'Microsoft',

@@ -24,6 +24,8 @@ use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\Gate; //acesos
 use Illuminate\Support\Facades\Crypt; //seguridad osea cifrado
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\ValidationException;
+
 
 class BienController extends Controller
 {
@@ -141,7 +143,9 @@ class BienController extends Controller
     {
         Gate::authorize('create-hardware');
         //Inserccion de datos
-        $request->validate(
+        
+        try {
+            $request->validate(
                 [
                 'FK_Hardware_AreaId' => 'required',
                 'FK_Hardware_TipoId' => 'required',
@@ -161,15 +165,30 @@ class BienController extends Controller
 
                 ]
         );
-        Bien::create($request->all());
-        session()->flash('swal',[
-            'icon'=> 'success',
-            'title'=> '!El Bien fue registrado con Exito¡',
-            'text'=>'PASO 1 COMPLEATADO'
+            Bien::create($request->all());
+            session()->flash('swal',[
+                'icon'=> 'success',
+                'title'=> '!El Bien fue registrado con Exito¡',
+                'text'=>'PASO 1 COMPLEATADO'
+                
+            ]);
+        
+            return view('admin/Load_Imagen');
+
+        } catch (ValidationException $e) {
+            $areas=Area::all();
+            $tipos = Tipo::all();
             
-        ]);
-       
-        return view('admin/Load_Imagen');
+            $errors = implode("\n", $e->validator->errors()->all());
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => '!Upss',
+                'text' => $errors
+            ]);
+            return view('admin.ingresar', compact('areas','tipos'));
+        }
+
+        
     }
 
     /**
@@ -250,7 +269,7 @@ class BienController extends Controller
                 [
                 'FK_Hardware_AreaId' => 'required',
                 'FK_Hardware_TipoId' => 'required',
-                'UK_Hardware_Codigo' => "required|min:12|max:12|unique:hardware,UK_Hardware_Codigo,{$$bien->PK_Hardware}",
+                'UK_Hardware_Codigo' => "required|min:12|max:12|unique:hardware,UK_Hardware_Codigo,{$bien->PK_Hardware},PK_Hardware",
                 'Tdescripcion_hardware' => 'required',
                 'Testado_fisico_hardware'=> 'required',
                 'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']

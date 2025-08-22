@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('Hardware', function (Blueprint $table) {
             $table->id('PK_Hardware');
-            //foreignId:->hace referencia al id y su tabla (tabla_suId) recuerda q la tabla tiene q ser con s
-            //$table->foreignId('area_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            
             $table->unsignedBigInteger('FK_Hardware_AreaId');
             $table->foreign('FK_Hardware_AreaId')
                     ->references('PK_area')

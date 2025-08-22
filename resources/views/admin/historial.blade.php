@@ -19,7 +19,6 @@ title="Reprar"
     ]">
         <div class="relative overflow-x-auto">
         <h2>Historial:</h2>
-        <h3>Area: {{$bien->area->UK_Nombre_Area}} > Tipo: {{$bien->tipo->T_Descriocion}} > Codigo: {{$bien->UK_Codigo_Pratimonial}} </h3>
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -48,17 +47,17 @@ title="Reprar"
                 @else
                     @foreach ($comentarios as $coment)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$coment->usuario->name}}
                             </th>
                                 
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$coment->Tdescripcion_comentario}}
                             </th>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$coment->Testado_fisico_comentario}}
                             </td>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$coment->created_at}}
                             </td>
                         </tr>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate; //acesos
-
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -31,25 +31,39 @@ class UserController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('create-agregar');
-        $request->validate([
-            'name'     => 'required|string|max:50',
-            'email'    => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8',
-        ]);
+        try {
+            $request->validate([
+                'name'     => 'required|string|max:50',
+                'email'    => 'required|email|unique:users,email',
+                'password' => 'required|string|min:8|confirmed',
+                'permiso' => 'required',
+                
+            ]);
+    
+            $user = User::create([
+                'name'     => $request->name,
+                'email'    => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+            $user->assignRole($request->permiso);
+            session()->flash('swal',[
+                        'icon'=> 'success',
+                        'title'=> '!Exito¡',
+                        'text'=>'El usuario fue creado correctamente'
+                        
+                    ]);
+            return view('admin/agregar');
 
-        $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-        $user->assignRole($request->permiso);
-        session()->flash('swal',[
-                    'icon'=> 'success',
-                    'title'=> '!Exito¡',
-                    'text'=>'El usuario fue creado correctamente'
-                    
-                ]);
-        return view('admin/agregar');
+        } catch (ValidationException $e) {
+            $errors = implode("\n", $e->validator->errors()->all());
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => '!Upss',
+                'text' => $errors
+            ]);
+            return view('admin/agregar');
+        }
+
     }
 
     /**
