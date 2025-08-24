@@ -34,6 +34,7 @@ title="Buscar"
         {{-- formulario SIN CODIGO --}}
             <form method="POST" action="/admin/buscar/todo" >
                 @csrf
+                <input type="text" name="form" value="2" class="hidden">  
                  <div class="grid gap-6 mb-4 md:grid-cols-2">
         
                     <div>
@@ -86,6 +87,7 @@ title="Buscar"
         {{-- formulario CON CODIGO --}}
         <form class="max-w-sm mx-auto" action="/admin/buscar/todo/code" method="POST" >
             @csrf
+            <input type="text" name="form" value="1" class="hidden">  
             <div class="grid gap-6 mb-4 md:grid-cols-2">
                 <div class="mb-5">
                     {{-- <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar codigo</label> --}}
@@ -116,6 +118,9 @@ title="Buscar"
                         Area
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Reparar
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Accion
                     </th>
                 </tr>
@@ -132,9 +137,16 @@ title="Buscar"
                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$bien->estado->UK_Descripcion_estado}}
                         </th>
-                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                        <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$bien->area->UK_Nombre_area}}
                             
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
+                            <a href="">
+                                <span class="w-6 h-6 inline-flex justify-center items-center">
+                                    <i class="fa-solid fa-wrench"></i>
+                                </span>
+                            </a>
                         </th>
                         <td class="px-6 py-4">
                             {{-- cifrado --}}
