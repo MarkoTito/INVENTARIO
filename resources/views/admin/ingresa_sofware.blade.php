@@ -143,7 +143,7 @@ title="Registrar"
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, Subir bien",
+                            confirmButtonText: "Si, subir bien",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {

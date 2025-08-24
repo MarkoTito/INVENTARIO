@@ -47,9 +47,11 @@ class RoleSeeder extends Seeder
                 );
         }
 
-        Role::create(['name' => 'admin'])->givePermissionTo(Permission::all());
 
-        Role::create(['name' => 'soporte1'])->givePermissionTo(
+
+        Role::create(['name' => 'nivel1'])->givePermissionTo(Permission::all());
+
+        Role::create(['name' => 'nivel2'])->givePermissionTo(
             //TODOS LOS PERMISOS DE SOPORTE
             'create-hardware',
             'read-hardware',
@@ -57,8 +59,13 @@ class RoleSeeder extends Seeder
             'delete-hardware',
             'bajar-hardware',
 
+            //software
+            'create-software',
             'read-software',
-
+            'update-software',
+            'delete-software',
+            'bajar-software',
+            //comentario
             'create-comentario',
             'read-comentario',
             'update-comentario',
@@ -66,45 +73,32 @@ class RoleSeeder extends Seeder
             'bajar-comentario'
             
         );
-        Role::create(['name' => 'soporte2'])->givePermissionTo(
-            //ALGUNOS PERMISOS DE SOPORTE
+        Role::create(['name' => 'nivel3'])->givePermissionTo(
             'create-hardware',
             'read-hardware',
-            //'update-hardware',
-            //'delete-hardware',
-            //'bajar-hardware',
-            'create-comentario',
-            'read-comentario',
-            //'update-comentario',
-            //'delete-comentario',
-            //'bajar-comentario'
             
-        );
-        Role::create(['name' => 'desarrollo'])->givePermissionTo(
-            //TODOS LOS PERMISOS DE SOPORTE
-            'read-hardware',
-
+            //software
             'create-software',
             'read-software',
-            'update-software',
-            'delete-software',
-            'bajar-software',
-
-            'read-comentario',
+            
+            //comentario
+            'create-comentario',
+            'read-comentario',            
         );
+    
         User::factory()->create([
             'name' => 'marko tito',
             'email' => 'markojosheptitopena@gmail.com',
         
             'password' => bcrypt('12345678'),
-        ])->assignRole('admin'); //esto es gracias al metodo has role q se agrego con la descarga
+        ])->assignRole('nivel1'); //esto es gracias al metodo has role q se agrego con la descarga
 
         User::factory()->create([
                 'name' => 'jeremy vega',
                 'email' => 'jeremyvega@gmail.com',
                 'password' => bcrypt('87654321'),
            
-        ])->assignRole('soporte1');
+        ])->assignRole('nivel2');
         
 
     }

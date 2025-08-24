@@ -45,19 +45,19 @@ title="Buscar"
             <tbody>
                 @if ($bienes->isEmpty())
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              No Exite Bien con esa relacion
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
-                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
                     </tr>
@@ -65,23 +65,23 @@ title="Buscar"
                     @foreach ($bienes as $bien)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
     
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->tipo->Tdescriocion_tipo}}
                             </th>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->UK_Hardware_Codigo}}
                             </th>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->estado->UK_Descripcion_estado}}
                             </th>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->area->UK_Nombre_area}}
                             </th>
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bien->Dadquisicion_hardware}}
                             </th>
                             @if ($request->estado == "0")
-                                <th class="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                                <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                     {{$bien->Dbaja_hardware}}
                                 </th>
                                 

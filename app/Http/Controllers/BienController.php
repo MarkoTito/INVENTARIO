@@ -470,7 +470,7 @@ class BienController extends Controller
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Se encontro Relacion¡',
-                    'text'=>'Se encontraron: '.$cantidad .' Datos'
+                    'text'=>'Se encontraron: '.$cantidad .' Dato(s)'
                     
                 ]);
                 $bienes = $hardware->take(25);
@@ -497,7 +497,7 @@ class BienController extends Controller
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Se encontro Relacion¡',
-                    'text'=>'Se encontraron: '.$cantidad .' Datos'
+                    'text'=>'Se encontraron: '.$cantidad .' Dato(s)'
                     
                 ]);
                 $bienes = $hardware->take(25);
@@ -523,7 +523,7 @@ class BienController extends Controller
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Se encontro Relacion¡',
-                    'text'=>'Se encontraron: '.$cantidad .' Datos'
+                    'text'=>'Se encontraron: '.$cantidad .' Dato(s)'
                     
                 ]);
                 $bienes = $hardware->take(25);
@@ -551,7 +551,7 @@ class BienController extends Controller
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Se encontro Relacion¡',
-                    'text'=>'Se encontraron: '.$cantidad .' Datos'
+                    'text'=>'Se encontraron: '.$cantidad .' Dato(s)'
                     
                 ]);
                 $bienes = $hardware->take(25);

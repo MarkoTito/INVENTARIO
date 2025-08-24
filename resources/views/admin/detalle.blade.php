@@ -109,31 +109,37 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                 </div>        
             @else
                 <div class="grid gap-6 mb-4 md:grid-cols-3" >
-                    @can('bajar-hardware')
-                        <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                            class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
-                        </button>
-                    @endcan
-
-                    @can('update-hardware')
-                        <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
-                                <button
-                                    style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                    type="button">
-                                    Editar
-                                </button>
-                        </a>
-                    @endcan
-
-                    @can('read-comentario')
-                        <a href="{{url('/admin/buscar/historial/'.$idCifrado)}}">
-                            <button
-                                style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                type="button">
-                                Historial
+                    <div>
+                        @can('bajar-hardware')
+                            <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                                class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
                             </button>
-                        </a>
-                    @endcan
+                        @endcan
+                    </div>
+                    <div>
+                        @can('read-comentario')
+                            <a href="{{url('/admin/buscar/historial/'.$idCifrado)}}">
+                                <button
+                                    style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+                                    type="button">
+                                    Historial
+                                </button>
+                            </a>
+                        @endcan
+                    </div>
+                    <div>
+                        @can('update-hardware')
+                            <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
+                                    <button
+                                        style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+                                        type="button">
+                                        Editar
+                                    </button>
+                            </a>
+                        @endcan
+                    </div>
+
+
 
                 </div>   
                 
@@ -244,7 +250,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, Bajar bien",
+                            confirmButtonText: "Si, dar de baja",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {

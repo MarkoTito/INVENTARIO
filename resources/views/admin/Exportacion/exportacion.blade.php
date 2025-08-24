@@ -38,7 +38,7 @@ title="Exportacion"
                 <div>
                     {{-- tipo de bien --}}
                     <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware:</label>
-                    <select name="tipo" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select name="tipo" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @foreach ($tipos as $tipo)
                             @if ($tipo->PK_tipo != 1)
                                 <option value="{{{$tipo->PK_tipo}}}">{{{$tipo->Tdescriocion_tipo}}}</option>
@@ -51,7 +51,7 @@ title="Exportacion"
                     {{-- area --}}
                     <div>
                         <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Area:</label>
-                        <select name="area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select name="area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @foreach ($areas as $area)
                                 <option value="{{$area->PK_area}}">{{$area->UK_Nombre_area}}</option>
                             @endforeach
@@ -61,7 +61,7 @@ title="Exportacion"
                     <div>
                         {{-- Año de adquisicion --}}
                         <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Año de Adquisicion:</label>
-                        <select name="adquisicion" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select name="adquisicion" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="2025">2025</option>
                                 <option value="2024">2024</option>
                                 <option value="2023">2023</option>
@@ -99,7 +99,7 @@ title="Exportacion"
                 <div>
                     {{-- tipo de bien --}}
                     <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware:</label>
-                    <select name="tipo" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select name="tipo" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @foreach ($tipos as $tipo)
                             @if ($tipo->PK_tipo != 1)
                                 <option value="{{{$tipo->PK_tipo}}}">{{{$tipo->Tdescriocion_tipo}}}</option>
@@ -112,7 +112,7 @@ title="Exportacion"
                     {{-- area --}}
                     <div>
                         <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Area:</label>
-                        <select name="area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select name="area" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @foreach ($areas as $area)
                                 <option value="{{$area->PK_area}}">{{$area->UK_Nombre_area}}</option>
                             @endforeach

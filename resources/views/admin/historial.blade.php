@@ -69,15 +69,15 @@ title="Reprar"
             </tbody>
         </table>
     </div> 
-
+{{--  que?
     @push('js')
         <script>
-        //que seleciona todos esos formularios que tengan ese nombre de delete-form 
+        
             forms = document.querySelectorAll('.delete-form')
-            //que recorra todos los formularios
+            
             forms.forEach(form => {
-                //que se ponga al escucha de ese formulario con el evento submit
-                form.addEventListener('submit',function(e){ //e es el evento en si
+               
+                form.addEventListener('submit',function(e){ 
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
@@ -98,7 +98,7 @@ title="Reprar"
             });
         </script>
                                     
-    @endpush      
+    @endpush       --}}
 
 
 

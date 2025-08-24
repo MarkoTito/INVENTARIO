@@ -161,13 +161,13 @@ title="Reprar"
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
-                            title: "Estas seguro de subir este comentario?",
+                            title: "Estas seguro de subir esta reparacion?",
                             text: "No podras revertir esto!",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, Subir comentario",
+                            confirmButtonText: "Si, subir reparacion",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {

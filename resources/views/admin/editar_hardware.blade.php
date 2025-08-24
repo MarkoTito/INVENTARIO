@@ -141,7 +141,7 @@ title="Entregar"
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, Editar bien",
+                            confirmButtonText: "Si, editar bien",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {
