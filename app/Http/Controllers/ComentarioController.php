@@ -28,6 +28,18 @@ class ComentarioController extends Controller
         return view('admin.reparar', compact('areas','tipos') );
 
     }
+    public function index2($code)
+    {   
+        
+        Gate::authorize('create-comentario'); 
+        // dejar comentario de repacion
+        //muestra el formulario
+        //Gate::authorize();
+        $areas=Area::all();
+        $tipos = Tipo::all();
+        return view('admin.reparar', compact('areas','tipos','code') );
+
+    }
 
     /**
      * Show the form for creating a new resource.

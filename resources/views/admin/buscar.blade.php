@@ -141,13 +141,23 @@ title="Buscar"
                             {{$bien->area->UK_Nombre_area}}
                             
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
-                            <a href="">
-                                <span class="w-6 h-6 inline-flex justify-center items-center">
-                                    <i class="fa-solid fa-wrench"></i>
-                                </span>
-                            </a>
-                        </th>
+
+                        @if ( $bien->FK_Hardware_EstadoId == 1)
+                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
+                                <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}">
+                                    <span class="w-6 h-6 inline-flex justify-center items-center">
+                                        <i class="fa-solid fa-wrench"></i>
+                                    </span>
+                                </a>
+                            </th>
+                            
+                        @else
+                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                                -
+                            </th>                           
+                        @endif
+
+
                         <td class="px-6 py-4">
                             {{-- cifrado --}}
                             @php

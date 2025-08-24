@@ -49,8 +49,11 @@ Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
 Route::post('bien/dropzone',[BienController::class,'dropzone'])->name('bien.dropzone');
 //para los archivos
 Route::post('digital/dropzone',[DigitalController::class,'dropzone'])->name('digital.dropzone');
+
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);
+//generar comentario
+Route::get('/comentario/creacion/{code}',[ComentarioController::class,'index2']);
 
 //mostrar los bienes 
 Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);

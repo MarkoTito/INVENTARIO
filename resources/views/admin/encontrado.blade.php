@@ -126,7 +126,7 @@ title="Buscar"
                                 {{$bien->area->UK_Nombre_area}}
                             </th>
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
-                                <a href="">
+                                <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}">
                                     <span class="w-6 h-6 inline-flex justify-center items-center">
                                         <i class="fa-solid fa-wrench"></i>
                                     </span>
