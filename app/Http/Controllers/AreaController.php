@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Sistema;
+use App\Models\Tipo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,7 +32,12 @@ class AreaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {  
+        $areas=Area::paginate(10);
+        $tipos = Tipo::all();
+        $sistemas = Sistema::all();
+        $users= User::all();
+        
         $validator = Validator::make($request->all(), 
             [
                 'UK_Nombre_area' => 'required|unique:areas',
@@ -46,8 +54,9 @@ class AreaController extends Controller
                 'title' => '!Upss No Ingreso correctamente!',
                 'text' => 'El area no puede ser mayor a 90 carecteres'
             ]);
-            return view('admin/agregar');
+            return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
         } else {
+            
             if ($validator->fails()) {
                 if ($validator->errors()->has('UK_Nombre_area')) {
                     $error = $validator->errors()->first('UK_Nombre_area');
@@ -56,7 +65,7 @@ class AreaController extends Controller
                         'title' => '!Upss No Ingreso correctamente!',
                         'text' => 'El area ya existe'
                     ]);
-                    return view('admin/agregar');
+                    return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
                 }
             }else{
                 Area::create($request->all());
@@ -67,7 +76,7 @@ class AreaController extends Controller
                     
                 ]);
                
-                return view('admin/agregar');
+                return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
             }
         }
     }

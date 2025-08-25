@@ -448,12 +448,14 @@ class BienController extends Controller
 
     public function export()
     {
-        $areas=Area::all();
+        $areas=Area::paginate(10);
         $tipos = Tipo::all();
+        $sistemas = Sistema::all();
+        $users= User::all();
         
         //return $bienes;
         
-        return view('admin/Exportacion/exportacion',compact('areas','tipos'));
+        return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
     }
     public function exportDatps(Request $request)
     {        

@@ -13,4 +13,9 @@ class Area extends Model
     protected $fillable=[
         'UK_Nombre_area'
     ];
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class,'FK_Software_AreaId','PK_area');
+    }
 }
