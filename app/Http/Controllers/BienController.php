@@ -58,14 +58,16 @@ class BienController extends Controller
         //mandar info
         $areas=Area::all();
         $tipos = Tipo::all();
-        //$bien=$request->FK_Hardware_AreaId;
 
+        $bien=$request->FK_Hardware_AreaId;
+        
         if ($request->estado == "1") {
             $bienes = Bien::with('area','tipo','estado')
                     ->where('FK_Hardware_EstadoId',1)
                     ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                     ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                     ->get();
+            
             
             return view('admin.encontrado',compact('bienes','areas','tipos','request'));
         } 
@@ -76,13 +78,14 @@ class BienController extends Controller
                     ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                     ->where('FK_Hardware_EstadoId',2)
                     ->get();
-                //vereficar el t fisico mal escrito en el controller
+                
             
             
             return view('admin.encontrado',compact('bienes','areas','tipos','request'));
         }
 
     }
+
     public function index3(Request $request){
         //metodo de busqueda con CODIGO
         Gate::authorize('read-hardware');
@@ -96,13 +99,13 @@ class BienController extends Controller
             return redirect()->route('adminbien.index');
         }else{
             //$id = Crypt::decryptString($request->UK_Hardware_Codigo);
-            $bien=Bien::where('UK_Hardware_Codigo', $code)
+            $bienes=Bien::where('UK_Hardware_Codigo', $code)
                     ->with('area')
                     ->with('tipo')
-                    ->first();
+                    ->get();
     
     
-            if (!$bien) {
+            if (!$bienes) {
                 session()->flash('swal', [
                     'icon' => 'error',
                     'title' => '!Upss',
@@ -110,13 +113,21 @@ class BienController extends Controller
                 ]);
                 return redirect()->route('adminbien.index');
             }else{
+                
+                
                 //para mostrar los comentarios del bien
                 $comentarios=Comentario::where('FK_Comentario_HardwareId',$code)
                          ->get();
-                //para mostrar las imagnes;
-                $imagen = Image::where('FK_Imagenes_HardwareId',$bien->PK_Hardware)->first(); //aca esta el error
                 //return $bien;
-                return view('admin.detalle',compact('bien','comentarios','imagen'));
+                $areas=Area::all();
+                $tipos = Tipo::all();
+                session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Se encontro Bien¡',
+                    'text'=>''
+                ]);
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                
             }
             
         }

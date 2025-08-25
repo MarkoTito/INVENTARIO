@@ -14,7 +14,7 @@ title="Buscar"
     ]
     ]"> 
 
-    <div class="grid gap-6 mb-4 md:grid-cols-2" id="radios">
+    <div class="grid gap-6 mb-4 md:grid-cols-2" id="radios" >
         {{-- buscar metodo --}}
         <div class="flex items-center mb-4">
             <input id="default-radio-1" type="radio" value="1" name="busqueda" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -29,9 +29,11 @@ title="Buscar"
         @enderror
         
     </div>
+   
 
     <div class="flex justify-center" id="sinCodigo" style="display: none;">
         {{-- formulario SIN CODIGO --}}
+        
             <form method="POST" action="/admin/buscar/todo" >
                 @csrf
                 <input type="text" name="form" value="2" class="hidden">  
@@ -83,6 +85,8 @@ title="Buscar"
                 </div>    
             </form>
     </div>
+
+
     <div class="flex justify-center" id="conCodigo" style="display: none;">
         {{-- formulario CON CODIGO --}}
         <form class="max-w-sm mx-auto" action="/admin/buscar/todo/code" method="POST" >
@@ -94,7 +98,7 @@ title="Buscar"
                     <input name="UK_Hardware_Codigo" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el Codigo del Bien" required />
                 </div>
                 <div>
-                    <button type="submit" class="text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
                 </div>
             </div>
         </form>
@@ -187,6 +191,7 @@ title="Buscar"
             document.querySelectorAll('input[name="busqueda"]').forEach(function(radio) {
                 radio.addEventListener('change', function() {
                 // ocultar todos los inputs
+                
                 document.getElementById('conCodigo').style.display = 'none';
                 document.getElementById('sinCodigo').style.display = 'none';
                 
@@ -194,10 +199,12 @@ title="Buscar"
                 // mostrar solo el correspondiente
                 if (this.value === '1') {
                     document.getElementById('conCodigo').style.display = 'block';
-                    document.getElementById('radios').style.display = 'none';
+                    document.getElementById('radios').style.display = 'block';
+                    
                 } else if (this.value === '2') {
                     document.getElementById('sinCodigo').style.display = 'block';
-                    document.getElementById('radios').style.display = 'none';
+                    document.getElementById('radios').style.display = 'block';
+                    
                 }
                 });
             });
