@@ -453,8 +453,7 @@ class BienController extends Controller
         $sistemas = Sistema::all();
         $users= User::all();
         
-        //return $bienes;
-        
+        //return $users;
         return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
     }
     public function exportDatps(Request $request)
