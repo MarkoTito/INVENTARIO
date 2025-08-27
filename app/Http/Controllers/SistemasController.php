@@ -89,6 +89,15 @@ class SistemasController extends Controller
     public function edit(Sistema $sistema)
     {
         //
+        $sistema->Testado_sistema=0;
+        $sistema->save();
+        session()->flash('swal',[
+            'icon'=> 'success',
+            'title'=> '!Exito¡',
+            'text'=>'El Sistema fue registrado con Exito'
+                    
+       ]);
+        return redirect('/admin/exportar');
     }
 
     /**

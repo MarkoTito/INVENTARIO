@@ -448,7 +448,7 @@ class BienController extends Controller
 
     public function export()
     {
-        $areas=Area::paginate(10);
+        $areas=Area::paginate(20);
         $tipos = Tipo::all();
         $sistemas = Sistema::all();
         $users= User::all();

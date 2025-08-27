@@ -9,6 +9,7 @@ class Tipo extends Model
 {
     use HasFactory;
     protected $table = 'tipos';
+    protected $primaryKey = 'PK_tipo'; 
     protected $fillable=[
         'Tdescriocion_tipo'
     ];

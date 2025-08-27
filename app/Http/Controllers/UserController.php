@@ -78,6 +78,19 @@ class UserController extends Controller
     {
         //
     }
+    public function eliminar($id)
+    {
+        //
+        $usuario=User::find($id);
+        $usuario->delete();
+        session()->flash('swal',[
+            'icon'=> 'success',
+            'title'=> '!Exito¡',
+            'text'=>'El usuario fue eliminado correctamente'
+                        
+        ]);
+        return redirect('/admin/exportar');
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -85,6 +98,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+        return $user->id;
     }
 
     /**
@@ -101,5 +115,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+        return $user;
     }
 }

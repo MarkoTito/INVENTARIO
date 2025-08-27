@@ -8,6 +8,7 @@ class Sistema extends Model
 {
     //
     protected $table = 'sistemas';
+    protected $primaryKey = 'PK_sistema'; 
     protected $fillable=[
         'Tdescripcion_sistema'
     ];

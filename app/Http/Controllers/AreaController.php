@@ -92,9 +92,19 @@ class AreaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    //aca se dara de baja
     public function edit(Area $area)
     {
         //
+        $area->Nestado_area=0;
+        $area->save();
+        session()->flash('swal',[
+            'icon'=> 'success',
+            'title'=> '!Exito¡',
+            'text'=>'El area fue eliminado'
+                    
+        ]);
+        return redirect('/admin/exportar');
     }
 
     /**

@@ -91,6 +91,17 @@ class TiposController extends Controller
     public function edit(Tipo $tipo)
     {
         //
+        $tipo->Nestado_tipo=0;
+        $tipo->save();
+        session()->flash('swal',[
+            'icon'=> 'success',
+            'title'=> '!Exito¡',
+            'text'=>'El Tipo de bien fue eliminado con Exito'
+                    
+        ]);
+               
+        return redirect('/admin/exportar');
+
     }
 
     /**

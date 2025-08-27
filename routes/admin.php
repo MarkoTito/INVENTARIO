@@ -84,4 +84,5 @@ Route::resource('tipos', TiposController::class);
 Route::resource('sistemas', SistemasController::class);
 //ruta para usuario
 Route::resource('usuario', UserController::class); //ojo aca
+Route::post('/eliminar/usuario/{id}',[UserController::class,'eliminar']);
 

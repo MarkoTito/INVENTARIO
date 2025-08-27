@@ -10,6 +10,8 @@ class Area extends Model
 {
     use HasFactory;
     protected $table = 'areas';
+    protected $primaryKey = 'PK_area'; 
+    
     protected $fillable=[
         'UK_Nombre_area'
     ];

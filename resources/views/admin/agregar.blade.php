@@ -13,56 +13,76 @@ title="Buscar"
         'name'=> 'Ingresar',
     ]
     ]"> 
-
-    <br>
-    <br>
-            
-            
-    <button data-popover-target="popover-top" data-popover-placement="top" type="button" class="text-white mb-3 me-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Nivel 1</button>
-    <div data-popover id="popover-top" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-            <h3 class="font-semibold text-gray-900 dark:text-white">Permisos</h3>
-        </div>
-        <div class="px-3 py-2">
-            <p>Agregar, editar , dar de baja y revertir baja de cualquier bien</p>
-        </div>
-        <div data-popper-arrow></div>
-    </div>
-
-    <button data-popover-target="arriba1-top" data-popover-placement="top" type="button" class="text-white mb-3 me-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Nivel 2</button>
-    <div data-popover id="arriba1-top" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-            <h3 class="font-semibold text-gray-900 dark:text-white">Permisos</h3>
-        </div>
-        <div class="px-3 py-2">
-            <p>And here's some amazing content. It's very engaging. Right?</p>
-        </div>
-        <div data-popper-arrow></div>
-    </div>
-
-    <button data-popover-target="arriba2-top" data-popover-placement="top" type="button" class="text-white mb-3 me-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Nivel 3</button>
-    <div data-popover id="arriba2-top" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-            <h3 class="font-semibold text-gray-900 dark:text-white">Permisos</h3>
-        </div>
-        <div class="px-3 py-2">
-            <p>And here's some amazing content. It's very engaging. Right?</p>
-        </div>
-        <div data-popper-arrow></div>
-    </div>
     
- 
+    <div class="grid gap-4 mb-4 md:grid-cols-2" id="botones">
+    <input type="hidden" name="busqueda" id="busqueda" value=""> <!-- valor seleccionado -->
+
+        <!-- Botón 1 -->
+        <div>
+            <button type="button" 
+                onclick="seleccionarBusqueda(1)" 
+                id="btn-1"
+                class="w-full px-4 py-2 text-sm font-medium border rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">
+                Buscar con Código
+            </button>
+            <!-- Input que se muestra solo si selecciona este -->
+            <div id="input-1" class="hidden mt-2">
+                <input type="text" name="codigo" placeholder="Ingrese código"
+                    class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 focus:outline-none">
+            </div>
+        </div>
+
+        <!-- Botón 2 -->
+        <div>
+            <button type="button" 
+                onclick="seleccionarBusqueda(2)" 
+                id="btn-2"
+                class="w-full px-4 py-2 text-sm font-medium border rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">
+                Buscar sin Código
+            </button>
+            <!-- Input que se muestra solo si selecciona este -->
+            <div id="input-2" class="hidden mt-2">
+                <input type="text" name="descripcion" placeholder="Ingrese descripción"
+                    class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 focus:outline-none">
+            </div>
+        </div>
+    </div>
+
+    @error('busqueda')
+        <p class="text-red-600">*{{ $message }}</p>
+    @enderror
+
+    <script>
+        function seleccionarBusqueda(valor) {
+            // Cambiar el valor oculto
+            document.getElementById('busqueda').value = valor;
+
+            // Resetear estilos de los botones
+            ['1','2'].forEach(i => {
+                let btn = document.getElementById('btn-' + i);
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+
+                // Ocultar inputs
+                document.getElementById('input-' + i).classList.add('hidden');
+            });
+
+            // Activar el botón seleccionado
+            let btnActivo = document.getElementById('btn-' + valor);
+            btnActivo.classList.remove('bg-gray-200', 'text-gray-700');
+            btnActivo.classList.add('bg-blue-600', 'text-white');
+
+            // Mostrar input correspondiente
+            document.getElementById('input-' + valor).classList.remove('hidden');
+        }
+    </script>
 
 
-        
 
 
 
-
-
-
-
-
+    <br>
+    <br>
 {{-- 
     
     <div class="grid gap-6 mb-4 md:grid-cols-2" id="radios">
