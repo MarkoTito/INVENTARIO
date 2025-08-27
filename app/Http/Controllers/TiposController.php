@@ -33,10 +33,7 @@ class TiposController extends Controller
      */
     public function store(Request $request)
     {
-        $areas=Area::paginate(10);
-        $tipos = Tipo::all();
-        $sistemas = Sistema::all();
-        $users= User::all();
+        
 
         $validator = Validator::make($request->all(), 
             [
@@ -54,7 +51,7 @@ class TiposController extends Controller
                 'title' => '!Upss No Ingreso correctamente!',
                 'text' => 'El Tipo de bien no puede ser mayor a 40 carecteres'
             ]);
-            return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
+            return redirect('/admin/exportar');
         } else {
             if ($validator->fails()) {
                 if ($validator->errors()->has('Tdescriocion_tipo')) {
@@ -64,7 +61,7 @@ class TiposController extends Controller
                         'title' => '!Upss No Ingreso correctamente!',
                         'text' => 'El Tipo de bien ya existe'
                     ]);
-                    return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
+                    return redirect('/admin/exportar');
                 }
             }else{
                 Tipo::create($request->all());
@@ -75,7 +72,7 @@ class TiposController extends Controller
                     
                 ]);
                
-                return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
+                return redirect('/admin/exportar');
             }
         }
     }

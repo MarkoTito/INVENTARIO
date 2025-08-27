@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
+use App\Models\Sistema;
+use App\Models\Tipo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate; //acesos
@@ -31,6 +34,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('create-agregar');
+        
+        
         try {
             $request->validate([
                 'name'     => 'required|string|max:50',
@@ -52,7 +57,7 @@ class UserController extends Controller
                         'text'=>'El usuario fue creado correctamente'
                         
                     ]);
-            return view('admin/agregar');
+            return redirect('/admin/exportar');
 
         } catch (ValidationException $e) {
             $errors = implode("\n", $e->validator->errors()->all());
@@ -61,7 +66,7 @@ class UserController extends Controller
                 'title' => '!Upss',
                 'text' => $errors
             ]);
-            return view('admin/agregar');
+            return redirect('/admin/exportar');
         }
 
     }
