@@ -116,7 +116,7 @@ title="Buscar"
                         Codigo Patrimonial
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Activo/Inactivo
+                        Activo/Baja
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Area
@@ -141,9 +141,16 @@ title="Buscar"
                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$bien->UK_Hardware_Codigo}}
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
-                            {{$bien->estado->UK_Descripcion_estado}}
-                        </th>
+                        @if ($bien->estado->UK_Descripcion_estado== 'Activo')
+                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap  text-blue-600">
+                                {{$bien->estado->UK_Descripcion_estado}}
+                            </th>
+                        @else
+                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-red-600">
+                                {{$bien->estado->UK_Descripcion_estado}}
+                            </th>
+                            
+                        @endif
                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$bien->area->UK_Nombre_area}}
                             
@@ -151,7 +158,7 @@ title="Buscar"
                         {{-- reparacion --}}
                         @if ( $bien->FK_Hardware_EstadoId == 1)
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
-                                <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}">
+                                <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black" >
                                     <span class="w-6 h-6 inline-flex justify-center items-center">
                                         <i class="fa-solid fa-wrench"></i>
                                     </span>
@@ -166,9 +173,9 @@ title="Buscar"
                         {{-- bajar --}}
                         @if ( $bien->FK_Hardware_EstadoId == 1)
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
-                                <a href="/admin/baja/creacion/{{$bien->UK_Hardware_Codigo}}">
+                                <a href="/admin/baja/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-red-500" >
                                     <span class="w-6 h-6 inline-flex justify-center items-center">
-                                        <i class="fa-solid fa-circle-xmark"></i>
+                                        <i class="fa-solid fa-circle-down"></i>
                                     </span>
                                 </a>
                             </th>

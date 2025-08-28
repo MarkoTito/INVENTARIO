@@ -25,7 +25,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
             <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
                 <button type="submit" 
                     class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                    Editar
+                    Editar <i class="fa-solid fa-pen-to-square"></i>
                 </button>
             </a>
 
@@ -36,7 +36,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
             <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
                 <button type="submit" 
                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    Ver baja 
+                    Ver baja <i class="fa-solid fa-eye"></i>
                 </button>
             </a>
         </div>
@@ -112,55 +112,55 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
     <br>
         @if ($bien->estado->PK_estado == 1)
             @if ($comentarios->isEmpty())
-                <div class="grid gap-6 mb-4 md:grid-cols-2" >
-                    
-                    @can('bajar-hardware')
-                        <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                            class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
-                        </button>
-                    @endcan
-
-                    @can('update-hardware')
-                        <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
-                                <button
-                                    style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                    type="button">
-                                    Editar
-                                </button>
-                        </a>
-                    @endcan
-
-                </div>        
-            @else
-                <div class="grid gap-6 mb-4 md:grid-cols-3" >
+            {{-- si no hay comentarios no te deberia dar de baja pero creo q lo dejare  --}}
+                <div class="grid gap-6 mb-4 md:grid-cols-3">
                     <div>
+                        
+                    </div>
+                    <div class="grid gap-6 mb-4 md:grid-cols-2">
                         @can('bajar-hardware')
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                                class="block text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-lg px-8 py-3 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800" type="button"> Dar de Baja 
+                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" 
+                                class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                                type="submit">
+                                Dar de Baja <i class="fa-solid fa-circle-down"></i>
                             </button>
                         @endcan
+
                     </div>
+
+                </div>
+        
+            @else
+                <div class="grid gap-6 mb-4 md:grid-cols-3" >
+
                     <div>
-                        @can('read-comentario')
-                            <a href="{{url('/admin/buscar/historial/'.$idCifrado)}}">
-                                <button
-                                    style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                    type="button">
-                                    Historial
+                        
+                    </div>
+                    <div class="grid gap-6 mb-4 md:grid-cols-2">
+                        <div>
+                            @can('bajar-hardware')
+                                <button data-modal-target="default-modal" data-modal-toggle="default-modal" 
+                                    class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                                    type="submit">
+                                    Dar de Baja <i class="fa-solid fa-circle-down"></i>
                                 </button>
-                            </a>
-                        @endcan
-                    </div>
-                    <div>
-                        @can('update-hardware')
-                            <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
-                                    <button
-                                        style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                        type="button">
-                                        Editar
+                            @endcan
+
+                        </div>
+                        <div>
+                            @can('read-comentario')
+                                <a href="{{url('/admin/buscar/historial/'.$idCifrado)}}">
+                                    <button type="submit" 
+                                        class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center">
+                                        Historial <i class="fa-solid fa-folder"></i>
                                     </button>
-                            </a>
-                        @endcan
+                                </a>
+                            @endcan
+
+                        </div>
+                    </div>
+
+                    <div>
                     </div>
                 </div>   
                 
@@ -170,41 +170,58 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
         @if ($bien->estado->PK_estado == 2)
                 
                 @if ($comentarios->isEmpty())
-                    {{-- <div class="grid gap-6 mb-4 md:grid-cols-1" >
-                    </div> --}}
-                    @can('read-hardware')
-                        <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
-                            <button
-                                style="background-color: #e21111; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                type="button">
-                                Ver Baja
-                            </button>
-                        </a>
-                    @endcan
-                    
-                @else
-                    <div class="grid gap-6 mb-4 md:grid-cols-2" >
-                        @can('read-hardware')
-                            <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
-                                <button
-                                    style="background-color: #e21111; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                    type="button">
-                                    Ver Baja
-                                </button>
-                            </a>
-                        @endcan
-                        @can('read-comentario')
-                            <a href="/admin/buscar/historial/{{$bien->PK_Hardware}}">
-                                <button
-                                    style="background-color: #140154; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-                                    type="button">
-                                        Historial
-                                </button>
-                            </a>
+                    <div class="grid gap-6 mb-4 md:grid-cols-3" >
+
+                        <div>
                             
-                        @endcan
+                        </div>
+                        <div class="grid gap-6 mb-4 md:grid-cols-2">
+                            @can('bajar-hardware')
+                                <button data-modal-target="default-modal-cancelar" data-modal-toggle="default-modal-cancelar" 
+                                    class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                                    type="submit">
+                                    Revertir baja <i class="fa-solid fa-circle-up"></i>
+                                </button>
+                            @endcan
+                            
+                        </div>
                         
-                    </div>
+                        <div>
+                        </div>
+                    </div>     
+                @else
+                    <div class="grid gap-6 mb-4 md:grid-cols-3" >
+
+                        <div>
+                            
+                        </div>
+                        <div class="grid gap-6 mb-4 md:grid-cols-2">
+                            <div>
+                                @can('bajar-hardware')
+                                    <button data-modal-target="default-modal-cancelar" data-modal-toggle="default-modal-cancelar" 
+                                        class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                                        type="submit">
+                                        Revertir baja <i class="fa-solid fa-circle-up"></i>
+                                    </button>
+                                @endcan
+
+                            </div>
+                            <div>
+                                @can('read-comentario')
+                                    <a href="{{url('/admin/buscar/historial/'.$idCifrado)}}">
+                                        <button type="submit" 
+                                            class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center">
+                                            Historial <i class="fa-solid fa-folder"></i>
+                                        </button>
+                                    </a>
+                                @endcan
+
+                            </div>
+                        </div>
+                        
+                        <div>
+                        </div>
+                    </div>   
 
                     
                 @endif
@@ -220,7 +237,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                     <!-- Modal header -->
                                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
-                                            Dar de Baja al Bien
+                                            DAR DE BAJA AL BIEN
                                         </h3>
                                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-black" data-modal-hide="default-modal">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -245,6 +262,44 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                         <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                             <button data-modal-hide="default-modal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Dar de baja</button>
                                             <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700">Cancelar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+    <!-- Main modal de revertir baja -->
+                        <div id="default-modal-cancelar" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                                    <!-- Modal header -->
+                                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
+                                            REVERTIR BAJA DEL BIEN
+                                        </h3>
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-black" data-modal-hide="default-modal-cancelar">
+                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                    </div>
+                                    <!-- Modal body y formulario   -->
+                                    <form action="/admin/Bajar/{{$bien->PK_Hardware}}"
+                                            class="delete-form">
+                                        @csrf
+                                        <div class="p-4 md:p-5 space-y-4">
+                                            <label for="T_Motivo_Baja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo:</label>
+                                            <textarea  name="T_Motivo_Baja" id="T_Motivo_Baja" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la reversión de la baja">{{old('T_Motivo_Baja')}}</textarea>
+                                            @error('T_Motivo_Baja')
+                                                    <p class="text-red-600">*{{$message}}</p>
+                                            @enderror
+                                        
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                            <button data-modal-hide="default-modal-cancelar" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Revertir baja</button>
+                                            <button data-modal-hide="default-modal-cancelar" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700">Cancelar</button>
                                         </div>
                                     </form>
                                 </div>
