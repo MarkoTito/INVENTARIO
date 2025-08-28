@@ -285,7 +285,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                         </button>
                                     </div>
                                     <!-- Modal body y formulario   -->
-                                    <form action="/admin/Bajar/{{$bien->PK_Hardware}}"
+                                    <form action="/admin/Bajar/revertir/{{$bien->PK_Hardware}}"
                                             class="delete-form">
                                         @csrf
                                         <div class="p-4 md:p-5 space-y-4">

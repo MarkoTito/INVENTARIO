@@ -37,6 +37,8 @@ Route::post('/buscar/todo/code',[BienController::class,'index3']);
 Route::get('/buscar/{id}',[BienController::class,'show1']);
 //Bajar un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/Bajar/{id}',[BienController::class,'baja']);
+//revertir baja
+Route::get('/Bajar/revertir/{id}',[BienController::class,'revertirbaja']);
 
 //Bajar editar un bien:
 Route::get('/Editar/Hardware/{id}',[BienController::class,'H_editar']);
