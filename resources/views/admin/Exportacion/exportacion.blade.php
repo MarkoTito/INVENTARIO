@@ -13,25 +13,21 @@ title="Exportacion"
         'name'=> 'Prueba',
     ]
     ]"> 
-    
-    <textarea id="miTextarea" rows="4" cols="50" maxlength="200"></textarea>
-    <p>Letras restantes: <span id="contador">200</span></p>
+    <form id="miFormulario" action="/guardar" method="POST">
+        <label for="fecha">Fecha de adquisición:</label>
+        <input type="date" id="fecha" name="fecha">
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
 
     <script>
-        const textarea = document.getElementById("miTextarea");
-        const contador = document.getElementById("contador");
-        const limite = 200; // máximo de letras/caracteres permitidos
-
-        textarea.addEventListener("input", () => {
-            let restantes = limite - textarea.value.length;
-
-            if (restantes < 0) {
-                textarea.value = textarea.value.substring(0, limite); // corta el texto
-                restantes = 0;
-            }
-
-            contador.textContent = restantes;
-        });
+    document.getElementById('miFormulario').addEventListener('submit', function(e) {
+        const fecha = document.getElementById('fecha').value;
+        if (!fecha) {
+            e.preventDefault(); // evita que se envíe
+            alert("Debes seleccionar una fecha antes de enviar.");
+        }
+    });
     </script>
 
 

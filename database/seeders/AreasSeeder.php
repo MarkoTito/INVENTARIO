@@ -17,7 +17,7 @@ class AreasSeeder extends Seeder
         
         $areas=[
             [
-                'UK_Nombre_Area' => 'Área no Asignada'
+                'UK_Nombre_Area' => 'Todas las áreas'
             ],
             [
                 'UK_Nombre_Area' => 'Consejo Municipal',

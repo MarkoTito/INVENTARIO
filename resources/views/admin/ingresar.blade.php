@@ -15,7 +15,7 @@ title="Registrar"
     ]">
 
     
-    <form method="POST" action="{{route('adminbien.store')}}" class="submit-form">
+    <form method="POST" id="miFormulario" action="{{route('adminbien.store')}}" class="submit-form">
         @csrf
         {{-- tipo de bien --}}
         <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware</label>
@@ -43,7 +43,7 @@ title="Registrar"
             <div>
                 {{-- codigo patrimonial --}}
                 <label for="UK_Hardware_Codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo Patrimonial</label>
-                <input name="UK_Hardware_Codigo" type="text" id="UK_Hardware_Codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el codigo unitario de 12 digitos" required value="{{old('UK_Hardware_Codigo')}}"/>
+                <input name="UK_Hardware_Codigo" type="text" id="UK_Hardware_Codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="12" pattern=".{12}" required title="Debe tener exactamente 12 caracteres"  placeholder="Ingrese codigo Patrimonial" value="{{old('UK_Hardware_Codigo')}}"/>
                 @error('UK_Hardware_Codigo')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -80,7 +80,7 @@ title="Registrar"
             <div>
                 {{-- AÑO DE ADQUISICION --}}
                 <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Adquisicion:</label>
-                <input type="date" name="Dadquisicion_hardware" value="{{old('Dadquisicion_hardware')}}" max="{{ date('Y-m-d') }}">
+                <input type="date" name="Dadquisicion_hardware" id="fecha" value="{{old('Dadquisicion_hardware')}}" max="{{ date('Y-m-d') }}">
                 @error('Dadquisicion_hardware')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -153,6 +153,15 @@ title="Registrar"
                 }
 
                 contador.textContent = restantes;
+            });
+        </script>
+        <script>
+            document.getElementById('miFormulario').addEventListener('submit', function(e) {
+                const fecha = document.getElementById('fecha').value;
+                if (!fecha) {
+                    e.preventDefault(); // evita que se envíe
+                    alert("Debes seleccionar una fecha antes de enviar.");
+                }
             });
         </script>
 

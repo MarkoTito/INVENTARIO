@@ -62,26 +62,51 @@ class BienController extends Controller
         $bien=$request->FK_Hardware_AreaId;
         
         if ($request->estado == "1") {
-            $bienes = Bien::with('area','tipo','estado')
-                    ->where('FK_Hardware_EstadoId',1)
-                    ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
-                    ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                    ->get();
+            if ($request->FK_Hardware_AreaId== "1") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                        ->get();
+                
+                
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+
+            } else {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                        ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                        ->get();
+                
+                
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+
+            }
             
-            
-            return view('admin.encontrado',compact('bienes','areas','tipos','request'));
         } 
         if ($request->estado == "0") {
-            
-            $bienes = Bien::with('area','tipo','estado')
-                    ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
-                    ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                    ->where('FK_Hardware_EstadoId',2)
-                    ->get();
+            if ($request->FK_Hardware_AreaId== "1") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    
                 
+                
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+            } else {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                        ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    
+                
+                
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+
+            }
             
-            
-            return view('admin.encontrado',compact('bienes','areas','tipos','request'));
         }
 
     }
@@ -103,16 +128,19 @@ class BienController extends Controller
                     ->with('area')
                     ->with('tipo')
                     ->get();
-    
-    
-            if (!$bienes) {
+            
+            
+            if ($bienes->isEmpty()) {
                 session()->flash('swal', [
                     'icon' => 'error',
                     'title' => '!Upss',
                     'text' => 'El Codigo no exite'
                 ]);
+                
                 return redirect()->route('adminbien.index');
-            }else{
+            }
+            
+            else{
                 
                 
                 //para mostrar los comentarios del bien
@@ -637,7 +665,7 @@ class BienController extends Controller
     {
         
         //form 1 = con codigo - form = 2 sin codigo
-        if ($request->form == 1) { //aca compara si es con fecha
+        if ($request->form == 1) {
             if ($request->estado == "1") {
                 $bienes = Bien::with('area','tipo','estado')
                         ->where('UK_Hardware_Codigo',$request->UK_Hardware_Codigo)
@@ -658,25 +686,50 @@ class BienController extends Controller
             }
         } else { //aca sin code
             if ($request->estado == "1") {
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
-                        ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                        ->where('FK_Hardware_EstadoId',1)
-                        ->get();
-                //return $bienes;
-                return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
-            } 
+                if ($request->FK_Hardware_AreaId==1) {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->get();
+                    //return $bienes;
+                    return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+
+                } else {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->get();
+                    //return $bienes;
+                    return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+                } 
+                }
+                
             if ($request->estado == "0") {
+                if ($request->FK_Hardware_AreaId==1) {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                        //vereficar el t fisico mal escrito en el controller
+                    
+                    
+                    return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+
+
+
+                } else {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                        //vereficar el t fisico mal escrito en el controller
+                    
+                    
+                    return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+                }
                 
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
-                        ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                        ->where('FK_Hardware_EstadoId',2)
-                        ->get();
-                    //vereficar el t fisico mal escrito en el controller
-                
-                
-                return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
             }
         }
         
@@ -716,34 +769,62 @@ class BienController extends Controller
                 return $pdf->download("exportacion.pdf");
                 
             }
-        } else { //aca sin fecha
+        } else { //aca sin codigo
             if ($request->estado == "1") {
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
-                        ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                        ->where('FK_Hardware_EstadoId',1)
-                        ->get();
-                //return $bienes;
-                $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                    'bienes' =>$bienes
-                ]);
-                return $pdf->download("exportacion.pdf");
-                
-                
+                if ($request->FK_Hardware_AreaId==1) {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->get();
+                    //return $bienes;
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes
+                    ]);
+                    return $pdf->download("exportacion.pdf");
+
+                } else {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->get();
+                    //return $bienes;
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes
+                    ]);
+                    return $pdf->download("exportacion.pdf");
+                }
             } 
             if ($request->estado == "0") {
-                
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
-                        ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                        ->where('FK_Hardware_EstadoId',2)
-                        ->get();
-                    //vereficar el t fisico mal escrito en el controller
-                $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                    'bienes' =>$bienes
+                if ($request->FK_Hardware_AreaId==1) {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                        //vereficar el t fisico mal escrito en el controller
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes
+                        
+                    ]);
+                    return $pdf->download("exportacion.pdf");
                     
-                ]);
-                return $pdf->download("exportacion.pdf");
+                } else {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                        //vereficar el t fisico mal escrito en el controller
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes
+                        
+                    ]);
+                    return $pdf->download("exportacion.pdf");
+
+
+
+                }
+                
                 
                 
                 
