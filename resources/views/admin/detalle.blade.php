@@ -233,35 +233,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                         </div>
 
 
-    @push('js')
-        <script>
-        //que seleciona todos esos formularios que tengan ese nombre de delete-form 
-            forms = document.querySelectorAll('.delete-form')
-            //que recorra todos los formularios
-            forms.forEach(form => {
-                //que se ponga al escucha de ese formulario con el evento submit
-                form.addEventListener('submit',function(e){ //e es el evento en si
-                    //previne el evento 
-                    e.preventDefault('');
-                        Swal.fire({
-                            title: "Bajar este bien?",
-                            text: "No podras revertir esto!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, dar de baja",
-                            cancelButtonText: "No cancelar"
-                            }).then((result) => {
-                            if (result.isConfirmed) {
-                                form.submit();
-                            }
-                        });    
-                });
-            });
-        </script>
-                                    
-    @endpush      
+    
 
 
 

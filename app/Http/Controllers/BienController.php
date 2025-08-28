@@ -269,6 +269,15 @@ class BienController extends Controller
         return view('admin/editar_hardware',compact('bien','imagen','areas','tipos'));
         
     }
+    public function index_bajar($code)
+    {   
+        
+        Gate::authorize('create-comentario'); 
+        
+        return view('admin.bajar', compact('code') );
+
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -340,14 +349,15 @@ class BienController extends Controller
                 'title' => '!Upss',
                 'text' => 'No introdujo un motivo o es muy largo'
             ]);
-        return redirect()->route('adminbien.index');
-    }
+            return redirect()->route('adminbien.index');
+        }
         
         $usuario=Auth::user()->id;
         
         $fecha=Carbon::now();
         ////Bajar bien
-        Bien::where('PK_Hardware',$bien)->update(
+        
+        $dato= Bien::where('UK_Hardware_Codigo',$bien)->update(
             [
                 'Dbaja_hardware'=>$fecha,
                 'Tmotivo_baja_hardware'=> $request->T_Motivo_Baja,
@@ -361,8 +371,9 @@ class BienController extends Controller
             'title'=> '!Bien hecho',
             'text'=>   'El bien fue dado de baja correctamente'
         ]);
-
-       return redirect()->route('adminbien.index');
+        
+        //return $bien;
+        return redirect()->route('adminbien.index');
     }
 
     public function Bajas()

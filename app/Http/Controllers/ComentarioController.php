@@ -40,7 +40,7 @@ class ComentarioController extends Controller
         return view('admin.reparar', compact('areas','tipos','code') );
 
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

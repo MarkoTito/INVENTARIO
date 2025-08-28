@@ -24,7 +24,7 @@
 </head>
 <body>
  
-    <div class="title">Acta de Baja de Bien</div>
+    <div class="title">ACTA DE BAJA DE BIEN</div>
  
     <div>
         {{-- descripcion --}}
@@ -80,6 +80,8 @@
             </tbody>
         </table>
     </div>
+    <br>
+    <br>
     <br>
     <br>
     

@@ -125,7 +125,10 @@ title="Buscar"
                         Reparar
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Accion
+                        Bajar
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Detalle
                     </th>
                 </tr>
             </thead>
@@ -145,7 +148,7 @@ title="Buscar"
                             {{$bien->area->UK_Nombre_area}}
                             
                         </th>
-
+                        {{-- reparacion --}}
                         @if ( $bien->FK_Hardware_EstadoId == 1)
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
                                 <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}">
@@ -160,14 +163,30 @@ title="Buscar"
                                 -
                             </th>                           
                         @endif
+                        {{-- bajar --}}
+                        @if ( $bien->FK_Hardware_EstadoId == 1)
+                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
+                                <a href="/admin/baja/creacion/{{$bien->UK_Hardware_Codigo}}">
+                                    <span class="w-6 h-6 inline-flex justify-center items-center">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </span>
+                                </a>
+                            </th>
+                        @else
+                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                                -
+                            </th>                           
+                        @endif
 
-
+                        {{-- detalle --}}
                         <td class="px-6 py-4">
                             {{-- cifrado --}}
                             @php
                                 $idCifrado = Crypt::encryptString($bien->PK_Hardware);
                             @endphp
-                            <a href="{{url('/admin/buscar/'.$idCifrado)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalle</a>
+                            <a href="{{url('/admin/buscar/'.$idCifrado)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </a>
                             
                             
                             {{-- <a href="/admin/buscar/{{$bien->PK_Hardware}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalle</a> --}}
