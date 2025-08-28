@@ -56,7 +56,7 @@ title="Bajar"
                     e.preventDefault('');
                         Swal.fire({
                             title: "Bajar este bien?",
-                            text: "No podras revertir esto!",
+                            text: "",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",

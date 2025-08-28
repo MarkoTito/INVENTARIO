@@ -271,10 +271,18 @@ class BienController extends Controller
     }
     public function index_bajar($code)
     {   
-        
+         //formulario de baja
         Gate::authorize('create-comentario'); 
         
         return view('admin.bajar', compact('code') );
+
+    }
+    public function reversion($code)
+    {   
+        //formulario de revercion de baja
+        Gate::authorize('create-comentario'); 
+        
+        return view('admin.reactivar', compact('code') );
 
     }
 
@@ -393,7 +401,7 @@ class BienController extends Controller
     public function revertirbaja (Request $request,$bien)
     {
         Gate::authorize('bajar-hardware'); 
-        if (!$request->T_Motivo_Baja || strlen($request->T_Motivo_Baja) > 125) {
+        if (!$request->T_Motivo_Activar || strlen($request->T_Motivo_Activar) > 125) {
             session()->flash('swal', [
                 'icon' => 'error',
                 'title' => '!Upss',

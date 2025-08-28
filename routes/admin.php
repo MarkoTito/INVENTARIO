@@ -56,8 +56,10 @@ Route::post('digital/dropzone',[DigitalController::class,'dropzone'])->name('dig
 Route::resource('comentario',ComentarioController::class);
 //generar comentario
 Route::get('/comentario/creacion/{code}',[ComentarioController::class,'index2']);
-//generar comentario
+//generar baja
 Route::get('/baja/creacion/{code}',[BienController::class,'index_bajar']);
+//formular de revertir baja
+Route::get('/revercion/creacion/{code}',[BienController::class,'reversion']);
 
 //mostrar los bienes 
 Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);

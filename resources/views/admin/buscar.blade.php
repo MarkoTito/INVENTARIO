@@ -170,7 +170,7 @@ title="Buscar"
                                 -
                             </th>                           
                         @endif
-                        {{-- bajar --}}
+                        {{-- bajar o activar--}}
                         @if ( $bien->FK_Hardware_EstadoId == 1)
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
                                 <a href="/admin/baja/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-red-500" >
@@ -180,8 +180,13 @@ title="Buscar"
                                 </a>
                             </th>
                         @else
+                        {{-- activar --}}
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
-                                -
+                                <a href="/admin/revercion/creacion/{{$bien->PK_Hardware}}" class="text-blue-600 dark:text-blue-500" >
+                                    <span class="w-6 h-6 inline-flex justify-center items-center">
+                                        <i class="fa-solid fa-circle-up"></i>
+                                    </span>
+                                </a>
                             </th>                           
                         @endif
 

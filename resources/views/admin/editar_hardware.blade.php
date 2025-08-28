@@ -96,7 +96,7 @@ title="Entregar"
                             <select name="FK_Hardware_TipoId" id="FK_Hardware_TipoId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach ($tipos as $tipo)
                                     @if ($tipo->PK_tipo != 1)
-                                        <option value="{{{$tipo->PK_tipo}}}">{{{$tipo->Tdescriocion_tipo}}}</option>
+                                        <option value="{{{$tipo->PK_tipo}}}" {{$bien->tipo->PK_tipo==$tipo->PK_tipo ? 'selected' : ''}} >{{{$tipo->Tdescriocion_tipo}}}</option>
                                     @endif
                                 
                                 @endforeach
@@ -114,12 +114,27 @@ title="Entregar"
                     <p class="text-red-600">*{{$message}}</p>
             @enderror
         </div> 
-         <br> 
-        <button
-            style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
-            type="submit">
-            Editar
-        </button>
+        <br> 
+        <div class="grid gap-6 mb-4 md:grid-cols-3">
+                <div>            
+                </div>
+                <div class="grid gap-6 mb-4 md:grid-cols-2">
+                    <div class="flex justify-end">
+                        <button type="submit" 
+                            class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                            Subir  <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                    </div>
+
+                    {{-- falta poner el can --}}
+                    {{-- <button
+                        style="background-color: #16a34a; color: white; font-size: 1.25rem; padding: 1.25rem 3rem; border-radius: 9999px; width: 100%; font-weight: bold;"
+                        type="submit">
+                        Editar
+                    </button> --}}
+                    
+                </div>
+            </div>
 
     </form>
 
@@ -135,7 +150,7 @@ title="Entregar"
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
-                            title: "Editar este Bien?",
+                            title: "Editar este bien?",
                             text: "no podrás revertir esto",
                             icon: "warning",
                             showCancelButton: true,

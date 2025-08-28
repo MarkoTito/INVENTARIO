@@ -45,7 +45,7 @@ title="Buscar"
                 <div class="grid gap-6 mb-4 md:grid-cols-2">
                     <div class="mb-5">
                         {{-- <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar codigo</label> --}}
-                        <input name="UK_Hardware_Codigo" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$request->UK_Hardware_Codigo}}" required />
+                        <input name="UK_Hardware_Codigo" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa el Codigo del Bien" value="{{$request->UK_Hardware_Codigo}}"  required />
                     </div>
                     <div>
                         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
@@ -94,10 +94,17 @@ title="Buscar"
                     </div>   
                     
                     <div class=" flex justify-center mt-4">
-                        <input checked id="default-radio-1" type="radio" value="1" name="estado" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input  id="default-radio-1" type="radio" value="1" name="estado" 
+                            {{$request->estado == "1" ? 'checked' : ''}}
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Activo</label>
+                        
                         <span class="text-white" >---</span>
-                        <input  id="default-radio-2" type="radio" value="0" name="estado" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+
+
+                        <input  id="default-radio-2" type="radio" value="0" name="estado" 
+                            {{$request->estado == "0" ? 'checked' : ''}}
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-black">Inactivo</label>
                     </div>
                 
@@ -274,7 +281,7 @@ title="Buscar"
                                     -
                                 </th>                           
                             @endif
-                            {{-- bajar --}}
+                            {{-- bajar o activar--}}
                             @if ( $bien->FK_Hardware_EstadoId == 1)
                                 <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
                                     <a href="/admin/baja/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-red-500" >
@@ -284,8 +291,13 @@ title="Buscar"
                                     </a>
                                 </th>
                             @else
+                            {{-- activar --}}
                                 <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black">
-                                    -
+                                    <a href="/admin/revercion/creacion/{{$bien->PK_Hardware}}" class="text-blue-600 dark:text-blue-500" >
+                                        <span class="w-6 h-6 inline-flex justify-center items-center">
+                                            <i class="fa-solid fa-circle-up"></i>
+                                        </span>
+                                    </a>
                                 </th>                           
                             @endif
 
