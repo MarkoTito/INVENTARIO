@@ -51,7 +51,7 @@ class TiposController extends Controller
                 'title' => '!Upss No Ingreso correctamente!',
                 'text' => 'El Tipo de bien no puede ser mayor a 40 carecteres'
             ]);
-            return redirect('/admin/exportar');
+            return redirect('/admin/Agregar');
         } else {
             if ($validator->fails()) {
                 if ($validator->errors()->has('Tdescriocion_tipo')) {
@@ -61,7 +61,7 @@ class TiposController extends Controller
                         'title' => '!Upss No Ingreso correctamente!',
                         'text' => 'El Tipo de bien ya existe'
                     ]);
-                    return redirect('/admin/exportar');
+                    return redirect('/admin/Agregar');
                 }
             }else{
                 Tipo::create($request->all());
@@ -72,7 +72,7 @@ class TiposController extends Controller
                     
                 ]);
                
-                return redirect('/admin/exportar');
+                return redirect('/admin/Agregar');
             }
         }
     }
@@ -100,7 +100,7 @@ class TiposController extends Controller
                     
         ]);
                
-        return redirect('/admin/exportar');
+        return redirect('/admin/Agregar');
 
     }
 

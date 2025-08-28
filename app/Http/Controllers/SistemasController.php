@@ -49,7 +49,7 @@ class SistemasController extends Controller
                 'title' => '!Upss No Ingreso correctamente!',
                 'text' => 'El Sistema no puede ser mayor a 40 carecteres'
             ]);
-            return redirect('/admin/exportar');
+            return redirect('/admin/Agregar');
         } else {
             if ($validator->fails()) {
                 if ($validator->errors()->has('Tdescripcion_sistema')) {
@@ -59,7 +59,7 @@ class SistemasController extends Controller
                         'title' => '!Upss No Ingreso correctamente!',
                         'text' => 'El Sistema ya existe'
                     ]);
-                    return redirect('/admin/exportar');
+                    return redirect('/admin/Agregar');
                 }
             }else{
                 Sistema::create($request->all());
@@ -70,7 +70,7 @@ class SistemasController extends Controller
                     
                 ]);
                
-                return redirect('/admin/exportar');
+                return redirect('/admin/Agregar');
             }
         }
     }
@@ -97,7 +97,7 @@ class SistemasController extends Controller
             'text'=>'El Sistema fue registrado con Exito'
                     
        ]);
-        return redirect('/admin/exportar');
+        return redirect('/admin/Agregar');
     }
 
     /**

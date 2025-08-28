@@ -141,8 +141,8 @@ class BienController extends Controller
     {
         Gate::authorize('create-hardware');
         //muestra el formulario de hardware
-        $areas=Area::all();
-        $tipos = Tipo::all();
+        $areas=Area::where('Nestado_area','1')->get();
+        $tipos = Tipo::where('Nestado_tipo','1')->get();
         return view('admin.ingresar', compact('areas','tipos') );
     }
    
@@ -442,19 +442,22 @@ class BienController extends Controller
     public function agregar()
     {
         Gate::authorize('read-hardware'); 
-        return view('admin/agregar');
-    }
-
-
-    public function export()
-    {
         $areas=Area::paginate(20);
         $tipos = Tipo::all();
         $sistemas = Sistema::all();
         $users= User::all();
         
         //return $users;
-        return view('admin/Exportacion/exportacion',compact('areas','tipos','sistemas','users'));
+        return view('admin/agregar',compact('areas','tipos','sistemas','users'));
+        
+    }
+
+
+    public function export()
+    {
+        
+        //return $users;
+        return view('admin/Exportacion/exportacion');
     }
     public function exportDatps(Request $request)
     {        

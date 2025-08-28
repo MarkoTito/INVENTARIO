@@ -54,7 +54,7 @@ class AreaController extends Controller
                 'title' => '!Upss No Ingreso correctamente!',
                 'text' => 'El area no puede ser mayor a 90 carecteres'
             ]);
-           return redirect('/admin/exportar');
+           return redirect('/admin/Agregar');
         } else {
             
             if ($validator->fails()) {
@@ -65,7 +65,7 @@ class AreaController extends Controller
                         'title' => '!Upss No Ingreso correctamente!',
                         'text' => 'El area ya existe'
                     ]);
-                   return redirect('/admin/exportar');
+                   return redirect('/admin/Agregar');
                 }
             }else{
                 Area::create($request->all());
@@ -76,7 +76,7 @@ class AreaController extends Controller
                     
                 ]);
                
-               return redirect('/admin/exportar');
+               return redirect('/admin/Agregar');
             }
         }
     }
@@ -104,7 +104,7 @@ class AreaController extends Controller
             'text'=>'El area fue eliminado'
                     
         ]);
-        return redirect('/admin/exportar');
+        return redirect('/admin/Agregar');
     }
 
     /**

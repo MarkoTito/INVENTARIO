@@ -94,7 +94,7 @@
                   <span class="w-6 h-6 inline-flex justify-center items-center">
                      <i class="fa-solid fa-plus"></i>
                   </span>
-                  <span class="ms-3">Agregar</span>
+                  <span class="ms-3">Mas</span>
                </a>
             </li>
          @endcan

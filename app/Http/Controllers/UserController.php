@@ -57,7 +57,7 @@ class UserController extends Controller
                         'text'=>'El usuario fue creado correctamente'
                         
                     ]);
-            return redirect('/admin/exportar');
+            return redirect('/admin/Agregar');
 
         } catch (ValidationException $e) {
             $errors = implode("\n", $e->validator->errors()->all());
@@ -66,7 +66,7 @@ class UserController extends Controller
                 'title' => '!Upss',
                 'text' => $errors
             ]);
-            return redirect('/admin/exportar');
+            return redirect('/admin/Agregar');
         }
 
     }
@@ -89,7 +89,7 @@ class UserController extends Controller
             'text'=>'El usuario fue eliminado correctamente'
                         
         ]);
-        return redirect('/admin/exportar');
+        return redirect('/admin/Agregar');
     }
 
     /**

@@ -40,8 +40,8 @@ class DigitalController extends Controller
     {
         Gate::authorize('create-software'); 
         //muestra el formulario
-        $areas=Area::all();
-        $sistemas = Sistema::all();
+        $areas=Area::where('Nestado_area','1')->get();
+        $sistemas = Sistema::where('Testado_sistema','1')->get();
         return view('admin.ingresa_sofware', compact('areas','sistemas') );
     }
     
