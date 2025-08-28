@@ -33,6 +33,7 @@ title="Registrar"
                     {{-- Sistem --}}
                     <label for="FK_Software_SistemaId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Sistema</label>
                     <select name="FK_Software_SistemaId" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value=""selected disabled >---Selecione un sitema---</option>
                         @foreach ($sistemas as $sis)
                             <option value="{{$sis->PK_sistema}}">{{$sis->Tdescripcion_sistema}}</option>
                         @endforeach
@@ -63,7 +64,7 @@ title="Registrar"
             <div>
                 {{-- Fecha de inicio --}}
                 <label for="Dfe_Inicio_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Inicio:</label>
-                <input type="date" name="Dfe_Inicio_software" value="{{old('Dfe_Inicio_software')}}" >
+                <input type="date" name="Dfe_Inicio_software" value="{{old('Dfe_Inicio_software')}}" max="{{ date('Y-m-d') }}">
                 @error('Dfe_Inicio_software')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -99,7 +100,7 @@ title="Registrar"
         <div class="flex justify-center" id="miInput" style="display: none;">
             {{-- Fecha de vencimiento  --}}
             <label for="Dfe_vencimiento_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Vencimiento:</label>
-            <input type="date" id="Dfe_vencimiento_software" name="Dfe_vencimiento_software"value="{{old('Dfe_vencimiento_software')}}" >
+            <input type="date" id="Dfe_vencimiento_software" name="Dfe_vencimiento_software"value="{{old('Dfe_vencimiento_software')}}" min="{{ date('Y-m-d') }}">
             @error('Dfe_vencimiento_software')
                 <p class="text-red-600">*{{$message}}</p>
             @enderror
