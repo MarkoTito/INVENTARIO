@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Exportacion</title>
+    <title>PDF-{{$fecha}}</title>
     <style>
         body { font-family: sans-serif; font-size: 12px; margin: 20px; }
         .title { text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 20px; }
@@ -25,32 +25,7 @@
 <body>
  
     <div class="title">Exportacion de Bienes</div>
-    {{--     
-    <div>
-        descripcion
 
-        <strong>Tipo:</strong> {{ $bien->tipo->Tdescriocion_tipo ?? '—' }}<br>
-        <strong>Area:</strong> {{ $bien->area->UK_Nombre_area ?? '—' }}<br>
-        <strong>Fecha de Adquisicion:</strong> {{ \Carbon\Carbon::parse($bien->Dadquisicion_hardware)->format('d/m/Y') }}<br>
-        <strong>Codigo Patrimonial:</strong> {{$bien->UK_Hardware_Codigo ?? '—' }}<br>
-       
-    </div> --}}
-{{--     
-    <div class="section">
-        <table>
-            <thead>
-                <tr>
-                    <th>MOTIVO DE BAJA</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ $bien->Tmotivo_baja_hardware}}</td>
-                    
-                </tr>                
-            </tbody>
-        </table>
-    </div> --}}
     <div class="section">
         <h3>Cuadro de Bienes:</h3>
         <table>

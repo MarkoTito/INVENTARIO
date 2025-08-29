@@ -696,7 +696,7 @@ class BienController extends Controller
 
     public function dowloadExport(Request $request)
     {
-        
+        $fecha = Carbon::now()->format('d.m.Y');
         //form 1 = con codigo - form = 2 sin codigo
         if ($request->form == 1) {
             if ($request->estado == "1") {
@@ -706,7 +706,7 @@ class BienController extends Controller
                         //->whereYear('Dadquisicion_hardware',$request->adquisicion)
                         ->get();
                 //return $bienes;
-                return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+                return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
             } 
             if ($request->estado == "0") {
                 $bienes = Bien::with('area','tipo','estado')
@@ -715,7 +715,7 @@ class BienController extends Controller
                         //->whereYear('Dadquisicion_hardware',$request->adquisicion)
                         ->get();
                     //vereficar el t fisico mal escrito en el controller
-                return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+                return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
             }
         } else { //aca sin code
             if ($request->estado == "1") {
@@ -725,7 +725,7 @@ class BienController extends Controller
                             ->where('FK_Hardware_EstadoId',1)
                             ->get();
                     //return $bienes;
-                    return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+                    return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
 
                 } else {
                     $bienes = Bien::with('area','tipo','estado')
@@ -734,7 +734,7 @@ class BienController extends Controller
                             ->where('FK_Hardware_EstadoId',1)
                             ->get();
                     //return $bienes;
-                    return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+                    return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
                 } 
                 }
                 
@@ -747,7 +747,7 @@ class BienController extends Controller
                         //vereficar el t fisico mal escrito en el controller
                     
                     
-                    return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+                    return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
 
 
 
@@ -760,7 +760,7 @@ class BienController extends Controller
                         //vereficar el t fisico mal escrito en el controller
                     
                     
-                    return Excel::download(new \App\Exports\bienExport($bienes),'Excell.xlsx');
+                    return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
                 }
                 
             }
@@ -774,6 +774,9 @@ class BienController extends Controller
 
     public function dowloadExportPdf(Request $request)
     {
+        $fecha = Carbon::now()->format('d.m.Y');
+        
+
         if ($request->form == 1) { //aca compara si es con fecha
             if ($request->estado == "1") {
                  $bienes = Bien::with('area','tipo','estado')
@@ -783,9 +786,10 @@ class BienController extends Controller
                         ->get();
                 //return $bienes;
                 $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                    'bienes' =>$bienes
+                    'bienes' =>$bienes,
+                    'fecha' => $fecha
                 ]);
-                return $pdf->download("exportacion.pdf");
+                return $pdf->download("PDF-$fecha.pdf");
                 
             } 
             if ($request->estado == "0") {
@@ -797,9 +801,10 @@ class BienController extends Controller
                         ->get();
                     //vereficar el t fisico mal escrito en el controller
                 $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                    'bienes' =>$bienes
+                    'bienes' =>$bienes,
+                    'fecha' => $fecha
                 ]);
-                return $pdf->download("exportacion.pdf");
+                return $pdf->download("PDF-$fecha.pdf");
                 
             }
         } else { //aca sin codigo
@@ -811,9 +816,10 @@ class BienController extends Controller
                             ->get();
                     //return $bienes;
                     $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                        'bienes' =>$bienes
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
                     ]);
-                    return $pdf->download("exportacion.pdf");
+                    return $pdf->download("PDF-$fecha.pdf");
 
                 } else {
                     $bienes = Bien::with('area','tipo','estado')
@@ -823,9 +829,10 @@ class BienController extends Controller
                             ->get();
                     //return $bienes;
                     $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                        'bienes' =>$bienes
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
                     ]);
-                    return $pdf->download("exportacion.pdf");
+                    return $pdf->download("PDF-$fecha.pdf");
                 }
             } 
             if ($request->estado == "0") {
@@ -836,10 +843,11 @@ class BienController extends Controller
                             ->get();
                         //vereficar el t fisico mal escrito en el controller
                     $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                        'bienes' =>$bienes
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
                         
                     ]);
-                    return $pdf->download("exportacion.pdf");
+                    return $pdf->download("PDF-$fecha.pdf");
                     
                 } else {
                     $bienes = Bien::with('area','tipo','estado')
@@ -849,10 +857,11 @@ class BienController extends Controller
                             ->get();
                         //vereficar el t fisico mal escrito en el controller
                     $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                        'bienes' =>$bienes
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
                         
                     ]);
-                    return $pdf->download("exportacion.pdf");
+                    return $pdf->download("PDF-$fecha.pdf");
 
 
 
