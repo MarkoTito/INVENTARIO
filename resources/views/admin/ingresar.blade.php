@@ -22,7 +22,7 @@ title="Registrar"
         <select name="FK_Hardware_TipoId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value=""selected disabled >---Seleccioné un tipo de hardware---</option>
             @foreach ($tipos as $tipo)
-                    @if ($tipo->PK_tipo != 1)
+                    @if ($tipo->PK_tipo != 1 && $tipo->PK_tipo != 2)
                         <option value="{{{$tipo->PK_tipo}}}" {{old('FK_Hardware_TipoId') == $tipo->PK_tipo ? 'selected' : ''}} >{{{$tipo->Tdescriocion_tipo}}}</option>
                     @endif
             @endforeach
@@ -39,7 +39,9 @@ title="Registrar"
                     <select name="FK_Hardware_AreaId" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value=""selected disabled >---Seleccioné un área---</option>
                         @foreach ($areas as $area)
-                            <option value="{{$area->PK_area}}" {{old('FK_Hardware_AreaId')== $area->PK_area ? 'selected': '' }} >{{$area->UK_Nombre_area}}</option>
+                            @if ($area->PK_area != 1 )
+                                <option value="{{$area->PK_area}}" {{old('FK_Hardware_AreaId')== $area->PK_area ? 'selected': '' }} >{{$area->UK_Nombre_area}}</option>
+                            @endif
                         @endforeach
                     </select>
                     @error('FK_Hardware_AreaId')

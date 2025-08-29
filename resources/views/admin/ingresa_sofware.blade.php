@@ -35,7 +35,9 @@ title="Registrar"
                     <select name="FK_Software_SistemaId" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value=""selected disabled >---Seleccioné un sitema---</option>
                         @foreach ($sistemas as $sis)
-                            <option value="{{$sis->PK_sistema}}" {{old('FK_Software_SistemaId') ==$sis->PK_sistema ? 'selected' : '' }}  >{{$sis->Tdescripcion_sistema}}</option>
+                            @if ($sis->PK_sistema !=1 )
+                                <option value="{{$sis->PK_sistema}}" {{old('FK_Software_SistemaId') ==$sis->PK_sistema ? 'selected' : '' }}  >{{$sis->Tdescripcion_sistema}}</option>
+                            @endif
                         @endforeach
                     </select>
                     @error('FK_Software_SistemaId')
@@ -59,7 +61,9 @@ title="Registrar"
                     <select name="FK_Software_AreaId" id="FK_Software_AreaId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value=""selected disabled >---Seleccioné un área---</option>
                         @foreach ($areas as $area)
-                            <option value="{{$area->PK_area}}" {{old('FK_Software_AreaId')== $area->PK_area ? 'selected' : '' }} >{{$area->UK_Nombre_area}}</option>
+                            @if ($area->PK_area != 1)
+                                <option value="{{$area->PK_area}}" {{old('FK_Software_AreaId')== $area->PK_area ? 'selected' : '' }} >{{$area->UK_Nombre_area}}</option>                            
+                            @endif
                         @endforeach
                     </select>
                     @error('FK_Software_AreaId')

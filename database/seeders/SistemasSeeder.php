@@ -15,6 +15,9 @@ class SistemasSeeder extends Seeder
     {
         $Sistemas= [
             [
+                'Tdescripcion_sistema' => 'Todos sistemas',
+            ],
+            [
                 'Tdescripcion_sistema' => 'Zoom',
             ],
             [

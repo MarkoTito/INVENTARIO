@@ -70,7 +70,10 @@ class RoleSeeder extends Seeder
             'read-comentario',
             'update-comentario',
             'delete-comentario',
-            'bajar-comentario'
+            'bajar-comentario',
+            //mas
+            'create-agregar'
+
             
         );
         Role::create(['name' => 'nivel3'])->givePermissionTo(
@@ -87,14 +90,16 @@ class RoleSeeder extends Seeder
         );
     
         User::factory()->create([
-            'name' => 'marko tito',
+            'name' => 'marko',
+            'lastname'=> 'tito',
             'email' => 'markojosheptitopena@gmail.com',
         
             'password' => bcrypt('12345678'),
         ])->assignRole('nivel1'); //esto es gracias al metodo has role q se agrego con la descarga
 
         User::factory()->create([
-                'name' => 'jeremy vega',
+                'name' => 'jeremy',
+                'lastname' => 'vega',
                 'email' => 'jeremyvega@gmail.com',
                 'password' => bcrypt('87654321'),
            

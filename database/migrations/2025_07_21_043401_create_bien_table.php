@@ -49,6 +49,7 @@ return new class extends Migration
             $table->date('Dadquisicion_hardware');
             $table->date('Dbaja_hardware')->nullable();
             $table->text('Tmotivo_baja_hardware')->nullable();
+            $table->text('Tnumero_baja_hardware')->nullable();
             $table->timestamps();
 
         });

@@ -62,7 +62,30 @@ class BienController extends Controller
         $bien=$request->FK_Hardware_AreaId;
         
         if ($request->estado == "1") {
-            if ($request->FK_Hardware_AreaId== "1") {
+            //tquiere todo de areas y tipo
+            if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId == "2") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->get();
+                
+                
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+
+            }
+            //solo quiere todas los tipos
+            if ($request->FK_Hardware_TipoId == "2" && $request->FK_Hardware_AreaId != "1" ) {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_EstadoId',1)
+                        ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                        ->get();
+                
+                
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+
+            }
+
+            // solo quiere todas las area
+            if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId != "2") {
                 $bienes = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_EstadoId',1)
                         ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
@@ -71,7 +94,7 @@ class BienController extends Controller
                 
                 return view('admin.encontrado',compact('bienes','areas','tipos','request'));
 
-            } else {
+            } else {//no quiere todos en ningun caso
                 $bienes = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_EstadoId',1)
                         ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
@@ -85,7 +108,18 @@ class BienController extends Controller
             
         } 
         if ($request->estado == "0") {
-            if ($request->FK_Hardware_AreaId== "1") {
+            //quiere todo de areas y tipo
+            if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId == "2") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                
+                
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+
+            }
+            //solo quiere todas las area
+            if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId != "2") {
                 $bienes = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                         ->where('FK_Hardware_EstadoId',2)
@@ -94,7 +128,19 @@ class BienController extends Controller
                 
                 
                 return view('admin.encontrado',compact('bienes','areas','tipos','request'));
-            } else {
+            }
+            //solo quiere todas los tipos
+            if ($request->FK_Hardware_TipoId == "2" && $request->FK_Hardware_AreaId !="1") {
+                $bienes = Bien::with('area','tipo','estado')
+                        ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                        ->where('FK_Hardware_EstadoId',2)
+                        ->get();
+                    
+                
+                
+                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+            }
+            else {//no quiere todos en ningun caso
                 $bienes = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                         ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
