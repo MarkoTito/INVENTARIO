@@ -212,7 +212,7 @@ title="Buscar"
                         Codigo Patrimonial
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Activo/Baja
+                        Estado
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Area
@@ -221,7 +221,7 @@ title="Buscar"
                         Reparar
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Bajar
+                        Activar/Bajar
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Detalle

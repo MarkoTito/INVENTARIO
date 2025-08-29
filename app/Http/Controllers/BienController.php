@@ -183,6 +183,39 @@ class BienController extends Controller
         Gate::authorize('create-hardware');
         //Inserccion de datos
         
+        $request->validate(
+                [
+                'FK_Hardware_AreaId' => 'required',
+                'FK_Hardware_TipoId' => 'required',
+                'UK_Hardware_Codigo' => 'required|min:12|max:12|unique:hardware',
+                'Tdescripcion_hardware' => 'required|max:180',
+                'Testado_fisico_hardware'=> 'required',
+                'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
+                ],
+                [],
+                [
+                    'FK_Hardware_AreaId' => 'Area',
+                    'FK_Hardware_TipoId'=> 'Tipo',
+                    'UK_Hardware_Codigo' => 'Codigo patrimonial',
+                    'Tdescripcion_hardware'=> 'Descripcion',
+                    'Testado_fisico_hardware'=> 'Estado',
+                    'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
+
+                ]
+        );
+        Bien::create($request->all());
+            session()->flash('swal',[
+                'icon'=> 'success',
+                'title'=> '!El Bien fue registrado con Exito¡',
+                'text'=>'PASO 1 COMPLEATADO'
+                
+            ]);
+        
+        return view('admin/Load_Imagen');
+
+
+
+        /*
         try {
             $request->validate(
                 [
@@ -226,7 +259,7 @@ class BienController extends Controller
             ]);
             return view('admin.ingresar', compact('areas','tipos'));
         }
-
+        */
         
     }
 

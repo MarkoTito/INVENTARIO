@@ -42,7 +42,8 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
         </div>
     @endif
 
-
+    <br>
+    <br>
     
     <div class="grid gap-6  md:grid-cols-2 mb-4">
         <div>
@@ -103,11 +104,12 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
 
         </div>
     </div>  
-
+    <br>
     <div class="">  
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
         <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>{{$bien->Tdescripcion_hardware}}</textarea>
     </div>
+    <br>
     <br>
     <br>
         @if ($bien->estado->PK_estado == 1)

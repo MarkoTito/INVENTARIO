@@ -23,7 +23,7 @@ title="Registrar"
             <div>
                 {{-- Nombre de la licencia --}}
                 <label for="Tnombre_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nombre de la Licencia:</label>
-                <input name="Tnombre_software" type="text" id="Tnombre_software" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el nombre especifico de la licencia" required value="{{old('Tnombre_software')}}"/>
+                <input name="Tnombre_software" type="text" id="Tnombre_software" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="80" placeholder="Ingrese el nombre especifico de la licencia" required value="{{old('Tnombre_software')}}"/>
                 @error('Tnombre_software')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -33,18 +33,21 @@ title="Registrar"
                     {{-- Sistem --}}
                     <label for="FK_Software_SistemaId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Sistema</label>
                     <select name="FK_Software_SistemaId" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value=""selected disabled >---Selecione un sitema---</option>
+                        <option value=""selected disabled >---Seleccioné un sitema---</option>
                         @foreach ($sistemas as $sis)
-                            <option value="{{$sis->PK_sistema}}">{{$sis->Tdescripcion_sistema}}</option>
+                            <option value="{{$sis->PK_sistema}}" {{old('FK_Software_SistemaId') ==$sis->PK_sistema ? 'selected' : '' }}  >{{$sis->Tdescripcion_sistema}}</option>
                         @endforeach
                     </select>
+                    @error('FK_Software_SistemaId')
+                            <p class="text-red-600">*{{$message}}</p>
+                    @enderror
             </div>
             
             
             <div>
                 {{-- Nombre del host --}}
                 <label for="Thost_software" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Host:</label>
-                <input name="Thost_software" type="text" id="Thost_software" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese el Host" required value="{{old('Thost_software')}}"/>
+                <input name="Thost_software" type="text" id="Thost_software" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="30"  required  placeholder="Ingrese el Host" required value="{{old('Thost_software')}}"/>
                 @error('Thost_software')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -54,10 +57,14 @@ title="Registrar"
                     {{-- area --}}
                     <label for="FK_Software_AreaId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Área</label>
                     <select name="FK_Software_AreaId" id="FK_Software_AreaId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value=""selected disabled >---Seleccioné un área---</option>
                         @foreach ($areas as $area)
-                            <option value="{{$area->PK_area}}">{{$area->UK_Nombre_area}}</option>
+                            <option value="{{$area->PK_area}}" {{old('FK_Software_AreaId')== $area->PK_area ? 'selected' : '' }} >{{$area->UK_Nombre_area}}</option>
                         @endforeach
                     </select>
+                    @error('FK_Software_AreaId')
+                            <p class="text-red-600">*{{$message}}</p>
+                    @enderror
             </div>
             
 
