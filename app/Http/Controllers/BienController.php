@@ -743,74 +743,116 @@ class BienController extends Controller
     public function dowloadExport(Request $request)
     {
         $fecha = Carbon::now()->format('d.m.Y');
-        //form 1 = con codigo - form = 2 sin codigo
-        if ($request->form == 1) {
+        $bien=$request->FK_Hardware_AreaId;
+
+        if ($request->form == "1") { //con code
+            $bienes = Bien::with('area','tipo','estado')
+                ->where('UK_Hardware_Codigo',$request->UK_Hardware_Codigo)
+                ->get();
+            return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
+        } else {
             if ($request->estado == "1") {
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('UK_Hardware_Codigo',$request->UK_Hardware_Codigo)
-                        ->where('FK_Hardware_EstadoId',1)
-                        //->whereYear('Dadquisicion_hardware',$request->adquisicion)
-                        ->get();
-                //return $bienes;
-                return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
-            } 
-            if ($request->estado == "0") {
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('UK_Hardware_Codigo',$request->UK_Hardware_Codigo)
-                        ->where('FK_Hardware_EstadoId',2)
-                        //->whereYear('Dadquisicion_hardware',$request->adquisicion)
-                        ->get();
-                    //vereficar el t fisico mal escrito en el controller
-                return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
-            }
-        } else { //aca sin code
-            if ($request->estado == "1") {
-                if ($request->FK_Hardware_AreaId==1) {
+                //tquiere todo de areas y tipo
+                if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId == "2") {
                     $bienes = Bien::with('area','tipo','estado')
-                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                             ->where('FK_Hardware_EstadoId',1)
                             ->get();
-                    //return $bienes;
+                    
+                    
                     return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
-
-                } else {
+    
+                }
+                //solo quiere todas los tipos
+                if ($request->FK_Hardware_TipoId == "2" && $request->FK_Hardware_AreaId != "1" ) {
                     $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->get();
+                    
+                    
+                    return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
+    
+                }
+    
+                // solo quiere todas las area
+                if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId != "2") {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->get();
+                    
+                    
+                    return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
+    
+                } else {//no quiere todos en ningun caso
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_EstadoId',1)
                             ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                             ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                            ->where('FK_Hardware_EstadoId',1)
                             ->get();
-                    //return $bienes;
+                    
+                    
                     return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
-                } 
+    
                 }
                 
+            } 
             if ($request->estado == "0") {
-                if ($request->FK_Hardware_AreaId==1) {
+                //quiere todo de areas y tipo
+                if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId == "2") {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                    
+                    
+                    return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
+    
+                }
+                //solo quiere todas las area
+                if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId != "2") {
                     $bienes = Bien::with('area','tipo','estado')
                             ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                             ->where('FK_Hardware_EstadoId',2)
                             ->get();
-                        //vereficar el t fisico mal escrito en el controller
+                        
                     
                     
                     return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
-
-
-
-                } else {
+                }
+                //solo quiere todas los tipos
+                if ($request->FK_Hardware_TipoId == "2" && $request->FK_Hardware_AreaId !="1") {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                    
+                    return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
+                }
+                else {//no quiere todos en ningun caso
                     $bienes = Bien::with('area','tipo','estado')
                             ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                             ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                             ->where('FK_Hardware_EstadoId',2)
                             ->get();
-                        //vereficar el t fisico mal escrito en el controller
+                        
                     
                     
                     return Excel::download(new \App\Exports\bienExport($bienes),'E-'.$fecha.'.xlsx');
+    
                 }
                 
             }
         }
+        
+
+
+
+        
+
+        
+
+
+        
         
         
     }
@@ -821,106 +863,146 @@ class BienController extends Controller
     public function dowloadExportPdf(Request $request)
     {
         $fecha = Carbon::now()->format('d.m.Y');
-        
 
-        if ($request->form == 1) { //aca compara si es con fecha
+        $bien=$request->FK_Hardware_AreaId;
+
+        if ($request->form == "1") { //con code
+            $bienes = Bien::with('area','tipo','estado')
+                ->where('UK_Hardware_Codigo',$request->UK_Hardware_Codigo)
+                ->get();
+            $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                'bienes' =>$bienes,
+                'fecha' => $fecha
+            ]);
+            return $pdf->download("PDF-$fecha.pdf");
+            
+        } else {
             if ($request->estado == "1") {
-                 $bienes = Bien::with('area','tipo','estado')
-                        ->where('UK_Hardware_Codigo',$request->UK_Hardware_Codigo)
-                        ->where('FK_Hardware_EstadoId',1)
-                        //->whereYear('Dadquisicion_hardware',$request->adquisicion)
-                        ->get();
-                //return $bienes;
-                $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                    'bienes' =>$bienes,
-                    'fecha' => $fecha
-                ]);
-                return $pdf->download("PDF-$fecha.pdf");
-                
-            } 
-            if ($request->estado == "0") {
-                
-                $bienes = Bien::with('area','tipo','estado')
-                        ->where('UK_Hardware_Codigo',$request->UK_Hardware_Codigo)
-                        ->where('FK_Hardware_EstadoId',2)
-                        //->whereYear('Dadquisicion_hardware',$request->adquisicion)
-                        ->get();
-                    //vereficar el t fisico mal escrito en el controller
-                $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                    'bienes' =>$bienes,
-                    'fecha' => $fecha
-                ]);
-                return $pdf->download("PDF-$fecha.pdf");
-                
-            }
-        } else { //aca sin codigo
-            if ($request->estado == "1") {
-                if ($request->FK_Hardware_AreaId==1) {
+                //tquiere todo de areas y tipo
+                if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId == "2") {
                     $bienes = Bien::with('area','tipo','estado')
-                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                             ->where('FK_Hardware_EstadoId',1)
                             ->get();
-                    //return $bienes;
-                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                        'bienes' =>$bienes,
-                        'fecha' => $fecha
-                    ]);
-                    return $pdf->download("PDF-$fecha.pdf");
-
-                } else {
-                    $bienes = Bien::with('area','tipo','estado')
-                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
-                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                            ->where('FK_Hardware_EstadoId',1)
-                            ->get();
-                    //return $bienes;
-                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                        'bienes' =>$bienes,
-                        'fecha' => $fecha
-                    ]);
-                    return $pdf->download("PDF-$fecha.pdf");
-                }
-            } 
-            if ($request->estado == "0") {
-                if ($request->FK_Hardware_AreaId==1) {
-                    $bienes = Bien::with('area','tipo','estado')
-                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
-                            ->where('FK_Hardware_EstadoId',2)
-                            ->get();
-                        //vereficar el t fisico mal escrito en el controller
-                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
-                        'bienes' =>$bienes,
-                        'fecha' => $fecha
-                        
-                    ]);
-                    return $pdf->download("PDF-$fecha.pdf");
                     
-                } else {
+                    
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
+                    ]);
+                    return $pdf->download("PDF-$fecha.pdf");
+    
+                }
+                //solo quiere todas los tipos
+                if ($request->FK_Hardware_TipoId == "2" && $request->FK_Hardware_AreaId != "1" ) {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->get();
+                    
+                    
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
+                    ]);
+                    return $pdf->download("PDF-$fecha.pdf");
+    
+                }
+    
+                // solo quiere todas las area
+                if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId != "2") {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->get();
+                    
+                    
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
+                    ]);
+                    return $pdf->download("PDF-$fecha.pdf");
+    
+                } else {//no quiere todos en ningun caso
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_EstadoId',1)
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->get();
+                    
+                    
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
+                    ]);
+                    return $pdf->download("PDF-$fecha.pdf");
+    
+                }
+                
+            } 
+            if ($request->estado == "0") {
+                //quiere todo de areas y tipo
+                if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId == "2") {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                    
+                    
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
+                    ]);
+                    return $pdf->download("PDF-$fecha.pdf");
+    
+                }
+                //solo quiere todas las area
+                if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId != "2") {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                        
+                    
+                    
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
+                    ]);
+                    return $pdf->download("PDF-$fecha.pdf");
+                }
+                //solo quiere todas los tipos
+                if ($request->FK_Hardware_TipoId == "2" && $request->FK_Hardware_AreaId !="1") {
+                    $bienes = Bien::with('area','tipo','estado')
+                            ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
+                            ->where('FK_Hardware_EstadoId',2)
+                            ->get();
+                        
+                    
+                    
+                    $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
+                        'bienes' =>$bienes,
+                        'fecha' => $fecha
+                    ]);
+                    return $pdf->download("PDF-$fecha.pdf");
+                }
+                else {//no quiere todos en ningun caso
                     $bienes = Bien::with('area','tipo','estado')
                             ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                             ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                             ->where('FK_Hardware_EstadoId',2)
                             ->get();
-                        //vereficar el t fisico mal escrito en el controller
+                        
+                    
+                    
                     $pdf =Pdf::loadView('admin.PDF.exportacionPdf',[
                         'bienes' =>$bienes,
                         'fecha' => $fecha
-                        
                     ]);
                     return $pdf->download("PDF-$fecha.pdf");
-
-
-
+    
                 }
-                
-                
-                
                 
             }
         }
         
-        
     }
-
-
 }
