@@ -34,6 +34,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('create-agregar');
+
         
         
         try {
@@ -41,6 +42,7 @@ class UserController extends Controller
                 'name'     => 'required|string|max:50',
                 'email'    => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8|confirmed',
+                'lastname' => 'required|string|max:50',
                 'permiso' => 'required',
                 
             ]);
@@ -48,6 +50,7 @@ class UserController extends Controller
             $user = User::create([
                 'name'     => $request->name,
                 'email'    => $request->email,
+                'lastname' => $request->lastname,
                 'password' => bcrypt($request->password),
             ]);
             $user->assignRole($request->permiso);
@@ -68,6 +71,7 @@ class UserController extends Controller
             ]);
             return redirect('/admin/Agregar');
         }
+
 
     }
 

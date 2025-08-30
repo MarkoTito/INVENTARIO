@@ -13,22 +13,16 @@ title="Exportacion"
         'name'=> 'Prueba',
     ]
     ]"> 
-    <form id="miFormulario" action="/guardar" method="POST">
-        <label for="fecha">Fecha de adquisición:</label>
-        <input type="date" id="fecha" name="fecha">
-        <br>
-        <button type="submit">Enviar</button>
-    </form>
+    <label for="frutas">Elige una fruta:</label>
+    <input list="lista-frutas" id="frutas" name="frutas">
 
-    <script>
-    document.getElementById('miFormulario').addEventListener('submit', function(e) {
-        const fecha = document.getElementById('fecha').value;
-        if (!fecha) {
-            e.preventDefault(); // evita que se envíe
-            alert("Debes seleccionar una fecha antes de enviar.");
-        }
-    });
-    </script>
+    <datalist id="lista-frutas">
+        <option value="Manzana">
+        <option value="Mango">
+        <option value="Mandarina">
+        <option value="Melón">
+        <option value="Sandía">
+    </datalist>
 
 
 
