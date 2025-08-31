@@ -17,24 +17,43 @@ title="Registrar"
     
     <form method="POST" id="miFormulario" action="{{route('adminbien.store')}}" class="submit-form">
         @csrf
-        {{-- tipo de bien --}}
-        <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware</label>
-        <select name="FK_Hardware_TipoId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value=""selected disabled >---Seleccioné un tipo de hardware---</option>
-            @foreach ($tipos as $tipo)
-                    @if ($tipo->PK_tipo != 1 && $tipo->PK_tipo != 2)
-                        <option value="{{{$tipo->PK_tipo}}}" {{old('FK_Hardware_TipoId') == $tipo->PK_tipo ? 'selected' : ''}} >{{{$tipo->Tdescriocion_tipo}}}</option>
-                    @endif
-            @endforeach
-        </select>
-        @error('FK_Hardware_TipoId')
-            <p class="text-red-600">*{{$message}}</p>
-        @enderror
-        <br>
+        <div class="grid gap-6 mb-4 ">
+            <div>
+                {{-- tipo de bien --}}
+                <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware</label>
+                <select name="FK_Hardware_TipoId" id="miSelect-tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value=""selected disabled >---Seleccioné un tipo de hardware---</option>
+                    @foreach ($tipos as $tipo)
+                            @if ($tipo->PK_tipo != 1 && $tipo->PK_tipo != 2)
+                                <option value="{{{$tipo->PK_tipo}}}" {{old('FK_Hardware_TipoId') == $tipo->PK_tipo ? 'selected' : ''}} >{{{$tipo->Tdescriocion_tipo}}}</option>
+                            @endif
+                    @endforeach
+                </select>
+                @error('FK_Hardware_TipoId')
+                    <p class="text-red-600">*{{$message}}</p>
+                @enderror
+            </div>
+
+        </div>
+        
 
         <div class="grid gap-6 mb-4 md:grid-cols-2">
             <div>
-                    {{-- area --}}
+                {{-- area --}}
+                <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
+                <select name="FK_Hardware_AreaId" id="miSelect-area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value=""selected disabled >---Seleccioné un área---</option>
+                        @foreach ($areas as $area)
+                            @if ($area->PK_area != 1 )
+                                <option value="{{$area->PK_area}}" {{old('FK_Hardware_AreaId')== $area->PK_area ? 'selected': '' }} >{{$area->UK_Nombre_area}}</option>
+                            @endif
+                        @endforeach
+                </select>
+                @error('FK_Hardware_AreaId')
+                    <p class="text-red-600">*{{$message}}</p>
+                @enderror 
+                    {{--                     
+                    area
                     <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
                     <select name="FK_Hardware_AreaId" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value=""selected disabled >---Seleccioné un área---</option>
@@ -46,7 +65,7 @@ title="Registrar"
                     </select>
                     @error('FK_Hardware_AreaId')
                             <p class="text-red-600">*{{$message}}</p>
-                    @enderror
+                    @enderror --}}
             </div>
             <div>
                 {{-- codigo patrimonial --}}
@@ -163,8 +182,23 @@ title="Registrar"
                 contador.textContent = restantes;
             });
         </script>
-        
 
+        <script>
+            $(document).ready(function() {
+                $('#miSelect-area').select2({
+                placeholder: "---Seleccioné un área---",
+                allowClear: true
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('#miSelect-tipo').select2({
+                placeholder: "---Seleccioné un tipo---",
+                allowClear: true
+                });
+            });
+        </script>
                                     
     @endpush
     

@@ -56,9 +56,19 @@ class BienController extends Controller
     public function index2(?Request $request){
         Gate::authorize('read-hardware');
         //mandar info
+        $request->validate(
+                [
+                'FK_Hardware_AreaId' => 'required',
+                'FK_Hardware_TipoId' => 'required',
+                ],
+                [],
+                [
+                    'FK_Hardware_AreaId' => 'Area',
+                    'FK_Hardware_TipoId'=> 'Tipo'
+                ]
+        );
         $areas=Area::all();
         $tipos = Tipo::all();
-
         $bien=$request->FK_Hardware_AreaId;
         
         if ($request->estado == "1") {

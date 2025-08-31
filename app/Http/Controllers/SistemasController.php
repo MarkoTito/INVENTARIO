@@ -81,6 +81,15 @@ class SistemasController extends Controller
     public function show(Sistema $sistema)
     {
         //
+        $sistema->Testado_sistema=1;
+        $sistema->save();
+        session()->flash('swal',[
+            'icon'=> 'success',
+            'title'=> '!Exito¡',
+            'text'=>'El Sistema fue habilitado con Exito'
+                    
+       ]);
+        return redirect('/admin/Agregar');
     }
 
     /**
@@ -94,7 +103,7 @@ class SistemasController extends Controller
         session()->flash('swal',[
             'icon'=> 'success',
             'title'=> '!Exito¡',
-            'text'=>'El Sistema fue registrado con Exito'
+            'text'=>'El Sistema fue deshabilitado con Exito'
                     
        ]);
         return redirect('/admin/Agregar');

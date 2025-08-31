@@ -83,6 +83,16 @@ class TiposController extends Controller
     public function show(Tipo $tipo)
     {
         //
+        $tipo->Nestado_tipo=1;
+        $tipo->save();
+        session()->flash('swal',[
+            'icon'=> 'success',
+            'title'=> '!Exito¡',
+            'text'=>'El Tipo de bien fue Habilitado con Exito'
+                    
+        ]);
+               
+        return redirect('/admin/Agregar');
     }
 
     /**
@@ -96,7 +106,7 @@ class TiposController extends Controller
         session()->flash('swal',[
             'icon'=> 'success',
             'title'=> '!Exito¡',
-            'text'=>'El Tipo de bien fue eliminado con Exito'
+            'text'=>'El Tipo de bien fue Deshabilitado con Exito'
                     
         ]);
                

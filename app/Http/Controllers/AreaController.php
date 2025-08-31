@@ -17,7 +17,7 @@ class AreaController extends Controller
      */
     public function index()
     {
-        return 'hola este es el index';
+        return 'hola este es a index'; 
     }
 
     /**
@@ -86,7 +86,16 @@ class AreaController extends Controller
      */
     public function show(Area $area)
     {
-        //
+        //lo usare para habilitarlo
+        $area->Nestado_area=1;
+        $area->save();
+        session()->flash('swal',[
+            'icon'=> 'success',
+            'title'=> '!Exito¡',
+            'text'=>'El area fue habilitado'
+                    
+        ]);
+        return redirect('/admin/Agregar');
     }
 
     /**
@@ -101,7 +110,7 @@ class AreaController extends Controller
         session()->flash('swal',[
             'icon'=> 'success',
             'title'=> '!Exito¡',
-            'text'=>'El area fue eliminado'
+            'text'=>'El area fue deshabilitado'
                     
         ]);
         return redirect('/admin/Agregar');

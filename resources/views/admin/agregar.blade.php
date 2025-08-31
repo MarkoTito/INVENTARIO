@@ -41,66 +41,51 @@ title="Mas"
     <div id="myTabContent">
         {{-- area --}}
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="area" role="tabpanel" aria-labelledby="area-tab">
-            <p class="text-sm text-gray-500 dark:text-gray-400">Formulario de Área</p>
-            <form class="max-w-sm mx-auto" action="{{route('adminarea.store')}}" method="POST"  >
-                @csrf
-                
-                <div class="grid gap-6 mb-4 md:grid-cols-2">
-                    <div>
-                        {{-- <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar Area:</label> --}}
-                        <input name="UK_Nombre_area" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa àrea" required />
-                        @error('UK_Nombre_area')
-                            <p class="text-red-600">*{{$message}}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Agregar <i class="fa-solid fa-plus"></i></button>
-                    </div>
-
-
-                </div>
-
-            </form>
+            <div class="mb-4 flex justify-end " >
+                <button data-modal-target="default-modal" data-modal-toggle="default-modal" class=" block  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " type="button">
+                    Agregar Área
+                </button>
+            </div>
+            
             <p class="text-sm text-gray-500 dark:text-gray-400">Áreas</p>
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Numero
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Área
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Estado
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                Eliminar
+                            <th scope="col" class="px-6 py-3" align="center" >
+                                Deshabilitar / Habilitar
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($areas as $area)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" align="center" >
                                     {{$area->PK_area}}
                                 </th>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4" align="center" >
                                     {{$area->UK_Nombre_area}}
                                 </td>
                                 @if ($area->Nestado_area==1)
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-blue-600 dark:text-blue-500 " align="center" >
                                         Activo
                                     </td>
                                 @else
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-red-500 " align="center" >
                                         No activo
                                     </td>
                                 @endif
                                 @if ($area->Nestado_area==1)
-                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra text-red-500" align="center"  >
                                         <form action="{{route('adminarea.edit',$area->PK_area)}}" method="GET" class="delete-form-area">
                                             @csrf
                                             <button>
@@ -114,9 +99,18 @@ title="Mas"
                                     </th>
                                     
                                 @else
-                                    <td class="px-6 py-4">
-                                        -
-                                    </td>
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra text-blue-600 dark:text-blue-500" align="center"  >
+                                        <form action="{{route('adminarea.show',$area->PK_area)}}" method="GET" class="activate-form-area">
+                                            @csrf
+                                            <button>
+                                                <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                    <i class="fa-solid fa-circle-check"></i>
+                                                </span>
+                                            </button>
+
+                                        </form>
+                                        
+                                    </th>
                                 @endif                                
                             </tr>
                         @endforeach
@@ -135,35 +129,28 @@ title="Mas"
         </div>
         {{-- tipo --}}
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="hardware" role="tabpanel" aria-labelledby="hardware-tab">
-            <p class="text-sm text-gray-500 dark:text-gray-400">Formulario de tipo de hardware</p>
-            <form class="max-w-sm mx-auto" action="{{route('admintipos.store')}}" method="POST" >   
-                @csrf
-                <div class="grid gap-6 mb-4 md:grid-cols-2">
-                    <div class="mb-5">
-                        {{-- <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar Nombre:</label> --}}
-                        <input name="Tdescriocion_tipo" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa hardware" required />
-                    </div>
-                    <div>
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Agregar <i class="fa-solid fa-plus"></i></button>
-                    </div>
-                </div>
-            </form>
+            
+            <div class="mb-4 flex justify-end " >
+                <button data-modal-target="default-modal-hardware" data-modal-toggle="default-modal-hardware" class=" block  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " type="button">
+                    Agregar hardware
+                </button>
+            </div>
             <p class="text-sm text-gray-500 dark:text-gray-400">Tipos de hardwares</p>
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Numero
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Tipo de Hardware
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Estado
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                Eliminar
+                             <th scope="col" class="px-6 py-3" align="center" >
+                                Deshabilitar / Habilitar
                             </th>
                             
                         </tr>
@@ -171,27 +158,27 @@ title="Mas"
                     <tbody>
                         @foreach ($tipos as $tipo)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" align="center" >
                                     {{$tipo->PK_tipo}}
                                 </th>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4" align="center" >
                                     {{$tipo->Tdescriocion_tipo}}
                                 </td>
                                 @if ($tipo->Nestado_tipo==1)
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-blue-600 dark:text-blue-500 " align="center" >
                                         Activo
                                     </td>
                                 @else
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-red-500" " align="center" >
                                         No activo
                                     </td>
                                 @endif
                                 @if ($tipo->Nestado_tipo==1)
-                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
+                                   <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra text-red-500" align="center"  >
                                         <form action="{{route('admintipos.edit',$tipo->PK_tipo)}}" method="GET" class="delete-form-hardware">
                                             @csrf
                                             <button>
-                                                <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                <span class="w-6 h-6 inline-flex text-red-500 justify-center items-center">
                                                     <i class="fa-solid fa-circle-xmark"></i>
                                                 </span>
                                             </button>
@@ -201,9 +188,17 @@ title="Mas"
                                     </th>
                                     
                                 @else
-                                    <td class="px-6 py-4">
-                                        -
-                                    </td>
+                                   <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra text-blue-600 dark:text-blue-500" align="center"  >
+                                       <form action="{{route('admintipos.show',$tipo->PK_tipo)}}" method="GET" class="activate-form-tipo">
+                                           @csrf
+                                           <button>
+                                               <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                   <i class="fa-solid fa-circle-check"></i>
+                                               </span>
+                                           </button>
+                                       </form>
+                                        
+                                    </th>
                                 @endif 
                                 
                             </tr>
@@ -222,19 +217,15 @@ title="Mas"
 
         {{-- sistemas --}}
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="sistema" role="tabpanel" aria-labelledby="sistema-tab">
-            <p class="text-sm text-gray-500 dark:text-gray-400">Formulario de tipo de sistema</p>
-            <form class="max-w-sm mx-auto" action="{{route('adminsistemas.store')}}" method="POST" >
-                @csrf
-                <div class="grid gap-6 mb-4 md:grid-cols-2">
-                    <div class="mb-5">
-                        {{-- <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar Nombre:</label> --}}
-                        <input name="Tdescripcion_sistema" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa sistema" required />    
-                    </div>
-                    <div>
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Agregar <i class="fa-solid fa-plus"></i> </button>
-                    </div>
-                </div>
-            </form>
+
+            <div class="mb-4 flex justify-end " >
+                <button data-modal-target="default-modal-sistema" data-modal-toggle="default-modal-sistema" class=" block  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " type="button">
+                    Agregar Sistema
+                </button>
+            </div>
+
+            {{-- <p class="text-sm text-gray-500 dark:text-gray-400">Formulario de tipo de sistema</p>
+             --}}
 
 
 
@@ -243,44 +234,44 @@ title="Mas"
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Numero
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Tipo de Sistema
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" align="center" >
                                 Estado
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                Eliminar
+                             <th scope="col" class="px-6 py-3" align="center" >
+                                Deshabilitar / Habilitar
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($sistemas as $sistema)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" align="center" >
                                     {{$sistema->PK_sistema}}
                                 </th>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4" align="center" >
                                     {{$sistema->Tdescripcion_sistema}}
                                 </td>
                                 @if ($sistema->Testado_sistema==1)
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-blue-600 dark:text-blue-500  " align="center" >
                                         Activo
                                     </td>
                                 @else
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-red-500 " align="center" >
                                         No activo
                                     </td>
                                 @endif
                                 @if ($sistema->Testado_sistema==1)
-                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center" >
                                         <form action="{{route('adminsistemas.edit',$sistema->PK_sistema)}}" method="GET" class="delete-form-sistema">
                                             @csrf
                                             <button>
-                                                <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                <span class="w-6 h-6 inline-flex justify-center items-center text-red-500" >
                                                     <i class="fa-solid fa-circle-xmark"></i>
                                                 </span>
                                             </button>
@@ -290,9 +281,17 @@ title="Mas"
                                     </th>
                                     
                                 @else
-                                    <td class="px-6 py-4">
-                                        -
-                                    </td>
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra text-blue-600 dark:text-blue-500" align="center"  >
+                                       <form action="{{route('adminsistemas.show',$sistema->PK_sistema)}}" method="GET" class="activate-form-sistema">
+                                           @csrf
+                                           <button>
+                                               <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                   <i class="fa-solid fa-circle-check"></i>
+                                               </span>
+                                           </button>
+                                       </form>
+                                        
+                                    </th>
                                 @endif 
                                 
                             </tr>
@@ -437,19 +436,19 @@ title="Mas"
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3" align="center" >
                                     Numero
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3" align="center" >
                                     Nombre
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3" align="center" >
                                     Apellido
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3" align="center" >
                                     Email
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3" align="center" >
                                     Eliminar
                                 </th>
                                 
@@ -458,23 +457,23 @@ title="Mas"
                         <tbody>
                             @foreach ($users as $user)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" align="center" >
                                         {{$user->id}}
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4" align="center" >
                                         {{$user->name}}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4" align="center" >
                                         {{$user->lastname}}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4" align="center" >
                                         {{$user->email}}
                                     </td>
-                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra">
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center" >
                                         <form action="/admin/eliminar/usuario/{{$user->id}}" method="POST" class="delete-form-usuario">
                                             @csrf
                                             <button>
-                                                <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                <span class="w-6 h-6 inline-flex justify-center items-center text-red-500 ">
                                                     <i class="fa-solid fa-circle-xmark"></i>
                                                 </span>
                                             </button>
@@ -510,7 +509,119 @@ title="Mas"
 
         </div>
     </div>
-    
+    {{-- modals --}}
+    <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
+                        AGREGAR ÀREA
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-black" data-modal-hide="default-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                   </button>
+                </div>
+                <div class="mb-4" >
+                    <!-- Modal body y formulario -->
+                    <form class="max-w-sm mx-auto" action="{{route('adminarea.store')}}" method="POST"  >
+                        @csrf
+                        <div>
+                            <br>
+                            <input name="UK_Nombre_area" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa àrea" required />
+                            @error('UK_Nombre_area')
+                                <p class="text-red-600">*{{$message}}</p>
+                            @enderror
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Agregar <i class="fa-solid fa-plus"></i></button>
+                            <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700">Cancelar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- modals de hadrware --}}
+    <div id="default-modal-hardware" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
+                        AGREGAR HARDWARE
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-black" data-modal-hide="default-modal-hardware">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                   </button>
+                </div>
+                <div class="mb-4" >
+                    <!-- Modal body y formulario -->
+                   <form class="max-w-sm mx-auto" action="{{route('admintipos.store')}}" method="POST" >   
+                        @csrf
+                        <br>
+                        <div>
+                            <input name="Tdescriocion_tipo" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa hardware" required />
+                            @error('Tdescriocion_tipo')
+                                <p class="text-red-600">*{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Agregar <i class="fa-solid fa-plus"></i></button>
+                            <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- modals de sistema --}}
+    <div id="default-modal-sistema" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
+                        AGREGAR SISTEMA
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-black" data-modal-hide="default-modal-sistema">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                   </button>
+                </div>
+                <div class="mb-4" >
+                    <!-- Modal body y formulario -->
+                    <form class="max-w-sm mx-auto" action="{{route('adminsistemas.store')}}" method="POST" >
+                        @csrf 
+                        <br>
+                        <div>
+                            <input name="Tdescripcion_sistema" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa sistema" required />
+                            @error('Tdescripcion_sistema')
+                                <p class="text-red-600">*{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Agregar <i class="fa-solid fa-plus"></i></button>
+                            <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     @push('js')
@@ -554,13 +665,37 @@ title="Mas"
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
-                            title: "Eliminar esta àrea?",
-                            text: "No podras revertir esto!",
+                            title: "Deshabilitar  esta àrea?",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, eliminar àrea",
+                            confirmButtonText: "Si, Deshabilitar  àrea",
+                            cancelButtonText: "No cancelar"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });    
+                });
+            });
+        </script>
+        <script>
+        //que seleciona todos esos formularios que tengan ese nombre de delete-form-area 
+            forms = document.querySelectorAll('.activate-form-area')
+            //que recorra todos los formularios
+            forms.forEach(form => {
+                //que se ponga al escucha de ese formulario con el evento submit
+                form.addEventListener('submit',function(e){ //e es el evento en si
+                    //previne el evento 
+                    e.preventDefault('');
+                        Swal.fire({
+                            title: "Habilitar  esta àrea?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Si, habilitar  àrea",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {
@@ -580,13 +715,37 @@ title="Mas"
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
-                            title: "Eliminar esta tipo de hardware?",
-                            text: "No podras revertir esto!",
+                            title: "Deshabilitar  esta tipo de hardware?",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, eliminar hardware",
+                            confirmButtonText: "Si, Deshabilitar  hardware",
+                            cancelButtonText: "No cancelar"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });    
+                });
+            });
+        </script>
+        <script>
+        //que seleciona todos esos formularios que tengan ese nombre de delete-form-area 
+            forms = document.querySelectorAll('.activate-form-tipo')
+            //que recorra todos los formularios
+            forms.forEach(form => {
+                //que se ponga al escucha de ese formulario con el evento submit
+                form.addEventListener('submit',function(e){ //e es el evento en si
+                    //previne el evento 
+                    e.preventDefault('');
+                        Swal.fire({
+                            title: "Habilitar  este tipo de hardware?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Si, habilitar tipo de hardware",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {
@@ -606,13 +765,37 @@ title="Mas"
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
-                            title: "Eliminar esta tipo de sistema?",
-                            text: "No podras revertir esto!",
+                            title: "Deshabilitar  esta tipo de sistema?",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, eliminar sistema",
+                            confirmButtonText: "Si, Deshabilitar  sistema",
+                            cancelButtonText: "No cancelar"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });    
+                });
+            });
+        </script>
+        <script>
+        //que seleciona todos esos formularios que tengan ese nombre de delete-form-area 
+            forms = document.querySelectorAll('.activate-form-sistema')
+            //que recorra todos los formularios
+            forms.forEach(form => {
+                //que se ponga al escucha de ese formulario con el evento submit
+                form.addEventListener('submit',function(e){ //e es el evento en si
+                    //previne el evento 
+                    e.preventDefault('');
+                        Swal.fire({
+                            title: "Habilitar  este sistema?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Si, habilitar  sistema",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {
@@ -632,13 +815,12 @@ title="Mas"
                     //previne el evento 
                     e.preventDefault('');
                         Swal.fire({
-                            title: "Eliminar esta usuario",
-                            text: "No podras revertir esto!",
+                            title: "Deshabilitar  esta usuario",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, eliminar usuario",
+                            confirmButtonText: "Si, Deshabilitar  usuario",
                             cancelButtonText: "No cancelar"
                             }).then((result) => {
                             if (result.isConfirmed) {
