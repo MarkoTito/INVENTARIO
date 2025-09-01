@@ -18,6 +18,9 @@ class MarcaSeeder extends Seeder
                 'UK_Nombre_marca' => 'No cuenta con una marca',
             ],
             [
+                'UK_Nombre_marca' => 'Compatible',
+            ],
+            [
                 'UK_Nombre_marca' => 'HP',
             ],
              [

@@ -14,21 +14,50 @@ title="Exportacion"
     ]
     ]"> 
 
-    <input id="campo" type="text" class="border border-gray-300 p-2 rounded-lg">
+    <!-- Select -->
+<select id="miSelect" style="width: 200px;">
+  <option value="">---Selecciona una marca---</option>
+  <option value="1">HP</option>
+  <option value="2">Dell</option>
+  <option value="3">Lenovo</option>
+  <option value="4">Epson</option>
+  <option value="5">Asus</option>
+</select>
 
-        <script>
-        const input = document.getElementById('campo');
+<!-- Input -->
+<input type="text" id="miInput" placeholder="Aquí aparecerá el valor">
 
-        input.addEventListener('input', () => {
-        if (input.value.trim() === '') {
-            input.classList.add('border-red-500', 'bg-red-100');
-            input.classList.remove('border-green-500', 'bg-green-100');
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Activa select2 con búsqueda
+    $('#miSelect').select2({
+        placeholder: "---Selecciona una marca---",
+        allowClear: true
+    });
+
+    // Detecta cambio
+    $('#miSelect').on("change", function () {
+        const value = $(this).val();
+        const input = document.getElementById("miInput");
+
+        if (value === "2") { 
+            input.value = "Código-PC-001"; // asigna valor si escogió Asus
+            input.disabled = true;
         } else {
-            input.classList.add('border-green-500', 'bg-green-100');
-            input.classList.remove('border-red-500', 'bg-red-100');
+            input.value = "";
+            input.disabled = false;
         }
-        });
-        </script>
+    });
+});
+</script>
+
+
 
 
     

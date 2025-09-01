@@ -16,6 +16,9 @@ class Bien extends Model
     protected $fillable=[
         'FK_Hardware_AreaId',
         'FK_Hardware_TipoId',
+        'FK_Hardware_MarcasId',
+        'Tmodelo_hardware',
+        'Tserie_hardware',
         'Tdescripcion_hardware',
         'UK_Hardware_Codigo',
         'Dadquisicion_hardware',

@@ -43,13 +43,6 @@ return new class extends Migration
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('FK_Hardware_ModelosId')->nullable();
-            $table->foreign('FK_Hardware_ModelosId')
-                    ->references('PK_modelo')
-                    ->on('modelos')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-
             $table->unsignedBigInteger('FK_Hardware_MarcasId')->nullable();
             $table->foreign('FK_Hardware_MarcasId')
                     ->references('PK_marca')
@@ -58,8 +51,8 @@ return new class extends Migration
                     ->onUpdate('cascade');
 
             $table->text('Testado_fisico_hardware'); //este se hara sin tabla 
-            $table->text('Tserie_hardware');
-            $table->text('Tmodelo_hardware');
+            $table->text('Tserie_hardware')->default("null");
+            $table->text('Tmodelo_hardware')->default("null");
             $table->text('Tdescripcion_hardware');
             $table->string('UK_Hardware_Codigo')->unique()->nullable();
             $table->date('Dadquisicion_hardware');

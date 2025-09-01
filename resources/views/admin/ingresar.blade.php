@@ -17,7 +17,7 @@ title="Registrar"
     
     <form method="POST" id="miFormulario" action="{{route('adminbien.store')}}" class="submit-form">
         @csrf
-        <div class="grid gap-6 mb-4 ">
+        <div class="grid gap-6 mb-4 md:grid-cols-3">
             <div>
                 {{-- tipo de bien --}}
                 <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware</label>
@@ -33,11 +33,6 @@ title="Registrar"
                     <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>
-
-        </div>
-        
-
-        <div class="grid gap-6 mb-4 md:grid-cols-2">
             <div>
                 {{-- area --}}
                 <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
@@ -52,21 +47,8 @@ title="Registrar"
                 @error('FK_Hardware_AreaId')
                     <p class="text-red-600">*{{$message}}</p>
                 @enderror 
-                    {{--                     
-                    area
-                    <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
-                    <select name="FK_Hardware_AreaId" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value=""selected disabled >---Seleccioné un área---</option>
-                        @foreach ($areas as $area)
-                            @if ($area->PK_area != 1 )
-                                <option value="{{$area->PK_area}}" {{old('FK_Hardware_AreaId')== $area->PK_area ? 'selected': '' }} >{{$area->UK_Nombre_area}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    @error('FK_Hardware_AreaId')
-                            <p class="text-red-600">*{{$message}}</p>
-                    @enderror --}}
             </div>
+
             <div>
                 {{-- codigo patrimonial --}}
                 <label for="UK_Hardware_Codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo Patrimonial</label>
@@ -75,7 +57,63 @@ title="Registrar"
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
             </div>
+
+        </div>
+        
+
+        <div class="grid gap-6 mb-4 md:grid-cols-3">
+
+            <div>
+                {{-- marca --}}
+                <label for="marca" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige una marca</label>
+                <select name="FK_Hardware_MarcasId" id="miSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value=""selected disabled >---Seleccioné una marca---</option>
+                        @foreach ($marcas as $marca)
+                            <option value="{{$marca->PK_marca}}" {{old('FK_Hardware_MarcasId')== $marca->PK_marca ? 'selected': '' }} >{{$marca->UK_Nombre_marca}}</option>
+                        @endforeach
+                </select>
+                @error('FK_Hardware_MarcasId')
+                    <p class="text-red-600">*{{$message}}</p>
+                @enderror 
+
+{{--                 
+                <label for="marca" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige una marca</label>
+                   <select id="miSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">-- Selecciona --</option>
+                        <option value="pc">PC</option>
+                        @foreach ($marcas as $marca)
+                            <option value="{{$marca->PK_marca}}" {{old('FK_Hardware_MarcasId')== $marca->PK_marca ? 'selected': '' }} >{{$marca->UK_Nombre_marca}}</option>
+                        @endforeach
+                    </select> --}}
+            </div>
             
+            <div>
+                {{-- model--}}
+                <label for="Tmodelo_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Modelo:</label>
+                <input name="Tmodelo_hardware" type="text" id="miInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"   placeholder="Ingrese modelo" value="{{old('Tmodelo_hardware')}}"/>
+                @error('Tmodelo_hardware')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+                {{-- <input type="text" id="miInput" placeholder="Aquí aparecerá el valor"> --}}
+            </div>
+            
+            <div>
+                {{-- Serie --}}
+                <label for="Tserie_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">codigo de serie: </label>
+                <input name="Tserie_hardware" type="text" id="miInput2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"   placeholder="Ingrese marca" value="{{old('Tserie_hardware')}}"/>
+                @error('Tserie_hardware')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+            </div>
+
+            
+            
+            
+            
+            
+        </div>
+        
+        <div class="grid gap-6 mb-4 md:grid-cols-3">
             <div>
                 {{-- Estado del bien --}}
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-black">Estado del bien</h3>
@@ -105,6 +143,9 @@ title="Registrar"
                     @enderror
             </div>
             <div>
+
+            </div>
+            <div>
                 {{-- AÑO DE ADQUISICION --}}
                 <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Adquisicion:</label>
                 <input type="date" name="Dadquisicion_hardware" id="fecha" value="{{old('Dadquisicion_hardware')}}" max="{{ date('Y-m-d') }}">
@@ -113,26 +154,24 @@ title="Registrar"
                 @enderror
                 
             </div>
-
-            
-            
-            
-        </div>
-        <br>
-        <div>
-            {{-- descipcion --}}
-            <label  for="message" class="block mb-1 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
-            <textarea name="Tdescripcion_hardware" id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripcion del bien (No mayor de 180 letras)">{{old('Tdescripcion_hardware')}}</textarea>
-            <p>Letras restantes: <span id="contador">180</span></p>
-            @error('Tdescripcion_hardware')
-                    <p class="text-red-600">*{{$message}}</p>
-            @enderror
-        </div>
-        <br>
-        <div class="flex justify-center mt-4" >
-            <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Subir <i class="fa-solid fa-arrow-up"></i> </button>
-
-        </div>
+        </div>    
+    
+            <br>
+            <div>
+                {{-- descipcion --}}
+                <label  for="message" class="block mb-1 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
+                <textarea name="Tdescripcion_hardware" id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripcion del bien (No mayor de 180 letras)">{{old('Tdescripcion_hardware')}}</textarea>
+                <p>Letras restantes: <span id="contador">180</span></p>
+                @error('Tdescripcion_hardware')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+            </div>
+            <br>
+            <div class="flex justify-center mt-4" >
+                <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Subir <i class="fa-solid fa-arrow-up"></i> </button>
+    
+            </div>
+        
     </form>    
     
    
@@ -191,11 +230,62 @@ title="Registrar"
                 });
             });
         </script>
+
         <script>
             $(document).ready(function() {
                 $('#miSelect-tipo').select2({
-                placeholder: "---Seleccioné un tipo---",
+                placeholder: "---Seleccioné un tipo de hardware---",
                 allowClear: true
+                });
+            });
+        </script>
+        <script>
+            const textarea = document.getElementById("miTextarea");
+            const contador = document.getElementById("contador");
+            const limite = 180; // máximo de letras/caracteres permitidos
+
+            textarea.addEventListener("input", () => {
+                let restantes = limite - textarea.value.length;
+
+                if (restantes < 0) {
+                    textarea.value = textarea.value.substring(0, limite); // corta el texto
+                    restantes = 0;
+                }
+
+                contador.textContent = restantes;
+            });
+        </script>
+        
+
+        <script>
+            $(document).ready(function() {
+                // Activa select2 con búsqueda
+                $('#miSelect').select2({
+                    placeholder: "---Selecciona una marca---",
+                    allowClear: true
+                });
+
+                // Detecta cambio
+                $('#miSelect').on("change", function () {
+                    const value = $(this).val();
+                    const input = document.getElementById("miInput");
+                    const input2 = document.getElementById("miInput2");
+
+                    if (value === "2") { 
+                        input.value = "Sin registro";
+                        input2.value = "Sin registro";  
+                        input.disabled = true;
+                        input2.disabled = true;
+                    }else if (value === "1"){
+                        input.value = "Sin registro";
+                        input2.value = "Sin registro";  
+                        input.disabled = true;
+                        input2.disabled = true;
+                    }else {
+                        input.value = "";
+                        input.disabled = false;
+                        input2.disabled = false;
+                    }
                 });
             });
         </script>
