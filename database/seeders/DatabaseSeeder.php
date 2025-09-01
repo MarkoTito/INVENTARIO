@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
        
 
         // metodo para correr las areas seeder
-
+        $this->call(SedeSeeder::class);
+        $this->call(MarcaSeeder::class);
         $this->call(DeterminacionSeeder::class);
 
         $this->call([
