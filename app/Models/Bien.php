@@ -41,7 +41,11 @@ class Bien extends Model
     {
         return $this->belongsTo(Tipo::class,'FK_Hardware_TipoId','PK_tipo');
     }
-    //aca falta agregar mas coneccionde de la BD
+    public function marca()
+    {
+        return $this->belongsTo(marca::class,'FK_Hardware_MarcasId','PK_marca');
+    }
+
 
     
 

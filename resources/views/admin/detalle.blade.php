@@ -20,55 +20,31 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
     @php
         $idCifrado = Crypt::encryptString($bien->PK_Hardware);
     @endphp
-    @if ($bien->estado->PK_estado == 1)
-        <div class="flex justify-end">
-            <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
-                <button type="submit" 
-                    class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                    Editar <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-            </a>
-
-        </div>
-        
-    @else
-        <div class="flex justify-end">
-            <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
-                <button type="submit" 
-                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    Ver baja <i class="fa-solid fa-eye"></i>
-                </button>
-            </a>
-        </div>
-    @endif
-
-    <br>
-    <br>
     
-    <div class="grid gap-6  md:grid-cols-2 mb-4">
+    <div class="grid gap-6 md:grid-cols-3 mb-2">
         <div>
                 @if (!$imagen)
                     
-                    @if ($bien->FK_Hardware_TipoId ==7)
+                    @if ($bien->FK_Hardware_TipoId ==8)
                         <img src="https://static.vecteezy.com/system/resources/previews/012/618/939/original/printer-cartoon-illustration-vector.jpg" height="240px" width="250px" alt="imagen de impresora">
                     @endif
-                    @if ($bien->FK_Hardware_TipoId ==6) 
+                    @if ($bien->FK_Hardware_TipoId ==7) 
                         <img src="https://m.media-amazon.com/images/I/41it4g4TcEL._UF894,1000_QL80_.jpg " height="210px" width="310px" alt="imagen de Proyector">
                         <p> Estado Original: {{$bien->Testado_fisico_hardware}}</p>                    
                     @endif
-                    @if ($bien->FK_Hardware_TipoId ==5)
+                    @if ($bien->FK_Hardware_TipoId ==6)
                         <img src=" https://static.vecteezy.com/system/resources/previews/011/065/272/non_2x/wireless-computer-mouse-clipart-gray-computer-mouse-watercolor-style-illustration-isolated-on-white-background-simple-wireless-mouse-cartoon-hand-drawn-office-supplies-drawing-back-view-vector.jpg" height="350px" width="350px" alt="imagen de Mouse">
                         <p> Estado Original: {{$bien->Testado_fisico_hardware}}</p>
                     @endif
-                    @if ($bien->FK_Hardware_TipoId ==4)
+                    @if ($bien->FK_Hardware_TipoId ==5)
                         <img src=" https://cdn-icons-png.flaticon.com/512/5921/5921714.png" height="200px" width="200px" alt="imagen de CPU">
                         <p> Estado Original: {{$bien->Testado_fisico_hardware}}</p>
                     @endif
-                    @if ($bien->FK_Hardware_TipoId ==3)
+                    @if ($bien->FK_Hardware_TipoId ==4)
                         <img src="https://img.freepik.com/vector-premium/monitor-computadora-estilo-dibujos-animados-aislado-sobre-fondo-blanco-ilustracion-stock-simbolo-computadora_258706-337.jpg" height="200px" width="250px" alt="imagen de Monitor">
                         <p> Estado Original: {{$bien->Testado_fisico_hardware}}</p>
                     @endif
-                    @if ($bien->FK_Hardware_TipoId ==2)
+                    @if ($bien->FK_Hardware_TipoId ==3)
                         <img src="https://images.vexels.com/media/users/3/140673/isolated/preview/68ff7023a9804bb6e5e12d53f6044c4c-icono-de-dibujos-animados-de-laptop.png" height="200px" width="250px" alt="imagen de Laptop">
                         <p> Estado Original: {{$bien->Testado_fisico_hardware}}</p>
                     @endif
@@ -82,44 +58,58 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                 @endif
         </div>
         
-        <div class="grid gap-6 md:grid-cols-2">
-
-            <div>
-                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Área</label>
-                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->area->UK_Nombre_area}}" disabled>
+        <div class="md:col-span-2 bg-green-200 p-4">
+            <div class="grid gap-6 md:grid-cols-3">
+    
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Área</label>
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->area->UK_Nombre_area}}" disabled>
+                </div>
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Tipo de hardware</label>
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->tipo->Tdescriocion_tipo}}" disabled>
+                </div>
+               
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Hardware_Codigo}}" disabled>
+                        
+                </div>
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Marca:</label>    
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->marca->UK_Nombre_marca}}" disabled>        
+                </div>        
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Modelo:</label>    
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Tmodelo_hardware}}" disabled>        
+                </div>
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Serie:</label>    
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Tserie_hardware}}" disabled>        
+                </div>
+                 <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" disabled>
+                </div>
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado:</label>    
+                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Testado_fisico_hardware}}" disabled>        
+                </div>
             </div>
-            <div>
-                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Codigo:</label>    
-                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->UK_Hardware_Codigo}}" disabled>
-                    
-            </div>
-            <div>
-                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
-                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" disabled>
-            </div>
-            <div>
-                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware:</label>    
-                <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->tipo->Tdescriocion_tipo}}" disabled>        
-            </div>        
 
         </div>
+
     </div>  
-    <br>
     <div class="">  
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
         <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>{{$bien->Tdescripcion_hardware}}</textarea>
     </div>
     <br>
-    <br>
-    <br>
         @if ($bien->estado->PK_estado == 1)
             @if ($comentarios->isEmpty())
-            {{-- si no hay comentarios no te deberia dar de baja pero creo q lo dejare  --}}
+             {{-- si no hay comentarios no te deberia dar de baja pero creo q lo dejare  --}}
                 <div class="grid gap-6 mb-4 md:grid-cols-3">
                     <div>
-                        
-                    </div>
-                    <div class="grid gap-6 mb-4 md:grid-cols-2">
                         @can('bajar-hardware')
                             <button data-modal-target="default-modal" data-modal-toggle="default-modal" 
                                 class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
@@ -127,7 +117,33 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                 Dar de Baja <i class="fa-solid fa-circle-down"></i>
                             </button>
                         @endcan
+                        
+                    </div>
+                    <div class="grid gap-6 mb-4 md:grid-cols-2">
 
+                    </div>
+                    <div>
+                        @if ($bien->estado->PK_estado == 1)
+                            <div class="flex justify-end">
+                                <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
+                                    <button type="submit" 
+                                        class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                                        Editar <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </a>
+
+                            </div>
+                            
+                        @else
+                            <div class="flex justify-end">
+                                <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
+                                    <button type="submit" 
+                                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                        Ver baja <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        @endif
                     </div>
 
                 </div>
@@ -136,33 +152,48 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                 <div class="grid gap-6 mb-4 md:grid-cols-3" >
 
                     <div>
+                        @can('bajar-hardware')
+                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" 
+                                class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+                                type="submit">
+                                Dar de Baja <i class="fa-solid fa-circle-down"></i>
+                            </button>
+                        @endcan
                         
                     </div>
-                    <div class="grid gap-6 mb-4 md:grid-cols-2">
-                        <div>
-                            @can('bajar-hardware')
-                                <button data-modal-target="default-modal" data-modal-toggle="default-modal" 
-                                    class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
-                                    type="submit">
-                                    Dar de Baja <i class="fa-solid fa-circle-down"></i>
+                    <div  >
+                        @can('read-comentario')
+                            <a href="{{url('/admin/buscar/historial/'.$idCifrado)}}">
+                                <button type="submit" 
+                                    class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center">
+                                    Historial <i class="fa-solid fa-folder"></i>
                                 </button>
-                            @endcan
-
-                        </div>
-                        <div>
-                            @can('read-comentario')
-                                <a href="{{url('/admin/buscar/historial/'.$idCifrado)}}">
+                            </a>
+                        @endcan
+                    </div>
+                    <div>
+                        @if ($bien->estado->PK_estado == 1)
+                            <div class="flex justify-end">
+                                <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
                                     <button type="submit" 
-                                        class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center">
-                                        Historial <i class="fa-solid fa-folder"></i>
+                                        class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                                        Editar <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                 </a>
-                            @endcan
 
-                        </div>
-                    </div>
+                            </div>
+                            
+                        @else
+                            <div class="flex justify-end">
+                                <a href="/admin/baja/{{$bien->PK_Hardware}}/pdf">
+                                    <button type="submit" 
+                                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                        Ver baja <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        @endif
 
-                    <div>
                     </div>
                 </div>   
                 

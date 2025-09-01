@@ -328,6 +328,7 @@ class BienController extends Controller
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
+                ->with('marca')
                 ->first();
 
         //para mostrar los comentarios del bien
