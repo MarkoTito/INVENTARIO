@@ -110,11 +110,11 @@
             </div>
             <div class="flex" style="margin-top: 3px;">
                 <label><strong>Usuario:</strong></label>
-                <input type="text">
+                <input value="{{$comentario->usuario}}"  type="text">
             </div>
             <div class="flex" style="margin-top: 3px;">
                 <label><strong>Cargo:</strong></label>
-                <input type="text">
+                <input value="{{$comentario->cargo}}"  type="text">
             </div>
         </div>
         <!-- Acciones realizadas -->

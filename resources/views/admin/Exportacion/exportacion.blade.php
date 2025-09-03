@@ -14,47 +14,52 @@ title="Exportacion"
     ]
     ]"> 
 
-    <!-- Select -->
-<select id="miSelect" style="width: 200px;">
-  <option value="">---Selecciona una marca---</option>
-  <option value="1">HP</option>
-  <option value="2">Dell</option>
-  <option value="3">Lenovo</option>
-  <option value="4">Epson</option>
-  <option value="5">Asus</option>
-</select>
+    <div class="p-4">
+    <!-- Campo de búsqueda -->
+    <input id="searchInput" 
+           type="text" 
+           placeholder="Buscar..." 
+           class="border rounded-lg p-2 mb-4 w-full">
 
-<!-- Input -->
-<input type="text" id="miInput" placeholder="Aquí aparecerá el valor">
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Select2 -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Tabla -->
+    <table class="min-w-full text-sm text-left text-gray-500">
+        <thead class="bg-gray-200 text-gray-700 uppercase">
+            <tr>
+                <th class="px-6 py-3">Nombre</th>
+                <th class="px-6 py-3">Correo</th>
+                <th class="px-6 py-3">Edad</th>
+            </tr>
+        </thead>
+        <tbody id="dataTable">
+            <tr class="bg-white border-b">
+                <td class="px-6 py-4">Juan Pérez</td>
+                <td class="px-6 py-4">juan@example.com</td>
+                <td class="px-6 py-4">28</td>
+            </tr>
+            <tr class="bg-white border-b">
+                <td class="px-6 py-4">María Gómez</td>
+                <td class="px-6 py-4">maria@example.com</td>
+                <td class="px-6 py-4">34</td>
+            </tr>
+            <tr class="bg-white border-b">
+                <td class="px-6 py-4">Pedro López</td>
+                <td class="px-6 py-4">pedro@example.com</td>
+                <td class="px-6 py-4">22</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <script>
-$(document).ready(function() {
-    // Activa select2 con búsqueda
-    $('#miSelect').select2({
-        placeholder: "---Selecciona una marca---",
-        allowClear: true
-    });
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#dataTable tr");
 
-    // Detecta cambio
-    $('#miSelect').on("change", function () {
-        const value = $(this).val();
-        const input = document.getElementById("miInput");
-
-        if (value === "2") { 
-            input.value = "Código-PC-001"; // asigna valor si escogió Asus
-            input.disabled = true;
-        } else {
-            input.value = "";
-            input.disabled = false;
-        }
+        rows.forEach(row => {
+            let text = row.textContent.toLowerCase();
+            row.style.display = text.includes(filter) ? "" : "none";
+        });
     });
-});
 </script>
 
 

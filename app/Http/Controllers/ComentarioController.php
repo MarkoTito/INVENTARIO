@@ -37,7 +37,12 @@ class ComentarioController extends Controller
         //Gate::authorize();
         $areas=Area::all();
         $tipos = Tipo::all();
-        return view('admin.reparar', compact('areas','tipos','code') );
+
+        $codigo= Bien::with('area','tipo')
+                            ->where('UK_Hardware_Codigo',$code)
+                            ->first();
+        
+        return view('admin.reparar', compact('areas','tipos','codigo','code') );
 
     }
     
@@ -61,15 +66,17 @@ class ComentarioController extends Controller
                 'Tdescripcion_comentario' => 'required',
                 'FK_Comentario_HardwareId' => 'required|min:12|max:12',
                 'Testado_fisico_comentario' => 'required',
-                'situacion' => 'required'
-                
+                'cargo' => 'required',
+                'usuario' => 'required',
             ],
             [],
             [
                 'Tdescripcion_comentario'=> 'Comentario',
                 'FK_Comentario_HardwareId' => 'Codigo Patrimonial',
                 'Testado_fisico_comentario' => 'Estado del Bien',
-                'situacion' => 'Situacion'
+                'cargo' => 'Usuario',
+                'usuario' => 'cargo',
+                
             ]
         );
         //BUSQUEDA DEL USUARIO_id
@@ -81,10 +88,7 @@ class ComentarioController extends Controller
         $codigo= Bien::with('area','tipo')
                             ->where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)
                             ->first();
-        /*
-        $bien= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)
-                            ->get();
-        */
+  
         if (!$codigo) {
             //varaible de seccion
             session()->flash('swal',[
@@ -94,58 +98,40 @@ class ComentarioController extends Controller
             ]);
             return redirect()->route('adminbien.index');
         } else {
-            if ($codigo->FK_Hardware_EstadoId == 1) {
-                if ($request->situacion == 1) {
-                    $coment = new Comentario();
-                    //esto se podria evitar con carga masivoa . pero se vera despues
-                    $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
-                    $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
-                    $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
-                    $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
-                    $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
-                    $coment->FK_Comentario_UserId=$usuario_id;
-                    $coment->save();
-    
-                    
-                    $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
-                        'comentario' =>$request,
-                        'bien' => $codigo,
-                        'nombre'=> $usuario,
-                        'fecha' => $fecha,
-                        
-                    ]);
             
-                    //varaible de seccion
-                    session()->flash('swal',[
-                        'icon'=> 'success',
-                        'title'=> '!Bien hecho',
-                        'text'=>   'El comentario fue registrado con exito'
-                    ]);
-                    return $pdf->download("compra_{$codigo->PK_Hardware}.pdf");
-                    
+            if ($codigo->FK_Hardware_EstadoId == 1) {
+
+                $coment = new Comentario();
+                //esto se podria evitar con carga masivoa . pero se vera despues
+                $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
+                $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
+                $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
+                $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
+                $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
+                $coment->FK_Comentario_UserId=$usuario_id;
+                $coment->save();
+
+                $dato= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)->update(
+                [
+                    'Testado_fisico_hardware' => $request->Testado_fisico_comentario                
+                ]
+                );
                 
-                    return redirect()->route('adminbien.index');
+                $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
+                    'comentario' =>$request,
+                    'bien' => $codigo,
+                    'nombre'=> $usuario,
+                    'fecha' => $fecha,
                     
-                } else {
-                     $coment = new Comentario();
-                    //esto se podria evitar con carga masivoa . pero se vera despues
-                    $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
-                    $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
-                    $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
-                    $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
-                    $coment->FK_Comentario_UserId=$usuario_id;
-                    $coment->save();
-    
-                    //varaible de seccion
-                    session()->flash('swal',[
-                        'icon'=> 'success',
-                        'title'=> '!Bien hecho',
-                        'text'=>   'El comentario fue registrado con exito'
-                    ]);
-                
-                    return redirect()->route('adminbien.index');
-                }
-               
+                ]);
+        
+                //varaible de seccion
+                session()->flash('swal',[
+                    'icon'=> 'success',
+                    'title'=> '!Bien hecho',
+                    'text'=>   'El comentario fue registrado con exito'
+                ]);
+                return $pdf->download("Acta de salida {$codigo->UK_Hardware_Codigo}.pdf");
 
 
             } else {
@@ -157,6 +143,72 @@ class ComentarioController extends Controller
              return redirect()->route('adminbien.index');
             }
             
+        }
+        
+
+    }
+    public function reparacion(Request $request)
+    {
+        Gate::authorize('create-comentario'); 
+        //creacion del comentario
+        $data=$request->validate(
+            [
+                'Tdescripcion_comentario' => 'required',
+                'FK_Comentario_HardwareId' => 'required|min:12|max:12',
+                'Testado_fisico_comentario' => 'required',
+                
+                
+            ],
+            [],
+            [
+                'Tdescripcion_comentario'=> 'Comentario',
+                'FK_Comentario_HardwareId' => 'Codigo Patrimonial',
+                'Testado_fisico_comentario' => 'Estado del Bien',
+                
+            ]
+        );
+        //BUSQUEDA DEL USUARIO_id
+        $usuario_id=Auth::user()->id;
+        $usuario=Auth::user();
+        $fecha = Carbon::now()->format('d-m-Y');
+                
+        //BUSQUEDA DEL BIEN
+        $codigo= Bien::with('area','tipo')
+                            ->where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)
+                            ->first();
+  
+        if (!$codigo) {
+            //varaible de seccion
+            session()->flash('swal',[
+                'icon'=> 'error',
+                'title'=> '!Upss',
+                'text'=>   'El Bien no existe'
+            ]);
+            return redirect()->route('adminbien.index');
+        } else {
+            $coment = new Comentario();
+           //esto se podria evitar con carga masivoa . pero se vera despues
+           $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
+           $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
+           $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
+           $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
+           $coment->FK_Comentario_UserId=$usuario_id;
+           $coment->save();
+
+           $dato= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)->update(
+            [
+                'Testado_fisico_hardware' => $request->Testado_fisico_comentario                
+            ]
+            );
+
+           //varaible de seccion
+           session()->flash('swal',[
+               'icon'=> 'success',
+               'title'=> '!Bien hecho',
+               'text'=>   'El comentario fue registrado con exito'
+           ]);
+       
+           return redirect()->route('adminbien.index');
         }
         
 

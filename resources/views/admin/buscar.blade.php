@@ -13,10 +13,10 @@ title="Buscar"
         'name'=> 'Buscar',
     ]
     ]"> 
-    
+{{--     
     <div class="grid gap-2 mb-4 md:grid-cols-2">
         <div>
-            {{-- formulario CON CODIGO --}}
+            formulario CON CODIGO
             <form method="POST" action="/admin/buscar/todo/code" class="p-6 rounded-lg w-96 mx-auto">
                 
                 @csrf
@@ -37,7 +37,7 @@ title="Buscar"
                 <input type="text" name="form" value="2" class="hidden">  
                  <div class="grid gap-6 mb-4 md:grid-cols-2">
                     <div>
-                        {{-- tipo de bien --}}
+                        tipo de bien
                         <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware</label>
                         <select name="FK_Hardware_TipoId" id="miSelect-tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value=""selected disabled >---Seleccioné un tipo de hardware---</option>
@@ -53,7 +53,7 @@ title="Buscar"
                     </div>
                     <div>
                             <div>
-                                {{-- area --}}
+                                area
                                 <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
                                 <select name="FK_Hardware_AreaId" id="miSelect-area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option value=""selected disabled >---Seleccioné un área---</option>
@@ -88,9 +88,12 @@ title="Buscar"
             
         </div>
 
-    </div>
+    </div> --}}
 
-    
+     <input id="searchInput" 
+           type="text" 
+           placeholder="Buscar..." 
+           class="border rounded-lg p-2 mb-4 w-full">
  
 
 
@@ -122,7 +125,7 @@ title="Buscar"
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="dataTable">
                 @foreach ($bienes as $bien)
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
@@ -208,6 +211,18 @@ title="Buscar"
     <!-- Previous Button -->
    
     @push('js')
+        <script>
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#dataTable tr");
+
+            rows.forEach(row => {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? "" : "none";
+            });
+        });
+    </script>
+
         <script>
             document.querySelectorAll('input[name="busqueda"]').forEach(function(radio) {
                 radio.addEventListener('change', function() {
