@@ -393,14 +393,7 @@ class BienController extends Controller
         return view('admin.bajar', compact('code') );
 
     }
-    public function reversion($code)
-    {   
-        //formulario de revercion de baja
-        Gate::authorize('create-comentario'); 
-        
-        return view('admin.reactivar', compact('code') );
-
-    }
+    
 
 
     /**
@@ -464,41 +457,7 @@ class BienController extends Controller
         
     }
 
-    public function baja (Request $request,$bien)
-    {
-        Gate::authorize('bajar-hardware'); 
-        if (!$request->T_Motivo_Baja || strlen($request->T_Motivo_Baja) > 125) {
-            session()->flash('swal', [
-                'icon' => 'error',
-                'title' => '!Upss',
-                'text' => 'No introdujo un motivo o es muy largo'
-            ]);
-            return redirect()->route('adminbien.index');
-        }
-        
-        $usuario=Auth::user()->id;
-        
-        $fecha=Carbon::now();
-        ////Bajar bien
-        
-        $dato= Bien::where('UK_Hardware_Codigo',$bien)->update(
-            [
-                'Dbaja_hardware'=>$fecha,
-                'Tmotivo_baja_hardware'=> $request->T_Motivo_Baja,
-                'FK_Hardware_UserId'=>$usuario,
-                'FK_Hardware_EstadoId' => 2                
-            ]
-        );
-       
-        session()->flash('swal',[
-            'icon'=> 'success',
-            'title'=> '!Bien hecho',
-            'text'=>   'El bien fue dado de baja correctamente'
-        ]);
-        
-        //return $bien;
-        return redirect()->route('adminbien.index');
-    }
+    
 
     public function Bajas()
     {
@@ -514,44 +473,7 @@ class BienController extends Controller
         return view('admin/Buscar/buscar_Baja',compact('bienes','areas','tipos'));
     }
 
-    public function revertirbaja (Request $request,$bien)
-    {
-        Gate::authorize('bajar-hardware'); 
-        if (!$request->T_Motivo_Activar || strlen($request->T_Motivo_Activar) > 125) {
-            session()->flash('swal', [
-                'icon' => 'error',
-                'title' => '!Upss',
-                'text' => 'No introdujo un motivo o es muy largo'
-            ]);
-            return redirect()->route('adminbien.index');
-        }
-        /*
-        $usuario=Auth::user()->id;
-        
-        $fecha=Carbon::now();
-        */
-        ////revetir  baja
-        
-        $dato= Bien::where('PK_Hardware',$bien)->update(
-            [
-                'Dbaja_hardware'=> null,
-                'Tmotivo_baja_hardware'=> null,
-                'FK_Hardware_UserId'=>  null,
-                'FK_Hardware_EstadoId' => 1                
-            ]
-        );
-       
-        session()->flash('swal',[
-            'icon'=> 'success',
-            'title'=> '!Bien hecho',
-            'text'=>   'El bien se re activo correctamente'
-        ]);
-        
-        //return $bien;
-        return redirect()->route('adminbien.index');
-        
-        //return $bien;
-    }
+    
     
 
     public function pdf($id)

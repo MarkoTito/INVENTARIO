@@ -17,7 +17,7 @@ title="Bajar"
     <div class="grid gap-6 mb-4 md:grid-cols-2">
 
         <div>
-            <h3>Codigo: {{$code}}</h3>
+            <h3>Codigo: {{$code}} </h3>
         </div>
 
     </div>

@@ -14,11 +14,31 @@ title="Activar"
     ]
     ]">
 
-    <div class="grid gap-6 mb-4 md:grid-cols-2">
-
-        {{-- <div>
-            <h3>Codigo: {{$code}}</h3>
-        </div> --}}
+    <div class="border-2 border-black rounded-3xl p-6">
+         <div class="flex justify-center mb-4" >
+            <h3>DATOS DE LA BAJA</h3>
+            
+        </div>
+        <div class="grid gap-6 mb-4 md:grid-cols-2">
+           <div>
+                {{-- motivo --}}
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Usuario:</label>    
+                <input disabled type="text" name="" id="" aria-label="" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$baja->usuarioBaja->name}}" >          
+                
+            </div>
+            <div>
+                {{-- fehca --}}
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha:</label>    
+                <input disabled type="text" name="" id="" aria-label="" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$baja->created_at}}" >          
+                
+            </div>
+    
+        </div>
+        <div class="mb-4">
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo de Baja</label>
+            <textarea disabled id="miTextarea" name="Tdescripcion_hardware" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$baja->Tdescripcion_baja}}</textarea>
+    
+        </div> 
 
     </div>
 

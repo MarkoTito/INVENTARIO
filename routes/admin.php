@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\BajaController;
 use App\Http\Controllers\BienController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DigitalController;
@@ -36,9 +37,9 @@ Route::post('/buscar/todo/code',[BienController::class,'index3']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/{id}',[BienController::class,'show1']);
 //Bajar un bien (cree una ruta pero se ve mal esteticamente)
-Route::get('/Bajar/{id}',[BienController::class,'baja']);
+Route::get('/Bajar/{id}',[BajaController::class,'baja']);
 //revertir baja
-Route::get('/Bajar/revertir/{id}',[BienController::class,'revertirbaja']);
+Route::get('/Bajar/revertir/{id}',[BajaController::class,'revertirbaja']);
 
 //Bajar editar un bien:
 Route::get('/Editar/Hardware/{id}',[BienController::class,'H_editar']);
@@ -64,9 +65,12 @@ Route::post('/reparar/creacion',[ComentarioController::class,'reparacion']);
 
 
 //generar baja
-Route::get('/baja/creacion/{code}',[BienController::class,'index_bajar']);
+
+Route::resource('baja',BajaController::class);
+
+Route::get('/baja/creacion/{code}',[BajaController::class,'index_bajar']);
 //formular de revertir baja
-Route::get('/revercion/creacion/{code}',[BienController::class,'reversion']);
+Route::get('/revercion/creacion/{code}',[BajaController::class,'reversion']);
 
 //mostrar los bienes 
 Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);
