@@ -8,6 +8,7 @@ class Bajas extends Model
 {
     //
     protected $table = 'bajas';
+    protected $primaryKey = 'PK_Bajas'; 
     protected $fillable=[
         'FK_Bajas_HardwareId',
         'FK_Baja_UserId',

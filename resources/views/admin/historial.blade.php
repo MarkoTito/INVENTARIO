@@ -69,36 +69,7 @@ title="Reprar"
             </tbody>
         </table>
     </div> 
-{{--  que?
-    @push('js')
-        <script>
-        
-            forms = document.querySelectorAll('.delete-form')
-            
-            forms.forEach(form => {
-               
-                form.addEventListener('submit',function(e){ 
-                    //previne el evento 
-                    e.preventDefault('');
-                        Swal.fire({
-                            title: "Bajar este Bien?",
-                            text: "No podras revertir esto!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Si, Bajar bien",
-                            cancelButtonText: "No cancelar"
-                            }).then((result) => {
-                            if (result.isConfirmed) {
-                                form.submit();
-                            }
-                        });    
-                });
-            });
-        </script>
-                                    
-    @endpush       --}}
+
 
 
 

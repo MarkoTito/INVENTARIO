@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Archivos;
 use App\Models\Area;
+use App\Models\Bajas;
 use App\Models\Bien;
 use App\Models\Category;
 use App\Models\Comentario;
@@ -339,7 +340,11 @@ class BienController extends Controller
         //para mostrar las imagnes;
         $imagen = Image::where('FK_Imagenes_HardwareId',$id)->first();
         //return $imagen->Tpath_imagenes;
-        return view('admin.detalle',compact('bien','comentarios','imagen'));
+        //ver bjas
+        $bajas = Bajas::where('FK_Bajas_HardwareId',$id)
+                    ->where('Testado_baja',0)
+                    ->get();
+        return view('admin.detalle',compact('bien','comentarios','imagen','bajas'));
     }
 
     public function historial($idCifrado)

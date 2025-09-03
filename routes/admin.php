@@ -78,6 +78,8 @@ Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);
 Route::post('/buscar/digital/store',[DigitalController::class,'index_baja']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/baja/{id}',[BienController::class,'baja_show']);
+//mostrar el historial debjas
+Route::get('/buscar/historial/bajas/{id}',[BajaController::class,'historial']);
 
 
 //menu para agegar mas cosas

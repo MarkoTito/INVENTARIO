@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt; //seguridad osea cifrado
 
 
 
@@ -76,9 +77,10 @@ class BajaController extends Controller
         //formulario de revercion de baja
         // Gate::authorize('create-comentario'); 
 
-        $baja=Bajas::where('FK_Bajas_HardwareId',$code)
-                ->with('usuarioBaja')
-                ->first();
+        $baja = Bajas::where('FK_Bajas_HardwareId', $code)
+             ->with('usuarioBaja')
+             ->latest() 
+             ->first();
         
         return view('admin.reactivar', compact('code','baja') );
 
@@ -147,7 +149,22 @@ class BajaController extends Controller
      */
     public function show(Bajas $bajas)
     {
-        //
+        // aca muestro el historial de las bajas
+        return "holas";
+    }
+    public function historial($idCifrado)
+    {   
+        // Gate::authorize('read-hardware');
+        $id = Crypt::decryptString($idCifrado);
+
+        $bajas=Bajas::with('usuarioBaja')
+                ->where('FK_Bajas_HardwareId',$id)
+                ->where('Testado_baja',0)
+                 ->get();
+        
+        //return $bajas;
+        return view('admin.Historial_baja',compact('bajas'));
+        
     }
 
     /**
