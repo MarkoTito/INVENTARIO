@@ -14,7 +14,6 @@ class Area extends Model
     
     protected $fillable=[
         'UK_Nombre_area',
-        'FK_Area_SedeId'
     ];
 
     public function estado()

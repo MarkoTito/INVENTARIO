@@ -16,31 +16,31 @@ class SedeSeeder extends Seeder
         $sedes= [
             [
                 'UK_Nombre_sede' => 'Palacio municipal',
-                'Tubicacion_sede' => 'Adentro'
+                'Nubicacion_sede' => 1
             ],
             [
                 'UK_Nombre_sede' => 'Maitacapa',
-                'Tubicacion_sede' => 'Afuera'
+                'Nubicacion_sede' => 2
             ],
             [
                 'UK_Nombre_sede' => 'Nuevo san martin',
-                'Tubicacion_sede' => 'Afuera'
+                'Nubicacion_sede' => 2
             ],
             [
                 'UK_Nombre_sede' => 'Infantas',
-                'Tubicacion_sede' => 'Afuera'
+                'Nubicacion_sede' => 2
             ],
             [
                 'UK_Nombre_sede' => 'Narangal',
-                'Tubicacion_sede' => 'Afuera'
+                'Nubicacion_sede' => 2
             ],
             [
                 'UK_Nombre_sede' => 'Pedregal',
-                'Tubicacion_sede' => 'Afuera'
+                'Nubicacion_sede' => 2
             ],
             [
                 'UK_Nombre_sede' => 'ONPE',
-                'Tubicacion_sede' => 'Afuera'
+                'Nubicacion_sede' => 2
             ],
         ];
 

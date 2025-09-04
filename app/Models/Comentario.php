@@ -8,13 +8,15 @@ class Comentario extends Model
 {
     //
     protected $table = 'comentarios';
+    protected $primaryKey = 'PK_Comentario'; 
     protected $fillable=[
         'FK_Comentario_HardwareId',
         'FK_Comentario_UserId',
         'Tdescripcion_comentario',
         'Testado_fisico_comentario',
         'Tobservacion_comentario',
-        'Trecomendacion_comentario'
+        'Trecomendacion_comentario',
+        'Nnumero_comentario'
     ];
     
     public function bien()

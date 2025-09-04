@@ -11,6 +11,6 @@ class Sedes extends Model
     protected $primaryKey = 'PK_sede'; 
      protected $fillable=[
         'UK_Nombre_sede',
-        'Tubicacion_sede'
+        'Nubicacion_sede',
     ];
 }

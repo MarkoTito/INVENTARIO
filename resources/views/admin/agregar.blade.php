@@ -16,7 +16,13 @@ title="Mas"
 
    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
         <li class="me-2" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="area-tab" data-tabs-target="#area" type="button" role="tab" aria-controls="area" aria-selected="true">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="sede-tab" data-tabs-target="#sede" type="button" role="tab" aria-controls="sede" aria-selected="true">
+            Sedes
+            </button>
+        </li>
+
+        <li class="me-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="area-tab" data-tabs-target="#area" type="button" role="tab" aria-controls="area" aria-selected="false">
             Área
             </button>
         </li>
@@ -39,6 +45,98 @@ title="Mas"
     </ul>
 
     <div id="myTabContent">
+        {{-- sede --}}
+        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="sede" role="tabpanel" aria-labelledby="sede-tab">
+            <div class="mb-4 flex justify-end " >
+                <button data-modal-target="default-modal-sede" data-modal-toggle="default-modal-sede" class=" block  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " type="button">
+                    Agregar sede
+                </button>
+            </div>
+
+
+
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3" align="center" >
+                                Numero
+                            </th>
+                            <th scope="col" class="px-6 py-3" align="center" >
+                                Sede
+                            </th>
+                            <th scope="col" class="px-6 py-3" align="center" >
+                                Estado
+                            </th>
+                            <th scope="col" class="px-6 py-3" align="center" >
+                                Deshabilitar / Habilitar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($sedes as $sede)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" align="center" >
+                                    {{$sede->PK_sede}}
+                                </th>
+                                <td class="px-6 py-4" align="center" >
+                                    {{$sede->UK_Nombre_sede}}
+                                </td>
+                                @if ($sede->Nestado_sede==1)
+                                    <td class="px-6 py-4 text-blue-600 dark:text-blue-500 " align="center" >
+                                        Activo
+                                    </td>
+                                @else
+                                    <td class="px-6 py-4 text-red-500 " align="center" >
+                                        No activo
+                                    </td>
+                                @endif
+                                @if ($sede->Nestado_sede==1)
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra text-red-500" align="center"  >
+                                        <form action="{{route('adminsedes.disable',$sede->PK_sede)}}" method="GET" class="delete-form-sede">
+                                            @csrf
+                                            <button>
+                                                <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                    <i class="fa-solid fa-circle-xmark"></i>
+                                                </span>
+                                            </button>
+
+                                        </form>
+                                        
+                                    </th>
+                                    
+                                @else
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra text-blue-600 dark:text-blue-500" align="center"  >
+                                        <form action="{{route('adminsedes.habilitar',$sede->PK_sede)}}" method="GET" class="activate-form-sede">
+                                            @csrf
+                                            <button>
+                                                <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                    <i class="fa-solid fa-circle-check"></i>
+                                                </span>
+                                            </button>
+
+                                        </form>
+                                        
+                                    </th>
+                                @endif                                
+                            </tr>
+                        @endforeach
+                        
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
         {{-- area --}}
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="area" role="tabpanel" aria-labelledby="area-tab">
             <div class="mb-4 flex justify-end " >
@@ -509,7 +607,56 @@ title="Mas"
 
         </div>
     </div>
+
+
+
+
+
+
+
+
     {{-- modals --}}
+    <div id="default-modal-sede" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
+                        AGREGAR SEDE
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-black" data-modal-hide="default-modal-sede">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                   </button>
+                </div>
+                <div class="mb-4" >
+                    <!-- Modal body y formulario -->
+                    <form class="max-w-sm mx-auto" action="{{route('adminsedes.store')}}" method="POST"  >
+                        @csrf
+                        <div>
+                            <br>
+                            <input type="text" name="Nubicacion_sede" value="2" hidden >
+                            <input name="UK_Nombre_sede" type="sede" id="sede" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="105" placeholder="Ingresa sede" required />
+                            @error('UK_Nombre_sede')
+                                <p class="text-red-600">*{{$message}}</p>
+                            @enderror
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Agregar <i class="fa-solid fa-plus"></i></button>
+                            <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700">Cancelar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- modal de area --}}
     <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
         <!-- Modal content -->
@@ -532,7 +679,7 @@ title="Mas"
                         @csrf
                         <div>
                             <br>
-                            <input type="text" name="FK_Area_SedeId" value="1" hidden >
+                            
                             <input name="UK_Nombre_area" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="105" placeholder="Ingresa àrea" required />
                             @error('UK_Nombre_area')
                                 <p class="text-red-600">*{{$message}}</p>
@@ -626,6 +773,56 @@ title="Mas"
 
 
     @push('js')
+        <script>
+        //que seleciona todos esos formularios que tengan ese nombre de delete-form-area 
+            forms = document.querySelectorAll('.delete-form-sede')
+            //que recorra todos los formularios
+            forms.forEach(form => {
+                //que se ponga al escucha de ese formulario con el evento submit
+                form.addEventListener('submit',function(e){ //e es el evento en si
+                    //previne el evento 
+                    e.preventDefault('');
+                        Swal.fire({
+                            title: "Deshabilitar  esta sede?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Si, Deshabilitar  sede",
+                            cancelButtonText: "No cancelar"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });    
+                });
+            });
+        </script>
+        <script>
+        //que seleciona todos esos formularios que tengan ese nombre de delete-form-area 
+            forms = document.querySelectorAll('.activate-form-sede')
+            //que recorra todos los formularios
+            forms.forEach(form => {
+                //que se ponga al escucha de ese formulario con el evento submit
+                form.addEventListener('submit',function(e){ //e es el evento en si
+                    //previne el evento 
+                    e.preventDefault('');
+                        Swal.fire({
+                            title: "Habilitar esta sede?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Si, habilitar sede",
+                            cancelButtonText: "No cancelar"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });    
+                });
+            });
+        </script>
        
         <script>
             document.querySelectorAll('input[name="permiso"]').forEach(function(radio) {

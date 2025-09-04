@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sedes', function (Blueprint $table) {
             $table->id('PK_sede');
             $table->text('UK_Nombre_sede')->uniqid();
-            $table->text('Tubicacion_sede')->uniqid();
+            $table->integer('Nubicacion_sede');
             $table->integer('Nestado_sede')->default(1);
             $table->timestamps();
         });

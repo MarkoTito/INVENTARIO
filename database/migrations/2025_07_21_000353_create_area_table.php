@@ -14,13 +14,6 @@ return new class extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->id('PK_area');
 
-            $table->unsignedBigInteger('FK_Area_SedeId');
-            $table->foreign('FK_Area_SedeId')
-                    ->references('PK_sede')
-                    ->on('sedes')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-
             $table->text('UK_Nombre_area')->uniqid();
             $table->integer('Nestado_area')->default(1);
             $table->timestamps();

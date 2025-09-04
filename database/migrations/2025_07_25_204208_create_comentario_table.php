@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('Trecomendacion_comentario')->nullable();
             $table->text('Testado_fisico_comentario');
             $table->text('Testado_comentario')->default(1);
+            $table->integer('Nnumero_comentario')->nullable();
 
             $table->timestamps();
         });

@@ -13,6 +13,7 @@ use App\Models\Image;
 use App\Models\Marca;
 use App\Models\Modificacion;
 use App\Models\Modificaciones;
+use App\Models\Sedes;
 use App\Models\Sistema;
 use App\Models\Tipo;
 use App\Models\User;
@@ -231,7 +232,8 @@ class BienController extends Controller
         $areas=Area::where('Nestado_area','1')->get();
         $tipos = Tipo::where('Nestado_tipo','1')->get();
         $marcas = Marca::where('Nestado_marca','1')->get();
-        return view('admin.ingresar', compact('areas','tipos','marcas') );
+        $sedes= Sedes::where('Nestado_sede','1')->get();
+        return view('admin.ingresar', compact('areas','tipos','marcas','sedes') );
     }
    
 
@@ -248,6 +250,7 @@ class BienController extends Controller
                     'FK_Hardware_AreaId' => 'required',
                     'FK_Hardware_TipoId' => 'required',
                     'FK_Hardware_MarcasId' => 'required',
+                    'FK_Hardware_SedeId' => 'required',
                     'UK_Hardware_Codigo' => 'required|min:12|max:12|unique:hardware',
                     'Tdescripcion_hardware' => 'required|max:180',
                     'Testado_fisico_hardware'=> 'required',
@@ -258,6 +261,7 @@ class BienController extends Controller
                         'FK_Hardware_AreaId' => 'Area',
                         'FK_Hardware_TipoId'=> 'Tipo',
                         'FK_Hardware_MarcasId' => 'Marca',
+                        'FK_Hardware_SedeId' => 'Sede',
                         'UK_Hardware_Codigo' => 'Codigo patrimonial',
                         'Tdescripcion_hardware'=> 'Descripcion',
                         'Testado_fisico_hardware'=> 'Estado',
@@ -292,6 +296,7 @@ class BienController extends Controller
                     'FK_Hardware_AreaId' => 'required',
                     'FK_Hardware_TipoId' => 'required',
                     'FK_Hardware_MarcasId' => 'required',
+                    'FK_Hardware_SedeId' => 'required',
                     'UK_Hardware_Codigo' => 'required|min:12|max:12|unique:hardware',
                     'Tmodelo_hardware' => 'required|max:30',
                     'Tserie_hardware' => 'required|max:25',
@@ -304,6 +309,7 @@ class BienController extends Controller
                         'FK_Hardware_AreaId' => 'Area',
                         'FK_Hardware_TipoId'=> 'Tipo',
                         'FK_Hardware_MarcasId' => 'Marca',
+                        'FK_Hardware_SedeId' => 'Sede',
                         'Tmodelo_hardware' => 'Modelo',
                         'Tserie_hardware' => 'Serie',
                         'UK_Hardware_Codigo' => 'Codigo patrimonial',
@@ -590,9 +596,10 @@ class BienController extends Controller
         $tipos = Tipo::all();
         $sistemas = Sistema::all();
         $users= User::all();
+        $sedes = Sedes::all();
         
         //return $users;
-        return view('admin/agregar',compact('areas','tipos','sistemas','users'));
+        return view('admin/agregar',compact('areas','tipos','sistemas','users','sedes'));
         
     }
 

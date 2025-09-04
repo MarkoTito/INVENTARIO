@@ -148,21 +148,27 @@ title="Buscar"
                             
                         </th>
                         {{-- reparacion --}}
-                        @if ( $bien->FK_Hardware_EstadoId == 1)
-                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
-                                <span data-modal-target="popup-modal" 
-                                    data-modal-toggle="popup-modal" 
-                                    class="w-6 h-6 inline-flex justify-center items-center cursor-pointer text-black hover:text-blue-800">
-                                    <i class="fa-solid fa-wrench"></i>
-                                </span>
+                            {{-- ver si esta activo --}}
+                        @if ( $bien->FK_Hardware_EstadoId == 1) 
+                            {{-- ver si pertence es del palacio municipal --}}
+                            @if ($bien->FK_Hardware_SedeId == 1)
+                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
+                                    <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
+                                        <span class="w-6 h-6 inline-flex justify-center items-center">
+                                            <i class="fa-solid fa-wrench"></i>
+                                        </span>
+                                    </a>
+                                </th>
+                            @else
+                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
+                                    <a href="/admin/comentario/pdf/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
+                                        <span class="w-6 h-6 inline-flex justify-center items-center">
+                                            <i class="fa-solid fa-wrench"></i>
+                                        </span>
+                                    </a>
+                                </th>
                                 
-                                {{-- <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
-                                    <span class="w-6 h-6 inline-flex justify-center items-center">
-                                        <i class="fa-solid fa-wrench"></i>
-                                    </span>
-                                </a> --}}
-                            </th>
-                            
+                            @endif
                             
                         @else
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
@@ -211,8 +217,8 @@ title="Buscar"
     </div>
     {{ $bienes->links() }}
     
-    <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <!-- CAMBIO: max-w-md → max-w-sm -->
+    {{-- <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        
         <div class="relative p-4 w-full max-w-sm max-h-full">
             <div class="relative bg-blue-600 rounded-lg shadow-sm dark:bg-blue-800">
                 <button type="button" class="absolute top-3 end-2.5 text-gray-200 bg-transparent hover:bg-blue-500 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-blue-700 dark:hover:text-gray-100" data-modal-hide="popup-modal">
@@ -241,7 +247,7 @@ title="Buscar"
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
    
     @push('js')
         <script>

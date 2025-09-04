@@ -71,14 +71,23 @@ title="Movimientos"
 
                     
                     @if (is_null($modificacion->FK_Modificaciones_HardwareId))
-                        <td class="px-6 py-4 text-teal-950 " align="center" >
-                            {{$modificacion->digital->Tnombre_software}}
-                        </td> 
+
+                        @if (is_null($modificacion->FK_Modificaciones_SoftwareId))
+                            <td class="px-6 py-4 text-teal-950 " align="center" >
+                                -
+                            </td> 
+                        @else
+                            <td class="px-6 py-4 text-teal-950 " align="center" >
+                                {{$modificacion->digital->Tnombre_software}}
+                            </td>
+                        @endif
                         
                     @else
                         <td class="px-6 py-4 text-teal-950 " align="center" >
                             {{$modificacion->bien->UK_Hardware_Codigo}}
-                        </td>         
+                        </td>                                     
+
+
                     @endif
             
 

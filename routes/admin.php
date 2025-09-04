@@ -5,10 +5,12 @@ use App\Http\Controllers\BajaController;
 use App\Http\Controllers\BienController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DigitalController;
+use App\Http\Controllers\SedesController;
 use App\Http\Controllers\SistemasController;
 use App\Http\Controllers\TiposController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
+use Database\Seeders\SedeSeeder;
 use Illuminate\Support\Facades\Route;
 /*
     aca tenderemos las rutas que nos dirijiran atraves del
@@ -97,6 +99,11 @@ Route::get('/exportacion/encontrado/excel',[BienController::class,'dowloadExport
 //ruta para descar bienes en excell
 Route::get('/exportacion/encontrado/pdf',[BienController::class,'dowloadExportPdf'])->name('export.pdf');
 
+
+//ruta para areas ()
+Route::resource('sedes', SedesController::class);
+Route::get('sedes/{sede}/disable', [SedesController::class, 'disable'])->name('sedes.disable');
+Route::get('sedes/{sede}/habilitar', [SedesController::class, 'habilitar'])->name('sedes.habilitar');
 //ruta para areas ()
 Route::resource('area', AreaController::class);
 //ruta para tipos ()

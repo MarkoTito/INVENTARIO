@@ -108,7 +108,7 @@ title="Registrar Hardware"
             
             <div>
                 {{-- model--}}
-                <label for="Tmodelo_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Modelo:</label>
+                <label for="Tmodelo_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Modelo</label>
                 <input name="Tmodelo_hardware" type="text" id="miInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="25"   placeholder="Ingrese modelo" value="{{old('Tmodelo_hardware')}}"/>
                 @error('Tmodelo_hardware')
                         <p class="text-red-600">*{{$message}}</p>
@@ -118,7 +118,7 @@ title="Registrar Hardware"
             
             <div>
                 {{-- Serie --}}
-                <label for="Tserie_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">codigo de serie: </label>
+                <label for="Tserie_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">codigo de serie </label>
                 <input name="Tserie_hardware" type="text" id="miInput2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="25"   placeholder="Ingrese marca" value="{{old('Tserie_hardware')}}"/>
                 @error('Tserie_hardware')
                         <p class="text-red-600">*{{$message}}</p>
@@ -161,12 +161,26 @@ title="Registrar Hardware"
                         <p class="text-red-600">*{{$message}}</p>
                     @enderror
             </div>
-            <div>
 
+            <div>
+                {{-- sede --}}
+                <label for="sedes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige una sede</label>
+                <select name="FK_Hardware_SedeId" id="miSelect-sede" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value=""selected disabled >---Seleccioné una sede---</option>
+                    @foreach ($sedes as $sede)
+                            <option value="{{$sede->PK_sede}}" {{old('FK_Hardware_SedeId')== $sede->PK_sede ? 'selected': '' }} >{{$sede->UK_Nombre_sede}}</option>
+                            {{-- @if ($sede->PK_sede != 1 )
+                            @endif --}}
+                    @endforeach
+                </select>
+                @error('FK_Hardware_SedeId')
+                    <p class="text-red-600">*{{$message}}</p>
+                @enderror 
             </div>
+
             <div>
                 {{-- AÑO DE ADQUISICION --}}
-                <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Adquisicion:</label>
+                <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Adquisicion</label>
                 <input type="date" name="Dadquisicion_hardware" id="fecha" value="{{old('Dadquisicion_hardware')}}" max="{{ date('Y-m-d') }}">
                 @error('Dadquisicion_hardware')
                         <p class="text-red-600">*{{$message}}</p>
@@ -179,7 +193,7 @@ title="Registrar Hardware"
             <div>
                 {{-- descipcion --}}
                 <label  for="message" class="block mb-1 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
-                <textarea name="Tdescripcion_hardware" id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripcion del bien (No mayor de 180 letras)">{{old('Tdescripcion_hardware')}}</textarea>
+                <textarea name="Tdescripcion_hardware" required id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripcion del bien (No mayor de 180 letras)">{{old('Tdescripcion_hardware')}}</textarea>
                 <p>Letras restantes: <span id="contador">180</span></p>
                 @error('Tdescripcion_hardware')
                         <p class="text-red-600">*{{$message}}</p>
@@ -245,6 +259,15 @@ title="Registrar Hardware"
             $(document).ready(function() {
                 $('#miSelect-area').select2({
                 placeholder: "---Seleccioné un área---",
+                allowClear: true
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('#miSelect-sede').select2({
+                placeholder: "---Seleccioné un sede---",
                 allowClear: true
                 });
             });

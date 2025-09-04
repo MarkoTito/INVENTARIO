@@ -17,6 +17,7 @@ class Bien extends Model
         'FK_Hardware_AreaId',
         'FK_Hardware_TipoId',
         'FK_Hardware_MarcasId',
+        'FK_Hardware_SedeId',
         'Tmodelo_hardware',
         'Tserie_hardware',
         'Tdescripcion_hardware',

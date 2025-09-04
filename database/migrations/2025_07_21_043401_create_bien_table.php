@@ -29,6 +29,13 @@ return new class extends Migration
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
+            $table->unsignedBigInteger('FK_Hardware_SedeId');
+            $table->foreign('FK_Hardware_SedeId')
+                    ->references('PK_sede')
+                    ->on('sedes')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
             $table->unsignedBigInteger('FK_Hardware_UserId')->nullable();
             $table->foreign('FK_Hardware_UserId')
                     ->references('id')

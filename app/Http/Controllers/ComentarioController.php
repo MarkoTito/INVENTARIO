@@ -127,6 +127,7 @@ class ComentarioController extends Controller
                 $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
                 $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
                 $coment->FK_Comentario_UserId=$usuario_id;
+                
                 $coment->save();
 
                 $dato= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)->update(
@@ -140,7 +141,7 @@ class ComentarioController extends Controller
 
                 Modificacion::create([
                     'FK_Modificaciones_UserId' => $usuario_id,
-                    'FK_Modificaciones_HardwareId' => $codigo->PK_Software,
+                    'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
                     'Tdescripcion_modificaciones'=> "5"
                 ]);
                 
