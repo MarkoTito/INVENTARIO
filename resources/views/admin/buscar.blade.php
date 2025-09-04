@@ -96,7 +96,6 @@ title="Buscar"
            class="border rounded-lg p-2 mb-4 w-full"> --}}
  
 
-
     <h3>Bienes</h3>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" id="table-hardware">
@@ -151,12 +150,19 @@ title="Buscar"
                         {{-- reparacion --}}
                         @if ( $bien->FK_Hardware_EstadoId == 1)
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
-                                <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
+                                <span data-modal-target="popup-modal" 
+                                    data-modal-toggle="popup-modal" 
+                                    class="w-6 h-6 inline-flex justify-center items-center cursor-pointer text-black hover:text-blue-800">
+                                    <i class="fa-solid fa-wrench"></i>
+                                </span>
+                                
+                                {{-- <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
                                     <span class="w-6 h-6 inline-flex justify-center items-center">
                                         <i class="fa-solid fa-wrench"></i>
                                     </span>
-                                </a>
+                                </a> --}}
                             </th>
+                            
                             
                         @else
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
@@ -205,7 +211,37 @@ title="Buscar"
     </div>
     {{ $bienes->links() }}
     
-    <!-- Previous Button -->
+    <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <!-- CAMBIO: max-w-md → max-w-sm -->
+        <div class="relative p-4 w-full max-w-sm max-h-full">
+            <div class="relative bg-blue-600 rounded-lg shadow-sm dark:bg-blue-800">
+                <button type="button" class="absolute top-3 end-2.5 text-gray-200 bg-transparent hover:bg-blue-500 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-blue-700 dark:hover:text-gray-100" data-modal-hide="popup-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4 md:p-5 text-center text-white">
+                    <svg class="mx-auto mb-4 text-white w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                    <h3 class="mb-5 text-lg font-normal text-white">El bien a reparar pertenece al palacio municipal?</h3>
+                    <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" >
+                        <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            Si
+                        </button>
+                    </a>
+                    <a href="/admin/comentario/pdf/creacion/{{$bien->UK_Hardware_Codigo}}" >
+                        <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-blue-600 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-blue-700 dark:bg-blue-800 dark:text-white dark:border-blue-600 dark:hover:text-white dark:hover:bg-blue-700">
+                            No
+                        </button>
+
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
    
     @push('js')
         <script>

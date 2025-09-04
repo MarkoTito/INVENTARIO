@@ -73,8 +73,12 @@
 
         <!-- Fecha -->
         <div class="flex" style="justify-content: flex-end;">
-            <label><strong>Fecha:</strong></label> 
-            <input type="text" value="{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}"  class="small-input">
+            <div>
+                <label><strong>Fecha:</strong></label> 
+            </div>
+            <div>
+                <input type="text" value="{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}"  class="small-input">
+            </div>
         </div>
 
         <!-- Equipo -->
@@ -92,11 +96,11 @@
             <div class="flex-space" style="margin-top: 5px;">
                 <div class="flex" style="flex: 1;">
                     <label><strong>Marca:</strong></label>
-                    <input type="text">
+                    <input type="text" value="{{$bien->marca->UK_Nombre_marca}}" >
                 </div>
                 <div class="flex" style="flex: 1;">
                     <label><strong>Modelo:</strong></label>
-                    <input type="text">
+                    <input type="text" value="{{$bien->Tmodelo_hardware}}">
                 </div>
             </div>
         </div>
@@ -163,7 +167,7 @@
     <h2 style="display:inline-block; margin:0 280px 0 40;">______________</h2>
     <h2 style="display:inline-block; margin:0;">__________________</h2>
 
-    <h3 style="display:inline-block; margin:0 330px 0 70;">{{$nombre->name}}</h3>
+    <h3 style="display:inline-block; margin:0 330px 0 70;">{{$nombre->name}} {{$nombre->lastname}}</h3>
     <h3 style="display:inline-block; margin:0;">V.B Jefe de la ODTIE</h3>
     
     <p style="display:inline-block; margin:0 280px 0 45;">*Tecnico Responsable*</p>

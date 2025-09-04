@@ -55,8 +55,10 @@ Route::post('digital/dropzone',[DigitalController::class,'dropzone'])->name('dig
 
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);
-//generar comentario
+//generar comentario sin pdf
 Route::get('/comentario/creacion/{code}',[ComentarioController::class,'index2']);
+//generar comentario con pdf
+Route::get('/comentario/pdf/creacion/{code}',[ComentarioController::class,'index2Pdf']);
 
 //generar comentario en la BD
 Route::post('/reparar/creacion',[ComentarioController::class,'reparacion']);

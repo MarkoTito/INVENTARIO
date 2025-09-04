@@ -46,6 +46,23 @@ class ComentarioController extends Controller
         return view('admin.reparar', compact('areas','tipos','codigo','code') );
 
     }
+    public function index2Pdf($code)
+    {   
+        
+        Gate::authorize('create-comentario'); 
+        // dejar comentario de repacion
+        //muestra el formulario
+        //Gate::authorize();
+        $areas=Area::all();
+        $tipos = Tipo::all();
+
+        $codigo= Bien::with('area','tipo')
+                            ->where('UK_Hardware_Codigo',$code)
+                            ->first();
+        
+        return view('admin.repararPdf', compact('areas','tipos','codigo','code') );
+
+    }
     
     /**
      * Show the form for creating a new resource.
@@ -86,7 +103,7 @@ class ComentarioController extends Controller
         $fecha = Carbon::now()->format('d-m-Y');
                 
         //BUSQUEDA DEL BIEN
-        $codigo= Bien::with('area','tipo')
+        $codigo= Bien::with('area','tipo','marca')
                             ->where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)
                             ->first();
   
