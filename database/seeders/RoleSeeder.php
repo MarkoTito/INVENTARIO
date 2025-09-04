@@ -34,6 +34,8 @@ class RoleSeeder extends Seeder
             'update-comentario',
             'delete-comentario',
             'bajar-comentario',
+            //movimientos
+            'read-movimientos',
             //agrregar
             'create-agregar',
             
@@ -71,8 +73,7 @@ class RoleSeeder extends Seeder
             'update-comentario',
             'delete-comentario',
             'bajar-comentario',
-            //mas
-            'create-agregar'
+          
 
             
         );

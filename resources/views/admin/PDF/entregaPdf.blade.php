@@ -80,6 +80,15 @@
                 <input type="text" value="{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}"  class="small-input">
             </div>
         </div>
+        <!-- numero de entrega -->
+        <div class="flex" style="justify-content: flex-end;">
+            <div>
+                <label><strong>N° Entrega:</strong></label> 
+            </div>
+            <div>
+                <input type="text" value="{{$numero}}"  class="small-input">
+            </div>
+        </div>
 
         <!-- Equipo -->
         <div class="section">

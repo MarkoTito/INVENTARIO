@@ -16,7 +16,9 @@ class Comentario extends Model
         'Testado_fisico_comentario',
         'Tobservacion_comentario',
         'Trecomendacion_comentario',
-        'Nnumero_comentario'
+        'Nnumero_comentario',
+        'Tubicacion_comentario'
+
     ];
     
     public function bien()

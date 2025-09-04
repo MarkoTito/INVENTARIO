@@ -121,9 +121,11 @@ title="Buscar"
                     <th scope="col" class="px-6 py-3" align="center" >
                         Reparar
                     </th>
-                    <th scope="col" class="px-6 py-3" align="center" >
-                        Activar/Bajar
-                    </th>
+                    @can('bajar-hardware')
+                        <th scope="col" class="px-6 py-3" align="center" >
+                            Activar/Bajar
+                        </th>                        
+                    @endcan
                     <th scope="col" class="px-6 py-3" align="center" >
                         Detalle
                     </th>
@@ -171,40 +173,60 @@ title="Buscar"
                                 {{$bien->area->UK_Nombre_area}}
                                 
                             </th>
+
                             {{-- reparacion --}}
-                            @if ( $bien->FK_Hardware_EstadoId == 1)
-                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center" >
-                                    <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"   >
-                                        <span class="w-6 h-6 inline-flex justify-center items-center">
-                                            <i class="fa-solid fa-wrench"></i>
-                                        </span>
-                                    </a>
-                                </th>
+                                {{-- ver si esta activo --}}
+                            @if ( $bien->FK_Hardware_EstadoId == 1) 
+                                {{-- ver si pertence es del palacio municipal --}}
+                                @if ($bien->FK_Hardware_SedeId == 1)
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
+                                        <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
+                                            <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                <i class="fa-solid fa-wrench"></i>
+                                            </span>
+                                        </a>
+                                    </th>
+                                @else
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
+                                        <a href="/admin/comentario/pdf/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
+                                            <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                <i class="fa-solid fa-wrench"></i>
+                                            </span>
+                                        </a>
+                                    </th>
+                                    
+                                @endif
                                 
                             @else
                                 <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
                                     -
                                 </th>                           
                             @endif
-                            {{-- bajar o activar--}}
-                            @if ( $bien->FK_Hardware_EstadoId == 1)
-                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center" >
-                                    <a href="/admin/baja/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-red-500" >
-                                        <span class="w-6 h-6 inline-flex justify-center items-center">
-                                            <i class="fa-solid fa-circle-down"></i>
-                                        </span>
-                                    </a>
-                                </th>
-                            @else
-                            {{-- activar --}}
-                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
-                                    <a href="/admin/revercion/creacion/{{$bien->PK_Hardware}}" class="text-blue-600 dark:text-blue-500" >
-                                        <span class="w-6 h-6 inline-flex justify-center items-center">
-                                            <i class="fa-solid fa-circle-up"></i>
-                                        </span>
-                                    </a>
-                                </th>                           
-                            @endif
+                            
+
+
+                            @can('bajar-hardware')
+                                {{-- bajar o activar--}}
+                                @if ( $bien->FK_Hardware_EstadoId == 1)
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center" >
+                                        <a href="/admin/baja/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-red-500" >
+                                            <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                <i class="fa-solid fa-circle-down"></i>
+                                            </span>
+                                        </a>
+                                    </th>
+                                @else
+                                {{-- activar --}}
+                                    <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
+                                        <a href="/admin/revercion/creacion/{{$bien->PK_Hardware}}" class="text-blue-600 dark:text-blue-500" >
+                                            <span class="w-6 h-6 inline-flex justify-center items-center">
+                                                <i class="fa-solid fa-circle-up"></i>
+                                            </span>
+                                        </a>
+                                    </th>                           
+                                @endif                                
+                            @endcan
+
 
                             {{-- detalle --}}
                             <td class="px-6 py-4"align="center" >

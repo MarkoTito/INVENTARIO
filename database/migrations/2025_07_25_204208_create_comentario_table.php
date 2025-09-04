@@ -29,11 +29,17 @@ return new class extends Migration
                     ->onUpdate('cascade');
 
             $table->text('Tdescripcion_comentario');
+
             $table->text('Tobservacion_comentario')->nullable();
             $table->text('Trecomendacion_comentario')->nullable();
-            $table->text('Testado_fisico_comentario');
-            $table->text('Testado_comentario')->default(1);
+            
             $table->integer('Nnumero_comentario')->nullable();
+            $table->integer('Tubicacion_comentario')->nullable();//este no deberia ser null (es prueba)
+
+            $table->text('Testado_fisico_comentario');
+
+
+            $table->text('Testado_comentario')->default(1);
 
             $table->timestamps();
         });
