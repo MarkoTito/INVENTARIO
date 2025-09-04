@@ -3,7 +3,7 @@
     sin : significa texto plano
 --}}
 <x-admin-layout 
-title="Registrar"
+title="Registrar Software"
 :breadcrumbs="[
     [
         'name'=>'Menu',

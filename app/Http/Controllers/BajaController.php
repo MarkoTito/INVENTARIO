@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bajas;
 use App\Models\Bien;
+use App\Models\Modificacion;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -49,9 +50,6 @@ class BajaController extends Controller
         
         $dato= Bien::where('UK_Hardware_Codigo',$bien)->update(
             [
-                'Dbaja_hardware'=>$fecha,
-                'Tmotivo_baja_hardware'=> $request->T_Motivo_Baja,
-                'FK_Hardware_UserId'=>$usuario,
                 'FK_Hardware_EstadoId' => 2                
             ]
         );
@@ -62,6 +60,11 @@ class BajaController extends Controller
             "FK_Baja_UserId" => $usuario,
             "Tdescripcion_baja" => $request->T_Motivo_Baja
         ]);
+        Modificacion::create([
+                'FK_Modificaciones_UserId' => $usuario,
+                'FK_Modificaciones_HardwareId' => $bienBja->PK_Hardware,
+                'Tdescripcion_modificaciones'=> "3"
+            ]);
        
         session()->flash('swal',[
             'icon'=> 'success',
@@ -105,9 +108,6 @@ class BajaController extends Controller
         
         $dato= Bien::where('PK_Hardware',$bien)->update(
             [
-                'Dbaja_hardware'=> null,
-                'Tmotivo_baja_hardware'=> null,
-                'FK_Hardware_UserId'=>  null,
                 'FK_Hardware_EstadoId' => 1                
             ]
         );
@@ -120,6 +120,14 @@ class BajaController extends Controller
 
             ]
         );
+        
+        //guardado en el BD de modificaciones
+       
+        Modificacion::create([
+                'FK_Modificaciones_UserId' => $usuario,
+                'FK_Modificaciones_HardwareId' => $bien,
+                'Tdescripcion_modificaciones'=> "4"
+            ]);
        
         session()->flash('swal',[
             'icon'=> 'success',
@@ -157,7 +165,7 @@ class BajaController extends Controller
         // Gate::authorize('read-hardware');
         $id = Crypt::decryptString($idCifrado);
 
-        $bajas=Bajas::with('usuarioBaja')
+        $bajas=Bajas::with('usuarioBaja','usuarioNullBaja')
                 ->where('FK_Bajas_HardwareId',$id)
                 ->where('Testado_baja',0)
                  ->get();

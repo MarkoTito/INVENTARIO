@@ -3,7 +3,7 @@
     sin : significa texto plano
 --}}
 <x-admin-layout 
-title="Entregar"
+title="Subir archivos"
 :breadcrumbs="[
     [
         'name'=>'Menu',

@@ -24,9 +24,13 @@ class Bajas extends Model
         return $this->belongsTo(Bien::class,'FK_Bajas_HardwareId','PK_Hardware');
     }
 
-     public function usuarioBaja()
+    public function usuarioBaja()
     {
         return $this->belongsTo(User::class,'FK_Baja_UserId','id');
+    }
+    public function usuarioNullBaja()
+    {
+        return $this->belongsTo(User::class,'FK_null_Baja_UserId','id');
     }
 
 }

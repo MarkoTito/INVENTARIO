@@ -36,7 +36,7 @@ title="Activar"
         </div>
         <div class="mb-4">
             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo de Baja</label>
-            <textarea disabled id="miTextarea" name="Tdescripcion_hardware" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$baja->Tdescripcion_baja}}</textarea>
+            <textarea disabled id="" name="Tdescripcion_hardware" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" >{{$baja->Tdescripcion_baja}}</textarea>
     
         </div> 
 
@@ -46,7 +46,8 @@ title="Activar"
         @csrf
         <div class="p-4 md:p-5 space-y-4">
             <label for="T_Motivo_Activar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo:</label>
-            <textarea  name="T_Motivo_Activar" id="T_Motivo_Activar" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la reversión de la baja">{{old('T_Motivo_Activar')}}</textarea>
+            <textarea  name="T_Motivo_Activar" id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la reversión de la baja (no mayor a 180 letras)">{{old('T_Motivo_Activar')}}</textarea>
+            <p>Letras restantes: <span id="contador">180</span></p>
             @error('T_Motivo_Activar')
                 <p class="text-red-600">*{{$message}}</p>
             @enderror                            
@@ -66,6 +67,24 @@ title="Activar"
    
 
     @push('js')
+        <script>
+            const textarea = document.getElementById("miTextarea");
+            const contador = document.getElementById("contador");
+            const limite = 180; // máximo de letras/caracteres permitidos
+
+            textarea.addEventListener("input", () => {
+                let restantes = limite - textarea.value.length;
+
+                if (restantes < 0) {
+                    textarea.value = textarea.value.substring(0, limite); // corta el texto
+                    restantes = 0;
+                }
+
+                contador.textContent = restantes;
+            });
+        </script>
+
+
         <script>
         //que seleciona todos esos formularios que tengan ese nombre de delete-form 
             forms = document.querySelectorAll('.delete-form')

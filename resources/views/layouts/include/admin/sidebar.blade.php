@@ -81,7 +81,7 @@
                <span class="w-6 h-6 inline-flex justify-center items-center">
                   <i class="fa-solid fa-arrow-up-from-bracket"></i>
                </span>
-               <span class="ms-3">Exportar</span>
+               <span class="ms-3">Movimientos</span>
             </a>
          </li> 
          @can('create-agregar')

@@ -22,13 +22,16 @@ title="Reprar"
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Usuario
+                        Usuario de baja
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Motivo de baja
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Fecha de baja
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Usuario de activación
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Motivo de activar bien
@@ -51,13 +54,17 @@ title="Reprar"
                                 {{$bajas->usuarioBaja->name}}
                             </th>
                                 
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-red-600">
                                 {{$bajas->Tdescripcion_baja}}
                             </th>
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                                 {{$bajas->created_at}}
+                                
                             </td>
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                                {{$bajas->usuarioNullBaja->name}}
+                            </th>
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-blue-600">
                                 {{$bajas->Tdescripcion_null_baja}}
                             </td>
                         </tr>

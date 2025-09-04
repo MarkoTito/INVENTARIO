@@ -48,7 +48,7 @@ class AreaController extends Controller
             ]);
 
         
-        if (strlen($request->UK_Nombre_area) >90) {
+        if (strlen($request->UK_Nombre_area) >105) {
             session()->flash('swal',[
                 'icon' => 'error',
                 'title' => '!Upss No Ingreso correctamente!',

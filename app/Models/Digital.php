@@ -8,7 +8,7 @@ class Digital extends Model
 {
     //
     protected $table = 'software';
-
+     protected $primaryKey = 'PK_Software'; 
     protected $fillable=[
         'FK_Software_DeterminacionId',
         'FK_Software_AreaId',

@@ -6,6 +6,7 @@ use App\Models\Archivos;
 use App\Models\Area;
 use App\Models\Digital;
 use App\Models\file;
+use App\Models\Modificacion;
 use App\Models\Sistema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -82,7 +83,18 @@ class DigitalController extends Controller
                             'Dfe_Inicio_software'=> 'Fecha de Incio'
                         ]
                 );
-                Digital::create($request->all());
+                $creado=Digital::create($request->all());
+
+                $FK_Modificaciones_UserId=Auth::user()->id;
+
+                Modificacion::create([
+                    'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
+                    'FK_Modificaciones_SoftwareId' => $creado->PK_Software,
+                    'Tdescripcion_modificaciones'=> "1"
+                ]);
+
+
+
                 session()->flash('swal',[
                         'icon'=> 'success',
                         'title'=> '!Bien hecho',
@@ -110,7 +122,16 @@ class DigitalController extends Controller
                             'Dfe_Inicio_software'=> 'Fecha de Incio'
                         ]
                 );
-                Digital::create($request->all());
+                $creado=Digital::create($request->all());
+                $FK_Modificaciones_UserId=Auth::user()->id;
+
+                Modificacion::create([
+                    'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
+                    'FK_Modificaciones_SoftwareId' => $creado->PK_Software,
+                    'Tdescripcion_modificaciones'=> "1"
+                ]);
+
+
                 session()->flash('swal',[
                         'icon'=> 'success',
                         'title'=> '!Bien hecho',

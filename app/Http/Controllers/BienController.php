@@ -11,6 +11,7 @@ use App\Models\Comentario;
 use App\Models\Digital;
 use App\Models\Image;
 use App\Models\Marca;
+use App\Models\Modificacion;
 use App\Models\Modificaciones;
 use App\Models\Sistema;
 use App\Models\Tipo;
@@ -265,13 +266,21 @@ class BienController extends Controller
                     ]
             );
             
-            Bien::create($request->all());
+            $creado=Bien::create($request->all());
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!El Bien fue registrado con Exito¡',
                     'text'=>'PASO 1 COMPLEATADO'
                     
                 ]);
+
+            $FK_Modificaciones_UserId=Auth::user()->id;
+
+            Modificacion::create([
+                'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
+                'FK_Modificaciones_HardwareId' => $creado->PK_Hardware,
+                'Tdescripcion_modificaciones'=> "1"
+            ]);
             
             return view('admin/Load_Imagen');
 
@@ -305,13 +314,20 @@ class BienController extends Controller
                     ]
             );
             
-            Bien::create($request->all());
-                session()->flash('swal',[
+            $creado= Bien::create($request->all());
+            session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!El Bien fue registrado con Exito¡',
                     'text'=>'PASO 1 COMPLEATADO'
                     
                 ]);
+            $FK_Modificaciones_UserId=Auth::user()->id;
+
+            Modificacion::create([
+                'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
+                'FK_Modificaciones_HardwareId' => $creado->PK_Hardware,
+                'Tdescripcion_modificaciones'=> "1"
+            ]);
             
             return view('admin/Load_Imagen');
         }
@@ -344,7 +360,14 @@ class BienController extends Controller
         $bajas = Bajas::where('FK_Bajas_HardwareId',$id)
                     ->where('Testado_baja',0)
                     ->get();
-        return view('admin.detalle',compact('bien','comentarios','imagen','bajas'));
+
+        $ultimoBaja= Bajas::where('FK_Bajas_HardwareId', $id)
+                   ->where('Testado_baja', 1)
+                   ->latest() // por defecto ordena por created_at DESC
+                   ->first();
+
+        //return $ultimoBaja->created_at;
+        return view('admin.detalle',compact('bien','comentarios','imagen','bajas','ultimoBaja'));
     }
 
     public function historial($idCifrado)
@@ -379,15 +402,19 @@ class BienController extends Controller
         //formulario para editar un hardware
         $id = Crypt::decryptString($idCifrado);
         $bien=Bien::where('PK_Hardware', $id)
+                ->with('marca')
                 ->with('area')
                 ->with('tipo')
                 ->first();
         //para mostrar las imagnes;
         $imagen = Image::where('FK_Imagenes_HardwareId',$id)->first();
+
         $areas=Area::all();
         $tipos = Tipo::all();
+        $marcas= Marca::all();
+
         //return $bien;
-        return view('admin/editar_hardware',compact('bien','imagen','areas','tipos'));
+        return view('admin/editar_hardware',compact('bien','imagen','areas','tipos','marcas'));
         
     }
     public function index_bajar($code)
@@ -414,7 +441,10 @@ class BienController extends Controller
                 'UK_Hardware_Codigo' => "required|min:12|max:12|unique:hardware,UK_Hardware_Codigo,{$bien->PK_Hardware},PK_Hardware",
                 'Tdescripcion_hardware' => 'required',
                 'Testado_fisico_hardware'=> 'required',
-                'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
+                'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today'],
+                'FK_Hardware_MarcasId'=> 'required',
+                'Tmodelo_hardware'=> 'required',
+                'Tserie_hardware'=> 'required',
                 ],
                 [],
                 [
@@ -423,7 +453,10 @@ class BienController extends Controller
                     'UK_Hardware_Codigo' => 'Codigo patrimonial',
                     'Tdescripcion_hardware'=> 'Descripcion',
                     'Testado_fisico_hardware'=> 'Estado',
-                    'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
+                    'Dadquisicion_hardware'=>'Fecha de Adiquiscion',
+                    'FK_Hardware_MarcasId'=> 'Marca',
+                    'Tmodelo_hardware'=> 'Model',
+                    'Tserie_hardware'=> 'serie',
 
                 ]
         );
@@ -434,10 +467,7 @@ class BienController extends Controller
         $FK_Modificaciones_UserId=Auth::user()->id;
         $FK_Modificaciones_HardwareId= $New_Bien->PK_Hardware;
 
-        Modificaciones::create([
-            'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
-            'FK_Modificaciones_HardwareId' => $FK_Modificaciones_HardwareId
-        ]);
+
 
         $New_Bien->FK_Hardware_AreaId = $request->FK_Hardware_AreaId;
         $New_Bien->UK_Hardware_Codigo = $request->UK_Hardware_Codigo;
@@ -445,7 +475,20 @@ class BienController extends Controller
         $New_Bien->Testado_fisico_hardware= $request->Testado_fisico_hardware;
         $New_Bien->FK_Hardware_TipoId = $request->FK_Hardware_TipoId;
         $New_Bien->Dadquisicion_hardware= $request->Dadquisicion_hardware;
+        //nuevos
+        $New_Bien->FK_Hardware_MarcasId = $request->FK_Hardware_MarcasId;
+        $New_Bien->Tmodelo_hardware= $request->Tmodelo_hardware;
+        $New_Bien->Tserie_hardware = $request->Tserie_hardware;
+
         $New_Bien->save();
+        //guardar en tabla de modificacion
+
+        Modificacion::create([
+                'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
+                'FK_Modificaciones_HardwareId' => $bien->PK_Hardware,
+                'Tdescripcion_modificaciones'=> "2"
+            ]);
+
         session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Bien hecho¡',
@@ -558,7 +601,13 @@ class BienController extends Controller
     {
         
         //return $users;
-        return view('admin/Exportacion/exportacion');
+        $modificaciones = Modificacion::with('usuario','bien','digital')
+                ->orderBy('PK_modificaciones', 'desc')
+                ->paginate(20);
+
+        
+        //return $modificaciones;
+        return view('admin/Exportacion/exportacion',compact('modificaciones'));
     }
     public function exportDatps(Request $request)
     {        

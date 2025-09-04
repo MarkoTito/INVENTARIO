@@ -13,7 +13,8 @@ class Area extends Model
     protected $primaryKey = 'PK_area'; 
     
     protected $fillable=[
-        'UK_Nombre_area'
+        'UK_Nombre_area',
+        'FK_Area_SedeId'
     ];
 
     public function estado()

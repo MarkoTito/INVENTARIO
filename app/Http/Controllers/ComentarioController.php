@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Bien;
 use App\Models\Comentario;
+use App\Models\Modificacion;
 use App\Models\Tipo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -116,6 +117,15 @@ class ComentarioController extends Controller
                     'Testado_fisico_hardware' => $request->Testado_fisico_comentario                
                 ]
                 );
+
+                //agegar a tabla modificacion
+               
+
+                Modificacion::create([
+                    'FK_Modificaciones_UserId' => $usuario_id,
+                    'FK_Modificaciones_HardwareId' => $codigo->PK_Software,
+                    'Tdescripcion_modificaciones'=> "5"
+                ]);
                 
                 $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
                     'comentario' =>$request,
@@ -195,11 +205,17 @@ class ComentarioController extends Controller
            $coment->FK_Comentario_UserId=$usuario_id;
            $coment->save();
 
-           $dato= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)->update(
+           Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)->update(
             [
                 'Testado_fisico_hardware' => $request->Testado_fisico_comentario                
             ]
             );
+            //actualizacion en la tabla de modificacion
+            Modificacion::create([
+                    'FK_Modificaciones_UserId' => $usuario_id,
+                    'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
+                    'Tdescripcion_modificaciones'=> "5"
+            ]);
 
            //varaible de seccion
            session()->flash('swal',[

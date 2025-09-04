@@ -14,20 +14,28 @@ return new class extends Migration
         Schema::create('tbl_modificaciones_log', function (Blueprint $table) {
             $table->id('PK_modificaciones');
 
-            $table->unsignedBigInteger('FK_Modificaciones_UserId')->nullable();
+            $table->unsignedBigInteger('FK_Modificaciones_UserId');
             $table->foreign('FK_Modificaciones_UserId')
                     ->references('id')
                     ->on('users')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('FK_Modificaciones_HardwareId');
+            $table->unsignedBigInteger('FK_Modificaciones_HardwareId')->nullable();
             $table->foreign('FK_Modificaciones_HardwareId')
                     ->references('PK_Hardware')
                     ->on('Hardware')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            
+
+            $table->unsignedBigInteger('FK_Modificaciones_SoftwareId')->nullable();
+            $table->foreign('FK_Modificaciones_SoftwareId')
+                    ->references('PK_Software')
+                    ->on('software')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->text('Tdescripcion_modificaciones');
             $table->timestamps();
         });
     }

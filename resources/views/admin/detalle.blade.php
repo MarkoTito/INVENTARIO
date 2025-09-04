@@ -98,7 +98,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                 @if ($bien->estado->PK_estado == 2)
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de baja:</label>    
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="baja" disabled>        
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$ultimoBaja->created_at->toDateString()}}" disabled>        
                     </div>
                 @else
                     
@@ -362,7 +362,8 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                         @csrf
                                         <div class="p-4 md:p-5 space-y-4">
                                             <label for="T_Motivo_Baja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo:</label>
-                                            <textarea  name="T_Motivo_Baja" id="T_Motivo_Baja" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la baja">{{old('T_Motivo_Baja')}}</textarea>
+                                            <textarea  name="T_Motivo_Baja" id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la baja">{{old('T_Motivo_Baja')}}</textarea>
+                                            <p>Letras restantes: <span id="contador">180</span></p>
                                             @error('T_Motivo_Baja')
                                                     <p class="text-red-600">*{{$message}}</p>
                                             @enderror
@@ -400,7 +401,8 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                         @csrf
                                         <div class="p-4 md:p-5 space-y-4">
                                             <label for="T_Motivo_Activar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo:</label>
-                                            <textarea  name="T_Motivo_Activar" id="T_Motivo_Activar" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la reversión de la baja">{{old('T_Motivo_Activar')}}</textarea>
+                                            <textarea  name="T_Motivo_Activar" id="miTextarea2" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la reversión de la baja">{{old('T_Motivo_Activar')}}</textarea>
+                                            {{-- <p>Letras restantes: <span id="contador2">180</span></p> --}}
                                             @error('T_Motivo_Activar')
                                                     <p class="text-red-600">*{{$message}}</p>
                                             @enderror
@@ -419,7 +421,37 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
 
     
 
+@push('js')
+    <script>
+        const textarea = document.getElementById("miTextarea");
+        const contador = document.getElementById("contador");
+        const limite = 180; // máximo de letras/caracteres permitidos
+        textarea.addEventListener("input", () => {
+        let restantes = limite - textarea.value.length;
+        if (restantes < 0) {
+            textarea.value = textarea.value.substring(0, limite); // corta el texto
+            restantes = 0;
+        }
 
+        contador.textContent = restantes;
+        });
+    </script>
+    {{-- <script>
+        const textarea2 = document.getElementById("miTextarea2");
+        const contador2 = document.getElementById("contador2");
+        const limite = 180; // máximo de letras/caracteres permitidos
+        textarea2.addEventListener("input", () => {
+        let restantes = limite - textarea2.value.length;
+        if (restantes < 0) {
+            textarea2.value = textarea2.value.substring(0, limite); // corta el texto
+            restantes = 0;
+        }
+
+        contador2.textContent = restantes;
+        });
+    </script> --}}
+    
+@endpush
 
 
 

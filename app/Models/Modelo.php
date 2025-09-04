@@ -9,7 +9,7 @@ class Modelo extends Model
     //
     protected $table = 'modelos';
     protected $primaryKey = 'PK_modelo'; 
-     protected $fillable=[
+    protected $fillable=[
         'Tdescripcion_modelo'
     ];
 }
