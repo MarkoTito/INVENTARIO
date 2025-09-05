@@ -48,24 +48,24 @@ title="Reprar"
                     </tr>
                 
                 @else
-                    @foreach ($bajas as $bajas)
+                    @foreach ($bajas as $baja)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
-                                {{$bajas->usuarioBaja->name}}
+                                {{$baja->usuarioBaja->name}}
                             </th>
                                 
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-red-600">
-                                {{$bajas->Tdescripcion_baja}}
+                                {{$baja->Tdescripcion_baja}}
                             </th>
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
-                                {{$bajas->created_at}}
+                                {{$baja->created_at}}
                                 
                             </td>
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
-                                {{$bajas->usuarioNullBaja->name}}
+                                {{$baja->usuarioNullBaja->name}}
                             </th>
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-blue-600">
-                                {{$bajas->Tdescripcion_null_baja}}
+                                {{$baja->Tdescripcion_null_baja}}
                             </td>
                         </tr>
                     @endforeach

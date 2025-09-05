@@ -71,7 +71,33 @@
             Acta de Entrega
         </h2>
 
-        <!-- Fecha -->
+        <table style="width: 100%;">
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Fecha:</strong>
+                </td>
+                <td style="text-align: right;">
+                    <strong>N° Entrega:</strong>
+                    
+                </td>
+            </tr>
+        </table>
+
+        <table style="width: 100%; margin-bottom: 10px;">
+            <tr>
+                <td style="text-align: left;">
+                    <input type="text" value="{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}" class="small-input">
+                </td>
+                <td style="text-align: right;">
+                    <input type="text" value="{{$numero}}-{{$año}}" class="small-input">
+                </td>
+            </tr>
+        </table>
+
+
+
+
+        {{-- Fecha 
         <div class="flex" style="justify-content: flex-end;">
             <div>
                 <label><strong>Fecha:</strong></label> 
@@ -80,7 +106,7 @@
                 <input type="text" value="{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}"  class="small-input">
             </div>
         </div>
-        <!-- numero de entrega -->
+        numero de entrega 
         <div class="flex" style="justify-content: flex-end;">
             <div>
                 <label><strong>N° Entrega:</strong></label> 
@@ -88,7 +114,7 @@
             <div>
                 <input type="text" value="{{$numero}}"  class="small-input">
             </div>
-        </div>
+        </div> --}}
 
         <!-- Equipo -->
         <div class="section">

@@ -44,7 +44,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $bien->Tmotivo_baja_hardware}}</td>
+                    <td>{{ $baja->Tdescripcion_baja}}</td>
                     
                 </tr>                
             </tbody>
@@ -88,7 +88,7 @@
     
     <h2 style="display:inline-block; margin:0 100px 0 0;">______________</h2>
     <h2 style="display:inline-block; margin:0;">__________________</h2>
-    <h3 style="display:inline-block; margin:0 165px 0 25;"> {{ $bien->usuario->name}}</h3>
+    <h3 style="display:inline-block; margin:0 165px 0 25;"> {{ $baja->usuarioBaja->name}}</h3>
     <h3 style="display:inline-block; margin:0;">V.B Jefe de la ODTIE</h3>
     
     <p style="display:inline-block; margin:0;">*Tecnico Responsable*</p>

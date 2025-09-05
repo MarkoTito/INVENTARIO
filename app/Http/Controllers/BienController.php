@@ -541,11 +541,19 @@ class BienController extends Controller
         $bien = Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
-                ->with('usuario')
                 ->firstOrFail();    
+
+        $baja = Bajas::where('FK_Bajas_HardwareId', $id)
+             ->with('usuarioBaja')
+             ->orderBy('PK_Bajas', 'desc')
+             ->first();
+
+
+
         $pdf =Pdf::loadView('admin.PDF.pdf',[
             'bien' =>$bien,
-            'comentarios' => $historial
+            'comentarios' => $historial,
+            'baja'=> $baja
         ]);
         $pdf->setPaper('A5', 'portrait');
 

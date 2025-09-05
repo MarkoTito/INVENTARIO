@@ -118,11 +118,14 @@ class ComentarioController extends Controller
             return redirect()->route('adminbien.index');
         } else {
             
+
             if ($codigo->FK_Hardware_EstadoId == 1) {
 
                 $ultimo = Comentario::where('Tubicacion_comentario', 1)
                         ->latest()
                         ->first();
+                $añoActual = Carbon::now()->format('Y');
+                $añoFinal = $ultimo->created_at->format('Y');
                 
                 if (!$ultimo) { 
                 //    este es por si es el primero en hacerse
@@ -161,6 +164,7 @@ class ComentarioController extends Controller
                         'numero' =>1,
                         'nombre'=> $usuario,
                         'fecha' => $fecha,
+                        'año'=> $añoActual
                         
                     ]);
             
@@ -176,52 +180,107 @@ class ComentarioController extends Controller
 
 
                 } else {
-                    $numero= $ultimo->Nnumero_comentario+1;
-                    $coment = new Comentario();
-                    //esto se podria evitar con carga masivoa . pero se vera despues
-                    $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
-                    $coment->FK_Comentario_UserId=$usuario_id;
-    
-                    $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
-    
-                    $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
-                    $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
                     
-                    $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
-                    $coment->Tubicacion_comentario= 1;
-                    $coment->Tubicacion_comentario = $numero;
-
-                    $coment->save();
-
-                    $dato= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)->update(
-                    [
-                        'Testado_fisico_hardware' => $request->Testado_fisico_comentario                
-                    ]
-                    );
-    
-                    //agegar a tabla modificacion
-                    Modificacion::create([
-                        'FK_Modificaciones_UserId' => $usuario_id,
-                        'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
-                        'Tdescripcion_modificaciones'=> "5"
-                    ]);
-                    
-                    $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
-                        'comentario' =>$request,
-                        'bien' => $codigo,
-                        'numero' => $numero,
-                        'nombre'=> $usuario,
-                        'fecha' => $fecha,
+                    if ($añoFinal == $añoActual) {
+                        // sigue aumentado xq son del mismo año
+                        $numero= $ultimo->Nnumero_comentario+1;
+                        $coment = new Comentario();
+                        //esto se podria evitar con carga masivoa . pero se vera despues
+                        $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
+                        $coment->FK_Comentario_UserId=$usuario_id;
+        
+                        $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
+        
+                        $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
+                        $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
                         
-                    ]);
-            
-                    //varaible de seccion
-                    session()->flash('swal',[
-                        'icon'=> 'success',
-                        'title'=> '!Bien hecho',
-                        'text'=>   'El comentario fue registrado con exito'
-                    ]);
-                    return $pdf->download("Acta de salida {$codigo->UK_Hardware_Codigo}.pdf");
+                        $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
+                        $coment->Tubicacion_comentario= 1;
+                        $coment->Nnumero_comentario = $numero;
+    
+                        $coment->save();
+    
+                        $dato= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)->update(
+                        [
+                            'Testado_fisico_hardware' => $request->Testado_fisico_comentario                
+                        ]
+                        );
+        
+                        //agegar a tabla modificacion
+                        Modificacion::create([
+                            'FK_Modificaciones_UserId' => $usuario_id,
+                            'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
+                            'Tdescripcion_modificaciones'=> "5"
+                        ]);
+                        
+                        $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
+                            'comentario' =>$request,
+                            'bien' => $codigo,
+                            'numero' => $numero,
+                            'nombre'=> $usuario,
+                            'fecha' => $fecha,
+                            'año'=> $añoActual
+                            
+                        ]);
+                
+                        //varaible de seccion
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Bien hecho',
+                            'text'=>   'El comentario fue registrado con exito'
+                        ]);
+                        return $pdf->download("Acta de salida {$codigo->UK_Hardware_Codigo}.pdf");
+                    } else {
+                        // aca es diferente año asi que se crea denuvo
+                        $coment = new Comentario();
+                        //esto se podria evitar con carga masivoa . pero se vera despues
+                        $coment->FK_Comentario_HardwareId=$codigo->PK_Hardware;
+                        $coment->FK_Comentario_UserId=$usuario_id;
+        
+                        $coment->Tdescripcion_comentario=$request->Tdescripcion_comentario;
+        
+                        $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
+                        $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
+                        
+                        $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
+                        $coment->Tubicacion_comentario= 1;
+                        $coment->Nnumero_comentario = 1;
+
+                        $coment->save();
+
+                        $dato= Bien::where('UK_Hardware_Codigo',$request->FK_Comentario_HardwareId)->update(
+                        [
+                            'Testado_fisico_hardware' => $request->Testado_fisico_comentario                
+                        ]
+                        );
+        
+                        //agegar a tabla modificacion
+                        Modificacion::create([
+                            'FK_Modificaciones_UserId' => $usuario_id,
+                            'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
+                            'Tdescripcion_modificaciones'=> "5"
+                        ]);
+                        
+                        $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
+                            'comentario' =>$request,
+                            'bien' => $codigo,
+                            'numero' =>1,
+                            'nombre'=> $usuario,
+                            'fecha' => $fecha,
+                            'año'=> $añoActual
+                            
+                        ]);
+                
+                        //varaible de seccion
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Bien hecho',
+                            'text'=>   'El comentario fue registrado con exito'
+                        ]);
+                        return $pdf->download("Acta de salida {$codigo->UK_Hardware_Codigo}.pdf");
+                       
+                    }
+                    
 
                 }
                 

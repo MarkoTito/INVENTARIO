@@ -41,7 +41,7 @@ return new class extends Migration
             $table->text('Tdescripcion_null_baja')->nullable();
             
             $table->text('Testado_baja')->default(1);
-            $table->integer('Nnumero_baja')->nullable();
+            
 
 
             $table->timestamps();
