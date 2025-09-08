@@ -89,7 +89,7 @@ class BajaController extends Controller
 
     }
     public function revertirbaja (Request $request,$bien)
-    {
+    {        
         // Gate::authorize('bajar-hardware'); 
         if (!$request->T_Motivo_Activar || strlen($request->T_Motivo_Activar) > 125) {
             session()->flash('swal', [
@@ -99,10 +99,7 @@ class BajaController extends Controller
             ]);
             return redirect()->route('adminbien.index');
         }
-        /*
         
-        $fecha=Carbon::now();
-        */
         ////revetir  baja
         $usuario=Auth::user()->id;
         
@@ -112,29 +109,64 @@ class BajaController extends Controller
             ]
         );
 
-        Bajas::where('FK_Bajas_HardwareId',$bien)->update(
-            [
-                'FK_null_Baja_UserId' => $usuario,
-                'Tdescripcion_null_baja' => $request->T_Motivo_Activar,
-                'Testado_baja' => 0
 
-            ]
-        );
-        
-        //guardado en el BD de modificaciones
-       
-        Modificacion::create([
-                'FK_Modificaciones_UserId' => $usuario,
-                'FK_Modificaciones_HardwareId' => $bien,
-                'Tdescripcion_modificaciones'=> "4"
+        if ($request->tipo == 1) {
+            # por el modal
+            $lastBaja= Bajas::where('FK_Bajas_HardwareId',$bien)
+                            ->where('Testado_baja',1)
+                            ->first();
+            
+            $PK_baja=$lastBaja->PK_Bajas;
+
+            Bajas::where('PK_Bajas',$PK_baja)->update(
+                [
+                    'FK_null_Baja_UserId' => $usuario,
+                    'Tdescripcion_null_baja' => $request->T_Motivo_Activar,
+                    'Testado_baja' => 0
+    
+                ]
+            );
+                       
+            Modificacion::create([
+                    'FK_Modificaciones_UserId' => $usuario,
+                    'FK_Modificaciones_HardwareId' => $bien,
+                    'Tdescripcion_modificaciones'=> "4"
+                ]);
+           
+            session()->flash('swal',[
+                'icon'=> 'success',
+                'title'=> '!Bien hecho',
+                'text'=>   'El bien se re activo correctamente'
             ]);
-       
-        session()->flash('swal',[
-            'icon'=> 'success',
-            'title'=> '!Bien hecho',
-            'text'=>   'El bien se re activo correctamente'
-        ]);
-        return redirect()->route('adminbien.index');
+            return redirect()->route('adminbien.index');
+
+
+        } else {
+            # por el buscar
+            Bajas::where('PK_Bajas',$request->PK_baja)->update(
+                [
+                    'FK_null_Baja_UserId' => $usuario,
+                    'Tdescripcion_null_baja' => $request->T_Motivo_Activar,
+                    'Testado_baja' => 0
+    
+                ]
+            );
+            
+            //guardado en el BD de modificaciones
+           
+            Modificacion::create([
+                    'FK_Modificaciones_UserId' => $usuario,
+                    'FK_Modificaciones_HardwareId' => $bien,
+                    'Tdescripcion_modificaciones'=> "4"
+                ]);
+           
+            session()->flash('swal',[
+                'icon'=> 'success',
+                'title'=> '!Bien hecho',
+                'text'=>   'El bien se re activo correctamente'
+            ]);
+            return redirect()->route('adminbien.index');
+        }
     }
     /**
      * Show the form for creating a new resource.

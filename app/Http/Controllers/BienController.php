@@ -47,7 +47,7 @@ class BienController extends Controller
                 ->first();
         */
         //forma q muestra todo con los metodos creado, mas facil q hacer un where dentro de otro... :)
-        $bienes = Bien::with('area','tipo','estado')->paginate(5);
+        $bienes = Bien::with('area','tipo','estado')->paginate(25);
                 //->where('FK_Hardware_EstadoId',1)    
         //mandar info
         $areas=Area::all();
@@ -749,7 +749,7 @@ class BienController extends Controller
 
     public function dowloadExport(Request $request)
     {
-        $fecha = Carbon::now()->format('d.m.Y');
+        $fecha = Carbon::now()->format('dmY');
         $bien=$request->FK_Hardware_AreaId;
 
         if ($request->form == "1") { //con code
@@ -869,7 +869,7 @@ class BienController extends Controller
 
     public function dowloadExportPdf(Request $request)
     {
-        $fecha = Carbon::now()->format('d.m.Y');
+        $fecha = Carbon::now()->format('dmY');
 
         $bien=$request->FK_Hardware_AreaId;
 

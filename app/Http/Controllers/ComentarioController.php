@@ -125,7 +125,7 @@ class ComentarioController extends Controller
                         ->latest()
                         ->first();
                 $añoActual = Carbon::now()->format('Y');
-                $añoFinal = $ultimo->created_at->format('Y');
+                
                 
                 if (!$ultimo) { 
                 //    este es por si es el primero en hacerse
@@ -180,7 +180,7 @@ class ComentarioController extends Controller
 
 
                 } else {
-                    
+                    $añoFinal = $ultimo->created_at->format('Y');
                     if ($añoFinal == $añoActual) {
                         // sigue aumentado xq son del mismo año
                         $numero= $ultimo->Nnumero_comentario+1;
