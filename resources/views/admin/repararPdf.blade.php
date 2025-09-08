@@ -94,7 +94,10 @@ title="Reprar"
         <div class="" > 
             {{-- descipcion --}}
             <label  for="message" class="block mb-1 text-sm font-medium text-gray-900 dark:text-black">Descripcion</label>
-            <textarea  name="Tdescripcion_comentario" required id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required placeholder="Ingrese una descripcion de la reparacion">{{old('Tdescripcion_comentario')}} </textarea>
+            
+            {{-- <textarea  name="Tdescripcion_comentario"  id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required placeholder="Ingrese una descripcion de la reparacion">{{old('Tdescripcion_comentario')}} </textarea> --}}
+            <textarea  name="Tdescripcion_comentario" required id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripcion de la reparacion">{{old('Tdescripcion_comentario')}}</textarea>
+            
             <p>Letras restantes: <span id="contador">200</span></p>
             @error('Tdescripcion_comentario')                
                 <p class="text-red-600">*{{$message}}</p>

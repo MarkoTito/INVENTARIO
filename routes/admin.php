@@ -80,6 +80,9 @@ Route::get('/revercion/creacion/{code}',[BajaController::class,'reversion']);
 Route::get('/buscar/baja/todo',[BienController::class,'Bajas']);
 //mostrar la busqueda mas exacta
 Route::post('/buscar/digital/store',[DigitalController::class,'index_baja']);
+//editar digital
+Route::post('/digital/editar',[DigitalController::class,'actualizar']);  
+
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/baja/{id}',[BienController::class,'baja_show']);
 //mostrar el historial debjas

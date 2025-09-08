@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Archivos;
 use App\Models\Area;
+use App\Models\Determinacion;
 use App\Models\Digital;
 use App\Models\file;
 use App\Models\Modificacion;
@@ -139,90 +140,6 @@ class DigitalController extends Controller
                 ]);
                 return view('admin/Load_Archivos'); 
             }
-
-
-        /*
-        try {
-            $request->validate(
-                    [
-                    'FK_Software_DeterminacionId' => 'required'
-                    ],
-                    [],
-                    [
-                        'FK_Software_DeterminacionId' => "Determinacion",
-                    ]
-            );
-            if ($request->FK_Software_DeterminacionId == 2) {
-                
-                $request->validate(
-                        [
-                        'FK_Software_AreaId' => 'required',
-                        'FK_Software_SistemaId' => 'required',
-                        'Tnombre_software' => 'required',
-                        'Tnombre_software' => 'required|unique:software',
-                        'Thost_software' => 'required|max:30|unique:software',
-                        'Dfe_Inicio_software'=> ['required' , 'date', 'before_or_equal:today'],
-                        ],
-                        [],
-                        [
-                            'FK_Software_AreaId'=>'Area',
-                            'FK_Software_SistemaId'=> 'Sistema',
-                            'Tnombre_software'=>'Nombre del sistema',
-                            'Thost_software' => 'Host',
-                            'Dfe_Inicio_software'=> 'Fecha de Incio'
-                        ]
-                );
-                Digital::create($request->all());
-                session()->flash('swal',[
-                        'icon'=> 'success',
-                        'title'=> '!Bien hecho',
-                        'text'=>'El bien fue registrado correctamente'
-                ]);
-                return view('admin/Load_Archivos'); 
-            } else {
-                $request->validate(
-                        [
-                        'FK_Software_AreaId' => 'required',
-                        'FK_Software_SistemaId' => 'required',
-                        'Tnombre_software' => 'required|unique:software',
-                        'Thost_software' => 'required|max:30|unique:software',
-                        'Dfe_vencimiento_software'=> ['required' , 'date', 'after_or_equal:today'],
-                        'Dfe_Inicio_software'=> ['required' , 'date', 'before_or_equal:today'],
-                        
-                        ],
-                        [],
-                        [
-                            'FK_Software_AreaId'=>'Area',
-                            'FK_Software_SistemaId'=> 'Sistema',
-                            'Tnombre_software'=>'Nombre del sistema',
-                            'Dfe_vencimiento_software' => 'Fecha de vencimiento',
-                            'Thost_software' => 'Host',
-                            'Dfe_Inicio_software'=> 'Fecha de Incio'
-                        ]
-                );
-                Digital::create($request->all());
-                session()->flash('swal',[
-                        'icon'=> 'success',
-                        'title'=> '!Bien hecho',
-                        'text'=>'El bien fue registrado correctamente'
-                ]);
-                return view('admin/Load_Archivos'); 
-            }
-            
-        } catch (ValidationException $e) {
-            $areas=Area::all();
-            $sistemas = Sistema::all();
-            $errors = implode("\n", $e->validator->errors()->all());
-            session()->flash('swal', [
-                'icon' => 'error',
-                'title' => '!Upss',
-                'text' => $errors
-            ]);
-            return view('admin.ingresa_sofware', compact('areas','sistemas') );
-            
-        }
-
-        */
        
     
     }
@@ -280,12 +197,24 @@ class DigitalController extends Controller
         //buscar software
         //mandar info
         $sistemas=Sistema::all();
-        $licencias = Digital::with('determinacion','area','sistema')
-                        ->where('FK_Software_DeterminacionId',$request->determinacion)
-                        ->where('FK_Software_SistemaId', $request->FK_Software_SistemaId)
-                ->get();
+        if ( $request->FK_Software_SistemaId==1) {
+            # todos los sistemas
+            $licencias = Digital::with('determinacion','area','sistema')
+                            ->where('FK_Software_DeterminacionId',$request->determinacion)
+                    ->get();
+    
+            return view('admin/Buscar/encontrado_Baja',compact('licencias','sistemas'));
 
-        return view('admin/Buscar/encontrado_Baja',compact('licencias','sistemas'));
+        } else {
+            # filtro de sistemas
+            $licencias = Digital::with('determinacion','area','sistema')
+                            ->where('FK_Software_DeterminacionId',$request->determinacion)
+                            ->where('FK_Software_SistemaId', $request->FK_Software_SistemaId)
+                    ->get();
+    
+            return view('admin/Buscar/encontrado_Baja',compact('licencias','sistemas','request'));
+        }
+        
     }
     
 
@@ -294,7 +223,14 @@ class DigitalController extends Controller
      */
     public function edit(Digital $digital)
     {
-        //
+        
+        Gate::authorize('update-software');
+
+        $determinacion = Determinacion::all();
+        $sistemas= Sistema::all();
+        $areas = Area::all();
+        return view('admin/Buscar/editar_Digital',compact('digital','determinacion','sistemas','areas'));
+
     }
 
     /**
@@ -302,8 +238,85 @@ class DigitalController extends Controller
      */
     public function update(Request $request, Digital $digital)
     {
-        //
+        
     }
+
+    public function actualizar(Request $request)
+    {
+        
+        $nuevo=Digital::where('PK_Software',$request->PK_Software)->first();
+
+
+
+        if ($request->FK_Software_DeterminacionId== 2) {
+            # indeterminado (2) sin fecha , x eso sera null
+            $nuevo->FK_Software_AreaId = $request->FK_Software_AreaId ;
+            $nuevo->FK_Software_TipoId = $request->FK_Software_TipoId ; //
+            $nuevo->FK_Software_SistemaId = $request->FK_Software_SistemaId ;//
+            $nuevo->FK_Software_EstadoId = $request->FK_Software_EstadoId ;//
+            $nuevo->FK_Software_DeterminacionId= $request->FK_Software_DeterminacionId;
+    
+            $nuevo->Tnombre_software = $request->Tnombre_software ;//
+            $nuevo->Thost_software = $request->Thost_software ;//
+            
+            $nuevo->Dfe_Inicio_software = $request->Dfe_Inicio_software ;//
+            $nuevo->Dfe_vencimiento_software = NULl ;//
+            $nuevo->save();
+            // return $request;
+            $FK_Modificaciones_UserId=Auth::user()->id;
+    
+            Modificacion::create([
+                    'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
+                    'FK_Modificaciones_SoftwareId' => $request->PK_Software,
+                    'Tdescripcion_modificaciones'=> "2"
+                ]);
+    
+    
+            session()->flash('swal',[
+                'icon'=> 'success',
+                'title'=> '!Bien hecho',
+                'text'=>'El Software fue editado correctamente'
+            ]);
+            return redirect()->route('admindigital.index');
+
+
+
+        } else {
+            # determinado (1) con fehca
+            $nuevo->FK_Software_AreaId = $request->FK_Software_AreaId ;
+            $nuevo->FK_Software_TipoId = $request->FK_Software_TipoId ; //
+            $nuevo->FK_Software_SistemaId = $request->FK_Software_SistemaId ;//
+            $nuevo->FK_Software_EstadoId = $request->FK_Software_EstadoId ;//
+            $nuevo->FK_Software_DeterminacionId= $request->FK_Software_DeterminacionId;
+    
+            $nuevo->Tnombre_software = $request->Tnombre_software ;//
+            $nuevo->Thost_software = $request->Thost_software ;//
+            
+            $nuevo->Dfe_Inicio_software = $request->Dfe_Inicio_software ;//
+            $nuevo->Dfe_vencimiento_software = $request->Dfe_vencimiento_software ;//
+            $nuevo->save();
+            // return $request;
+            $FK_Modificaciones_UserId=Auth::user()->id;
+    
+            Modificacion::create([
+                    'FK_Modificaciones_UserId' => $FK_Modificaciones_UserId,
+                    'FK_Modificaciones_SoftwareId' => $request->PK_Software,
+                    'Tdescripcion_modificaciones'=> "2"
+                ]);
+    
+    
+            session()->flash('swal',[
+                'icon'=> 'success',
+                'title'=> '!Bien hecho',
+                'text'=>'El Software fue editado correctamente'
+            ]);
+            return redirect()->route('admindigital.index');
+        }
+        
+
+        
+    }
+
 
     /**
      * Remove the specified resource from storage.

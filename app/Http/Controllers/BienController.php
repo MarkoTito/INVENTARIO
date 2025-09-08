@@ -352,6 +352,7 @@ class BienController extends Controller
                 ->with('area')
                 ->with('tipo')
                 ->with('marca')
+                ->with('sede')
                 ->first();
 
         //para mostrar los comentarios del bien
@@ -410,6 +411,7 @@ class BienController extends Controller
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('marca')
                 ->with('area')
+                ->with('sede')
                 ->with('tipo')
                 ->first();
         //para mostrar las imagnes;
@@ -418,9 +420,10 @@ class BienController extends Controller
         $areas=Area::all();
         $tipos = Tipo::all();
         $marcas= Marca::all();
+        $sedes= Sedes::all();
 
         //return $bien;
-        return view('admin/editar_hardware',compact('bien','imagen','areas','tipos','marcas'));
+        return view('admin/editar_hardware',compact('bien','imagen','areas','tipos','marcas','sedes'));
         
     }
     public function index_bajar($code)
@@ -444,18 +447,21 @@ class BienController extends Controller
                 [
                 'FK_Hardware_AreaId' => 'required',
                 'FK_Hardware_TipoId' => 'required',
+                'FK_Hardware_SedeId' =>'required',
                 'UK_Hardware_Codigo' => "required|min:12|max:12|unique:hardware,UK_Hardware_Codigo,{$bien->PK_Hardware},PK_Hardware",
                 'Tdescripcion_hardware' => 'required',
                 'Testado_fisico_hardware'=> 'required',
                 'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today'],
                 'FK_Hardware_MarcasId'=> 'required',
                 'Tmodelo_hardware'=> 'required',
+                
                 'Tserie_hardware'=> 'required',
                 ],
                 [],
                 [
                     'FK_Hardware_AreaId' => 'Area',
                     'FK_Hardware_TipoId'=> 'Tipo',
+                    'FK_Hardware_SedeId'=> 'Sede',
                     'UK_Hardware_Codigo' => 'Codigo patrimonial',
                     'Tdescripcion_hardware'=> 'Descripcion',
                     'Testado_fisico_hardware'=> 'Estado',
@@ -481,6 +487,7 @@ class BienController extends Controller
         $New_Bien->Testado_fisico_hardware= $request->Testado_fisico_hardware;
         $New_Bien->FK_Hardware_TipoId = $request->FK_Hardware_TipoId;
         $New_Bien->Dadquisicion_hardware= $request->Dadquisicion_hardware;
+        $New_Bien->FK_Hardware_SedeId = $request->FK_Hardware_SedeId;
         //nuevos
         $New_Bien->FK_Hardware_MarcasId = $request->FK_Hardware_MarcasId;
         $New_Bien->Tmodelo_hardware= $request->Tmodelo_hardware;
@@ -503,10 +510,10 @@ class BienController extends Controller
     
         //return 'se registro correctamente';
 
-       
+       return redirect()->route('adminbien.index');
 
 
-        return redirect()->route('adminbien.index');
+        
         
         
     }
@@ -557,7 +564,7 @@ class BienController extends Controller
         ]);
         $pdf->setPaper('A5', 'portrait');
 
-        return $pdf->download("compra_{$bien->PK_Hardware}.pdf");
+        return $pdf->download("Acta de baja $bien->UK_Hardware_Codigo.pdf");
        
     }
 
@@ -614,7 +621,7 @@ class BienController extends Controller
 
     public function export()
     {
-        
+        //MUESTRRA LAS MODIFICACIONES
         //return $users;
         $modificaciones = Modificacion::with('usuario','bien','digital')
                 ->orderBy('PK_modificaciones', 'desc')

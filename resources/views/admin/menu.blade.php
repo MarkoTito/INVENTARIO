@@ -2,8 +2,8 @@
     : significa codigo php
     sin : significa texto plano
 --}}
-<x-admin-layout 
-title="Menu"
+<x-admin-layout >
+{{-- title="Menu"
 :breadcrumbs="[
     [
         'name'=>'Menu',
@@ -12,9 +12,11 @@ title="Menu"
     [
         'name'=> 'Prueba',
     ]
-    ]">
-    hola desde el admin
-    menu inicial
+    ]"> --}}
+
+    <div class="flex justify-center mt-4" >
+        <img src="{{ asset('images/menu.png') }}" height="800" width="920" alt="Logo">
+    </div>
 
 
 

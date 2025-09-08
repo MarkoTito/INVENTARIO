@@ -46,6 +46,10 @@ class Bien extends Model
     {
         return $this->belongsTo(marca::class,'FK_Hardware_MarcasId','PK_marca');
     }
+    public function sede()
+    {
+        return $this->belongsTo(Sedes::class,'FK_Hardware_SedeId','PK_sede');
+    }
 
     
 

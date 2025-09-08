@@ -20,7 +20,7 @@ title="Buscar"
 
             <div>
                 {{-- tipo de sistema  --}}
-                <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Bien</label>
+                <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de sistema</label>
                       <select name="FK_Software_SistemaId" id="tipos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     @foreach ($sistemas as $sistema)
                       <option value="{{{$sistema->PK_sistema}}}">{{{$sistema->Tdescripcion_sistema}}}</option>
@@ -30,7 +30,7 @@ title="Buscar"
             <div>
                 {{-- Determinacion --}}
                     <div>
-                        <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un area</label>
+                        <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige una determinación </label>
                         <select name="determinacion" id="areas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="2">Indeterminado</option>
                             <option value="1">Determinado</option>

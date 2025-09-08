@@ -53,7 +53,16 @@ title="Editar"
                 <div class="md:col-span-2 bg-green-200 p-4">
                     <div class="grid gap-6 md:grid-cols-3">
                         <div>
-                             {{-- AREA --}} 
+                            {{-- sede --}} 
+                            <label for="sedes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
+                            <select name="FK_Hardware_SedeId" id=""  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @foreach ($sedes as $sede)
+                                    <option value="{{$sede->PK_sede}}" {{$bien->FK_Hardware_SedeId==$sede->PK_sede ? 'selected' : ''}}  >{{$sede->UK_Nombre_sede}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            {{-- AREA --}} 
                             <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
                             <select name="FK_Hardware_AreaId" id="miSelect-area"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach ($areas as $area)
@@ -75,15 +84,7 @@ title="Editar"
                                 @endforeach
                             </select> 
                         </div>   
-                        <div>
-                            {{-- codigo --}}
-                            <label for="UK_Hardware_Codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Codigo:</label>
-                            <input name="UK_Hardware_Codigo" type="text" id="UK_Hardware_Codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="12" pattern=".{12}" required title="Debe tener exactamente 12 caracteres" required  value="{{$bien->UK_Hardware_Codigo}}" >      
-                            @error('UK_Hardware_Codigo')
-                                <p class="text-red-600">*{{$message}}</p>
-                            @enderror
                         
-                        </div>
 
                        <div>
                             {{-- marca --}}
@@ -111,6 +112,15 @@ title="Editar"
                             <label for="Tserie_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Serie:</label>
                             <input name="Tserie_hardware" type="text" id="miInput2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  maxlength="25"   required  value="{{$bien->Tserie_hardware}}" >      
                             @error('Tserie_hardware')
+                                <p class="text-red-600">*{{$message}}</p>
+                            @enderror
+                        
+                        </div>
+                        <div>
+                            {{-- codigo --}}
+                            <label for="UK_Hardware_Codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Codigo:</label>
+                            <input name="UK_Hardware_Codigo" type="text" id="UK_Hardware_Codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="12" pattern=".{12}" required title="Debe tener exactamente 12 caracteres" required  value="{{$bien->UK_Hardware_Codigo}}" >      
+                            @error('UK_Hardware_Codigo')
                                 <p class="text-red-600">*{{$message}}</p>
                             @enderror
                         
