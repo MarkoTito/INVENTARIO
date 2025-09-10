@@ -556,11 +556,12 @@ class BienController extends Controller
              ->first();
 
 
-
+        $logoBase64 = base64_encode(file_get_contents(public_path('images/logo-insti.png')));
         $pdf =Pdf::loadView('admin.PDF.pdf',[
             'bien' =>$bien,
             'comentarios' => $historial,
-            'baja'=> $baja
+            'baja'=> $baja,
+            'logoBase64'=> $logoBase64
         ]);
         $pdf->setPaper('A5', 'portrait');
 

@@ -25,7 +25,7 @@
 <body>
  
     <div class="title">Exportacion de Bienes</div>
-
+    
     <div class="section">
         <h3>Cuadro de Bienes:</h3>
         <table>

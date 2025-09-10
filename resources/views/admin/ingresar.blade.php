@@ -21,7 +21,7 @@ title="Registrar Hardware"
             <div>
                 {{-- tipo de bien --}}
                 <label for="tipos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tipo de Hardware</label>
-                <select name="FK_Hardware_TipoId" id="miSelect-tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select required name="FK_Hardware_TipoId" id="miSelect-tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value=""selected disabled >---Seleccioné un tipo de hardware---</option>
                     @foreach ($tipos as $tipo)
                             @if ($tipo->PK_tipo != 1 && $tipo->PK_tipo != 2)
@@ -37,7 +37,7 @@ title="Registrar Hardware"
             <div>
                 {{-- sede --}}
                 <label for="sedes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige una sede</label>
-                <select name="FK_Hardware_SedeId" id="miSelect-sede" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select required name="FK_Hardware_SedeId" id="miSelect-sede" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value=""selected disabled >---Seleccioné una sede---</option>
                     @foreach ($sedes as $sede)
                             <option value="{{$sede->PK_sede}}" {{old('FK_Hardware_SedeId')== $sede->PK_sede ? 'selected': '' }} >{{$sede->UK_Nombre_sede}}</option>
@@ -59,7 +59,7 @@ title="Registrar Hardware"
             <div>
                 {{-- area --}}
                 <label for="areas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige un Área</label>
-                <select name="FK_Hardware_AreaId" id="miSelect-area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select required name="FK_Hardware_AreaId" id="miSelect-area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value=""selected disabled >---Seleccioné un área---</option>
                         @foreach ($areas as $area)
                             @if ($area->PK_area != 1 )
@@ -99,7 +99,7 @@ title="Registrar Hardware"
                 <div>
                     {{-- marca --}}
                     <label for="marca" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Elige una marca</label>
-                    <select name="FK_Hardware_MarcasId" id="miSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select required name="FK_Hardware_MarcasId" id="miSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value=""selected disabled >---Seleccioné una marca---</option>
                             @foreach ($marcas as $marca)
                                 <option value="{{$marca->PK_marca}}" {{old('FK_Hardware_MarcasId')== $marca->PK_marca ? 'selected': '' }} >{{$marca->UK_Nombre_marca}}</option>
@@ -125,7 +125,7 @@ title="Registrar Hardware"
             <div>
                 {{-- model--}}
                 <label for="Tmodelo_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Modelo</label>
-                <input name="Tmodelo_hardware" type="text" id="miInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="25"   placeholder="Ingrese modelo" value="{{old('Tmodelo_hardware')}}"/>
+                <input required name="Tmodelo_hardware" type="text" id="miInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="25"   placeholder="Ingrese modelo" value="{{old('Tmodelo_hardware')}}"/>
                 @error('Tmodelo_hardware')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -135,7 +135,7 @@ title="Registrar Hardware"
             <div>
                 {{-- Serie --}}
                 <label for="Tserie_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">codigo de serie </label>
-                <input name="Tserie_hardware" type="text" id="miInput2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="25"   placeholder="Ingrese marca" value="{{old('Tserie_hardware')}}"/>
+                <input required name="Tserie_hardware" type="text" id="miInput2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="25"   placeholder="Ingrese marca" value="{{old('Tserie_hardware')}}"/>
                 @error('Tserie_hardware')
                         <p class="text-red-600">*{{$message}}</p>
                 @enderror
@@ -155,19 +155,19 @@ title="Registrar Hardware"
                     <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">    
                         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                             <div class="flex items-center ps-3">
-                                <input id="horizontal-list-radio-license" type="radio" value="Bueno" name="Testado_fisico_hardware" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" {{old('Testado_fisico_hardware')== 'Bueno' ? 'checked' : ''}}  >
+                                <input required id="horizontal-list-radio-license" type="radio" value="Bueno" name="Testado_fisico_hardware" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" {{old('Testado_fisico_hardware')== 'Bueno' ? 'checked' : ''}}  >
                                 <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bueno </label>
                             </div>
                         </li>
                         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                             <div class="flex items-center ps-3">
-                                <input id="horizontal-list-radio-id" type="radio" value="Regular" name="Testado_fisico_hardware" {{old('Testado_fisico_hardware')}} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" {{old('Testado_fisico_hardware')== 'Regular' ? 'checked' : ''}}  >
+                                <input required id="horizontal-list-radio-id" type="radio" value="Regular" name="Testado_fisico_hardware" {{old('Testado_fisico_hardware')}} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" {{old('Testado_fisico_hardware')== 'Regular' ? 'checked' : ''}}  >
                                 <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Regular </label>
                             </div>
                         </li>
                         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                             <div class="flex items-center ps-3">
-                                <input id="horizontal-list-radio-military" type="radio" value="Mal" name="Testado_fisico_hardware" {{old('Testado_fisico_hardware')}} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" {{old('Testado_fisico_hardware')== 'Mal' ? 'checked' : ''}}  >
+                                <input required id="horizontal-list-radio-military" type="radio" value="Mal" name="Testado_fisico_hardware" {{old('Testado_fisico_hardware')}} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" {{old('Testado_fisico_hardware')== 'Mal' ? 'checked' : ''}}  >
                                 <label for="horizontal-list-radio-military" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mal</label>
                             </div>
                         </li>

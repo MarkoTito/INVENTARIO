@@ -24,7 +24,14 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
     <div class="grid gap-6 md:grid-cols-3 mb-2">
         <div>
                 @if (!$imagen)
-                    
+                    @if ($bien->FK_Hardware_TipoId ==10)
+                        <img src="https://static.wixstatic.com/media/d8609d_fd38794fcf164bcebd0e5e5423548f0b~mv2.jpg/v1/fill/w_980,h_938,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d8609d_fd38794fcf164bcebd0e5e5423548f0b~mv2.jpg" height="240px" width="250px" alt="imagen de ecran">
+                        <p> Estado: {{$bien->Testado_fisico_hardware}}</p>
+                    @endif
+                    @if ($bien->FK_Hardware_TipoId ==9)
+                        <img src="https://img.freepik.com/vector-premium/contorno-icono-teclado-creativo-ilustracion-vectorial-dibujos-animados_1324823-10443.jpg?semt=ais_hybrid&w=740&q=80" height="240px" width="250px" alt="imagen de teclado">
+                        <p> Estado: {{$bien->Testado_fisico_hardware}}</p>
+                    @endif
                     @if ($bien->FK_Hardware_TipoId ==8)
                         <img src="https://static.vecteezy.com/system/resources/previews/012/618/939/original/printer-cartoon-illustration-vector.jpg" height="240px" width="250px" alt="imagen de impresora">
                         <p> Estado: {{$bien->Testado_fisico_hardware}}</p>
@@ -50,11 +57,16 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                         <p> Estado: {{$bien->Testado_fisico_hardware}}</p>
                     @endif
                     {{-- aca falta poner una imagen x si no es ninguna de ellos --}}
+                    @if ($bien->FK_Hardware_TipoId !=1 && $bien->FK_Hardware_TipoId !=2 && $bien->FK_Hardware_TipoId !=3 && $bien->FK_Hardware_TipoId !=4 && $bien->FK_Hardware_TipoId !=5 && $bien->FK_Hardware_TipoId !=6 && $bien->FK_Hardware_TipoId !=7 && $bien->FK_Hardware_TipoId !=8 && $bien->FK_Hardware_TipoId !=9 && $bien->FK_Hardware_TipoId !=10 )
+                        <img src="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" height="200px" width="250px" alt="imagen de Laptop">
+                        <p> Estado: {{$bien->Testado_fisico_hardware}}</p>
+                    @endif
                     
                 @else
-                
-                <img src="{{ Storage::url($imagen->Tpath_imagenes) }}" height="450px" width="440px" alt="imagen del bien">
-                <p> Estado: {{$bien->Testado_fisico_hardware}}</p>
+                    <div class="mb-4" >
+                        <img src="{{ Storage::url($imagen->Tpath_imagenes) }}" height="450px" width="440px" alt="imagen del bien">
+                        <p> Estado: {{$bien->Testado_fisico_hardware}}</p>
+                    </div>
                     
                 @endif
         </div>
@@ -405,7 +417,7 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                                         <input hidden name="tipo" type="text" value="1">
                                         <div class="p-4 md:p-5 space-y-4">
                                             <label for="T_Motivo_Activar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo:</label>
-                                            <textarea required name="T_Motivo_Activar" id="miTextarea2" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la reversión de la baja">{{old('T_Motivo_Activar')}}</textarea>
+                                            <textarea required name="T_Motivo_Activar" id="miTextarea2" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="200" placeholder="Escriba el motivo de la reversión de la baja">{{old('T_Motivo_Activar')}}</textarea>
                                             {{-- <p>Letras restantes: <span id="contador2">180</span></p> --}}
                                             @error('T_Motivo_Activar')
                                                     <p class="text-red-600">*{{$message}}</p>

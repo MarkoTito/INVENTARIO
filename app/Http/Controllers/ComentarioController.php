@@ -158,13 +158,15 @@ class ComentarioController extends Controller
                         'Tdescripcion_modificaciones'=> "5"
                     ]);
                     
+                    $logoBase64 = base64_encode(file_get_contents(public_path('images/logo-insti.png')));
                     $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
                         'comentario' =>$request,
                         'bien' => $codigo,
                         'numero' =>1,
                         'nombre'=> $usuario,
                         'fecha' => $fecha,
-                        'año'=> $añoActual
+                        'año'=> $añoActual,
+                        'logoBase64'=> $logoBase64
                         
                     ]);
             
@@ -212,14 +214,16 @@ class ComentarioController extends Controller
                             'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
                             'Tdescripcion_modificaciones'=> "5"
                         ]);
-                        
+                        $logoBase64 = base64_encode(file_get_contents(public_path('images/logo-insti.png')));
+
                         $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
                             'comentario' =>$request,
                             'bien' => $codigo,
                             'numero' => $numero,
                             'nombre'=> $usuario,
                             'fecha' => $fecha,
-                            'año'=> $añoActual
+                            'año'=> $añoActual,
+                            'logoBase64'=> $logoBase64
                             
                         ]);
                 
@@ -260,14 +264,15 @@ class ComentarioController extends Controller
                             'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
                             'Tdescripcion_modificaciones'=> "5"
                         ]);
-                        
+                        $logoBase64 = base64_encode(file_get_contents(public_path('images/logo-insti.png')));
                         $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
                             'comentario' =>$request,
                             'bien' => $codigo,
                             'numero' =>1,
                             'nombre'=> $usuario,
                             'fecha' => $fecha,
-                            'año'=> $añoActual
+                            'año'=> $añoActual,
+                            'logoBase64'=> $logoBase64
                             
                         ]);
                 

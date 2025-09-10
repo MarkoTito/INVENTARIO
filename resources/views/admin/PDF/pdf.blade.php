@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Detalle de hardware</title>
+    <title>Baja de hardware</title>
     <style>
         body { font-family: sans-serif; font-size: 12px; margin: 20px; }
         .title { text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 20px; }
@@ -22,9 +22,25 @@
     </style>
 
 </head>
-<body>
+<body> 
+    <table  style="width: 100%;">
+        <tr>
+            <td style="border: none">
+                <img src="data:image/png;base64,{{ $logoBase64 }}" height="50" width="50" alt="Logo institucional">
+            </td>
+            <td style="border: none">
+                <span style="text-decoration: underline; font-size: 19px; font-weight: bold; color: #000;">
+                    ACTA DE BAJA DE BIEN
+                </span>
+            </td>
+            <td style="border: none">
+                 <h3></h3>
+            </td>
+        </tr>
+    </table>
+    <br>
  
-    <div class="title">ACTA DE BAJA DE BIEN</div>
+    {{-- <div class="title">ACTA DE BAJA DE BIEN</div> --}}
  
     <div>
         {{-- descripcion --}}

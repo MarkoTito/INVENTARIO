@@ -38,6 +38,12 @@ class Tiposeeder extends Seeder
             [
                 'Tdescriocion_tipo' => 'Impresora',
             ],
+            [
+                'Tdescriocion_tipo' => 'Teclado',
+            ],
+            [
+                'Tdescriocion_tipo' => 'Ecran',
+            ],
         ];
 
         foreach ($Tipos as $tipo) {

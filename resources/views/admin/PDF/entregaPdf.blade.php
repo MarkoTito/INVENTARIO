@@ -67,55 +67,25 @@
 <body>
 
     <div class="container">
-        <h2 style="text-align: center; font-weight: bold; text-transform: uppercase;">
-            Acta de Entrega
-        </h2>
-
+        
         <table style="width: 100%;">
             <tr>
-                <td style="text-align: left;">
-                    <strong>Fecha:</strong>
+                <td >
+                    <img src="data:image/png;base64,{{ $logoBase64 }}" height="100" width="100" alt="Logo institucional">
                 </td>
-                <td style="text-align: right;">
-                    <strong>N° Entrega:</strong>
-                    
-                </td>
+                <th align="center" >
+                    <span style="text-decoration: underline; font-size: 24px; font-weight: bold; color: #000;">
+                        ACTA DE ENTREGA
+                    </span>
+                </th>
+                <th align="end-2">
+                   <input type="text" value="Entrega Nº{{$numero}}-{{$año}}" class="small-input">
+                </th>
             </tr>
         </table>
 
-        <table style="width: 100%; margin-bottom: 10px;">
-            <tr>
-                <td style="text-align: left;">
-                    <input type="text" value="{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}" class="small-input">
-                </td>
-                <td style="text-align: right;">
-                    <input type="text" value="{{$numero}}-{{$año}}" class="small-input">
-                </td>
-            </tr>
-        </table>
-
-
-
-
-        {{-- Fecha 
-        <div class="flex" style="justify-content: flex-end;">
-            <div>
-                <label><strong>Fecha:</strong></label> 
-            </div>
-            <div>
-                <input type="text" value="{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}"  class="small-input">
-            </div>
-        </div>
-        numero de entrega 
-        <div class="flex" style="justify-content: flex-end;">
-            <div>
-                <label><strong>N° Entrega:</strong></label> 
-            </div>
-            <div>
-                <input type="text" value="{{$numero}}"  class="small-input">
-            </div>
-        </div> --}}
-
+        <h3>Fecha: {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}</h3>
+        
         <!-- Equipo -->
         <div class="section">
             <div class="section-title">Equipo</div>
