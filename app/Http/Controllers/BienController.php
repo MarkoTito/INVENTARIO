@@ -60,6 +60,7 @@ class BienController extends Controller
     public function index2(?Request $request){
         Gate::authorize('read-hardware');
         //mandar info
+        $tope=50;
         $request->validate(
                 [
                 'FK_Hardware_AreaId' => 'required',
@@ -78,45 +79,184 @@ class BienController extends Controller
         if ($request->estado == "1") {
             //tquiere todo de areas y tipo
             if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId == "2") {
-                $bienes = Bien::with('area','tipo','estado')
+                $toma = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_EstadoId',1)
                         ->get();
+
+                if ($toma->isEmpty()) {
+
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => '!Upss',
+                        'text' => 'No existe ningun bien con esa realacion'
+                    ]);
+                    
+                    return redirect()->route('adminbien.index');
+
+
+                } else {
+                    if ($toma->count()>=$tope) {
+                        $bienes = $toma->take($tope);
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontraron mas de '.$tope .' bienes¡',
+                            'text'=>'Solo se mostraran los '. $tope. ' primeros bienes'
+                        ]);                    
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+    
+                    } else {
+                        $bienes = $toma;
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontro Bien¡',
+                            'text'=>''
+                        ]);
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                        
+                    }
+                }
                 
+
+
                 
-                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+
 
             }
             //solo quiere todas los tipos
             if ($request->FK_Hardware_TipoId == "2" && $request->FK_Hardware_AreaId != "1" ) {
-                $bienes = Bien::with('area','tipo','estado')
+                $toma = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_EstadoId',1)
                         ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                         ->get();
                 
+                if ($toma->isEmpty()) {
+
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => '!Upss',
+                        'text' => 'No existe ningun bien con esa realacion'
+                    ]);
+                    
+                    return redirect()->route('adminbien.index');
+
+
+                } else {
+                    if ($toma->count()>=$tope) {
+                        $bienes = $toma->take($tope);
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontraron mas de '.$tope .' bienes¡',
+                            'text'=>'Solo se mostraran los '. $tope. ' primeros bienes'
+                        ]);                    
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+    
+                    } else {
+                        $bienes = $toma;
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontro Bien¡',
+                            'text'=>''
+                        ]);
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                        
+                    }
+                }
+
                 
-                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
 
             }
 
             // solo quiere todas las area
             if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId != "2") {
-                $bienes = Bien::with('area','tipo','estado')
+                $toma = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_EstadoId',1)
                         ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                         ->get();
+
+                if ($toma->isEmpty()) {
+
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => '!Upss',
+                        'text' => 'No existe ningun bien con esa realacion'
+                    ]);
+                    
+                    return redirect()->route('adminbien.index');
+
+
+                } else {
+                    if ($toma->count()>=$tope) {
+                        $bienes = $toma->take($tope);
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontraron mas de '.$tope .' bienes¡',
+                            'text'=>'Solo se mostraran los '. $tope. ' primeros bienes'
+                        ]);                    
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+    
+                    } else {
+                        $bienes = $toma;
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontro Bien¡',
+                            'text'=>''
+                        ]);
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                        
+                    }
+                }
                 
-                
-                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
 
             } else {//no quiere todos en ningun caso
-                $bienes = Bien::with('area','tipo','estado')
+                $toma = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_EstadoId',1)
                         ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                         ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                         ->get();
+
+                if ($toma->isEmpty()) {
+
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => '!Upss',
+                        'text' => 'No existe ningun bien con esa realacion'
+                    ]);
+                    
+                    return redirect()->route('adminbien.index');
+
+
+                } else {
+                    if ($toma->count()>=$tope) {
+                        $bienes = $toma->take($tope);
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontraron mas de '.$tope .' bienes¡',
+                            'text'=>'Solo se mostraran los '. $tope. ' primeros bienes'
+                        ]);                    
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+    
+                    } else {
+                        $bienes = $toma;
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontro Bien¡',
+                            'text'=>''
+                        ]);
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                        
+                    }
+                }
+
+
                 
-                
-                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
 
             }
             
@@ -124,46 +264,179 @@ class BienController extends Controller
         if ($request->estado == "0") {
             //quiere todo de areas y tipo
             if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId == "2") {
-                $bienes = Bien::with('area','tipo','estado')
+                $toma = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_EstadoId',2)
                         ->get();
+
+                if ($toma->isEmpty()) {
+
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => '!Upss',
+                        'text' => 'No existe ningun bien con esa realacion'
+                    ]);
+                    
+                    return redirect()->route('adminbien.index');
+
+
+                } else {
+                    if ($toma->count()>=$tope) {
+                        $bienes = $toma->take($tope);
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontraron mas de '.$tope .' bienes¡',
+                            'text'=>'Solo se mostraran los '. $tope. ' primeros bienes'
+                        ]);                    
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+    
+                    } else {
+                        $bienes = $toma;
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontro Bien¡',
+                            'text'=>''
+                        ]);
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                        
+                    }
+                }
+
                 
-                
-                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
 
             }
             //solo quiere todas las area
             if ($request->FK_Hardware_AreaId== "1" && $request->FK_Hardware_TipoId != "2") {
-                $bienes = Bien::with('area','tipo','estado')
+                $toma = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                         ->where('FK_Hardware_EstadoId',2)
                         ->get();
+                if ($toma->isEmpty()) {
+
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => '!Upss',
+                        'text' => 'No existe ningun bien con esa realacion'
+                    ]);
                     
+                    return redirect()->route('adminbien.index');
+
+
+                } else {
+                    if ($toma->count()>=$tope) {
+                        $bienes = $toma->take($tope);
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontraron mas de '.$tope .' bienes¡',
+                            'text'=>'Solo se mostraran los '. $tope. ' primeros bienes'
+                        ]);                    
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+    
+                    } else {
+                        $bienes = $toma;
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontro Bien¡',
+                            'text'=>''
+                        ]);
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                        
+                    }
+                }
+
                 
-                
-                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
             }
             //solo quiere todas los tipos
             if ($request->FK_Hardware_TipoId == "2" && $request->FK_Hardware_AreaId !="1") {
-                $bienes = Bien::with('area','tipo','estado')
+                $toma = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                         ->where('FK_Hardware_EstadoId',2)
                         ->get();
+                if ($toma->isEmpty()) {
+
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => '!Upss',
+                        'text' => 'No existe ningun bien con esa realacion'
+                    ]);
                     
+                    return redirect()->route('adminbien.index');
+
+
+                } else {
+                    if ($toma->count()>=$tope) {
+                        $bienes = $toma->take($tope);
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontraron mas de '.$tope .' bienes¡',
+                            'text'=>'Solo se mostraran los '. $tope. ' primeros bienes'
+                        ]);                    
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+    
+                    } else {
+                        $bienes = $toma;
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontro Bien¡',
+                            'text'=>''
+                        ]);
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                        
+                    }
+                }
+
                 
-                
-                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
             }
             else {//no quiere todos en ningun caso
-                $bienes = Bien::with('area','tipo','estado')
+                $toma = Bien::with('area','tipo','estado')
                         ->where('FK_Hardware_AreaId',$request->FK_Hardware_AreaId)
                         ->where('FK_Hardware_TipoId',$request->FK_Hardware_TipoId)
                         ->where('FK_Hardware_EstadoId',2)
                         ->get();
+
+         
+                if ($toma->isEmpty()) {
+
+                    session()->flash('swal', [
+                        'icon' => 'error',
+                        'title' => '!Upss',
+                        'text' => 'No existe ningun bien con esa realacion'
+                    ]);
                     
+                    return redirect()->route('adminbien.index');
+
+
+                } else {
+                    if ($toma->count()>=$tope) {
+                        $bienes = $toma->take($tope);
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontraron mas de '.$tope .' bienes¡',
+                            'text'=>'Solo se mostraran los '. $tope. ' primeros bienes'
+                        ]);                    
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+    
+                    } else {
+                        $bienes = $toma;
+    
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Se encontro Bien¡',
+                            'text'=>''
+                        ]);
+                        return view('admin.encontrado',compact('bienes','areas','tipos','request'));
+                        
+                    }
+                }
+
+
                 
-                
-                return view('admin.encontrado',compact('bienes','areas','tipos','request'));
 
             }
             
