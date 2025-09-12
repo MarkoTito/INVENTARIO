@@ -9,7 +9,7 @@
             </svg>
          </button>
         <a href="/" class="flex ms-2 md:me-24">
-          <img src="https://images.seeklogo.com/logo-png/48/1/municipalidad-distrital-san-martin-de-porres-logo-png_seeklogo-486447.png" class="h-8 me-3" alt="FlowBite Logo" />
+          <img src="{{ asset('images/muni.png') }}" height="50" width="50" alt="Logo">
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">SISTEMA DE INVENTARIO DE TI</span>
         </a>
       </div>
