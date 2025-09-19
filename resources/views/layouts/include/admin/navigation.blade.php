@@ -9,9 +9,9 @@
             </svg>
          </button>
         <a href="/" class="flex ms-2 md:me-24">
-          <img src="{{ asset('images/muni.png') }}" height="50" width="50" alt="Logo">
-          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">SISTEMA DE INVENTARIO DE TI</span>
+          <img src="{{ asset('images/SMP1.png') }}" height="50" width="50" alt="Logo">
         </a>
+        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">SISTEMA DE INVENTARIO DE TI</span>
       </div>
       <div class="flex items-center">
           <div class="ms-3 relative">

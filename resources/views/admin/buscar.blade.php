@@ -102,6 +102,9 @@ title="Buscar"
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3" align="center" >
+                        N° DE ITEN
+                    </th>
+                    <th scope="col" class="px-6 py-3" align="center" >
                         Tipo
                     </th>
                     <th scope="col" class="px-6 py-3" align="center" >
@@ -129,6 +132,10 @@ title="Buscar"
             <tbody id="dataTable">
                 @foreach ($bienes as $bien)
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
+                            {{$bien->PK_Hardware}}
+                        </th>    
+
                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
                             {{$bien->tipo->Tdescriocion_tipo}}
                         </th>
@@ -162,6 +169,7 @@ title="Buscar"
                                             <i class="fa-solid fa-wrench"></i>
                                         </span>
                                     </a>
+                                    
                                 </th>
                             @else
                                 <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
@@ -213,7 +221,10 @@ title="Buscar"
                             <a href="{{url('/admin/buscar/'.$idCifrado)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
-                            
+                            <div hidden>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                            </div>
                             
                             {{-- <a href="/admin/buscar/{{$bien->PK_Hardware}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalle</a> --}}
                         

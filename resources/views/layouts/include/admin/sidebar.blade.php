@@ -82,7 +82,7 @@
                   <span class="w-6 h-6 inline-flex justify-center items-center">
                      <i class="fa-solid fa-users"></i>
                   </span>
-                  <span class="ms-3">Movimientos   </span>
+                  <span class="ms-3">Historial de movimientos </span>
                </a>
             </li> 
          @endcan
