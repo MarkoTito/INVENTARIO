@@ -18,13 +18,24 @@ title="Subir archivos"
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     @endpush
-
+    
+    @if (!$idCifrado)
+        <!-- Para subir -->
+        <div>
+            nada
+        </div>              
+    @else
+        <!-- para cancelar -->
+        <div>
+            {{$idCifrado}}
+        </div>
+    @endif
    
 
     {{-- imagen --}}
     <div class="mb-4" >
        
-        <form action="{{ route('admindigital.dropzone')}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admindigital.dropzone',$idCifrado)}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
         @csrf
         </form>
         

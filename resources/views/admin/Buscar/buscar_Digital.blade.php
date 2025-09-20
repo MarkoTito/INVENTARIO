@@ -51,7 +51,7 @@ title="Buscar"
     </form>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-        <h3>Licencias</h3>
+        <h3>Licencias</h3>  
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -66,6 +66,9 @@ title="Buscar"
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Fecha de Inicio
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Fecha de fin
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Accion
@@ -84,14 +87,45 @@ title="Buscar"
                         <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$digital->determinacion->Tdescripcion_determinacion}} 
                         </th>
-                         <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                             {{$digital->Dfe_Inicio_software}}
                         </th>
+                        
+                        
+                        @if (! $digital->Dfe_vencimiento_software)
+                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                                -
+                            </th>
+                        @else
+                            @php
+                                $inicio = \Carbon\Carbon::today();
+                                $fin = \Carbon\Carbon::parse($digital->Dfe_vencimiento_software);
+                                $TotalDias = $inicio->diffInDays($fin);
+                            @endphp
+
+                            @if($TotalDias<=0)
+                                <th class="px-6 py-4 font-medium  whitespace-nowrap text-red-600">
+                                    Licencias vencida
+                                </th>
+                            @else
+                                <th class="px-6 py-4 font-medium  whitespace-nowrap text-green-600">
+                                    {{$TotalDias}}  Dias
+                                </th>
+                            
+                            @endif
+                           
+                        
+                        @endif
+                        
+
+
+
+
                         <td class="px-6 py-4">
                             @php
                                 $idCifrado = Crypt::encryptString($digital->PK_Software);
                             @endphp
-                            <a href="{{url('/admin/buscar/digital/'.$idCifrado)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalle</a>
+                            <a href="{{url('/admin/buscar/digital/'.$idCifrado)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><i class="fa-solid fa-magnifying-glass"></i></a>
                         
                         </td>
                     </tr>

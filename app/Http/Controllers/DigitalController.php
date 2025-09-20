@@ -54,6 +54,7 @@ class DigitalController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('create-software'); 
+        $idCifrado = null;
         $request->validate(
             [
                 'FK_Software_DeterminacionId' => 'required'
@@ -101,7 +102,7 @@ class DigitalController extends Controller
                         'title'=> '!Bien hecho',
                         'text'=>'El bien fue registrado correctamente'
                 ]);
-                return view('admin/Load_Archivos'); 
+                return view('admin/Load_Archivos',compact('idCifrado')); 
             } else {
                 $request->validate(
                         [
@@ -138,7 +139,7 @@ class DigitalController extends Controller
                         'title'=> '!Bien hecho',
                         'text'=>'El bien fue registrado correctamente'
                 ]);
-                return view('admin/Load_Archivos'); 
+                return view('admin/Load_Archivos',compact('idCifrado')); 
             }
        
     
@@ -146,27 +147,56 @@ class DigitalController extends Controller
 
 
 
-    public function dropzone(Request $request){
+    public function dropzone(Request $request ,?int $idCifrado = null ){
+        
         Gate::authorize('create-software'); 
-        $ultimo = Digital::orderBy('PK_Software', 'desc')->first();
 
-        if (!$request->hasFile('file')) {
-            return response()->json(['error' => 'No se recibió ningún archivo'], 400);
+        if ($idCifrado === null) {
+            # code...
+            $ultimo = Digital::orderBy('PK_Software', 'desc')->first();
+    
+            if (!$request->hasFile('file')) {
+                return response()->json(['error' => 'No se recibió ningún archivo'], 400);
+            }
+             
+            $image = new Archivos();
+            $image->Tpath_archivos = $request->file('file')->store('archivos', 'public');
+            $image->Nsize_archivo = $request->file('file')->getSize();
+            $image->FK_Archivos_SoftwareId = $ultimo->PK_Software;
+            $image->Tnombre_archivo=$request->file('file')->getClientOriginalName();
+            $image->save();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Se subio correctamente el archivo',
+                
+            ]);
+            return redirect()->route('admindigital.index');
+
+        }else { //documento de cancelacion
+
+            if (!$request->hasFile('file')) {
+                return response()->json(['error' => 'No se recibió ningún archivo'], 400);
+            }
+             
+            $image = new Archivos();
+            $image->Tpath_archivos = $request->file('file')->store('archivos', 'public');
+            $image->Nsize_archivo = $request->file('file')->getSize();
+            $image->FK_Archivos_SoftwareId = $idCifrado;
+            $image->Tnombre_archivo=$request->file('file')->getClientOriginalName();
+            $image->save();
+
+            $software= Digital::where('PK_Software',$idCifrado)->update([
+                    'Nestado_software'=>0
+                ]);
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Se cancelo correctamente la licencia',
+                
+            ]);
+            return redirect()->route('admindigital.index');
         }
-         
-        $image = new Archivos();
-        $image->Tpath_archivos = $request->file('file')->store('archivos', 'public');
-        $image->Nsize_archivo = $request->file('file')->getSize();
-        $image->FK_Archivos_SoftwareId = $ultimo->PK_Software;
-        $image->Tnombre_archivo=$request->file('file')->getClientOriginalName();
-        $image->save();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Se subio correctamente el archivo',
-            
-        ]);
-        return redirect()->route('admindigital.index');
         
     }
 
@@ -236,6 +266,16 @@ class DigitalController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+    public function Canceldropzone($idCifrado)
+    {
+        //aca
+        //return $idCifrado;
+        return view('admin/Load_Archivos',compact('idCifrado')); 
+    }
+
+
+
     public function update(Request $request, Digital $digital)
     {
         
@@ -324,5 +364,6 @@ class DigitalController extends Controller
     public function destroy(Digital $digital)
     {
         //
+        return "hola";
     }
 }

@@ -60,29 +60,25 @@ title="Reprar"
                     </div>
                     
                 </div>
-                <div>
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Nombre</label>
-                    <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Tnombre_software}}" disabled>
-                </div>
-                
                 <div class="grid gap-6 md:grid-cols-2">
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Nombre</label>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Tnombre_software}}" disabled>
+                    </div>
 
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Host</label>
                         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Thost_software}}" disabled>
                     </div>
+                </div>
+
+                
+                <div class="grid gap-6 md:grid-cols-2">
+
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Inicio</label>    
                         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->Dfe_Inicio_software}}" disabled>
                     
-                    </div>
-                    
-                </div>
-                <div class="grid gap-6 md:grid-cols-2">
-                    
-                    <div>
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Determinacion:</label>
-                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->determinacion->Tdescripcion_determinacion}}" disabled>
                     </div>
                     @if ($digital->FK_Software_DeterminacionId == 2)
                         <div>
@@ -98,6 +94,34 @@ title="Reprar"
                             
                         </div>
                     @endif
+                    
+                </div>
+                <div class="grid gap-6 md:grid-cols-2">
+                    
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Determinacion:</label>
+                        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$digital->determinacion->Tdescripcion_determinacion}}" disabled>
+                    </div>
+
+                    @if ($digital->FK_Software_DeterminacionId == 2)
+                        @if ($digital->Nestado_software == 1)
+                            <div>
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Estado:</label>
+                                <input type="text" id="disabled-input" aria-label="disabled input" class="text-green-600 mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="Activo" disabled>
+                            </div>
+                        @else
+                            <div>
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Estado:</label>
+                                <input  type="text" id="disabled-input" aria-label="disabled input" class=" text-red-600 mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="Cancelado" disabled>
+                            </div>
+
+                        @endif
+
+
+                    @endif
+
+
+
                 </div>
                 
                 
@@ -157,8 +181,28 @@ title="Reprar"
             </tbody>
         </table>
     </div>
+    <br>
+    <div class="grid gap-6 md:grid-cols-3 mb-3">
+        <div>
 
+        </div>
+        @can('bajar-hardware')
+            <div>
+                <a href="/admin/digital/cancelar/dropzone/{{$digital->PK_Software}}">
+                    <button type="submit" 
+                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        Cancelar Licencia 
+                    </button>
+                </a> 
+            </div>
+        @endcan
 
+        
+        <div>
+
+        </div>
+
+    </div>
 
         
 

@@ -52,8 +52,12 @@ Route::get('/buscar/historial/{id}',[BienController::class,'historial']);
 Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
 //para las imagenes:
 Route::post('bien/dropzone',[BienController::class,'dropzone'])->name('bien.dropzone');
-//para los archivos
-Route::post('digital/dropzone',[DigitalController::class,'dropzone'])->name('digital.dropzone');
+
+//para los archivos carga interna
+Route::post('digital/dropzone/{idCifrado}',[DigitalController::class,'dropzone'])->name('digital.dropzone');
+
+//Cancelar software con doc
+Route::get('digital/cancelar/dropzone/{digital}',[DigitalController::class,'Canceldropzone']);
 
 //ruta de los comentarios (reparacion)
 Route::resource('comentario',ComentarioController::class);

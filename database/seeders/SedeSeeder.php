@@ -19,7 +19,7 @@ class SedeSeeder extends Seeder
                 'Nubicacion_sede' => 1
             ],
             [
-                'UK_Nombre_sede' => 'Maitacapa',
+                'UK_Nombre_sede' => 'Mayta Cápac',
                 'Nubicacion_sede' => 2
             ],
             [

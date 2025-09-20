@@ -54,6 +54,7 @@ return new class extends Migration
             $table->date('Dfe_Inicio_software');
             //$table->text('Tdeterminacion_software');
             $table->date('Dfe_vencimiento_software')->nullable();
+            $table->integer('Nestado_software')->default(1);
             $table->timestamps();
 
         });
