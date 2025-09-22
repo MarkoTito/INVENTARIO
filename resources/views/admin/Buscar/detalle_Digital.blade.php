@@ -17,14 +17,17 @@ title="Reprar"
         'name'=> 'Detalle Licencia',
     ]
     ]">
-    <div class="flex justify-end">
-        <a href="{{route('admindigital.edit',$digital->PK_Software)}}">
-            <button type="submit" 
-                class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                Editar <i class="fa-solid fa-pen-to-square"></i>
-            </button>
-        </a>
-    </div>
+    @if ($digital->Nestado_software == 1) 
+        <div class="flex justify-end">
+            <a href="{{route('admindigital.edit',$digital->PK_Software)}}">
+                <button type="submit" 
+                    class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                    Editar <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+            </a>
+        </div>
+
+    @endif
 
     
     <div class="grid gap-6  md:grid-cols-2">
@@ -167,8 +170,9 @@ title="Reprar"
                             </th>
                             <th class="px-6 py-4">
 
-                                <a href="{{asset('storage/'.$archivo->Tpath_archivos)}} "target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                Ver
+                                <a href="{{ asset('storage/' . $archivo->Tpath_archivos) }}" 
+                                target="_blank">
+                                    Ver
                                 </a>
                             
                             </th>
@@ -183,24 +187,48 @@ title="Reprar"
     </div>
     <br>
     <div class="grid gap-6 md:grid-cols-3 mb-3">
-        <div>
-
-        </div>
         @can('bajar-hardware')
-            <div>
-                <a href="/admin/digital/cancelar/dropzone/{{$digital->PK_Software}}">
-                    <button type="submit" 
-                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                        Cancelar Licencia 
-                    </button>
-                </a> 
-            </div>
+            @if ($digital->Nestado_software == 1) 
+                <div>
+                    <a href="/admin/digital/cancelar/dropzone/{{$digital->PK_Software}}">
+                        <button type="submit" 
+                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                            Cancelar Licencia 
+                        </button>
+                    </a> 
+                </div>
+                            
+            @else
+                <div></div>
+
+            @endif
         @endcan
 
         
         <div>
 
         </div>
+
+        @can('bajar-hardware')
+            @if ($digital->Nestado_software == 1) 
+                <div>
+                    <form action="/admin/digital/agregar/dropzone" method="post" >
+                        @csrf
+                        <input hidden name="VALOR" type="valor" value="1">
+                        <input hidden name="PK_Software" type="idCifrado" value="{{$digital->PK_Software}}">
+                        <button type="submit" 
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Agregar documentos
+                        </button>
+
+                    </form>
+                </div>
+                            
+            @else
+                <div></div>
+
+            @endif
+        @endcan
 
     </div>
 

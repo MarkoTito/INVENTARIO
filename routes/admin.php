@@ -53,8 +53,18 @@ Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
 //para las imagenes:
 Route::post('bien/dropzone',[BienController::class,'dropzone'])->name('bien.dropzone');
 
+
 //para los archivos carga interna
-Route::post('digital/dropzone/{idCifrado}',[DigitalController::class,'dropzone'])->name('digital.dropzone');
+Route::post('digital/dropzone',[DigitalController::class,'dropzone'])->name('digital.dropzone');
+
+//para los archivos carga interna baja
+Route::post('digital/cancel/dropzone/{idCifrado}',[DigitalController::class,'bajDigitaldropzone']);
+
+//para agregar archivos (FORM)
+Route::post('digital/agregar/dropzone',[DigitalController::class,'agregarArchi']);
+
+//para agregar archivos 
+Route::post('digital/add/dropzone/{idCifrado}',[DigitalController::class,'adddropzone']);
 
 //Cancelar software con doc
 Route::get('digital/cancelar/dropzone/{digital}',[DigitalController::class,'Canceldropzone']);

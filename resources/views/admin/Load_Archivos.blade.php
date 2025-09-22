@@ -13,7 +13,7 @@ title="Subir archivos"
         'name'=> 'Ingresar Archivos',
     ]
     ]">
-   <H2>Ingresar Archivo de la Licencia</H2>
+   
 
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
@@ -21,25 +21,41 @@ title="Subir archivos"
     
     @if (!$idCifrado)
         <!-- Para subir -->
-        <div>
-            nada
-        </div>              
-    @else
-        <!-- para cancelar -->
-        <div>
-            {{$idCifrado}}
+        <H2>Agregar Archivo</H2>
+        {{-- imagen --}}
+        <div class="mb-4" >
+           
+            <form action="{{ route('admindigital.dropzone',$idCifrado)}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
+            @csrf
+            </form>
+            
         </div>
+    @elseif (!$VALOR)
+        <!-- para cancelar -->
+        <H2>Agregar archivo para cancelar</H2>
+        {{-- imagen --}}
+        <div class="mb-4" >
+           
+            <form action="/admin/digital/cancel/dropzone/{{$idCifrado}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
+            @csrf
+            </form>
+            
+        </div>
+    @else
+        <!-- para agregar -->
+        <H2>Agregar Archivo</H2>
+        {{-- imagen --}}
+        <div class="mb-4" >
+        
+            <form action="/admin/digital/add/dropzone/{{$idCifrado}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
+            @csrf
+            </form>
+            
+        </div>
+        
     @endif
    
 
-    {{-- imagen --}}
-    <div class="mb-4" >
-       
-        <form action="{{ route('admindigital.dropzone',$idCifrado)}}" class="dropzone" id="my-dropzone" method="POST" enctype="multipart/form-data">
-        @csrf
-        </form>
-        
-    </div>
     
     @push('js')
         <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>

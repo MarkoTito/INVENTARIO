@@ -15,7 +15,7 @@
     ]"> --}}
 
     <div class="flex justify-center mt-4" >
-        <img src="{{ asset('images/menu.png') }}" height="800" width="920" alt="Logo">
+        <img src="{{ asset('images/menu.png') }}" height="1500" width="1250" alt="Logo">
     </div>
 
 
