@@ -98,23 +98,48 @@
             <div class="flex">
                 <label><strong>Estado Actual del Bien:</strong></label> {{$comentario->Testado_fisico_comentario}}
             </div>
-            <div class="flex-space" style="margin-top: 5px;">
+
+            <div class="flex">
+                <label><strong>Marca:</strong></label> {{$bien->marca->UK_Nombre_marca}}
+            </div>
+
+            @if ($bien->Tmodelo_hardware== 'null')
+                
+                <div class="flex">
+                    <label><strong>Modelo:</strong></label> 
+                </div>
+            @else
+                <div class="flex">
+                    <label><strong>Modelo:</strong></label> {{$bien->Tmodelo_hardware}}
+                </div>
+            @endif
+
+
+
+            <!-- <div class="flex-space" style="margin-top: 5px;">
                 <div class="flex" style="flex: 1;">
                     <label><strong>Marca:</strong></label>
                     <input type="text" value="{{$bien->marca->UK_Nombre_marca}}" >
                 </div>
                 <div class="flex" style="flex: 1;">
                     <label><strong>Modelo:</strong></label>
-                    <input type="text" value="{{$bien->Tmodelo_hardware}}">
+                    @if (!$bien->Tmodelo_hardware)
+                        <input type="text" value="{{$bien->Tmodelo_hardware}}">
+                    @else
+                        <input type="text" value="{{$bien->Tmodelo_hardware}}">
+                    @endif
+
                 </div>
-            </div>
+            </div> -->
+
+
         </div>
 
         <!-- Oficina de Procedencia -->
         <div class="section">
             <div class="section-title">Oficina de Procedencia</div>
             <div class="flex" style="margin-top: 3px;">
-                <label><strong>Oficina / Unidad:</strong></label>
+                <label><strong>Órgano y/o unidad orgánica:</strong></label>
                 <input value="{{$bien->area->UK_Nombre_area}}"  type="text">
             </div>
             <div class="flex" style="margin-top: 3px;">
@@ -172,10 +197,13 @@
     <h2 style="display:inline-block; margin:0 280px 0 40;">______________</h2>
     <h2 style="display:inline-block; margin:0;">__________________</h2>
 
-    <h3 style="display:inline-block; margin:0 330px 0 70;">{{$nombre->name}} {{$nombre->lastname}}</h3>
+    <h3 style="display:inline-block; margin:0 350px 0 70;">Usuario</h3>
     <h3 style="display:inline-block; margin:0;">V.B Jefe de la ODTIE</h3>
     
-    <p style="display:inline-block; margin:0 280px 0 45;">*Tecnico Responsable*</p>
+    
+
+
+    <h4>Tecnico responsable: {{$nombre->name}} {{$nombre->lastname}}</h4>
 
 
 </body>

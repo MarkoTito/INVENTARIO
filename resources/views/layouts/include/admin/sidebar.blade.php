@@ -82,7 +82,7 @@
                   <span class="w-6 h-6 inline-flex justify-center items-center">
                      <i class="fa-solid fa-users"></i>
                   </span>
-                  <span class="ms-3">Historial de movimientos </span>
+                  <span class="ms-3">Historial de Actividades </span>
                </a>
             </li> 
          @endcan
@@ -97,7 +97,7 @@
                   <span class="w-6 h-6 inline-flex justify-center items-center">
                      <i class="fa-solid fa-plus"></i>
                   </span>
-                  <span class="ms-3">Mas</span>
+                  <span class="ms-3">Configuración</span>
                </a>
             </li>
          @endcan

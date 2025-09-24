@@ -104,13 +104,13 @@
     
     <h2 style="display:inline-block; margin:0 100px 0 0;">______________</h2>
     <h2 style="display:inline-block; margin:0;">__________________</h2>
-    <h3 style="display:inline-block; margin:0 165px 0 25;"> {{ $baja->usuarioBaja->name}} {{ $baja->usuarioBaja->lastname}}</h3>
+    <h3 style="display:inline-block; margin:0 115px 0 20;"> ÁREA USUARIA</h3>
     <h3 style="display:inline-block; margin:0;">V.B Jefe de la ODTIE</h3>
     
-    <p style="display:inline-block; margin:0;">*Tecnico Responsable*</p>
+    
 
     
-    
+    <h4>Tecnico responsable: {{ $baja->usuarioBaja->name}} {{ $baja->usuarioBaja->lastname}}</h4>
 
 
 </body>
