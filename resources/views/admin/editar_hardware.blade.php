@@ -155,7 +155,7 @@ title="Editar"
                             {{-- estado --}}
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado:</label>   
                             <select name="Testado_fisico_hardware" id="Testado_fisico_hardware" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="Bien" {{$bien->Testado_fisico_hardware== 'Bien' ? 'selected' : ''}} >Bien</option>
+                                <option value="Bueno" {{$bien->Testado_fisico_hardware== 'Bueno' ? 'selected' : ''}} >Bueno</option>
                                 <option value="Regular" {{$bien->Testado_fisico_hardware== 'Regular' ? 'selected' : ''}} >Regular</option>
                                 <option value="Mal" {{$bien->Testado_fisico_hardware== 'Mal' ? 'selected' : ''}} >Mal</option>
                             </select>   
