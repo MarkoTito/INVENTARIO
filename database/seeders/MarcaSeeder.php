@@ -44,6 +44,48 @@ class MarcaSeeder extends Seeder
             [
                 'UK_Nombre_marca' => 'Razer',
             ],
+            [
+                'UK_Nombre_marca' => 'All-in-One ANTRYX ASUS',
+            ],
+            [
+                'UK_Nombre_marca' => 'AVASTAC',
+            ],
+            [
+                'UK_Nombre_marca' => 'CYBERTEL',
+            ],
+            [
+                'UK_Nombre_marca' => 'Dell Inc.',
+            ],
+            [
+                'UK_Nombre_marca' => 'EXIN',
+            ],
+            [
+                'UK_Nombre_marca' => 'Foxconn GAMBYTE',
+            ],
+            [
+                'UK_Nombre_marca' => 'HALION',
+            ],
+            [
+                'UK_Nombre_marca' => 'INTEL',
+            ],
+            [
+                'UK_Nombre_marca' => 'LG',
+            ],
+            [
+                'UK_Nombre_marca' => 'MICRONICS',
+            ],
+            [
+                'UK_Nombre_marca' => 'TEROS',
+            ],
+            [
+                'UK_Nombre_marca' => 'THERMALTAKE',
+            ],
+            [
+                'UK_Nombre_marca' => 'VASTEC',
+            ],
+            [
+                'UK_Nombre_marca' => 'XTECH',
+            ],
            
             
         ];

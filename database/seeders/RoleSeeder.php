@@ -99,12 +99,36 @@ class RoleSeeder extends Seeder
         ])->assignRole('nivel1'); //esto es gracias al metodo has role q se agrego con la descarga
 
         User::factory()->create([
-                'name' => 'jeremy',
-                'lastname' => 'vega',
-                'email' => 'jeremyvega@gmail.com',
-                'password' => bcrypt('87654321'),
+                'name' => 'JEREMY',
+                'lastname' => 'VEGA',
+                'email' => 'jeremy22vb@gmail.com',
+                'password' => bcrypt('Muni*2025'),
            
         ])->assignRole('nivel2');
+
+        User::factory()->create([
+                'name' => 'CLAUDIO',
+                'lastname' => 'VILCHEZ',
+                'email' => 'cj72929740@gmail.com',
+                'password' => bcrypt('Muni*2025'),
+           
+        ])->assignRole('nivel2');
+
+        User::factory()->create([
+                'name' => 'MIGUEL',
+                'lastname' => 'ARANDA',
+                'email' => 'mcardenasakm7@gmail.com',
+                'password' => bcrypt('Muni*2025'),
+           
+        ])->assignRole('nivel2');
+
+        User::factory()->create([
+                'name' => 'ALVARO',
+                'lastname' => 'ALBA',
+                'email' => 'caracino63@gmail.com',
+                'password' => bcrypt('Muni*2025'),
+           
+        ])->assignRole('nivel3');
         
 
     }

@@ -237,12 +237,14 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
 
 
                     <div class="flex justify-end">
-                        <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
-                            <button type="submit" 
-                                class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                                Editar <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </a>
+                        @can('update-hardware')
+                            <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
+                                <button type="submit" 
+                                    class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                                    Editar <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </a>
+                        @endcan
 
                     </div>
                 </div>   
