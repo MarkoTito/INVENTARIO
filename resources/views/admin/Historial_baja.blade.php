@@ -3,7 +3,7 @@
     sin : significa texto plano
 --}}
 <x-admin-layout 
-title="Reprar"
+title="Reparar"
 :breadcrumbs="[
     [
         'name'=>'Menu',
@@ -50,7 +50,7 @@ title="Reprar"
                 @else
                     @foreach ($bajas as $baja)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                            <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                            <th class="px-6 py-4 font-medium   whitespace-nowrap text-black"  >
                                 {{$baja->usuarioBaja->name}}
                             </th>
                                 

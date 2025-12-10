@@ -139,6 +139,10 @@ class ComentarioController extends Controller
                     $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
                     $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
                     
+                    $coment->Tusuario_comentario=$request->usuario;
+                    $coment->TusuCargo_comentario=$request->cargo;
+
+
                     $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
                     $coment->Tubicacion_comentario= 1;//esto va en el otro tambien pero en 0
                     $coment->Nnumero_comentario = 1;
@@ -197,6 +201,11 @@ class ComentarioController extends Controller
                         $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
                         
                         $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
+
+                        $coment->Tusuario_comentario=$request->usuario;
+                        $coment->TusuCargo_comentario=$request->cargo;
+
+
                         $coment->Tubicacion_comentario= 1;
                         $coment->Nnumero_comentario = $numero;
     
@@ -246,6 +255,9 @@ class ComentarioController extends Controller
                         $coment->Tobservacion_comentario=$request->Tobservacion_comentario;
                         $coment->Trecomendacion_comentario=$request->Trecomendacion_comentario;
                         
+                        $coment->Tusuario_comentario=$request->usuario;
+                        $coment->TusuCargo_comentario=$request->cargo;
+
                         $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
                         $coment->Tubicacion_comentario= 1;
                         $coment->Nnumero_comentario = 1;
@@ -403,6 +415,45 @@ class ComentarioController extends Controller
     public function update(Request $request, Comentario $comentario)
     {
         //
+        //return $request;
+    
+        $comentario->Tdescripcion_comentario=$request->Tdescripcion_comentario;
+        $comentario->Tobservacion_comentario =$request->Tobservacion_comentario;
+        $comentario->Trecomendacion_comentario =$request->Trecomendacion_comentario;
+        $comentario->Tusuario_comentario =$request->usuario;
+        $comentario->TusuCargo_comentario =$request->cargo;
+        $comentario->save();
+
+        $usuario_id=Auth::user()->id;
+        $usuario=Auth::user();
+        $fecha = Carbon::now()->format('d-m-Y');
+        $añoActual = Carbon::now()->format('Y');
+
+
+        $codigo= Bien::with('area','tipo','marca')
+                            ->where('PK_Hardware',$comentario->FK_Comentario_HardwareId)
+                            ->first();
+
+        $logoBase64 = base64_encode(file_get_contents(public_path('images/logo-insti.png')));
+
+                        $pdf =Pdf::loadView('admin.PDF.entregaPdf',[
+                            'comentario' =>$request,
+                            'bien' => $codigo,
+                            'numero' => $comentario->Nnumero_comentario,
+                            'nombre'=> $usuario,
+                            'fecha' => $fecha,
+                            'año'=> $añoActual,
+                            'logoBase64'=> $logoBase64
+                            
+                        ]);
+                
+                        //varaible de seccion
+                        session()->flash('swal',[
+                            'icon'=> 'success',
+                            'title'=> '!Bien hecho',
+                            'text'=>   'El comentario fue registrado con exito'
+                        ]);
+                        return $pdf->download("Acta de salida {$codigo->UK_Hardware_Codigo}.pdf");
     }
 
     /**

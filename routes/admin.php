@@ -78,8 +78,8 @@ Route::get('/comentario/pdf/creacion/{code}',[ComentarioController::class,'index
 
 //generar comentario en la BD
 Route::post('/reparar/creacion',[ComentarioController::class,'reparacion']);
-
-
+//editar repar
+Route::get('/buscar/historial/editar/{id}',[BienController::class,'historial']);
 
 
 //generar baja
@@ -100,7 +100,7 @@ Route::post('/digital/editar',[DigitalController::class,'actualizar']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/baja/{id}',[BienController::class,'baja_show']);
 //mostrar el historial debjas
-Route::get('/buscar/historial/bajas/{id}',[BajaController::class,'historial']);
+Route::get('/buscar/historial/bajas/{id}',[BienController::class,'EdiTHistorial']);
 
 
 //menu para agegar mas cosas

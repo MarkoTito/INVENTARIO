@@ -38,7 +38,6 @@ return new class extends Migration
 
             $table->text('Testado_fisico_comentario');
 
-
             $table->text('Testado_comentario')->default(1);
 
             $table->timestamps();

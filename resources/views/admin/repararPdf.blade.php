@@ -3,14 +3,14 @@
     sin : significa texto plano
 --}}
 <x-admin-layout 
-title="Reprar"
+title="Reparar"
 :breadcrumbs="[
     [
         'name'=>'Menu',
         'href' => '/',
     ],
     [
-        'name'=> 'Reprar',
+        'name'=> 'Reparar',
     ]
     ]">
     

@@ -669,6 +669,16 @@ class BienController extends Controller
         return view('admin.historial',compact('comentarios','bien'));
         
     }
+    public function EdiTHistorial($idCifrado)
+    {   
+        Gate::authorize('read-hardware');
+        $comentarios=Comentario::with('bien','usuario')
+                ->where('PK_Comentario',$idCifrado)
+                 ->first();
+        //return $comentarios;
+        return view('admin.EditaReparar',compact('comentarios'));
+        
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -678,6 +688,8 @@ class BienController extends Controller
         //
         return 'hola desde el edit';
     }
+
+    
     public function H_editar($idCifrado)
     {
         Gate::authorize('update-hardware');
