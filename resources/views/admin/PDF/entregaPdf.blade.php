@@ -114,6 +114,11 @@
                 </div>
             @endif
 
+            <div class="section">
+                <div class="section-title">descripción de Bien</div>
+                <textarea rows="3">{{$bien->Tdescripcion_hardware}}</textarea>
+            </div>
+
 
 
             <!-- <div class="flex-space" style="margin-top: 5px;">

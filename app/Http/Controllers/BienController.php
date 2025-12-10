@@ -47,7 +47,9 @@ class BienController extends Controller
                 ->first();
         */
         //forma q muestra todo con los metodos creado, mas facil q hacer un where dentro de otro... :)
-        $bienes = Bien::with('area','tipo','estado')->paginate(25);
+        $bienes = Bien::with('area','tipo','estado')
+                ->orderBy('PK_Hardware', 'desc')
+                ->paginate(30);
                 //->where('FK_Hardware_EstadoId',1)    
         //mandar info
         $areas=Area::all();
