@@ -16,7 +16,10 @@ class Bajas extends Model
         //aanulacion
         'FK_null_Baja_UserId',
         'Tdescripcion_null_baja',
-        'Testado_baja'
+        'Testado_baja',
+        'Tusuario_baja',
+        'Tcargo_baja',
+        'Tcontrato_baja'
     ];
 
     public function bienBaja()

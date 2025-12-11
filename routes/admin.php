@@ -100,7 +100,7 @@ Route::post('/digital/editar',[DigitalController::class,'actualizar']);
 //mostrar el detalle de un bien (cree una ruta pero se ve mal esteticamente)
 Route::get('/buscar/baja/{id}',[BienController::class,'baja_show']);
 //mostrar el historial debjas
-Route::get('/buscar/historial/bajas/{id}',[BienController::class,'EdiTHistorial']);
+Route::get('/buscar/historial/bajas/{id}',[BajaController::class,'historialBajas']);
 
 
 //menu para agegar mas cosas

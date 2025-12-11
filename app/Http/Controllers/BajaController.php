@@ -58,7 +58,11 @@ class BajaController extends Controller
         Bajas::create([
             "FK_Bajas_HardwareId" => $bienBja->PK_Hardware,
             "FK_Baja_UserId" => $usuario,
-            "Tdescripcion_baja" => $request->T_Motivo_Baja
+            "Tdescripcion_baja" => $request->T_Motivo_Baja,
+
+            "Tusuario_baja" => $request->usuario,
+            "Tcargo_baja" => $request->cargo,
+            "Tcontrato_baja" => $request->contratro,
         ]);
         Modificacion::create([
                 'FK_Modificaciones_UserId' => $usuario,
@@ -192,7 +196,7 @@ class BajaController extends Controller
         // aca muestro el historial de las bajas
         return "holas";
     }
-    public function historial($idCifrado)
+    public function historialBajas($idCifrado)
     {   
         // Gate::authorize('read-hardware');
         $id = Crypt::decryptString($idCifrado);

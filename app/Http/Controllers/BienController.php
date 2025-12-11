@@ -833,8 +833,10 @@ class BienController extends Controller
             ->take(4) 
             ->get();
         $bien = Bien::where('PK_Hardware', $id)
+                ->with('sede')
                 ->with('area')
                 ->with('tipo')
+                ->with('marca')
                 ->firstOrFail();    
 
         $baja = Bajas::where('FK_Bajas_HardwareId', $id)
