@@ -623,6 +623,7 @@ class BienController extends Controller
         Gate::authorize('read-hardware');
         //para mostra solo un bien , con todo su detalle
         $id = Crypt::decryptString($idCifrado);
+        
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')
@@ -656,6 +657,7 @@ class BienController extends Controller
     {   
         Gate::authorize('read-hardware');
         $id = Crypt::decryptString($idCifrado);
+
         $bien=Bien::where('PK_Hardware', $id)
                 ->with('area')
                 ->with('tipo')

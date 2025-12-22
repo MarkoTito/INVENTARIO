@@ -34,7 +34,7 @@ class BajaController extends Controller
     public function baja (Request $request,$bien)
     {
         // Gate::authorize('bajar-hardware'); 
-        if (!$request->T_Motivo_Baja || strlen($request->T_Motivo_Baja) > 125) {
+        if (!$request->T_Motivo_Baja || strlen($request->T_Motivo_Baja) > 180) {
             session()->flash('swal', [
                 'icon' => 'error',
                 'title' => '!Upss',
@@ -207,7 +207,7 @@ class BajaController extends Controller
                  ->get();
         
         //return $bajas;
-        return view('admin.Historial_baja',compact('bajas'));
+        return view('admin.Historial_baja',compact('bajas'));                                                        
         
     }
 
