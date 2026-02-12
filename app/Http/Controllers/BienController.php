@@ -450,7 +450,7 @@ class BienController extends Controller
         //metodo de busqueda con CODIGO
         Gate::authorize('read-hardware');
         $code=$request->UK_Hardware_Codigo;
-        if (strlen($code) >12 || strlen($code) <12) {
+        if (strlen($code) >12 || strlen($code) <10) {
             session()->flash('swal', [
                 'icon' => 'error',
                 'title' => '!Upss',
@@ -526,7 +526,7 @@ class BienController extends Controller
                     'FK_Hardware_TipoId' => 'required',
                     'FK_Hardware_MarcasId' => 'required',
                     'FK_Hardware_SedeId' => 'required',
-                    'UK_Hardware_Codigo' => 'required|min:12|max:12|unique:hardware',
+                    'UK_Hardware_Codigo' => 'required|min:10|max:12|unique:hardware',
                     'Tdescripcion_hardware' => 'required|max:180',
                     'Testado_fisico_hardware'=> 'required',
                     'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
@@ -572,7 +572,7 @@ class BienController extends Controller
                     'FK_Hardware_TipoId' => 'required',
                     'FK_Hardware_MarcasId' => 'required',
                     'FK_Hardware_SedeId' => 'required',
-                    'UK_Hardware_Codigo' => 'required|min:12|max:12|unique:hardware',
+                    'UK_Hardware_Codigo' => 'required|min:10|max:12|unique:hardware',
                     'Tmodelo_hardware' => 'required|max:30',
                     'Tserie_hardware' => 'required|max:25',
                     'Tdescripcion_hardware' => 'required|max:180',
@@ -737,7 +737,7 @@ class BienController extends Controller
                 'FK_Hardware_AreaId' => 'required',
                 'FK_Hardware_TipoId' => 'required',
                 'FK_Hardware_SedeId' =>'required',
-                'UK_Hardware_Codigo' => "required|min:12|max:12|unique:hardware,UK_Hardware_Codigo,{$bien->PK_Hardware},PK_Hardware",
+                'UK_Hardware_Codigo' => "required|min:10|max:12|unique:hardware,UK_Hardware_Codigo,{$bien->PK_Hardware},PK_Hardware",
                 'Tdescripcion_hardware' => 'required',
                 'Testado_fisico_hardware'=> 'required',
                 'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today'],

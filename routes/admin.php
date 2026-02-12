@@ -53,6 +53,8 @@ Route::get('/baja/{bien}/pdf',[BienController::class,'pdf']);
 //para las imagenes:
 Route::post('bien/dropzone',[BienController::class,'dropzone'])->name('bien.dropzone');
 
+//editar reparacion
+Route::get('/bien/editar/{id}',[BienController::class,'EdiTHistorial']);
 
 //para los archivos carga interna
 Route::post('digital/dropzone',[DigitalController::class,'dropzone'])->name('digital.dropzone');

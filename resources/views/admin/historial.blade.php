@@ -65,10 +65,15 @@ title="Historial"
                                 {{$coment->created_at}}
                             </td>
                             <th class="px-6 py-4 font-medium  whitespace-nowrap text-blue-600">
-                                <a href="/admin/buscar/historial/bajas/{{$coment->PK_Comentario}}">
+                                <a href="/admin/bien/editar/{{$coment->PK_Comentario}}">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </a>
                             </td>
+                            {{-- <th class="px-6 py-4 font-medium  whitespace-nowrap text-blue-600">
+                                <a href="/admin/buscar/historial/bajas/{{$coment->PK_Comentario}}">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </a>
+                            </td> --}}
                         </tr>
                     @endforeach
                 @endif

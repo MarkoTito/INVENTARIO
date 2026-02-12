@@ -60,6 +60,8 @@ class ComentarioController extends Controller
                             ->where('UK_Hardware_Codigo',$code)
                             ->first();
         
+        
+        
         return view('admin.repararPdf', compact('areas','tipos','codigo','code') );
 
     }
@@ -83,7 +85,7 @@ class ComentarioController extends Controller
         $data=$request->validate(
             [
                 'Tdescripcion_comentario' => 'required',
-                'FK_Comentario_HardwareId' => 'required|min:12|max:12',
+                'FK_Comentario_HardwareId' => 'required|min:10|max:12',
                 'Testado_fisico_comentario' => 'required',
                 'cargo' => 'required',
                 'usuario' => 'required',
@@ -121,7 +123,7 @@ class ComentarioController extends Controller
 
             if ($codigo->FK_Hardware_EstadoId == 1) {
 
-                $ultimo = Comentario::where('Tubicacion_comentario', 1)
+                $ultimo = Comentario::where('Testado_comentario', 1)
                         ->latest()
                         ->first();
                 $añoActual = Carbon::now()->format('Y');
@@ -429,6 +431,7 @@ class ComentarioController extends Controller
         $fecha = Carbon::now()->format('d-m-Y');
         $añoActual = Carbon::now()->format('Y');
 
+        // return $comentario; esto se agrgo al ultimo, el editar las actas
 
         $codigo= Bien::with('area','tipo','marca')
                             ->where('PK_Hardware',$comentario->FK_Comentario_HardwareId)

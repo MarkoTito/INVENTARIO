@@ -178,7 +178,7 @@ title="Buscar"
                                 {{-- ver si esta activo --}}
                             @if ( $bien->FK_Hardware_EstadoId == 1) 
                                 {{-- ver si pertence es del palacio municipal --}}
-                                @if ($bien->FK_Hardware_SedeId == 1)
+                                {{-- @if ($bien->FK_Hardware_SedeId == 1)
                                     <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
                                         <a href="/admin/comentario/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
                                             <span class="w-6 h-6 inline-flex justify-center items-center">
@@ -195,7 +195,16 @@ title="Buscar"
                                         </a>
                                     </th>
                                     
-                                @endif
+                                @endif --}}
+
+
+                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center">
+                                    <a href="/admin/comentario/pdf/creacion/{{$bien->UK_Hardware_Codigo}}" class="text-black"  >
+                                        <span class="w-6 h-6 inline-flex justify-center items-center">
+                                            <i class="fa-solid fa-wrench"></i>
+                                        </span>
+                                    </a>
+                                </th>
                                 
                             @else
                                 <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
