@@ -28,7 +28,7 @@ title="Buscar"
                 <input type="text" name="form" value="1" class="hidden">  
                 <div class="mb-4">
                     <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Ingresar codigo</label>
-                    <input name="UK_Hardware_Codigo" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="12" pattern=".{12}" required title="Debe tener exactamente 12 caracteres"  placeholder="Ingresa el Codigo del Bien" value="{{$request->UK_Hardware_Codigo}}"  />
+                    <input name="UK_Hardware_Codigo" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" min="10" maxlength="12"  required title="Debe tener exactamente 12 caracteres"  placeholder="Ingresa el Codigo del Bien" value="{{$request->UK_Hardware_Codigo}}"  />
                 </div>
 
                 <div class="flex justify-center mb-4" >
@@ -119,6 +119,9 @@ title="Buscar"
                         Area
                     </th>
                     <th scope="col" class="px-6 py-3" align="center" >
+                        Prestamo
+                    </th>
+                    <th scope="col" class="px-6 py-3" align="center" >
                         Reparar
                     </th>
                     @can('bajar-hardware')
@@ -149,6 +152,9 @@ title="Buscar"
                         <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
                              -
                         </th>
+                        <th class="px-6 py-4 font-medium  whitespace-nowrap text-black">
+                            -
+                       </th>
                     </tr>
                 @else
                      @foreach ($bienes as $bien)
@@ -173,6 +179,20 @@ title="Buscar"
                                 {{$bien->area->UK_Nombre_area}}
                                 
                             </th>
+
+                            @if ($bien->estado->UK_Descripcion_estado== 'Activo')
+                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-green-500" align="center" >
+                                    <a href="{{route('adminPrestamo.show',$bien->UK_Hardware_Codigo)}}">
+                                        <i class="fa-solid fa-handshake"></i>
+                                    </a>
+                                </th>
+                                
+                            @else
+                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap " align="center" >
+                                    -
+                                </th>
+                                
+                            @endif
 
                             {{-- reparacion --}}
                                 {{-- ver si esta activo --}}

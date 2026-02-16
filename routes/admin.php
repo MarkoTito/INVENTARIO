@@ -5,6 +5,7 @@ use App\Http\Controllers\BajaController;
 use App\Http\Controllers\BienController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DigitalController;
+use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\SistemasController;
 use App\Http\Controllers\TiposController;
@@ -132,4 +133,21 @@ Route::resource('sistemas', SistemasController::class);
 //ruta para usuario
 Route::resource('usuario', UserController::class); //ojo aca
 Route::post('/eliminar/usuario/{id}',[UserController::class,'eliminar']);
+
+//prestamo (ultimo controller)
+
+Route::resource('Prestamo', PrestamoController::class);
+
+Route::get('/Prestamo/historial/{id}',[PrestamoController::class,'historial']);
+
+
+
+
+
+
+
+
+
+
+
 

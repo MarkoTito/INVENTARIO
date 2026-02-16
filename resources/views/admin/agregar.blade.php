@@ -31,11 +31,19 @@ title="Mas"
             Tipo de Hardware
             </button>
         </li>
+
+        {{-- <li class="me-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="marca-tab" data-tabs-target="#marca" type="button" role="tab" aria-controls="marca" aria-selected="false">
+                Marcas
+            </button>
+        </li> --}}
+
         <li class="me-2" role="presentation">
             <button class="inline-block p-4 border-b-2 rounded-t-lg" id="sistema-tab" data-tabs-target="#sistema" type="button" role="tab" aria-controls="sistema" aria-selected="false">
-            Tipo de Sistema
+                Marcas
             </button>
         </li>
+
         <li class="me-2" role="presentation">
             <button class="inline-block p-4 border-b-2 rounded-t-lg" id="usuario-tab" data-tabs-target="#usuario" type="button" role="tab" aria-controls="usuario" aria-selected="false">
             Usuarios
@@ -318,7 +326,7 @@ title="Mas"
 
             <div class="mb-4 flex justify-end " >
                 <button data-modal-target="default-modal-sistema" data-modal-toggle="default-modal-sistema" class=" block  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " type="button">
-                    Agregar Sistema
+                    Agregar Marca
                 </button>
             </div>
 
@@ -336,26 +344,26 @@ title="Mas"
                                 Numero
                             </th>
                             <th scope="col" class="px-6 py-3" align="center" >
-                                Tipo de Sistema
+                                Marca
                             </th>
                             <th scope="col" class="px-6 py-3" align="center" >
                                 Estado
                             </th>
-                             <th scope="col" class="px-6 py-3" align="center" >
+                            {{-- <th scope="col" class="px-6 py-3" align="center" >
                                 Deshabilitar / Habilitar
-                            </th>
+                            </th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($sistemas as $sistema)
+                        @foreach ($marcas as $marca)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" align="center" >
-                                    {{$sistema->PK_sistema}}
+                                    {{$marca->PK_marca}}
                                 </th>
                                 <td class="px-6 py-4" align="center" >
-                                    {{$sistema->Tdescripcion_sistema}}
+                                    {{$marca->UK_Nombre_marca}}
                                 </td>
-                                @if ($sistema->Testado_sistema==1)
+                                @if ($marca->Nestado_marca==1)
                                     <td class="px-6 py-4 text-blue-600 dark:text-blue-500  " align="center" >
                                         Activo
                                     </td>
@@ -364,7 +372,7 @@ title="Mas"
                                         No activo
                                     </td>
                                 @endif
-                                @if ($sistema->Testado_sistema==1)
+                                {{-- @if ($marca->Testado_marca==1)
                                     <th scope="row" class="px-6 py-4 font-medium  whitespace-nowra" align="center" >
                                         <form action="{{route('adminsistemas.edit',$sistema->PK_sistema)}}" method="GET" class="delete-form-sistema">
                                             @csrf
@@ -390,7 +398,7 @@ title="Mas"
                                        </form>
                                         
                                     </th>
-                                @endif 
+                                @endif  --}}
                                 
                             </tr>
                         @endforeach
@@ -607,14 +615,6 @@ title="Mas"
 
         </div>
     </div>
-
-
-
-
-
-
-
-
     {{-- modals --}}
     <div id="default-modal-sede" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -696,6 +696,7 @@ title="Mas"
             </div>
         </div>
     </div>
+
     {{-- modals de hadrware --}}
     <div id="default-modal-hardware" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -733,7 +734,26 @@ title="Mas"
             </div>
         </div>
     </div>
-    {{-- modals de sistema --}}
+
+
+    {{-- modals de marca 
+        No se puede ralizar sin quitar la marca
+        --}}
+    <div id="default-modal-marca" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                
+                
+            </div>
+        </div>
+    </div>
+
+
+    {{-- modals de sistema 
+        Paso a seer marca
+        --}}
     <div id="default-modal-sistema" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
         <!-- Modal content -->
@@ -741,7 +761,7 @@ title="Mas"
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
-                        AGREGAR SISTEMA
+                        AGREGAR MARCA
                     </h3>
                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-black" data-modal-hide="default-modal-sistema">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -756,8 +776,9 @@ title="Mas"
                         @csrf 
                         <br>
                         <div>
-                            <input name="Tdescripcion_sistema" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="25" placeholder="Ingresa sistema" required />
-                            @error('Tdescripcion_sistema')
+                            {{-- se apasa al controller de sistema --}}
+                            <input name="UK_Nombre_marca" type="codigo" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="25" placeholder="Ingresa marca" required />
+                            @error('UK_Nombre_marca')
                                 <p class="text-red-600">*{{$message}}</p>
                             @enderror
                         </div>
@@ -770,6 +791,8 @@ title="Mas"
             </div>
         </div>
     </div>
+
+    
 
 
     @push('js')

@@ -20,8 +20,26 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
     @php
         $idCifrado = Crypt::encryptString($bien->PK_Hardware);
     @endphp
+
+    <div class="flex justify-end mb-4 ">
+
+        @if ($bien->estado->PK_estado == 1)
+            @can('update-hardware')
+                <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
+                    <button type="submit" 
+                        class="text-white bg-black focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                        Editar <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </a>
+            @endcan
+            
+        @endif
+
+
+    </div>
     
     <div class="grid gap-6 md:grid-cols-3 mb-2">
+        {{-- imagen --}}
         <div class="mb-4" >
                 @if (!$imagen)
                     @if ($bien->FK_Hardware_TipoId ==10)
@@ -194,15 +212,19 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                     </div>
                     <div>
                         @if ($bien->estado->PK_estado == 1)
-                            <div class="flex justify-end">
-                                <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
-                                    <button type="submit" 
-                                        class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                                        Editar <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </a>
 
-                            </div>
+                            {{-- mostrar los prestamos del bien --}}
+                            @if (!$prestamos->isEmpty())
+                                <div class="flex justify-end">
+                                    <a href="/admin/Prestamo/historial/{{$bien->PK_Hardware}}">
+                                        <button type="submit" 
+                                            class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                                            Prestamos  <i class="fa-solid fa-handshake"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+                            @endif
                             
                         @else
                             <div class="flex justify-end">
@@ -273,17 +295,18 @@ title="{{$bien->tipo->Tdescriocion_tipo}}"
                     @endif
 
 
-                    <div class="flex justify-end">
-                        @can('update-hardware')
-                            <a href="{{url('/admin/Editar/Hardware/'.$idCifrado)}}">
+                    {{-- mostrar los prestamos del bien --}}
+                        @if (!$prestamos->isEmpty())
+                        <div class="flex justify-end">
+                            <a href="/admin/Prestamo/historial/{{$bien->PK_Hardware}}">
                                 <button type="submit" 
                                     class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                                    Editar <i class="fa-solid fa-pen-to-square"></i>
+                                    Prestamos  <i class="fa-solid fa-handshake"></i>
                                 </button>
                             </a>
-                        @endcan
 
-                    </div>
+                        </div>
+                    @endif
                 </div>   
                 
             @endif            

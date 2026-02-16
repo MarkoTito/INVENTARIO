@@ -117,6 +117,9 @@ title="Buscar"
                         Area
                     </th>
                     <th scope="col" class="px-6 py-3" align="center" >
+                        Prestamo
+                    </th>
+                    <th scope="col" class="px-6 py-3" align="center" >
                         Reparar
                     </th>
                     @can('bajar-hardware')
@@ -142,6 +145,8 @@ title="Buscar"
                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-black" align="center" >
                             {{$bien->UK_Hardware_Codigo}}
                         </th>
+                        
+
                         @if ($bien->estado->UK_Descripcion_estado== 'Activo')
                             <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap  text-blue-600" align="center" >
                                 {{$bien->estado->UK_Descripcion_estado}}
@@ -156,6 +161,23 @@ title="Buscar"
                             {{$bien->area->UK_Nombre_area}}
                             
                         </th>
+
+                        @if ($bien->estado->UK_Descripcion_estado== 'Activo')
+                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-green-500" align="center" >
+                                <a href="{{route('adminPrestamo.show',$bien->UK_Hardware_Codigo)}}">
+                                    <i class="fa-solid fa-handshake"></i>
+                                </a>
+                            </th>
+                            
+                        @else
+                            <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap " align="center" >
+                                -
+                            </th>
+                            
+                        @endif
+
+
+                        
 
 
                         {{-- reparacion --}}

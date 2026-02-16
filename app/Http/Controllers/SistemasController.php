@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Marca;
 use App\Models\Sistema;
 use App\Models\Tipo;
 use App\Models\User;
@@ -35,38 +36,38 @@ class SistemasController extends Controller
         
         $validator = Validator::make($request->all(), 
             [
-                'Tdescripcion_sistema' => 'required|unique:sistemas',
+                'UK_Nombre_marca' => 'required|unique:marcas',
             ], 
             [], 
             [
-                'Tdescripcion_sistema' => 'Sistema', 
+                'UK_Nombre_marca' => 'Marca', 
             ]);
 
         
-        if (strlen($request->Tdescripcion_sistema) >40) {
+        if (strlen($request->UK_Nombre_marca) >40) {
             session()->flash('swal',[
                 'icon' => 'error',
                 'title' => '!Upss No Ingreso correctamente!',
-                'text' => 'El Sistema no puede ser mayor a 40 carecteres'
+                'text' => 'El marca no puede ser mayor a 40 carecteres'
             ]);
             return redirect('/admin/Agregar');
         } else {
             if ($validator->fails()) {
-                if ($validator->errors()->has('Tdescripcion_sistema')) {
-                    $error = $validator->errors()->first('Tdescripcion_sistema');
+                if ($validator->errors()->has('UK_Nombre_marca')) {
+                    $error = $validator->errors()->first('UK_Nombre_marca');
                     session()->flash('swal',[
                         'icon' => 'error',
                         'title' => '!Upss No Ingreso correctamente!',
-                        'text' => 'El Sistema ya existe'
+                        'text' => 'La marca ya existe'
                     ]);
                     return redirect('/admin/Agregar');
                 }
             }else{
-                Sistema::create($request->all());
+                Marca::create($request->all());
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!Exito¡',
-                    'text'=>'El Sistema fue registrado con Exito'
+                    'text'=>'La marca fue registrado con Exito'
                     
                 ]);
                

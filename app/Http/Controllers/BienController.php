@@ -13,6 +13,7 @@ use App\Models\Image;
 use App\Models\Marca;
 use App\Models\Modificacion;
 use App\Models\Modificaciones;
+use App\Models\Prestamo;
 use App\Models\Sedes;
 use App\Models\Sistema;
 use App\Models\Tipo;
@@ -635,6 +636,9 @@ class BienController extends Controller
 
         $comentarios=Comentario::where('FK_Comentario_HardwareId',$id)
                  ->get();
+
+        $prestamos=Prestamo::where('FK_Prestamo_HardwareId',$id)
+                 ->get();
         
         //para mostrar las imagnes;
         $imagen = Image::where('FK_Imagenes_HardwareId',$id)->first();
@@ -650,7 +654,7 @@ class BienController extends Controller
                    ->first();
 
         //return $ultimoBaja->created_at;
-        return view('admin.detalle',compact('bien','comentarios','imagen','bajas','ultimoBaja'));
+        return view('admin.detalle',compact('bien','comentarios','imagen','bajas','ultimoBaja','prestamos'));
     }
 
     public function historial($idCifrado)
@@ -904,9 +908,12 @@ class BienController extends Controller
         $sistemas = Sistema::all();
         $users= User::all();
         $sedes = Sedes::all();
+        $marcas = Marca::all();
+
+        // return $marcas;
         
         //return $users;
-        return view('admin/agregar',compact('areas','tipos','sistemas','users','sedes'));
+        return view('admin/agregar',compact('areas','marcas','tipos','sistemas','users','sedes'));
         
     }
 
@@ -919,7 +926,10 @@ class BienController extends Controller
                 ->orderBy('PK_modificaciones', 'desc')
                 ->paginate(20);
 
-        
+        $id=3;
+
+        $user = User::find($id);
+        $user->syncRoles('nivel1');
         //return $modificaciones;
         return view('admin/Exportacion/exportacion',compact('modificaciones'));
     }

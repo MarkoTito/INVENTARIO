@@ -68,6 +68,12 @@ title="Movimientos"
                             Reparacion
                         </th>                        
                     @endif
+                    @if ($modificacion->Tdescripcion_modificaciones == "7")
+
+                        <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white" align="center">
+                            Prestamo
+                        </th>                        
+                    @endif
 
                     
                     @if (is_null($modificacion->FK_Modificaciones_HardwareId))
