@@ -675,13 +675,13 @@ class BienController extends Controller
         return view('admin.historial',compact('comentarios','bien'));
         
     }
-    public function EdiTHistorial($idCifrado)
+    public function EdiTHistorial($idCifrado)       
     {   
         Gate::authorize('read-hardware');
         $comentarios=Comentario::with('bien','usuario')
                 ->where('PK_Comentario',$idCifrado)
                  ->first();
-        //return $comentarios;
+        // return $comentarios;
         return view('admin.EditaReparar',compact('comentarios'));
         
     }

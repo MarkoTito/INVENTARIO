@@ -89,6 +89,7 @@ class ComentarioController extends Controller
                 'Testado_fisico_comentario' => 'required',
                 'cargo' => 'required',
                 'usuario' => 'required',
+                'Tdoc_ref_comentario' => 'required',
             ],
             [],
             [
@@ -97,9 +98,13 @@ class ComentarioController extends Controller
                 'Testado_fisico_comentario' => 'Estado del Bien',
                 'cargo' => 'Usuario',
                 'usuario' => 'cargo',
+                'Tdoc_ref_comentario' => 'Doc. referencia',
                 
             ]
         );
+
+        return $request;
+
         //BUSQUEDA DEL USUARIO_id
         $usuario_id=Auth::user()->id;
         $usuario=Auth::user();
@@ -206,7 +211,8 @@ class ComentarioController extends Controller
 
                         $coment->Tusuario_comentario=$request->usuario;
                         $coment->TusuCargo_comentario=$request->cargo;
-
+                        
+                        $coment->Tdoc_ref_comentario=$request->Tdoc_ref_comentario; //esto es para el doc de referencia
 
                         $coment->Tubicacion_comentario= 1;
                         $coment->Nnumero_comentario = $numero;
@@ -262,6 +268,7 @@ class ComentarioController extends Controller
 
                         $coment->Testado_fisico_comentario=$request->Testado_fisico_comentario;
                         $coment->Tubicacion_comentario= 1;
+                        $coment->Tdoc_ref_comentario=$request->Tdoc_ref_comentario; //esto es para el doc de referencia
                         $coment->Nnumero_comentario = 1;
 
                         $coment->save();
@@ -417,13 +424,14 @@ class ComentarioController extends Controller
     public function update(Request $request, Comentario $comentario)
     {
         //
-        //return $request;
+        return $request;
     
         $comentario->Tdescripcion_comentario=$request->Tdescripcion_comentario;
         $comentario->Tobservacion_comentario =$request->Tobservacion_comentario;
         $comentario->Trecomendacion_comentario =$request->Trecomendacion_comentario;
         $comentario->Tusuario_comentario =$request->usuario;
         $comentario->TusuCargo_comentario =$request->cargo;
+        $comentario->Tdoc_ref_comentario =$request->Tdoc_ref_comentario; //DOC REFERENCIA
         $comentario->save();
 
         $usuario_id=Auth::user()->id;
