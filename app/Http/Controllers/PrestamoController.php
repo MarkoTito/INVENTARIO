@@ -37,19 +37,15 @@ class PrestamoController extends Controller
         
         //  Gate::authorize('create-comentario'); 
         //creacion del prestamo
-
-        
-        
-
-
         $data=$request->validate(
             [
                 'Testado_fisico_prestamo' => 'required',
                 'Tmotivo_prestamo' => 'required|min:1|max:150',
                 'Tobservaciones_prestamo' => 'max:150',
+                'Tdoc_ref_prestamo' => 'max:150',
 
-                'usuario' => 'required|min:1|max:150',
-                'cargo' => 'required|min:1|max:150',
+                'Tresponsable_prestamo' => 'required|min:1|max:150',
+                'Tcargo_prestamo' => 'required|min:1|max:150',
                 'FK_Prestamo_AreaId' => 'required',
                 
             ],
@@ -58,9 +54,10 @@ class PrestamoController extends Controller
                 'Testado_fisico_prestamo'=> 'Estado',
                 'Tmotivo_prestamo' => 'motivo',
                 'Tobservaciones_prestamo' => 'Observacion',
+                'Tdoc_ref_prestamo' => 'Documento de referencia',
 
-                'cargo' => 'Usuario',
-                'usuario' => 'cargo',
+                'Tresponsable_prestamo' => 'Usuario',
+                'Tcargo_prestamo' => 'cargo',
                 'FK_Prestamo_AreaId' => 'area',
                 
             ]
@@ -77,12 +74,12 @@ class PrestamoController extends Controller
         $agente=Auth::user();
         $motivo = $request->Tmotivo_prestamo;
         $observacion = $request->Tobservaciones_prestamo;
-        $usuario = $request->usuario;
-        $cargo = $request->cargo;
+        $usuario = $request->Tresponsable_prestamo;
+        $cargo = $request->Tcargo_prestamo;
         $idHardware= $codigo->PK_Hardware;
         $idarea= $request->FK_Prestamo_AreaId;
         $estadoBien=$request->Testado_fisico_prestamo;
-        $estado = 1;
+        $doReferncia=$request->Tdoc_ref_prestamo; //documento de referncia
         $fecha = Carbon::now()->format('d-m-Y');
 
 
@@ -110,16 +107,17 @@ class PrestamoController extends Controller
             $prestamo->Tmotivo_prestamo = $motivo ;
             $prestamo->Tobservaciones_prestamo =$observacion ;
             $prestamo->Testado_Hardware_prestamo = $estadoBien ;
+            $prestamo->Tdoc_ref_prestamo = $doReferncia ; //referencia
             $prestamo->Testado_prestamo = 1 ;
 
             $prestamo->save();
 
-            //agegar a tabla modificacion
-            // Modificacion::create([
-            //     'FK_Modificaciones_UserId' => $agenteId,
-            //     'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
-            //     'Tdescripcion_modificaciones'=> "7"
-            // ]);
+            // agegar a tabla modificacion
+            Modificacion::create([
+                'FK_Modificaciones_UserId' => $agenteId,
+                'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
+                'Tdescripcion_modificaciones'=> "7"
+            ]);
 
 
             //area al cual va
@@ -169,15 +167,15 @@ class PrestamoController extends Controller
                 $prestamo->Tobservaciones_prestamo =$observacion ;
                 $prestamo->Testado_Hardware_prestamo = $estadoBien ;
                 $prestamo->Testado_prestamo = 1 ;
-
+                $prestamo->Tdoc_ref_prestamo = $doReferncia ; //referencia
                 $prestamo->save();
 
-                //agegar a tabla modificacion
-                // Modificacion::create([
-                //     'FK_Modificaciones_UserId' => $agenteId,
-                //     'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
-                //     'Tdescripcion_modificaciones'=> "7"
-                // ]);
+                // agegar a tabla modificacion
+                Modificacion::create([
+                    'FK_Modificaciones_UserId' => $agenteId,
+                    'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
+                    'Tdescripcion_modificaciones'=> "7"
+                ]);
 
 
                 //area al cual va
@@ -219,15 +217,15 @@ class PrestamoController extends Controller
                 $prestamo->Tobservaciones_prestamo =$observacion ;
                 $prestamo->Testado_Hardware_prestamo = $estadoBien ;
                 $prestamo->Testado_prestamo = 1 ;
-    
+                $prestamo->Tdoc_ref_prestamo = $doReferncia ; //referencia
                 $prestamo->save();
     
-                //agegar a tabla modificacion
-                // Modificacion::create([
-                //     'FK_Modificaciones_UserId' => $agenteId,
-                //     'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
-                //     'Tdescripcion_modificaciones'=> "7"
-                // ]);
+                // agegar a tabla modificacion
+                Modificacion::create([
+                    'FK_Modificaciones_UserId' => $agenteId,
+                    'FK_Modificaciones_HardwareId' => $codigo->PK_Hardware,
+                    'Tdescripcion_modificaciones'=> "7"
+                ]);
     
     
                 //area al cual va
@@ -318,9 +316,10 @@ class PrestamoController extends Controller
         $EditPrestamo->Tmotivo_prestamo = $request->Tmotivo_prestamo ;
         $EditPrestamo->Tobservaciones_prestamo = $request->Tobservaciones_prestamo ;
         $EditPrestamo->Testado_Hardware_prestamo = $request->Testado_fisico_prestamo ;
+        $EditPrestamo->Tdoc_ref_prestamo = $request->Tdoc_ref_prestamo ;
         $EditPrestamo->save();
 
-        $ultimo = Prestamo::where('PK_Prestamos', 1)
+        $ultimo = Prestamo::where('PK_Prestamos', $request->id)
                         ->with('area')                        
                         ->first();
         // return $ultimo;

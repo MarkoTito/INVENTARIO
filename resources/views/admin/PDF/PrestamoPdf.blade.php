@@ -68,6 +68,8 @@
 
     <div class="container">
         
+
+        {{-- para el titulo y numero y logo --}}
         <table style="width: 100%;">
             <tr>
                 <td >
@@ -84,7 +86,30 @@
             </tr>
         </table>
 
-        <h3>Fecha: {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}</h3>
+        {{-- la fecha y el documetno de refecia --}}
+        <table style="width: 100%;">
+            <tr>
+                
+                <th>
+                    <span style="text-decoration: font-size: 10px; font-weight: bold; color: #000;">
+                        Fecha: {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}
+                    </span>
+                </th>
+                <th>
+                    <span style="text-decoration: font-size: 24px; ; color: #ffffff;">
+                        XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                    </span>
+                </th>
+                <th align="end-2">
+                    Doc. Referencia: {{$prestamo->Tdoc_ref_prestamo}}
+                </th>
+            </tr>
+        </table>
+
+        {{-- <h3>Fecha: {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}</h3> --}}
+
+        {{-- <h2 style="display:inline-block; margin:0 280px 0 40;">Fecha: {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}</h2>
+        <h2 style="display:inline-block; margin:0;">Doc. Referencia: {{$prestamo->Tdoc_ref_prestamo}}</h2> --}}
         
         <!-- Equipo -->
         <div class="section">
