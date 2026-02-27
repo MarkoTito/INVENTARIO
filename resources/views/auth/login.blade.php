@@ -56,7 +56,7 @@
         
         
                     <a href="https://drive.google.com/file/d/1zqqeDHWIXZlMiZLJSHIhi682KVG0g4gO/view?usp=sharing">
-                        <p>
+                        <p class="underline text-red-500 " >
                             Video tutorial <i class="fa-solid fa-play"></i>
                         </p>
                     </a>

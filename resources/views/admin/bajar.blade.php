@@ -14,16 +14,31 @@ title="Bajar"
     ]
     ]">
 
-    <div class="grid gap-6 mb-4 md:grid-cols-2">
-
-        <div>
-            <h3>Codigo: {{$code}} </h3>
-        </div>
-
-    </div>
 
     <form action="/admin/Bajar/{{$code}}" class="delete-form">
         @csrf
+
+        <div class="grid gap-6 mb-4 md:grid-cols-2">
+            <div>
+                {{-- codigo --}}
+                <label for="codigo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">codigo:</label>
+                <input disabled name="codigo" type="text" id="codigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="30"    value="{{$code}}"/>
+            </div>
+        
+            <div>
+                {{-- Documetno de referencia--}}
+                <label for="Tdoc_ref_baja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Doc. Referencia:</label>
+                <input name="Tdoc_ref_baja" type="text" id="Tdoc_ref_baja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="70"  required  placeholder="Ingrese documento de referencia"  value="{{old('Tdoc_ref_baja')}}"/>
+                @error('Tdoc_ref_baja')
+                        <p class="text-red-600">*{{$message}}</p>
+                @enderror
+            </div>
+        
+        </div>
+    
+
+
+
         <div class="p-4 md:p-5 space-y-4">
             <label for="T_Motivo_Baja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Motivo:</label>
             <textarea required name="T_Motivo_Baja" id="miTextarea" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba el motivo de la baja">{{old('T_Motivo_Baja')}}</textarea>

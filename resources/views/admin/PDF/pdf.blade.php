@@ -37,7 +37,10 @@
                 </span> 
             </td>
             <td style="border: none">
-                 <h3></h3>
+                 <h5>
+                    Doc. Ref: {{$baja->Tdoc_ref_baja}}
+                 </h5>
+                 
             </td>
         </tr>
     </table>

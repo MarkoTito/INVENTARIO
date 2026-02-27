@@ -424,7 +424,7 @@ class ComentarioController extends Controller
     public function update(Request $request, Comentario $comentario)
     {
         //
-        return $request;
+        // return $request;
     
         $comentario->Tdescripcion_comentario=$request->Tdescripcion_comentario;
         $comentario->Tobservacion_comentario =$request->Tobservacion_comentario;

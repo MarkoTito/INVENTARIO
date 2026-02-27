@@ -850,7 +850,7 @@ class BienController extends Controller
              ->orderBy('PK_Bajas', 'desc')
              ->first();
 
-
+        // return $baja;
         $logoBase64 = base64_encode(file_get_contents(public_path('images/logo-insti.png')));
         $pdf =Pdf::loadView('admin.PDF.pdf',[
             'bien' =>$bien,

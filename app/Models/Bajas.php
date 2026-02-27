@@ -19,7 +19,8 @@ class Bajas extends Model
         'Testado_baja',
         'Tusuario_baja',
         'Tcargo_baja',
-        'Tcontrato_baja'
+        'Tcontrato_baja',
+        'Tdoc_ref_baja'
     ];
 
     public function bienBaja()

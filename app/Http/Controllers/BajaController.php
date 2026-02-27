@@ -47,6 +47,8 @@ class BajaController extends Controller
         
         $fecha=Carbon::now();
         ////Bajar bien
+
+        return $request;
         
         $dato= Bien::where('UK_Hardware_Codigo',$bien)->update(
             [
@@ -63,6 +65,9 @@ class BajaController extends Controller
             "Tusuario_baja" => $request->usuario,
             "Tcargo_baja" => $request->cargo,
             "Tcontrato_baja" => $request->contratro,
+            "Tcontrato_baja" => $request->contratro,
+            "Tdoc_ref_baja" => $request->Tdoc_ref_baja,
+
         ]);
         Modificacion::create([
                 'FK_Modificaciones_UserId' => $usuario,

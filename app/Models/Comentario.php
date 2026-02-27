@@ -19,7 +19,8 @@ class Comentario extends Model
         'Nnumero_comentario',
         'Tubicacion_comentario',
         'Tusuario_comentario',
-        'TusuCargo_comentario'
+        'TusuCargo_comentario',
+        'Tdoc_ref_comentario'
 
     ];
     
