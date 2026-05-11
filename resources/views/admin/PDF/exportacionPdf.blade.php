@@ -49,7 +49,11 @@
                         
                         <td>{{ $bien->area->UK_Nombre_area}}</td>
                         <td>{{ $bien->Testado_fisico_hardware}}</td>
-                        <td>{{ \Carbon\Carbon::parse($bien->Dadquisicion_hardware)->format('d/m/Y') }}</td>
+                        @if ($bien->Dadquisicion_hardware == null)
+                            No cuenta con fecha
+                        @else
+                            <td>{{ \Carbon\Carbon::parse($bien->Dadquisicion_hardware)->format('d/m/Y') }}</td>                            
+                        @endif
                         <td>{{$bien->Dbaja_hardware}}</td>
                         <td>{{ $bien->estado->UK_Descripcion_estado}}</td>
                     </tr>

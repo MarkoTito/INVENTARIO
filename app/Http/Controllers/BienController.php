@@ -513,13 +513,14 @@ class BienController extends Controller
     }
    
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         Gate::authorize('create-hardware');
         //Inserccion de datos
+
+        //return $request;
+
         if ($request->FK_Hardware_MarcasId == "1" || $request->FK_Hardware_MarcasId == "2") {
             $request->validate(
                     [
@@ -529,8 +530,8 @@ class BienController extends Controller
                     'FK_Hardware_SedeId' => 'required',
                     'UK_Hardware_Codigo' => 'required|min:10|max:12|unique:hardware',
                     'Tdescripcion_hardware' => 'required|max:180',
-                    'Testado_fisico_hardware'=> 'required',
-                    'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
+                    'Testado_fisico_hardware'=> 'required'
+                    //'Dadquisicion_hardware'=> ['before_or_equal:today']
                     ],
                     [],
                     [
@@ -540,13 +541,21 @@ class BienController extends Controller
                         'FK_Hardware_SedeId' => 'Sede',
                         'UK_Hardware_Codigo' => 'Codigo patrimonial',
                         'Tdescripcion_hardware'=> 'Descripcion',
-                        'Testado_fisico_hardware'=> 'Estado',
-                        'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
+                        'Testado_fisico_hardware'=> 'Estado'
+                        //'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
     
                     ]
             );
+
+            $data = $request->all();
+
+            // Si el valor viene como el string "null" o si el checkbox está marcado
+            if ($request->Dadquisicion_hardware === 'null' || !$request->filled('Dadquisicion_hardware')) {
+                $data['Dadquisicion_hardware'] = null;
+            }
+
             
-            $creado=Bien::create($request->all());
+            $creado = Bien::create($data);
                 session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!El Bien fue registrado con Exito¡',
@@ -577,8 +586,8 @@ class BienController extends Controller
                     'Tmodelo_hardware' => 'required|max:30',
                     'Tserie_hardware' => 'required|max:25',
                     'Tdescripcion_hardware' => 'required|max:180',
-                    'Testado_fisico_hardware'=> 'required',
-                    'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
+                    'Testado_fisico_hardware'=> 'required'
+                    //'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today']
                     ],
                     [],
                     [
@@ -590,13 +599,21 @@ class BienController extends Controller
                         'Tserie_hardware' => 'Serie',
                         'UK_Hardware_Codigo' => 'Codigo patrimonial',
                         'Tdescripcion_hardware'=> 'Descripcion',
-                        'Testado_fisico_hardware'=> 'Estado',
-                        'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
+                        'Testado_fisico_hardware'=> 'Estado'
+                        //'Dadquisicion_hardware'=>'Fecha de Adiquiscion'
     
                     ]
             );
             
-            $creado= Bien::create($request->all());
+            $data = $request->all();
+
+            // Si el valor viene como el string "null" o si el checkbox está marcado
+            if ($request->Dadquisicion_hardware === 'null' || !$request->filled('Dadquisicion_hardware')) {
+                $data['Dadquisicion_hardware'] = null;
+            }
+
+            
+            $creado = Bien::create($data);
             session()->flash('swal',[
                     'icon'=> 'success',
                     'title'=> '!El Bien fue registrado con Exito¡',
@@ -736,6 +753,8 @@ class BienController extends Controller
     public function update(Request $request, Bien $bien)
     {    
         Gate::authorize('update-hardware');
+
+        //return $request;
         $request->validate(
                 [
                 'FK_Hardware_AreaId' => 'required',
@@ -744,7 +763,7 @@ class BienController extends Controller
                 'UK_Hardware_Codigo' => "required|min:10|max:12|unique:hardware,UK_Hardware_Codigo,{$bien->PK_Hardware},PK_Hardware",
                 'Tdescripcion_hardware' => 'required',
                 'Testado_fisico_hardware'=> 'required',
-                'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today'],
+                //'Dadquisicion_hardware'=> ['required' , 'date', 'before_or_equal:today'],
                 'FK_Hardware_MarcasId'=> 'required',
                 'Tmodelo_hardware'=> 'required',
                 
@@ -758,7 +777,7 @@ class BienController extends Controller
                     'UK_Hardware_Codigo' => 'Codigo patrimonial',
                     'Tdescripcion_hardware'=> 'Descripcion',
                     'Testado_fisico_hardware'=> 'Estado',
-                    'Dadquisicion_hardware'=>'Fecha de Adiquiscion',
+                    //'Dadquisicion_hardware'=>'Fecha de Adiquiscion',
                     'FK_Hardware_MarcasId'=> 'Marca',
                     'Tmodelo_hardware'=> 'Model',
                     'Tserie_hardware'=> 'serie',
@@ -772,6 +791,11 @@ class BienController extends Controller
         $FK_Modificaciones_UserId=Auth::user()->id;
         $FK_Modificaciones_HardwareId= $New_Bien->PK_Hardware;
 
+        if ($request->has('sin_fecha')) {
+            $fecha = null;
+        } else {
+            $fecha = $request->input('Dadquisicion_hardware');
+        }
 
 
         $New_Bien->FK_Hardware_AreaId = $request->FK_Hardware_AreaId;
@@ -779,7 +803,7 @@ class BienController extends Controller
         $New_Bien->Tdescripcion_hardware = $request->Tdescripcion_hardware;
         $New_Bien->Testado_fisico_hardware= $request->Testado_fisico_hardware;
         $New_Bien->FK_Hardware_TipoId = $request->FK_Hardware_TipoId;
-        $New_Bien->Dadquisicion_hardware= $request->Dadquisicion_hardware;
+        $New_Bien->Dadquisicion_hardware = $fecha;
         $New_Bien->FK_Hardware_SedeId = $request->FK_Hardware_SedeId;
         //nuevos
         $New_Bien->FK_Hardware_MarcasId = $request->FK_Hardware_MarcasId;

@@ -56,7 +56,9 @@
                         <strong>Sede:</strong> {{ $bien->sede->UK_Nombre_sede ?? '—' }} <br>
                         <strong>Area:</strong> {{ $bien->area->UK_Nombre_area ?? '—' }} <br>
                         <strong>Tipo:</strong> {{ $bien->tipo->Tdescriocion_tipo ?? '—' }} <br>
-                        <strong>Fecha de Adquisicion:</strong> {{ \Carbon\Carbon::parse($bien->Dadquisicion_hardware)->format('d/m/Y') }} <br>
+                        @if ($bien->Dadquisicion_hardware != null)
+                            <strong>Fecha de Adquisicion:</strong> {{ \Carbon\Carbon::parse($bien->Dadquisicion_hardware)->format('d/m/Y') }} <br>                            
+                        @endif
                         <strong>Codigo Patrimonial:</strong> {{$bien->UK_Hardware_Codigo ?? '—' }} <br>
                         <strong>Nombre:</strong>{{ $baja->Tusuario_baja ?? '—' }}<br>
                         <strong>Cargo:</strong>{{ $baja->Tcargo_baja ?? '—' }}<br>

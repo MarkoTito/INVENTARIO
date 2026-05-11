@@ -48,7 +48,7 @@ class BajaController extends Controller
         $fecha=Carbon::now();
         ////Bajar bien
 
-        return $request;
+        // return $request;
         
         $dato= Bien::where('UK_Hardware_Codigo',$bien)->update(
             [

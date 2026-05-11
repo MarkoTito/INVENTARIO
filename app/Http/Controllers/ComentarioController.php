@@ -103,7 +103,7 @@ class ComentarioController extends Controller
             ]
         );
 
-        return $request;
+        // return $request;
 
         //BUSQUEDA DEL USUARIO_id
         $usuario_id=Auth::user()->id;

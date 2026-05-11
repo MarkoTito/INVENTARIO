@@ -184,10 +184,20 @@ title="Registrar Hardware"
             <div>
                 {{-- AÑO DE ADQUISICION --}}
                 <label for="fecha_vencimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha de Adquisicion</label>
-                <input type="date" name="Dadquisicion_hardware" id="fecha" value="{{old('Dadquisicion_hardware')}}" max="{{ date('Y-m-d') }}">
+                <input type="date" name="Dadquisicion_hardware" id="fecha" 
+                    value="{{old('Dadquisicion_hardware')}}" 
+                    max="{{ date('Y-m-d') }}"
+                    class="border p-2 rounded">
+
                 @error('Dadquisicion_hardware')
-                        <p class="text-red-600">*{{$message}}</p>
+                    <p class="text-red-600">*{{$message}}</p>
                 @enderror
+
+                <div class="flex items-center mt-2">
+                    <input name="Dadquisicion_hardware" id="checked-checkbox" type="checkbox" value="null" 
+                        class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+                    <label for="checked-checkbox" class="select-none ms-2 text-sm font-medium text-heading">Sin fecha</label>
+                </div>
                 
             </div>
         </div>    
@@ -256,6 +266,30 @@ title="Registrar Hardware"
 
                 contador.textContent = restantes;
             });
+        </script>
+
+        <script>
+            // Seleccionamos ambos elementos por su ID
+            const checkbox = document.getElementById('checked-checkbox');
+            const fechaInput = document.getElementById('fecha');
+
+            // Escuchamos el evento 'change' del checkbox
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    fechaInput.disabled = true;  // Deshabilita el input
+                    fechaInput.value = '';       // Limpia lo que el usuario haya escrito
+                    fechaInput.classList.add('opacity-50', 'cursor-not-allowed'); // Estilo visual opcional
+                } else {
+                    fechaInput.disabled = false; // Lo vuelve a habilitar
+                    fechaInput.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            });
+
+            // Ejecutar al cargar la página por si el checkbox viene marcado (ej. por validación fallida)
+            if (checkbox.checked) {
+                fechaInput.disabled = true;
+                fechaInput.value = '';
+            }
         </script>
 
         <script>

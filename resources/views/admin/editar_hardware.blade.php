@@ -145,10 +145,22 @@ title="Editar"
                         {{-- fecha de adquisicion --}}
                         <div>
                             <label for="Dadquisicion_hardware" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black  ">Fecha de Adquisicion:</label>
-                            <input type="date" name="Dadquisicion_hardware" id="Dadquisicion_hardware"  class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" max="{{ date('Y-m-d') }}">
-                            @error('Dadquisicion_hardware')
-                                <p class="text-red-600">*{{$message}}</p>
-                            @enderror
+                            @if ($bien->Dadquisicion_hardware == null)
+                                <input type="date" name="Dadquisicion_hardware" id="fecha" 
+                                        value="{{ old('Dadquisicion_hardware', $bien->Dadquisicion_hardware) }}" 
+                                        max="{{ date('Y-m-d') }}"
+                                        class="border p-2 rounded">
+                                
+                                <div class="flex items-center mt-2">
+                                    <input name="sin_fecha" id="checked-checkbox" type="checkbox" value="1" 
+                                            {{ is_null($bien->Dadquisicion_hardware) ? 'checked' : '' }}
+                                            class="w-4 h-4 border rounded">
+                                    <label for="checked-checkbox" class="select-none ms-2 text-sm">Sin fecha</label>
+                                </div>
+                            @else
+                                <input type="date" name="Dadquisicion_hardware" id="Dadquisicion_hardware"  class="mb-6 bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$bien->Dadquisicion_hardware}}" max="{{ date('Y-m-d') }}">                                                            
+                            @endif
+                            
                         </div>
                         
                         <div>
@@ -239,6 +251,30 @@ title="Editar"
                     }
                 });
             });
+        </script>
+
+        <script>
+            // Seleccionamos ambos elementos por su ID
+            const checkbox = document.getElementById('checked-checkbox');
+            const fechaInput = document.getElementById('fecha');
+
+            // Escuchamos el evento 'change' del checkbox
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    fechaInput.disabled = true;  // Deshabilita el input
+                    fechaInput.value = '';       // Limpia lo que el usuario haya escrito
+                    fechaInput.classList.add('opacity-50', 'cursor-not-allowed'); // Estilo visual opcional
+                } else {
+                    fechaInput.disabled = false; // Lo vuelve a habilitar
+                    fechaInput.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            });
+
+            // Ejecutar al cargar la página por si el checkbox viene marcado (ej. por validación fallida)
+            if (checkbox.checked) {
+                fechaInput.disabled = true;
+                fechaInput.value = '';
+            }
         </script>
 
         
